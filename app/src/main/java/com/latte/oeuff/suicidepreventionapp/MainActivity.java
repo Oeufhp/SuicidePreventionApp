@@ -1,5 +1,10 @@
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +21,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {            //https://developer.android.com/training/implementing-navigation/nav-drawer.html
+    protected void onCreate(Bundle savedInstanceState) {     //https://developer.android.com/training/implementing-navigation/nav-drawer.html
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -36,16 +41,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //floating button (bottom)
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
+//                        .setAction("Action", null).show();
+
+                Intent callIntent=new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:911"));
+                startActivity(callIntent);
+
             }
         });
     }
-
     //Close "Navigation Drawer"
     @Override
     public void onBackPressed() {
