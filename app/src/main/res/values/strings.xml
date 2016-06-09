@@ -3,9 +3,7 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="dialog_emergency_call">Do you want to call for emergency?</string>
-    <string name="call_btn">call</string>
-    <string name="cancel_btn">cancel</string>
-
+    <string name="user_name">userName</string>
+    <string name="user_email">gg@eiei.com</string>
     <string name="action_settings">Settings</string>
 </resources>
