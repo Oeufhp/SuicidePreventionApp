@@ -4,10 +4,6 @@
     <group android:checkableBehavior="single">
         <item
 
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/
-            android:title="Profile"/>
-
             android:id="@+id/nav_yourspace"
             android:icon="@drawable/ic_menu_camera"
             android:title="Your Space"/>
@@ -15,17 +11,11 @@
         <item
             android:id="@+id/nav_reminders"
             android:icon="@drawable/ic_menu_gallery"
-
-            android:title="your feeling today"/>
-
             android:title="Reminders"/>
 
         <item
             android:id="@+id/nav_safetyplanning"
             android:icon="@drawable/ic_menu_slideshow"
-
-            android:title="Remainder"/>
-
             android:title="Safety Planning"/>
 
         <item
