@@ -1,5 +1,6 @@
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {            //https://developer.android.com/training/implementing-navigation/nav-drawer.html
+                                                                    //https://developer.android.com/guide/topics/ui/menus.html
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -50,7 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) { //GravityCompat = Compatibility shim for accessing newer functionality from Gravity
+                                                        //Gravity =  Standard constants, tools for placing an object within a potentially larger container
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -60,20 +63,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Initialize the contents of the Activity's standard options menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        // Inflate(add) the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu); //MenuInflater allows you to inflate the context menu from a menu resource
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+    public boolean onOptionsItemSelected(MenuItem item) { // Called when the user selects an item from the options menu. Handle action bar item clicks here.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings) { //it is in main.xml (ctrl+click to see)
             return true;
         }
 
@@ -82,22 +83,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item) { //This method is called whenever a navigation item in your action bar is selected
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-                                                            //?
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        //CHECK IN "activity_main_drawer.xml"
+        //--------- Logics after pressing items on Navigation ----------------
+        Intent it ;
 
-        } else if (id == R.id.nav_manage) {
+        if (id == R.id.nav_yourspace) {
+            it = new Intent(MainActivity.this, YourSpace.class);
+            startActivity(it);
+        } else if (id == R.id.nav_reminders) {
+            it = new Intent(MainActivity.this, Reminders.class);
+            startActivity(it);
+        } else if (id == R.id.nav_safetyplanning) {
+            it = new Intent(MainActivity.this, SafetyPlanning.class);
+            startActivity(it);
+        } else if (id == R.id.nav_resources) {
+            it = new Intent(MainActivity.this, Resources.class);
+            startActivity(it);
+        } else if (id == R.id.nav_helpnearyou) {
+            it = new Intent(MainActivity.this, HelpNearYou.class);
+            startActivity(it);
+        } else if (id == R.id.nav_feeling) {
+            it = new Intent(MainActivity.this, Feeling.class);
+            startActivity(it);
+        }
+          else if (id == R.id.nav_logout) {
+            //it = new Intent(MainActivity.this, Logout.class);
+            //startActivity(it);
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            //Dialouge ??
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
