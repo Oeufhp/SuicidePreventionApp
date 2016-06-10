@@ -3,7 +3,8 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="user_name">userName</string>
+    <string name="user_email">gg@eiei.com</string>
     <string name="action_settings">Settings</string>
     <!--Change the title of the activity here-->
     <string name="title_activity_login">Suicide Prevention App</string>
