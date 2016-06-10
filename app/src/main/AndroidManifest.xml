@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.latte.oeuff.suicidepreventionapp">
+    package="com.latte.oeuff.suicidepreventionapp">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -8,16 +20,61 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+        <!-- Change your first activity here -->
+        <activity
+            android:name=".LoginMenuActivity"
+            android:label="@string/title_activity_login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- <data android:scheme="mainactivity" /> -->
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".CreateAccountActivity" />
+        <activity
+            android:name=".YourSpace"
+            android:label="@string/title_activity_your_space"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Reminders"
+            android:label="@string/title_activity_reminders"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SafetyPlanning"
+            android:label="@string/title_activity_safety_planning"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Resources"
+            android:label="@string/title_activity_resources"
+            android:theme="@style/AppTheme" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".HelpNearYou"
+            android:label="@string/title_activity_help_near_you" />
+        <activity
+            android:name=".Feeling"
+            android:label="@string/title_activity_feeling"></activity>
     </application>
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 </manifest>
