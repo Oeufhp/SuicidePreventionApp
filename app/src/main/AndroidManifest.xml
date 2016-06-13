@@ -13,6 +13,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -74,7 +75,7 @@
             android:label="@string/title_activity_help_near_you" />
         <activity
             android:name=".Feeling"
-            android:label="@string/title_activity_feeling"></activity>
+            android:label="@string/title_activity_feeling" />
     </application>
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+
 </manifest>

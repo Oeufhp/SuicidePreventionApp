@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--This xml file is for creating the Navigation Menu only
+(link: this->app_bar_main.xml(*) /main.xml/ nav_header_main.xml / activity_main_drawer.xml (*)->content_main.xml
+and other files are similar to this. )
+-->
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,6 +25,8 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer"/>
+        app:menu="@menu/activity_main_drawer"
+        />
 
 </android.support.v4.widget.DrawerLayout>
+

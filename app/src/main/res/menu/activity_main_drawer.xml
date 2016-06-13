@@ -3,44 +3,43 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home"/>
+        <item
             android:id="@+id/nav_yourspace"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/yourspace"
             android:title="Your Space"/>
         <item
             android:id="@+id/nav_reminders"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/reminders"
             android:title="Reminders"/>
         <item
             android:id="@+id/nav_safetyplanning"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/safetyplanning"
             android:title="Safety Planning"/>
         <item
             android:id="@+id/nav_resources"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/resources"
             android:title="Resources"/>
         <item
             android:id="@+id/nav_helpnearyou"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/helpnearyou"
             android:title="Help near you"/>
-
         <item
             android:id="@+id/nav_feeling"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/feeling"
             android:title="Feeling"/>
-
     </group>
+        <item android:title=""/>
 
-    <item android:title=" ">
-        <menu>
-            <item
+        <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/setting"
                 android:title="Setting"/>
-            <item
+        <item
                 android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/logout"
                 android:title="Log Out"/>
-        </menu>
-    </item>
 
 </menu>
