@@ -9,9 +9,11 @@
     tools:showIn="@layout/activity_reminders">
 
     <TextView
+        android:id="@+id/reminder_home_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:text="You don't have any reminder today."
+        android:textSize="20sp"/>
 
 </android.support.v4.widget.NestedScrollView>

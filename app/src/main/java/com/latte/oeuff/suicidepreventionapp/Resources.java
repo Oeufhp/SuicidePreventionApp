@@ -47,7 +47,7 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
 
         //floating button (bottom)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-        fab.setImageResource(R.drawable.ic_warning_black_40dp);
+        fab.setImageResource(R.drawable.ic_warning_white_40dp);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

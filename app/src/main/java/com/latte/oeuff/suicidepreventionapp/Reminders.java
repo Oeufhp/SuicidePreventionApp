@@ -14,9 +14,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+
+import java.text.SimpleDateFormat;
+
 
 public class Reminders extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private EditText fromDateEtxt;
+    private EditText toDateEtxt;
+
+    private DatePickerDialog fromDatePickerDialog;
+    private DatePickerDialog toDatePickerDialog;
+
+    private SimpleDateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +60,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
 
     //floating button (bottom)
     FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-    fab.setImageResource(R.drawable.ic_warning_black_40dp);
+    fab.setImageResource(R.drawable.ic_warning_white_40dp);
     fab.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {

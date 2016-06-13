@@ -10,14 +10,17 @@
             android:id="@+id/nav_yourspace"
             android:icon="@drawable/yourspace"
             android:title="Your Space"/>
+
         <item
             android:id="@+id/nav_reminders"
             android:icon="@drawable/reminders"
             android:title="Reminders"/>
+
         <item
             android:id="@+id/nav_safetyplanning"
             android:icon="@drawable/safetyplanning"
             android:title="Safety Planning"/>
+
         <item
             android:id="@+id/nav_resources"
             android:icon="@drawable/resources"
