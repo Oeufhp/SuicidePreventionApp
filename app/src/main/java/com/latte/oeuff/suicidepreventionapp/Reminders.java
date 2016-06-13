@@ -2,6 +2,7 @@
 
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -57,25 +58,34 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
     navigationView.setNavigationItemSelectedListener(this);
     //*****To uncover colors of icon**********
     navigationView.setItemIconTintList(null);
+//**************************************************************************************************
 
-    //floating button (bottom)
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-    fab.setImageResource(R.drawable.ic_warning_white_40dp);
-    fab.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-//                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
-//                        .setAction("Action", null).show();
+    //Floating Button in Reminders
+    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtnRem);
+        fab.setImageResource(R.drawable.ic_new_reminder);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Log.d("AA","BB");
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
+                LayoutInflater inflator = Reminders.this.getLayoutInflater();
+                builder.setView(inflator.inflate(R.layout.dialog_create_reminder, null));
+//                builder.setTitle("New Reminder");
+                builder.setPositiveButton("create reminder", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
-//This is for going to phone in mobile
-    Intent callIntent = new Intent(Intent.ACTION_CALL);
-    callIntent.setData(Uri.parse("tel:911"));
-    //no need to request a permission
-    startActivity(callIntent);
+                    }
+                });
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+                builder.show();
 
-}
-});
- //**************************************************************************************************
+            }
+        });
     }
 
 //************************ This is for creating the Navigation Menu*********************************
