@@ -27,13 +27,13 @@ import java.text.SimpleDateFormat;
 
 public class Reminders extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private EditText fromDateEtxt;
-    private EditText toDateEtxt;
-
-    private DatePickerDialog fromDatePickerDialog;
-    private DatePickerDialog toDatePickerDialog;
-
-    private SimpleDateFormat dateFormatter;
+//    private EditText fromDateEtxt;
+//    private EditText toDateEtxt;
+//
+//    private DatePickerDialog fromDatePickerDialog;
+//    private DatePickerDialog toDatePickerDialog;
+//
+//    private SimpleDateFormat dateFormatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
 
 //************************ This is for creating the Navigation Menu*********************************
     //Toolbar (Top)
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarRem);
     setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
 
 
