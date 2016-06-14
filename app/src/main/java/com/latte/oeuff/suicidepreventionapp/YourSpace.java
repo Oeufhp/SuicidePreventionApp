@@ -42,7 +42,8 @@ public class YourSpace extends AppCompatActivity
         navigationView.setItemIconTintList(null);
 
         //floating button (bottom)
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
+        fab.setImageResource(R.drawable.ic_warning_white_40dp);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,7 +73,7 @@ public class YourSpace extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.your_space, menu);  //MenuInflater allows you to inflate the context menu from a menu resource
+        //getMenuInflater().inflate(R.menu.main, menu);  //MenuInflater allows you to inflate the context menu from a menu resource
         return true;
     }
 

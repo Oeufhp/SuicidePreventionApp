@@ -58,12 +58,29 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
     navigationView.setNavigationItemSelectedListener(this);
     //*****To uncover colors of icon**********
     navigationView.setItemIconTintList(null);
+
+        //floating button (bottom)
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
+        fab.setImageResource(R.drawable.ic_warning_white_40dp);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
+//                        .setAction("Action", null).show();
+
+                //This is for going to phone in mobile
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:911"));
+                //no need to request a permission
+                startActivity(callIntent);
+            }
+        });
 //**************************************************************************************************
 
     //Floating Button in Reminders
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtnRem);
-        fab.setImageResource(R.drawable.ic_new_reminder);
-        fab.setOnClickListener(new View.OnClickListener() {
+    FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnRem);
+        fabRem.setImageResource(R.drawable.ic_new_reminder);
+        fabRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Log.d("AA","BB");
@@ -105,7 +122,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate(add) the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu); //MenuInflater allows you to inflate the context menu from a menu resource
+        //getMenuInflater().inflate(R.menu.main, menu); //MenuInflater allows you to inflate the context menu from a menu resource
         return true;
     }
 

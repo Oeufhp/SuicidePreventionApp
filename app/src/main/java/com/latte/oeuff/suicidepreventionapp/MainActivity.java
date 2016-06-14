@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate(add) the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu); //MenuInflater allows you to inflate the context menu from a menu resource
+                                                      //Bind "MainActivity.java" <-> main.xml for using "setting popup-menu"
+
         return true;
     }
 
@@ -139,4 +142,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 //**************************************************************************************************
+
 }

@@ -41,7 +41,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".CreateAccountActivity" />
+        <activity
+            android:name=".CreateAccountActivity"
+            android:label="Create an account"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".YourSpace"
             android:label="@string/title_activity_your_space"
@@ -76,6 +79,7 @@
         <activity
             android:name=".Feeling"
             android:label="@string/title_activity_feeling" />
+        <activity android:name=".TimePickerFragment"></activity>
     </application>
 
 </manifest>

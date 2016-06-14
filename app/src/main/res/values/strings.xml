@@ -21,6 +21,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="title_activity"></string>
     <string name="title_activity_your_space">YourSpace</string>
     <string name="title_activity_reminders">Reminders</string>
     <string name="title_activity_safety_planning">SafetyPlanning</string>
@@ -87,6 +89,14 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_aaa">aaa</string>
+
+    <!-- for countryflagspinner in CreateAccountActivity -->
+    <string-array name="countryflagspinner">
+        <item>France</item>
+        <item>Thailand</item>
+        <item>U.K.</item>
+        <item>U.S.A.</item>
+    </string-array>
 
 
 </resources>
