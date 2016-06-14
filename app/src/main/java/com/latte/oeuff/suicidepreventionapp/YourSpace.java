@@ -1,10 +1,13 @@
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,14 +17,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
 
 public class YourSpace extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    //================Camera===================================
+    //https://developer.android.com/guide/topics/media/camera.html
+    Button camerabtn;
+    ImageView imgView;
+    Button showImg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_space);
+
+        camerabtn = (Button)findViewById(R.id.camerabtn);
+        imgView = (ImageView)findViewById(R.id.imgView);
+        showImg = (Button)findViewById(R.id.showImg);
 
 //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
@@ -54,7 +72,47 @@ public class YourSpace extends AppCompatActivity
                 startActivity(callIntent);
             }
         });
+
+
 //**************************************************************************************************
+//=============================== Camera ======================================== Enable in Geny but Error in Fong's mobile / Sometimes error
+        camerabtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages"); //Constructs a new file using the specified directory and name
+                                                          //Return the primary shared/external storage directory.
+                    imagesFolder.mkdirs();  //Creates the directory named by this file, assuming its parents exist.
+
+                    File image = new File(imagesFolder, "image_001.jpg");
+                    Uri uriSavedImage = Uri.fromFile(image); //Creates a Uri from a file  "image" above
+                    imageIntent.putExtra(MediaStore.EXTRA_OUTPUT, uriSavedImage); //Keep a photo taken at "uriSavedImage" above
+                    startActivityForResult(imageIntent,0);  //start Camera with "imageIntent"
+
+                    Bitmap myBitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
+                    imgView.setImageBitmap(myBitmap);
+
+            }
+        });
+
+        showImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Toast.makeText(getApplicationContext(),"Pressed",Toast.LENGTH_LONG);
+
+                File imgFile = new  File( Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/");
+                if(imgFile.exists()){
+                    //Toast.makeText(getApplicationContext(),"Photos",Toast.LENGTH_LONG);
+                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                    imgView.setImageBitmap(myBitmap);
+                }
+                else {
+                    //Toast.makeText(getApplicationContext(),"No photo",Toast.LENGTH_LONG);
+                }
+            }
+        });
+
     }
 //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
@@ -133,4 +191,5 @@ public class YourSpace extends AppCompatActivity
         return true;
     }
 //*************************************************************************************
+
 }
