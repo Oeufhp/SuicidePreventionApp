@@ -80,8 +80,9 @@ public class YourSpace extends AppCompatActivity
             @Override
             public void onClick(View v) {
                     Intent imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File imagesFolder = new File(Environment.getExternalStorageDirectory(), "MyImages"); //Constructs a new file using the specified directory and name
-                                                          //Return the primary shared/external storage directory.
+                    File imagesFolder = new File(android.os.Environment.DIRECTORY_DCIM);
+                    //? params(path): Environment.getExternalStorageDirectory(), "MyImages" / android.os.Environment.DIRECTORY_DCIM / Environment.getExternalStorageDirectory() + "/" + Environment.DIRECTORY_DCIM + "/"
+                    //Constructs a new file using the specified directory and name
                     imagesFolder.mkdirs();  //Creates the directory named by this file, assuming its parents exist.
 
                     File image = new File(imagesFolder, "image_001.jpg");

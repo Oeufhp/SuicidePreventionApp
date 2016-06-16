@@ -5,24 +5,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class LoginMenuActivity extends AppCompatActivity {
     TextView ourwebsite;
-    ImageButton login, create;
+    ImageButton login, facebook, gmail, create;
+    ImageButton frenchbtn, thaibtn, englishbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_menu);
 
+        //-------For SplashScreen (Still error)-------------
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         //-----Tie variables to id in xml----------------------
         ourwebsite = (TextView)findViewById(R.id.ourwebsite);
         login = (ImageButton)findViewById(R.id.login);
-        //facebook
-        //gmail
+        //facebook = (ImageButton)findViewById(R.id.facebook);
+        //gmail = (ImageButton)findViewById(R.id.gmail);
         create = (ImageButton)findViewById(R.id.create);
+        //frenchbtn = (ImageButton)findViewById(R.id.frenchbtn);
+        //thaibtn = (ImageButton)findViewById(R.id.thaibtn);
+        //frenchbtn = (ImageButton)findViewById(R.id.englishbtn);
 
         //----------Logics-----------------------------------------------
         ourwebsite.setText("http://www.suicidepreventionlifeline.org/");

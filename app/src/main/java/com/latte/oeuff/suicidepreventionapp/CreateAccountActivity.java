@@ -47,8 +47,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         yesbtn = (RadioButton)findViewById(R.id.yesbtn);
         nobtn = (RadioButton)findViewById(R.id.nobtn);
 
-//-----------------------for contryflagspinner-------------------------------------
-//https://developer.android.com/guide/topics/ui/controls/spinner.html
+    //-----------------------for contryflagspinner-------------------------------------
+    //https://developer.android.com/guide/topics/ui/controls/spinner.html
 
         countryflagspinner = (Spinner)findViewById(R.id.countryflagspinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -56,7 +56,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 R.array.countryflagspinner, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         countryflagspinner.setAdapter(adapter);
-//-------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------
 
         countrycodetxtview = (TextView) findViewById(R.id.countrycodetxtview);
         phoneno = (EditText)findViewById(R.id.phoneno);
@@ -88,7 +88,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     public void showDatePickerDialog(View v) {
         DialogFragment newDateFragment = new DatePickerFragment();
         newDateFragment.show(getSupportFragmentManager(), "datePicker");
-
     }
 
 

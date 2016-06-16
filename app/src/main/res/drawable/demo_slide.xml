@@ -1,0 +1,25 @@
+<vector android:height="160dp" android:viewportHeight="60.0"
+    android:viewportWidth="60.0" android:width="200dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#8697CB" android:pathData="M1,4h56v44h-56z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,49H0V3h58V49zM2,47h54V5H2V47z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M25,33l0,-7.05l0,-6.95l11,7z"/>
+    <path android:fillColor="#687492" android:pathData="M1,4h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,16H0V3h12V16zM2,14h8V5H2V14z"/>
+    <path android:fillColor="#687492" android:pathData="M1,15h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,27H0V14h12V27zM2,25h8v-9H2V25z"/>
+    <path android:fillColor="#687492" android:pathData="M1,26h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,38H0V25h12V38zM2,36h8v-9H2V36z"/>
+    <path android:fillColor="#687492" android:pathData="M1,37h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M12,49H0V36h12V49zM2,47h8v-9H2V47z"/>
+    <path android:fillColor="#687492" android:pathData="M47,4h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,16H46V3h12V16zM48,14h8V5h-8V14z"/>
+    <path android:fillColor="#687492" android:pathData="M47,15h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,27H46V14h12V27zM48,25h8v-9h-8V25z"/>
+    <path android:fillColor="#687492" android:pathData="M47,26h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,38H46V25h12V38zM48,36h8v-9h-8V36z"/>
+    <path android:fillColor="#687492" android:pathData="M47,37h10v11h-10z"/>
+    <path android:fillColor="#535D73" android:pathData="M58,49H46V36h12V49zM48,47h8v-9h-8V47z"/>
+    <path android:fillColor="#21AE5E" android:pathData="M38,35h22v22h-22z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M48,36.59h2v16h-2z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M49,54l-7,-6.71l1.48,-1.41l5.52,5.29l5.52,-5.29l1.48,1.41z"/>
+</vector>

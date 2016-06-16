@@ -15,8 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
+    ImageButton shortcut1, shortcut2, shortcut3, shortcut4;
+    TextView locationtxtview, languagetxtview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {            //https://developer.android.com/training/implementing-navigation/nav-drawer.html
@@ -25,6 +29,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+            shortcut1 = (ImageButton)findViewById(R.id.shortcut1);
+            shortcut2 = (ImageButton)findViewById(R.id.shortcut2);
+            shortcut3 = (ImageButton)findViewById(R.id.shortcut3);
+            shortcut4 = (ImageButton)findViewById(R.id.shortcut4);
+            locationtxtview = (TextView)findViewById(R.id.locationtxtview);
+            languagetxtview = (TextView)findViewById(R.id.languagetxtview);
+//-------------------------Contents (Demo) ---------------------------------------------------------
+            shortcut1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(MainActivity.this,YourSpace.class);
+                    startActivity(it);
+                }
+            });
+            shortcut2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(MainActivity.this,Reminders.class);
+                    startActivity(it);
+                }
+            });
+            shortcut3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(MainActivity.this,Resources.class);
+                    startActivity(it);
+                }
+            });
+        shortcut4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent it = new Intent(MainActivity.this,HelpNearYou.class);
+                    startActivity(it);
+                }
+            });
 
 //************************ This is for creating the Navigation Menu*********************************
             //Toolbar (Top)

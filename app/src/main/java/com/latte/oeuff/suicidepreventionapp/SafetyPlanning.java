@@ -18,12 +18,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 public class SafetyPlanning  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -171,6 +174,30 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         return true;
     }
 //**************************************************************************************************
+// --------------------------------Floating menu--------------------------------------------------
+//@Override
+//public void onCreateContextMenu(ContextMenu menu, View v,
+//                                ContextMenu.ContextMenuInfo menuInfo) {
+//    super.onCreateContextMenu(menu, v, menuInfo);
+//    MenuInflater inflater = getMenuInflater();
+//    inflater.inflate(R.menu.context_menu, menu);
+//}
+//
+//@Override
+//public boolean onContextItemSelected(MenuItem item) {
+//    AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//    switch (item.getItemId()) {
+//        case R.id.edit:
+//            editNote(info.id);
+//            return true;
+//        case R.id.delete:
+//            deleteNote(info.id);
+//            return true;
+//        default:
+//            return super.onContextItemSelected(item);
+//    }
+//}
+//------------------------------------------------------------------------------------------------
 
     /**
      * A placeholder fragment containing a simple view.

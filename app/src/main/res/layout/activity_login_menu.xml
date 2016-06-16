@@ -108,4 +108,42 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="24dp" />
+
+        <ImageButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/frenchbtn"
+            android:src="@drawable/french_flag"
+            android:layout_below="@+id/textView"
+            android:layout_alignRight="@+id/please"
+            android:layout_alignEnd="@+id/please"
+            android:layout_marginTop="6dp" />
+        <ImageButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/thaibtn"
+            android:layout_alignTop="@+id/frenchbtn"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/thai_flag" />
+        <ImageButton
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/englishbtn"
+            android:layout_alignTop="@+id/frenchbtn"
+            android:layout_alignRight="@+id/gmail"
+            android:layout_alignEnd="@+id/gmail"
+            android:layout_marginRight="12dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/uk_flag" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Language"
+        android:id="@+id/textView"
+        android:layout_below="@+id/ourwebsite"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="7dp" />
+
 </RelativeLayout>

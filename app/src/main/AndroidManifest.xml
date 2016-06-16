@@ -13,9 +13,11 @@
 
     <!-- Request Camera Permission -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -32,18 +34,15 @@
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <!-- Constant Value: Start as a main entry point, does not expect to receive data -->
                 <category android:name="android.intent.category.LAUNCHER" />
+                <!-- Constant Value: Should be displayed in the top-level launcher -->
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <!-- <data android:scheme="mainactivity" /> -->
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="Home"
+            android:theme="@style/AppTheme" />
         <activity android:name=".LoginActivity" />
         <activity
             android:name=".CreateAccountActivity"
@@ -84,6 +83,7 @@
             android:name=".Feeling"
             android:label="@string/title_activity_feeling" />
         <activity android:name=".TimePickerFragment" />
+        <activity android:name=".SplashSreen"></activity>
     </application>
 
 </manifest>

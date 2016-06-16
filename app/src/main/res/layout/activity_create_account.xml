@@ -10,7 +10,6 @@
     tools:context="com.latte.oeuff.suicidepreventionapp.CreateAccountActivity"
 
     android:background="#E0E0E0"
-
     android:orientation="vertical" >
 
     <TextView
