@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.view.MotionEvent;
@@ -24,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.logging.LogRecord;
 
 import static com.latte.oeuff.suicidepreventionapp.R.*;
 
@@ -48,32 +50,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             languagetxtview = (TextView)findViewById(R.id.languagetxtview);
 
         //----------------------------------SlideShow-----------------------------------------//
-       final ArrayList<Integer> imgArr=new ArrayList<Integer>();
-        imgArr.add(drawable.batman);
-        imgArr.add(drawable.bicycle);
-        imgArr.add(drawable.egg);
-        imgArr.add(drawable.dog);
-
-        final int [] imgID=new int[]{drawable.batman,drawable.bicycle,drawable.egg,drawable.dog};
+        final int [] imgID=new int[]{drawable.batman,
+                drawable.bicycle,
+                drawable.egg,
+                drawable.dog,
+                drawable.book_worm,
+                drawable.car,
+                drawable.coffee1,
+                drawable.coffee2,
+                drawable.smile,
+                drawable.toilet_paper};
 
 
         imageView=(ImageView)findViewById(R.id.slideShowImg);
-        imageView.setOnTouchListener(new View.OnTouchListener() {
-            int p=0;
-            int i=0;
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(p==0) i=0;
-                else i =p%imgID.length;
-                imageView.setImageResource(imgID[i]);
-                p++;
-                return false;
-            }
-        });
-
-
-
-
+//        imageView.setOnTouchListener(new View.OnTouchListener() {
+//            int p=0;
+//            int i=0;
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if(p==0) i=0;
+//                else i =p%imgID.length;
+//                imageView.setImageResource(imgID[i]);
+//                p++;
+//                return false;
+//            }
+//        });
+        final Handler handler=new Handler();
+                Runnable runnable=new Runnable() {
+                    int i=0;
+                    @Override
+                    public void run() {
+                        imageView.setImageResource(imgID[i]);
+                        i++;
+                        if(i>imgID.length-1)i=0;
+                        handler.postDelayed(this,2000);
+                    }
+                };
+                handler.postDelayed(runnable,2000);
         //----------------------------------SlideShow-----------------------------------------//
 
 //-------------------------Contents (Demo) ---------------------------------------------------------
