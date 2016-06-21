@@ -3,7 +3,9 @@
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
@@ -36,9 +38,9 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
+    //------------Start the googleMap------------------------
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -48,5 +50,4 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback 
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
-
 }

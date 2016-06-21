@@ -19,7 +19,6 @@
         android:layout_above="@+id/pass"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,7 +30,6 @@
         android:layout_above="@+id/loginbtn"
         android:layout_alignLeft="@+id/user"
         android:layout_alignStart="@+id/user" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +38,6 @@
         android:layout_alignLeft="@+id/pass"
         android:layout_alignStart="@+id/pass"
         android:layout_marginTop="41dp" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,7 +46,6 @@
         android:layout_marginBottom="172dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,10 +55,7 @@
         android:layout_alignTop="@+id/loginbtn"
         android:layout_centerHorizontal="true"
 
-        android:autoLink="web"
-
-        />
-
+        android:autoLink="web" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

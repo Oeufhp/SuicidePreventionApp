@@ -1,13 +1,14 @@
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 
 public class LoginMenuActivity extends AppCompatActivity {
     TextView ourwebsite;
@@ -19,9 +20,6 @@ public class LoginMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_menu);
 
-        //-------For SplashScreen (Still error)-------------
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         //-----Tie variables to id in xml----------------------
         ourwebsite = (TextView)findViewById(R.id.ourwebsite);
         login = (ImageButton)findViewById(R.id.login);
@@ -32,7 +30,7 @@ public class LoginMenuActivity extends AppCompatActivity {
         //thaibtn = (ImageButton)findViewById(R.id.thaibtn);
         //frenchbtn = (ImageButton)findViewById(R.id.englishbtn);
 
-        //----------Logics-----------------------------------------------
+        //----------------My Logics-----------------------------------------------
         ourwebsite.setText("http://www.suicidepreventionlifeline.org/");
         Linkify.addLinks(ourwebsite, Linkify.ALL);
 

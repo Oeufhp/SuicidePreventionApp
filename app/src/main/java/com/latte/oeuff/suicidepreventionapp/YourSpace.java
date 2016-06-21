@@ -1,11 +1,13 @@
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -19,18 +21,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 
 public class YourSpace extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //================Camera===================================
+    //======================Camera===================================
     //https://developer.android.com/guide/topics/media/camera.html
     Button camerabtn;
     ImageView imgView;
     Button showImg;
+    TextView aaa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,15 @@ public class YourSpace extends AppCompatActivity
         camerabtn = (Button)findViewById(R.id.camerabtn);
         imgView = (ImageView)findViewById(R.id.imgView);
         showImg = (Button)findViewById(R.id.showImg);
+
+        final Button showhelpnearyou = (Button)findViewById(R.id.showhelpnearyou);
+        showhelpnearyou.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(YourSpace.this, ShowHelpNearYou.class);
+                startActivity(it);
+            }
+        });
 
 //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
@@ -75,7 +90,7 @@ public class YourSpace extends AppCompatActivity
 
 
 //**************************************************************************************************
-//=============================== Camera ======================================== Enable in Geny but Error in Fong's mobile / Sometimes error
+        //=============================== Camera =============================== Enable in Geny but Error in Fong's mobile / Sometimes error
         camerabtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,6 +128,13 @@ public class YourSpace extends AppCompatActivity
                 }
             }
         });
+
+        //--------------Logics across an activity ----------------------
+        aaa = (TextView)findViewById(R.id.aaa);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String go = prefs.getString("keyChannel",null);
+        aaa.setText(go);
+
 
     }
 //************************ This is for creating the Navigation Menu*********************************
@@ -178,6 +200,9 @@ public class YourSpace extends AppCompatActivity
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(YourSpace.this, Feeling.class);
+            startActivity(it);
+        } else if (id == R.id.nav_setting) {
+            it = new Intent(YourSpace.this, Setting.class);
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {

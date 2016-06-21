@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,11 +16,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
     ImageButton shortcut1, shortcut2, shortcut3, shortcut4;
+    TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview;
     TextView locationtxtview, languagetxtview;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {            //https://developer.android.com/training/implementing-navigation/nav-drawer.html
@@ -33,8 +40,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             shortcut2 = (ImageButton)findViewById(R.id.shortcut2);
             shortcut3 = (ImageButton)findViewById(R.id.shortcut3);
             shortcut4 = (ImageButton)findViewById(R.id.shortcut4);
+            shortcut1txtview = (TextView)findViewById(R.id.shortcut1txtview);
+            shortcut2txtview = (TextView)findViewById(R.id.shortcut2txtview);
+            shortcut3txtview = (TextView)findViewById(R.id.shortcut3txtview);
+            shortcut4txtview = (TextView)findViewById(R.id.shortcut4txtview);
             locationtxtview = (TextView)findViewById(R.id.locationtxtview);
             languagetxtview = (TextView)findViewById(R.id.languagetxtview);
+
 //-------------------------Contents (Demo) ---------------------------------------------------------
             shortcut1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,7 +114,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 //**************************************************************************************************
+        //--------------Logics across an activity ----------------------
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("keyChannel", "12345");
+        editor.commit();// commit is important here.
     }
+
+
+
 //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
     @Override
@@ -169,6 +189,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_feeling) {
             it = new Intent(MainActivity.this, Feeling.class);
             startActivity(it);
+        } else if (id==R.id.nav_setting){
+            it = new Intent(MainActivity.this, Setting.class);
+            startActivity(it);
         } else if (id == R.id.nav_logout) {
             it = new Intent(MainActivity.this, LoginMenuActivity.class);
             startActivity(it);
@@ -181,5 +204,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 //**************************************************************************************************
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+    }
 }

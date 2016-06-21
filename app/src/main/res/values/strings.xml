@@ -29,7 +29,8 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_resources">Resources</string>
     <string name="title_activity_help_near_you">Map</string>
-    <string name="title_activity_feeling">Settings</string>
+    <string name="title_activity_feeling">Feeling</string>
+    <string name="title_activity_setting">Settings</string>
 
     <!-- Strings related to Settings -->
 
@@ -97,6 +98,7 @@
         <item>U.K.</item>
         <item>U.S.A.</item>
     </string-array>
+    <string name="title_activity_show_help_near_you">ShowHelpNearYou</string>
 
 
 </resources>
