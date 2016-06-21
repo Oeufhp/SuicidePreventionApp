@@ -1,11 +1,16 @@
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
+import android.support.v4.app.DialogFragment;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,18 +21,24 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.logging.LogRecord;
+
+import static com.latte.oeuff.suicidepreventionapp.R.*;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
     ImageButton shortcut1, shortcut2, shortcut3, shortcut4;
     TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview;
     TextView locationtxtview, languagetxtview;
 
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {            //https://developer.android.com/training/implementing-navigation/nav-drawer.html
@@ -46,6 +57,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             shortcut4txtview = (TextView)findViewById(R.id.shortcut4txtview);
             locationtxtview = (TextView)findViewById(R.id.locationtxtview);
             languagetxtview = (TextView)findViewById(R.id.languagetxtview);
+
+//----------------------------------SlideShow-----------------------------------------//
+        final int [] imgID=new int[]{drawable.batman,
+                drawable.bicycle,
+                drawable.egg,
+                drawable.dog,
+                drawable.book_worm,
+                drawable.car,
+                drawable.coffee1,
+                drawable.coffee2,
+                drawable.smile,
+                drawable.toilet_paper};
+
+
+        imageView=(ImageView)findViewById(R.id.slideShowImg);
+//        imageView.setOnTouchListener(new View.OnTouchListener() {
+//            int p=0;
+//            int i=0;
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if(p==0) i=0;
+//                else i =p%imgID.length;
+//                imageView.setImageResource(imgID[i]);
+//                p++;
+//                return false;
+//            }
+//        });
+        final Handler handler=new Handler();
+                Runnable runnable=new Runnable() {
+                    int i=0;
+                    @Override
+                    public void run() {
+                        imageView.setImageResource(imgID[i]);
+                        i++;
+                        if(i>imgID.length-1)i=0;
+                        handler.postDelayed(this,2000);
+                    }
+                };
+                handler.postDelayed(runnable,2000);
+//---------------------------SlideShow-----------------------------------------//
 
 //-------------------------Contents (Demo) ---------------------------------------------------------
             shortcut1.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // top-level container of "Navigation Drawer" (side)
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(  //=tie together "functionality of DrawerLayout" <-> "framework ActionBar"
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                    this, drawer, toolbar, string.navigation_drawer_open, string.navigation_drawer_close);
             drawer.setDrawerListener(toggle);                         //Set a listener to be notified of drawer events
             toggle.syncState();                                       //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout
 
@@ -98,7 +149,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //floating button (bottom)
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-            fab.setImageResource(R.drawable.ic_warning_white_40dp);
+            fab.setImageResource(drawable.ic_warning_white_40dp);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -121,13 +172,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.commit();// commit is important here.
     }
 
+//----------------------------------SlideShow-----------------------------------------//
 
+//        public boolean onTouch(View v,MotionEvent event){
+//           if(v.equals(imageView)){
+//            if(event.getAction()==MotionEvent.ACTION_DOWN){
+//                imageView.setImageResource(R.drawable.img2);
+//                return true;
+//            }
+//            else if(event.getAction()==MotionEvent.ACTION_UP){
+//                imageView.setImageResource(R.drawable.img3);
+//                return true;
+//            }
+//           }
+//            return false;
+//        }
+
+//----------------------------------SlideShow-----------------------------------------//
 
 //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) { //GravityCompat = Compatibility shim for accessing newer functionality from Gravity
                                                         //Gravity =  Standard constants, tools for placing an object within a potentially larger container
             drawer.closeDrawer(GravityCompat.START);
