@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,15 +17,42 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-public class Feeling extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import com.google.android.gms.maps.GoogleMap;
+
+public class ShowHelpNearYou extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener   {
+    //Fragment fragment;
+    //LinearLayout helpnearyoulayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feeling);
+        setContentView(R.layout.activity_show_help_near_you);
 
-        //************************ This is for creating the Navigation Menu*********************************
+//        FragmentManager fm = getSupportFragmentManager();
+//        fragment = fm.findFragmentByTag("myFragmentTag"); //android:tag="unique_tag"
+//        if (fragment == null) {
+//            FragmentTransaction ft = fm.beginTransaction();
+//            HelpNearYou h;
+//            fragment = new fragment();
+//            ft.add(android.R.id.content,fragment,"myFragmentTag");
+//            ft.commit();
+//        }
+
+//------------------------------------------------------------------------------------------------
+
+//        helpnearyoulayout = (LinearLayout)findViewById(R.id.helpnearyou);
+//        android.app.FragmentManager fragmentManager = getFragmentManager();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        Fragment fragment = new Fragment();
+//        fragmentTransaction.replace(R.id.helpnearyoufragment, fragment);
+//        fragmentTransaction.commit();
+
+
+//************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
@@ -59,7 +89,10 @@ public class Feeling extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 //**************************************************************************************************
+        HelpNearYou h = new HelpNearYou();
+
     }
+
     //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
     @Override
@@ -106,31 +139,31 @@ public class Feeling extends AppCompatActivity implements NavigationView.OnNavig
         //--------- Logics after pressing items on Navigation ----------------
         Intent it;
         if (id == R.id.nav_home) {
-            it = new Intent(Feeling.this, MainActivity.class);
+            it = new Intent(ShowHelpNearYou.this, MainActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
-            it = new Intent(Feeling.this, YourSpace.class);
+            it = new Intent(ShowHelpNearYou.this, YourSpace.class);
             startActivity(it);
         } else if (id == R.id.nav_reminders) {
-            it = new Intent(Feeling.this, Reminders.class);
+            it = new Intent(ShowHelpNearYou.this, Reminders.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
-            it = new Intent(Feeling.this, SafetyPlanning.class);
+            it = new Intent(ShowHelpNearYou.this, SafetyPlanning.class);
             startActivity(it);
         } else if (id == R.id.nav_resources) {
-            it = new Intent(Feeling.this, Resources.class);
+            it = new Intent(ShowHelpNearYou.this, Resources.class);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(Feeling.this, HelpNearYou.class);
+            it = new Intent(ShowHelpNearYou.this, HelpNearYou.class);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
-            it = new Intent(Feeling.this, Feeling.class);
+            it = new Intent(ShowHelpNearYou.this, Feeling.class);
             startActivity(it);
         } else if (id==R.id.nav_setting){
-            it = new Intent(Feeling.this, Setting.class);
+            it = new Intent(ShowHelpNearYou.this, Setting.class);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
-            it = new Intent(Feeling.this, LoginMenuActivity.class);
+            it = new Intent(ShowHelpNearYou.this, LoginMenuActivity.class);
             startActivity(it);
 
             //Dialouge ??
@@ -141,4 +174,5 @@ public class Feeling extends AppCompatActivity implements NavigationView.OnNavig
         return true;
     }
 //**************************************************************************************************
+
 }

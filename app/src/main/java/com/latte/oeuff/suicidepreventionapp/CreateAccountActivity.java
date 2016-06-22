@@ -67,8 +67,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         completedview = (TextView)findViewById(R.id.completedtxtview);
         createbtn = (Button)findViewById(R.id.createbtn);
 
-    //------------------------------- My logics -----------------------------------------------------
-    //DEMO ONLY (No APIs & Database)
+    //------------------------------- DEMO for Create an account(No APIs & Database) -----------------------------------------------------
         createbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

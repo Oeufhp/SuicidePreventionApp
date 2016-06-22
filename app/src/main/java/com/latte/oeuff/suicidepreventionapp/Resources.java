@@ -64,7 +64,6 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
             }
         });
 //**************************************************************************************************
-
     }
 
     //************************ This is for creating the Navigation Menu*********************************
@@ -130,6 +129,9 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(Resources.this, Feeling.class);
+            startActivity(it);
+        } else if (id == R.id.nav_setting) {
+            it = new Intent(Resources.this, Setting.class);
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {

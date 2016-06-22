@@ -3,17 +3,17 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="com.latte.oeuff.suicidepreventionapp.Feeling$GeneralPreferenceFragment"
+        android:fragment="com.latte.oeuff.suicidepreventionapp.Setting$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general" />
 
     <header
-        android:fragment="com.latte.oeuff.suicidepreventionapp.Feeling$NotificationPreferenceFragment"
+        android:fragment="com.latte.oeuff.suicidepreventionapp.Setting$NotificationPreferenceFragment"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/pref_header_notifications" />
 
     <header
-        android:fragment="com.latte.oeuff.suicidepreventionapp.Feeling$DataSyncPreferenceFragment"
+        android:fragment="com.latte.oeuff.suicidepreventionapp.Setting$DataSyncPreferenceFragment"
         android:icon="@drawable/ic_sync_black_24dp"
         android:title="@string/pref_header_data_sync" />
 

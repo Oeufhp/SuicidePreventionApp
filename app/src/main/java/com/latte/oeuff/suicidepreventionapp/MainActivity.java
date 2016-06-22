@@ -23,6 +23,10 @@ import android.view.MenuItem;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.logging.LogRecord;
@@ -31,6 +35,7 @@ import static com.latte.oeuff.suicidepreventionapp.R.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
     ImageButton shortcut1, shortcut2, shortcut3, shortcut4;
+    TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview;
     TextView locationtxtview, languagetxtview;
 
     private ImageView imageView;
@@ -46,10 +51,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             shortcut2 = (ImageButton)findViewById(R.id.shortcut2);
             shortcut3 = (ImageButton)findViewById(R.id.shortcut3);
             shortcut4 = (ImageButton)findViewById(R.id.shortcut4);
+            shortcut1txtview = (TextView)findViewById(R.id.shortcut1txtview);
+            shortcut2txtview = (TextView)findViewById(R.id.shortcut2txtview);
+            shortcut3txtview = (TextView)findViewById(R.id.shortcut3txtview);
+            shortcut4txtview = (TextView)findViewById(R.id.shortcut4txtview);
             locationtxtview = (TextView)findViewById(R.id.locationtxtview);
             languagetxtview = (TextView)findViewById(R.id.languagetxtview);
 
-        //----------------------------------SlideShow-----------------------------------------//
+//----------------------------------SlideShow-----------------------------------------//
         final int [] imgID=new int[]{drawable.batman,
                 drawable.bicycle,
                 drawable.egg,
@@ -87,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 };
                 handler.postDelayed(runnable,2000);
-        //----------------------------------SlideShow-----------------------------------------//
+//---------------------------SlideShow-----------------------------------------//
 
 //-------------------------Contents (Demo) ---------------------------------------------------------
             shortcut1.setOnClickListener(new View.OnClickListener() {
@@ -156,9 +165,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 //**************************************************************************************************
+        //--------------Logics across an activity ----------------------
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("keyChannel", "12345");
+        editor.commit();// commit is important here.
     }
 
-    //----------------------------------SlideShow-----------------------------------------//
+//----------------------------------SlideShow-----------------------------------------//
 
 //        public boolean onTouch(View v,MotionEvent event){
 //           if(v.equals(imageView)){
@@ -174,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            return false;
 //        }
 
-    //----------------------------------SlideShow-----------------------------------------//
+//----------------------------------SlideShow-----------------------------------------//
 
 //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
@@ -242,6 +256,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_feeling) {
             it = new Intent(MainActivity.this, Feeling.class);
             startActivity(it);
+        } else if (id==R.id.nav_setting){
+            it = new Intent(MainActivity.this, Setting.class);
+            startActivity(it);
         } else if (id == R.id.nav_logout) {
             it = new Intent(MainActivity.this, LoginMenuActivity.class);
             startActivity(it);
@@ -254,5 +271,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 //**************************************************************************************************
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+    }
 }

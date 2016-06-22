@@ -38,7 +38,7 @@
 
         <item
                 android:id="@+id/nav_setting"
-                android:icon="@drawable/setting"
+                android:icon="@drawable/settingimg"
                 android:title="Setting"/>
         <item
                 android:id="@+id/nav_logout"

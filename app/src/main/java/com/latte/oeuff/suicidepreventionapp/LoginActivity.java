@@ -18,15 +18,13 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         //-----tie vars to id--------------------------------------------------
         user = (EditText)findViewById(R.id.user);
         pass = (EditText)findViewById(R.id.pass);
         loginbtn = (Button)findViewById(R.id.loginbtn);
         forgotpass = (TextView)findViewById(R.id.forgotpass);
 
-        //----------------Logics-----------------------------------------------
-        //=========== DEMO ONLY !!! ============================                 //LOGIN DEMO ???
+    //------------------------- Demo Login (No APIs & Database) ----------------------------------------------
         //strUser = user.getText().toString().trim();
         //strPass = user.getText().toString().trim();
 
@@ -48,11 +46,12 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-        //========================================================
 
         //------Link and change textView to be same as the link-------      //HOW TO LINK PERFECTLY ???
 //        forgotpass.setText("Forgot your pasword");
 //        Linkify.addLinks(forgotpass, Linkify.ALL);
+
+    //-------------------------------------------------------------------------------------------------------
 
     }
 }

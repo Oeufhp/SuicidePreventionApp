@@ -161,6 +161,9 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         } else if (id == R.id.nav_feeling) {
             it = new Intent(SafetyPlanning.this, Feeling.class);
             startActivity(it);
+        } else if (id == R.id.nav_setting) {
+            it = new Intent(SafetyPlanning.this, Setting.class);
+            startActivity(it);
         }
         else if (id == R.id.nav_logout) {
             it = new Intent(SafetyPlanning.this, LoginMenuActivity.class);
@@ -228,8 +231,8 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_safety_planning, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }
