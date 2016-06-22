@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawable.coffee1,
                 drawable.coffee2,
                 drawable.smile,
-                drawable.toilet_paper};
-
+                drawable.toilet_paper
+                };
 
         imageView=(ImageView)findViewById(R.id.slideShowImg);
 //        imageView.setOnTouchListener(new View.OnTouchListener() {

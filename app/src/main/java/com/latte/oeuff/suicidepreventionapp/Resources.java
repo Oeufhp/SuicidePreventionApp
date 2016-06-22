@@ -2,6 +2,7 @@
 
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
