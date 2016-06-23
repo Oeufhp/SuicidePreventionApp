@@ -28,7 +28,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     EditText phoneno;
     EditText username, password;
     TextView isvalidtxtview, completedview;
-    Button  checkbtn, createbtn;
+    Button  createbtn;
+    ImageButton checkbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         phoneno = (EditText)findViewById(R.id.phoneno);
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
-        checkbtn = (Button)findViewById(R.id.checkbtn);
+        checkbtn = (ImageButton)findViewById(R.id.checkbtn);
         isvalidtxtview = (TextView)findViewById(R.id.isvalidtxtview);
         completedview = (TextView)findViewById(R.id.completedtxtview);
         createbtn = (Button)findViewById(R.id.createbtn);

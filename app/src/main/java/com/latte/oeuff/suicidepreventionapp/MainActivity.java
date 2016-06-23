@@ -71,19 +71,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawable.toilet_paper};
 
 
-        imageView=(ImageView)findViewById(R.id.slideShowImg);
-//        imageView.setOnTouchListener(new View.OnTouchListener() {
-//            int p=0;
-//            int i=0;
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                if(p==0) i=0;
-//                else i =p%imgID.length;
-//                imageView.setImageResource(imgID[i]);
-//                p++;
-//                return false;
-//            }
-//        });
+        imageView=(ImageView)findViewById(R.id.slideShowImg); //android:src="@drawable/demo_slide"  in imageView
+
+    //====Touch to Change====
+    /*    imageView.setOnTouchListener(new View.OnTouchListener() {
+            int p=0;
+            int i=0;
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(p==0) i=0;
+                else i =p%imgID.length;
+                imageView.setImageResource(imgID[i]);
+                p++;
+                return false;
+            }
+        }); */
+
+    //====Auto Change========
         final Handler handler=new Handler();
                 Runnable runnable=new Runnable() {
                     int i=0;
@@ -171,24 +175,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.putString("keyChannel", "12345");
         editor.commit();// commit is important here.
     }
-
-//----------------------------------SlideShow-----------------------------------------//
-
-//        public boolean onTouch(View v,MotionEvent event){
-//           if(v.equals(imageView)){
-//            if(event.getAction()==MotionEvent.ACTION_DOWN){
-//                imageView.setImageResource(R.drawable.img2);
-//                return true;
-//            }
-//            else if(event.getAction()==MotionEvent.ACTION_UP){
-//                imageView.setImageResource(R.drawable.img3);
-//                return true;
-//            }
-//           }
-//            return false;
-//        }
-
-//----------------------------------SlideShow-----------------------------------------//
 
 //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"

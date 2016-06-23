@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#009688</color> //#3F51B5
     <color name="colorPrimaryDark">#004D40</color>  //#303F9F
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#4E342E</color>
     <color name="col_fabBtnRem">#FFC107</color>
     <color name="fabCol">#F44336</color>
 
