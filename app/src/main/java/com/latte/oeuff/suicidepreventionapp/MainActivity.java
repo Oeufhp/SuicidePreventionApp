@@ -3,13 +3,16 @@ package com.latte.oeuff.suicidepreventionapp;
 import android.annotation.TargetApi;
 import android.content.Intent;
 
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -37,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageButton shortcut1, shortcut2, shortcut3, shortcut4;
     TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview;
     TextView locationtxtview, languagetxtview;
+
+    private static final int SELECT_PICTURE = 100;
+    private static final String TAG = "MainActivity";
+
 
     private ImageView imageView;
 
@@ -72,6 +79,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 };
 
         imageView=(ImageView)findViewById(R.id.slideShowImg);
+        imageView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                openImageChooser();
+                return false;
+            }
+        });
 //        imageView.setOnTouchListener(new View.OnTouchListener() {
 //            int p=0;
 //            int i=0;
@@ -84,18 +98,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                return false;
 //            }
 //        });
-        final Handler handler=new Handler();
-                Runnable runnable=new Runnable() {
-                    int i=0;
-                    @Override
-                    public void run() {
-                        imageView.setImageResource(imgID[i]);
-                        i++;
-                        if(i>imgID.length-1)i=0;
-                        handler.postDelayed(this,2000);
-                    }
-                };
-                handler.postDelayed(runnable,2000);
+//        final Handler handler=new Handler();
+//                Runnable runnable=new Runnable() {
+//                    int i=0;
+//                    @Override
+//                    public void run() {
+//                        imageView.setImageResource(imgID[i]);
+//                        i++;
+//                        if(i>imgID.length-1)i=0;
+//                        handler.postDelayed(this,2000);
+//                    }
+//                };
+//                handler.postDelayed(runnable,2000);
 //---------------------------SlideShow-----------------------------------------//
 
 //-------------------------Contents (Demo) ---------------------------------------------------------
@@ -173,20 +187,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 //----------------------------------SlideShow-----------------------------------------//
+    //----choose image from gallery----//
+    void openImageChooser(){
+        Intent intent=new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select Image"),SELECT_PICTURE);
+    }
 
-//        public boolean onTouch(View v,MotionEvent event){
-//           if(v.equals(imageView)){
-//            if(event.getAction()==MotionEvent.ACTION_DOWN){
-//                imageView.setImageResource(R.drawable.img2);
-//                return true;
-//            }
-//            else if(event.getAction()==MotionEvent.ACTION_UP){
-//                imageView.setImageResource(R.drawable.img3);
-//                return true;
-//            }
-//           }
-//            return false;
-//        }
+    public void onActivityResult(int requestCode,int resultCode,Intent data){
+        if(resultCode==RESULT_OK){
+            if(requestCode==SELECT_PICTURE){
+                //get the Uri from the data
+                Uri selectedUri=data.getData();
+                if(selectedUri!=null){
+                    //get the path from the Uri
+                    String path=getPathFromURI(selectedUri);
+                    Log.i(TAG,"Image path: "+path);
+                    //set the image in ImageView
+                    imageView.setImageURI(selectedUri);
+                }
+            }
+        }
+    }
+    //get the real path from Uri
+    public String getPathFromURI(Uri contentUri){
+        String res=null;
+        String []proj={MediaStore.Images.Media.DATA};
+        Cursor cursor=getContentResolver().query(contentUri,proj,null,null,null);
+        if(cursor.moveToFirst()){
+            int column_index=cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res=cursor.getString(column_index);
+        }
+        cursor.close();
+        return res;
+    }
 
 //----------------------------------SlideShow-----------------------------------------//
 

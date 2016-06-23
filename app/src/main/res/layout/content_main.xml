@@ -25,10 +25,7 @@
         <ImageView
             android:id="@+id/slideShowImg"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/demo_slide"
-            android:layout_margin="0dp"/>
+            android:layout_height="170dp"/>
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
