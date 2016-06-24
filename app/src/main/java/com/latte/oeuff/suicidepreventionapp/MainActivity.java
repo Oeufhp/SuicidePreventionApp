@@ -4,12 +4,14 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final int SELECT_PICTURE = 100;
     private static final String TAG = "MainActivity";
 
-
     private ImageView imageView;
 
     @Override
@@ -66,18 +67,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             languagetxtview = (TextView)findViewById(R.id.languagetxtview);
 
 //----------------------------------SlideShow-----------------------------------------//
-        final int [] imgID=new int[]{drawable.batman,
-                drawable.bicycle,
-                drawable.egg,
-                drawable.dog,
-                drawable.book_worm,
-                drawable.car,
-                drawable.coffee1,
-                drawable.coffee2,
-                drawable.smile,
-                drawable.toilet_paper
-                };
-
         imageView=(ImageView)findViewById(R.id.slideShowImg);
         imageView.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -186,6 +175,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.commit();// commit is important here.
     }
 
+    //----------------------------return the state--------------------------------------//
+
 //----------------------------------SlideShow-----------------------------------------//
     //----choose image from gallery----//
     void openImageChooser(){
@@ -206,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Log.i(TAG,"Image path: "+path);
                     //set the image in ImageView
                     imageView.setImageURI(selectedUri);
+                    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 }
             }
         }
