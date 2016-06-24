@@ -67,7 +67,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             languagetxtview = (TextView)findViewById(R.id.languagetxtview);
 
 //----------------------------------SlideShow-----------------------------------------//
-        imageView=(ImageView)findViewById(R.id.slideShowImg);
+//        imageView=(ImageView)findViewById(R.id.slideShowImg);
+//        final int [] imgID=new int[]{drawable.batman,
+//                drawable.bicycle,
+//                drawable.egg,
+//                drawable.dog,
+//                drawable.book_worm,
+//                drawable.car,
+//                drawable.coffee1,
+//                drawable.coffee2,
+//                drawable.smile,
+//                drawable.toilet_paper
+//                };
+
+        imageView=(ImageView)findViewById(R.id.slideShowImg); //android:src="@drawable/demo_slide"  in imageView
         imageView.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -75,30 +88,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return false;
             }
         });
-//        imageView.setOnTouchListener(new View.OnTouchListener() {
-//            int p=0;
-//            int i=0;
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                if(p==0) i=0;
-//                else i =p%imgID.length;
-//                imageView.setImageResource(imgID[i]);
-//                p++;
-//                return false;
-//            }
-//        });
-//        final Handler handler=new Handler();
-//                Runnable runnable=new Runnable() {
-//                    int i=0;
-//                    @Override
-//                    public void run() {
-//                        imageView.setImageResource(imgID[i]);
-//                        i++;
-//                        if(i>imgID.length-1)i=0;
-//                        handler.postDelayed(this,2000);
-//                    }
-//                };
-//                handler.postDelayed(runnable,2000);
+    //====Touch to Change====
+    /*    imageView.setOnTouchListener(new View.OnTouchListener() {
+            int p=0;
+            int i=0;
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(p==0) i=0;
+                else i =p%imgID.length;
+                imageView.setImageResource(imgID[i]);
+                p++;
+                return false;
+            }
+        }); */
+
+    //====Auto Change========
+    /*
+        final Handler handler=new Handler();
+                Runnable runnable=new Runnable() {
+                    int i=0;
+                    @Override
+                    public void run() {
+                        imageView.setImageResource(imgID[i]);
+                        i++;
+                        if(i>imgID.length-1)i=0;
+                        handler.postDelayed(this,2000);
+                    }
+                };
+                handler.postDelayed(runnable,2000);
+    */
 //---------------------------SlideShow-----------------------------------------//
 
 //-------------------------Contents (Demo) ---------------------------------------------------------
@@ -175,9 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         editor.commit();// commit is important here.
     }
 
+
     //----------------------------return the state--------------------------------------//
 
-//----------------------------------SlideShow-----------------------------------------//
+
+//----------------------------------SlideShow Logics-----------------------------------------//
     //----choose image from gallery----//
     void openImageChooser(){
         Intent intent=new Intent();
@@ -215,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return res;
     }
 
-//----------------------------------SlideShow-----------------------------------------//
+//----------------------------------SlideShow Logics-----------------------------------------//
 
 //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"

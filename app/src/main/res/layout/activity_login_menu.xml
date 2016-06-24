@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
 
-    android:background="#E0E0E0"
+    android:background="@drawable/loginmenubg"
 
     tools:context="com.latte.oeuff.suicidepreventionapp.LoginMenuActivity">
 
@@ -20,40 +20,24 @@
         android:text="Welcome to Beleaf. Hope you long live with hapiness :D"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please login "
         android:id="@+id/please"
         android:layout_marginTop="24dp"
-        android:layout_below="@+id/welcome" />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/facebook"
-        android:src="@drawable/facebook"
-        android:background="#E0E0E0"
-        android:layout_above="@+id/textView2"
-        android:layout_centerHorizontal="true" />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gmail"
-        android:src="@drawable/gmail"
-        android:background="#E0E0E0"
-        android:layout_alignTop="@+id/facebook"
-        android:layout_toRightOf="@+id/create"
-        android:layout_toEndOf="@+id/create"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp" />
+        android:layout_below="@+id/welcome"
+        android:textColor="#000000"/>
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/login"
         android:src="@drawable/login"
+        android:background="@drawable/button_in_loginmenu"
         android:layout_marginTop="16dp"
-        android:background="#E0E0E0"
         android:layout_marginRight="21dp"
         android:layout_marginEnd="21dp"
         android:layout_below="@+id/please"
@@ -62,12 +46,26 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/create"
-        android:layout_marginTop="19dp"
-        android:src="@drawable/create"
-        android:background="#E0E0E0"
-        android:layout_below="@+id/textView2"
+        android:id="@+id/facebook"
+        android:src="@drawable/facebook"
+        android:background="@drawable/button_in_loginmenu_2"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_above="@+id/textView2"
         android:layout_centerHorizontal="true" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gmail"
+        android:src="@drawable/gmail"
+        android:background="@drawable/button_in_loginmenu_2"
+        android:layout_alignTop="@+id/facebook"
+        android:layout_toRightOf="@+id/create"
+        android:layout_toEndOf="@+id/create"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -76,45 +74,67 @@
         android:layout_marginTop="27dp"
         android:layout_below="@+id/login"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="url"
-        android:id="@+id/ourwebsite"
-        android:layout_below="@+id/create"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:linksClickable="true"
-        android:layout_weight="1"
-        android:layout_marginTop="49dp" />
+        android:textColor="#000000"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/create"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/create"
+        android:background="@drawable/button_in_loginmenu"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Visit our website"
         android:id="@+id/visit"
-        android:layout_alignBottom="@+id/ourwebsite"
+        android:textColor="#000000"
+        android:layout_marginBottom="12dp"
+        android:layout_above="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="24dp" />
+        android:layout_alignParentStart="true" />
+
     <ImageButton
-        android:layout_width="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/www"
+        android:src="@drawable/www"
+        android:background="@null"
+        android:layout_above="@+id/textView"
+        android:layout_alignLeft="@+id/create"
+        android:layout_alignStart="@+id/create" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Language"
+        android:id="@+id/textView"
+        android:textColor="#000000"
+        android:layout_marginBottom="8dp"
+        android:layout_above="@+id/frenchbtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+    <ImageButton
+        android:layout_width="45dp"
         android:layout_height="32dp"
         android:id="@+id/frenchbtn"
         android:src="@drawable/french_flag"
-        android:layout_below="@+id/textView"
+        android:layout_marginBottom="11dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/please"
-        android:layout_alignEnd="@+id/please"
-        android:layout_marginTop="6dp" />
+        android:layout_alignEnd="@+id/please" />
     <ImageButton
-        android:layout_width="32dp"
+        android:layout_width="45dp"
         android:layout_height="32dp"
         android:id="@+id/thaibtn"
         android:layout_alignTop="@+id/frenchbtn"
         android:layout_centerHorizontal="true"
         android:src="@drawable/thai_flag" />
     <ImageButton
-        android:layout_width="32dp"
+        android:layout_width="45dp"
         android:layout_height="32dp"
         android:id="@+id/englishbtn"
         android:layout_alignTop="@+id/frenchbtn"
@@ -123,14 +143,5 @@
         android:layout_marginRight="12dp"
         android:layout_marginEnd="12dp"
         android:src="@drawable/uk_flag" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Language"
-        android:id="@+id/textView"
-        android:layout_below="@+id/ourwebsite"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="7dp" />
 
 </RelativeLayout>

@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.latte.oeuff.suicidepreventionapp.LoginActivity">
+    tools:context="com.latte.oeuff.suicidepreventionapp.LoginActivity"
+    android:background="@drawable/loginbg">
 
     <EditText
         android:layout_width="wrap_content"
@@ -16,17 +17,17 @@
         android:hint="username"
         android:ems="10"
         android:id="@+id/user"
+        android:layout_marginBottom="26dp"
         android:layout_above="@+id/pass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp" />
+        android:layout_centerHorizontal="true" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/pass"
-        android:layout_marginBottom="17dp"
         android:hint="password"
+        android:layout_marginBottom="37dp"
         android:layout_above="@+id/loginbtn"
         android:layout_alignLeft="@+id/user"
         android:layout_alignStart="@+id/user" />
@@ -43,26 +44,29 @@
         android:layout_height="wrap_content"
         android:text="login"
         android:id="@+id/loginbtn"
-        android:layout_marginBottom="172dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="21dp"
+        android:background="@drawable/button_in_create_3"
+        android:layout_above="@+id/forgotpass"
         android:layout_centerHorizontal="true" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot your password"
-        android:id="@+id/forgotpass"
-        android:layout_marginTop="79dp"
-        android:layout_alignTop="@+id/loginbtn"
-        android:layout_centerHorizontal="true"
 
-        android:autoLink="web" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/login2"
         android:src="@drawable/login"
-        android:layout_above="@+id/user"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="29dp" />
+        android:layout_marginTop="71dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="Forgot your password ?"
+        android:id="@+id/forgotpass"
+        android:layout_marginBottom="56dp"
+        android:background="@null"
+        android:textSize="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

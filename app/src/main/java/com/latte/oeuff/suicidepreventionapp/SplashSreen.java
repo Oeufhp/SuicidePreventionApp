@@ -20,8 +20,8 @@ public class SplashSreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bitmap n = BitmapFactory.decodeResource(getResources(), R.drawable.demo_splashscreen);
-        n = Bitmap.createScaledBitmap(n, 100, 100, true);
+        //Bitmap n = BitmapFactory.decodeResource(getResources(), R.drawable.demo_splashscreen);
+        //n = Bitmap.createScaledBitmap(n, 100, 100, true);
         //-------for SplashScreen (important)--------------------
         this.getWindow().requestFeature(Window.FEATURE_PROGRESS);
         //-------------------------------------------------------
@@ -50,4 +50,5 @@ public class SplashSreen extends AppCompatActivity {
         handler.removeCallbacks(runnable);
         time = delay_time - (System.currentTimeMillis() - time);
     }
+
 }

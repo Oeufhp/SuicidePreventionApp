@@ -3,7 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:fillViewport="false"
@@ -18,20 +18,23 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical"
-    android:background="#E0E0E0" >
+    android:background="@drawable/appbg" >
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="170dp">
         <ImageView
             android:id="@+id/slideShowImg"
-            android:layout_width="match_parent"
-            android:layout_height="170dp"/>
+            android:layout_width="360dp"
+            android:layout_height="155dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/squarebtn"
+            android:scaleType="centerCrop" />
     </LinearLayout>
 
     <LinearLayout android:orientation="horizontal"
-        android:layout_width="360dp"
+        android:layout_width="380dp"
         android:layout_height="75dp"
-        android:layout_margin="5dp">
+        android:layout_marginLeft="8dp">
 
         <FrameLayout android:layout_width="180dp"
             android:layout_height="75dp">
@@ -39,7 +42,10 @@
                 android:id="@+id/shortcut1txtview"
                 android:layout_width="180dp"
                 android:layout_height="40dp"
-                android:text="Your Space"/>
+                android:text="Your Space"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="#000000"/>
             <ImageButton
                 android:layout_width="180dp"
                 android:layout_height="75dp"
@@ -48,7 +54,7 @@
                 android:layout_row="0"
                 android:layout_column="1"
                 android:src="@drawable/yourspace"
-                android:background="@null"/>
+                android:background="@drawable/squarebtn"/>
         </FrameLayout>
 
         <FrameLayout android:layout_width="180dp"
@@ -57,7 +63,10 @@
                 android:id="@+id/shortcut2txtview"
                 android:layout_width="180dp"
                 android:layout_height="40dp"
-                android:text="Reminders"/>
+                android:text="Reminders"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="#000000"/>
             <ImageButton
                 android:layout_width="180dp"
                 android:layout_height="75dp"
@@ -66,7 +75,7 @@
                 android:layout_row="0"
                 android:layout_column="1"
                 android:src="@drawable/reminders"
-                android:background="@null"/>
+                android:background="@drawable/squarebtn"/>
         </FrameLayout>
 
     </LinearLayout>
@@ -74,7 +83,7 @@
     <LinearLayout android:orientation="horizontal"
                   android:layout_width="360dp"
                   android:layout_height="75dp"
-                  android:layout_margin="5dp">
+                  android:layout_marginLeft="8dp">
 
         <FrameLayout android:layout_width="180dp"
                      android:layout_height="75dp">
@@ -82,7 +91,10 @@
                 android:id="@+id/shortcut3txtview"
                 android:layout_width="180dp"
                 android:layout_height="40dp"
-                android:text="Resources"/>
+                android:text="Resources"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="#000000"/>
 
             <ImageButton
                 android:layout_width="180dp"
@@ -92,8 +104,8 @@
                 android:layout_row="1"
                 android:layout_column="0"
                 android:src="@drawable/resources"
-                android:background="@null"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:background="@drawable/squarebtn"/>
         </FrameLayout>
 
         <FrameLayout android:layout_width="180dp"
@@ -102,7 +114,10 @@
                 android:id="@+id/shortcut4txtview"
                 android:layout_width="180dp"
                 android:layout_height="40dp"
-                android:text="Help Near You"/>
+                android:text="Help Near You"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="50dp"
+                android:textColor="#000000"/>
 
             <ImageButton
                 android:layout_width="180dp"
@@ -112,34 +127,38 @@
                 android:layout_row="1"
                 android:layout_column="1"
                 android:src="@drawable/helpnearyou"
-                android:background="@null"
-                android:layout_gravity="left|center_vertical" />
+                android:layout_gravity="left|center_vertical"
+                android:background="@drawable/squarebtn"/>
         </FrameLayout>
 
     </LinearLayout>
 
 
-    <GridLayout android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_margin="5dp">
+                android:layout_margin="8dp">
         <TextView
             android:id="@+id/locationtxtview"
             android:layout_width="180dp"
             android:layout_height="40dp"
-            android:text="Your location..."/>
+            android:text="Your location: "
+            android:textColor="#000000"
+            android:background="@drawable/squarebtn"/>
         <TextView
             android:id="@+id/languagetxtview"
             android:layout_width="180dp"
             android:layout_height="40dp"
-            android:text="Your language..."
-            android:layout_marginLeft="5dp"/>
-    </GridLayout>
+            android:text="Your language:"
+            android:textColor="#000000"
+            android:background="@drawable/squarebtn"/>
+    </LinearLayout>
 
     <TextView
         android:layout_width="180dp"
         android:layout_height="20dp"
         android:text="Feeling Graph Visualization"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:textColor="#000000"/>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent">
@@ -151,10 +170,7 @@
             android:layout_margin="5dp"/>
     </LinearLayout>
 
-    <LinearLayout android:layout_height="80dp"
-                  android:layout_width="match_parent"
-                  android:background="#E0E0E0">
-    </LinearLayout>
+
 
 </LinearLayout>
 
