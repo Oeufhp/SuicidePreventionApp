@@ -2,9 +2,12 @@
 
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,22 +26,22 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 
 public class Reminders extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-//    private EditText fromDateEtxt;
-//    private EditText toDateEtxt;
-//
-//    private DatePickerDialog fromDatePickerDialog;
-//    private DatePickerDialog toDatePickerDialog;
-//
-//    private SimpleDateFormat dateFormatter;
+    private static final String TAG="MainActivity";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,8 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
 
     //Floating Button in Reminders
     FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnRem);
+        Log.d(TAG,"Add new Remainder");
+        final EditText taskEditText=new EditText(this);
         fabRem.setImageResource(R.drawable.ic_new_reminder);
         fabRem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,15 +104,12 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
 
                     }
                 });
-                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
-                });
+                builder.setNegativeButton("cancel", null);
                 builder.show();
 
             }
         });
+
     }
 
 //************************ This is for creating the Navigation Menu*********************************

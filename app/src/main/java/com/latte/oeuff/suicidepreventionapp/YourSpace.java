@@ -47,11 +47,6 @@ public class YourSpace extends AppCompatActivity
         imgView = (ImageView)findViewById(R.id.imgView);
         showImg = (Button)findViewById(R.id.showImg);
 
-        String mystring = getResources().getString(R.string.link_text);
-        TextView link = (TextView)findViewById(R.id.link);
-        link.setText(mystring);
-
-
         final Button showhelpnearyou = (Button)findViewById(R.id.showhelpnearyou);
         showhelpnearyou.setOnClickListener(new View.OnClickListener() {
             @Override

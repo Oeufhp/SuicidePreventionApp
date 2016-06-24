@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/title_editText"
+        android:id="@+id/task_title"
         android:hint="Title"
         android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
@@ -66,23 +66,6 @@
 
         </ScrollView>
 
-    <!--<EditText-->
-        <!--android:id="@+id/editText_setDate"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:inputType="date"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="15dp"-->
-        <!--android:layout_weight="0"-->
-        <!--android:hint="set date(dd-MM-yy)" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/editText_setTime"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="time"-->
-        <!--android:layout_marginTop="15dp"-->
-        <!--android:layout_weight="0"-->
-        <!--android:hint="set time(24 hours format)" />-->
 
 
 </LinearLayout>
