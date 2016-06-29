@@ -28,16 +28,16 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.00"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:layout_marginTop="15dp"
-        android:hint="Description"
-        android:id="@+id/desc_editText"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.00"/>
+    <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textMultiLine"-->
+        <!--android:ems="10"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:hint="Description"-->
+        <!--android:id="@+id/desc_editText"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_weight="0.00"/>-->
 
     <ScrollView
             android:layout_width="match_parent"
