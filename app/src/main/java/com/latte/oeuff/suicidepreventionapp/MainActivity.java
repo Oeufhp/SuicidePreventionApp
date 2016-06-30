@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //floating button (bottom)
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-            fab.setImageResource(drawable.ic_warning_white_40dp);
+            fab.setImageResource(drawable.emergencycall);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //This is for going to phone in mobile
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:911"));
+                    callIntent.setData(Uri.parse("tel:112"));
                     //no need to request a permission
                     startActivity(callIntent);
 
