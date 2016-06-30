@@ -1,116 +1,152 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="10dp"
     android:fillViewport="false"
-    android:background="@drawable/appbg">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical">
-        <Button
-        android:id="@+id/button"
+    android:background="@drawable/appbg"
+    tools:context="com.latte.oeuff.suicidepreventionapp.Feeling"
+    tools:showIn="@layout/app_bar_feeling"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1" />
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2" />
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="3" />
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="4" />
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="5" />
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="6" />
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="7" />
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="8" />
-        <Button
-            android:id="@+id/button9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="9" />
-        <Button
-            android:id="@+id/button10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="10" />
-        <Button
-            android:id="@+id/button11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="11" />
-        <Button
-            android:id="@+id/button12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="12" />
-        <Button
-            android:id="@+id/button13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="13" />
-        <Button
-            android:id="@+id/button14"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="14" />
-        <Button
-            android:id="@+id/button15"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="15" />
-        <Button
-            android:id="@+id/button16"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="16" />
-        <Button
-            android:id="@+id/button17"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="17" />
-        <Button
-            android:id="@+id/button18"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="18" />
-        <Button
-            android:id="@+id/button19"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="19" />
-        <Button
-            android:id="@+id/button20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="20" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.latte.oeuff.suicidepreventionapp.YourSpace"
+        tools:showIn="@layout/app_bar_your_space"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
 
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Today I feel..."
+                android:textSize="40dp" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/squarebtn"
+                android:layout_marginTop="10dp"
+                android:id="@+id/perfectlayout">
+
+                <ImageView android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/moonlv5"
+                           android:layout_margin="5dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perfect"
+                    android:textSize="30dp"
+                    android:textColor="#FFF9C4"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/squarebtn"
+                android:layout_marginTop="5dp"
+                android:id="@+id/verygoodlayout">
+
+                <ImageView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/moonlv4"
+                    android:layout_margin="5dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Very Good"
+                    android:textSize="30dp"
+                    android:textColor="#FFF176"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/squarebtn"
+                android:layout_marginTop="5dp"
+                android:id="@+id/neutrallayout">
+
+                <ImageView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/moonlv3"
+                    android:layout_margin="5dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Neutral"
+                    android:textSize="30dp"
+                    android:textColor="#FBC02D"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/squarebtn"
+                android:layout_marginTop="5dp"
+                android:id="@+id/verybadlayout">
+
+                <ImageView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/moonlv2"
+                    android:layout_margin="5dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Very Bad"
+                    android:textSize="30dp"
+                    android:textColor="#F57F17"
+                    android:layout_margin="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/squarebtn"
+                android:layout_marginTop="5dp"
+                android:id="@+id/terriblelayout">
+
+                <ImageView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/moonlv1"
+                    android:layout_margin="5dp"/>
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terrible"
+                    android:textSize="30dp"
+                    android:textColor="#BF360C"
+                    android:layout_margin="20dp" />
+                <TextView android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(Think to commit a suicide)"
+                    android:textSize="12dp"
+                    android:textColor="#BF360C"
+                    android:layout_marginTop="10dp"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

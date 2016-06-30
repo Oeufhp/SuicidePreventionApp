@@ -7,27 +7,34 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:fillViewport="false"
-
+    tools:showIn="@layout/app_bar_reminders"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity"
-    tools:showIn="@layout/app_bar_reminders"
+
     android:background="@drawable/appbg">
 
-    <LinearLayout android:layout_height="match_parent"
-                  android:layout_width="match_parent" >
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <!--<TextView-->
-            <!--android:id="@+id/reminder_home_status"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="@dimen/text_margin"-->
-            <!--android:text="You don't have any reminder today."-->
-            <!--android:textSize="20sp"/>-->
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:background="@drawable/squarebtn"
+            android:id="@+id/reminderslayout">
 
-        <ListView
-            android:id="@+id/list_todo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please add a reminder"
+                android:id="@+id/reminderstextview"
+                android:textSize="30dp"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

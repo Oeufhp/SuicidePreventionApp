@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.latte.oeuff.suicidepreventionapp.Reminders">
+    tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:fitsSystemWindows="true"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:id="@+id/app_bar"
+        android:fitsSystemWindows="true">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -24,25 +24,36 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbarRem"
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_reminders" />
+    <include layout="@layout/content_reminders"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabBtnRem"
+        android:id="@+id/fabBtnAddAReminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/col_fabBtnRem"
         app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="bottom|start" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabBtnDelAReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/del_big"
+        app:backgroundTint="#C0392B"
+        app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabBtn"

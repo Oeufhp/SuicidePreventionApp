@@ -8,10 +8,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.latte.oeuff.suicidepreventionapp.LoginMenuActivity"
 
-    android:background="@drawable/loginmenubg"
-
-    tools:context="com.latte.oeuff.suicidepreventionapp.LoginMenuActivity">
+    android:background="@drawable/loginmenubg">
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,8 +40,8 @@
         android:layout_marginRight="21dp"
         android:layout_marginEnd="21dp"
         android:layout_below="@+id/please"
-        android:layout_toLeftOf="@+id/create"
-        android:layout_toStartOf="@+id/create" />
+        android:layout_toLeftOf="@+id/loginmenu_create"
+        android:layout_toStartOf="@+id/loginmenu_create" />
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,8 +60,8 @@
         android:src="@drawable/gmail"
         android:background="@drawable/button_in_loginmenu_2"
         android:layout_alignTop="@+id/facebook"
-        android:layout_toRightOf="@+id/create"
-        android:layout_toEndOf="@+id/create"
+        android:layout_toRightOf="@+id/loginmenu_create"
+        android:layout_toEndOf="@+id/loginmenu_create"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp" />
 
@@ -79,7 +78,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/create"
+        android:id="@+id/loginmenu_create"
         android:layout_marginTop="19dp"
         android:src="@drawable/create"
         android:background="@drawable/button_in_loginmenu"
@@ -104,8 +103,8 @@
         android:src="@drawable/www"
         android:background="@null"
         android:layout_above="@+id/textView"
-        android:layout_alignLeft="@+id/create"
-        android:layout_alignStart="@+id/create" />
+        android:layout_alignLeft="@+id/loginmenu_create"
+        android:layout_alignStart="@+id/loginmenu_create" />
 
     <TextView
         android:layout_width="wrap_content"

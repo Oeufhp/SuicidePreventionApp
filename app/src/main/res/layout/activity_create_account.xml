@@ -228,7 +228,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Yes"
-            android:id="@+id/yesbtn"
+            android:id="@+id/create_yesbtn"
             android:checked="true"
             android:layout_below="@+id/textView6"
             android:layout_alignParentLeft="true"
@@ -238,9 +238,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="No"
-            android:id="@+id/nobtn"
+            android:id="@+id/create_nobtn"
             android:checked="false"
-            android:layout_below="@+id/yesbtn"
+            android:layout_below="@+id/create_yesbtn"
             android:layout_alignParentLeft="true" />
         </RadioGroup>
     </LinearLayout>

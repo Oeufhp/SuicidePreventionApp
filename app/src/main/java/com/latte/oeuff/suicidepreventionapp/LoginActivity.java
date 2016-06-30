@@ -46,12 +46,12 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
+        //----------------------------------------------------------------------------------------------------
         //------Link and change textView to be same as the link-------      //HOW TO LINK PERFECTLY ???
 //        forgotpass.setText("Forgot your pasword");
 //        Linkify.addLinks(forgotpass, Linkify.ALL);
 
-    //-------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------
 
     }
 }

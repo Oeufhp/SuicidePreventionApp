@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -25,10 +26,12 @@ import android.view.MenuItem;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,19 +41,53 @@ import java.util.ArrayList;
 
 
 public class Reminders extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    //---About Others----
+    TextView reminderstextview;
+    //---About Dialog---
+    DialogFragment newLogoutFragment;
     private static final String TAG="MainActivity";
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
+        //---About Others ---
+        reminderstextview =(TextView) findViewById(R.id.reminderstextview);
+        //---About Dialog & Resources---
+        newLogoutFragment = new LogOutDialog();
 
-//************************ This is for creating the Navigation Menu*********************************
+    //---------- Logics -------------------------------------
+        //Floating Button in Reminders
+        FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnAddAReminder);
+        Log.d(TAG,"Add a new Remainder");
+        final EditText taskEditText=new EditText(this);
+        fabRem.setImageResource(R.drawable.ic_new_reminder);
+        fabRem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Log.d("AA","BB");
+                final AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
+                LayoutInflater inflator = Reminders.this.getLayoutInflater();
+                builder.setView(inflator.inflate(R.layout.dialog_create_reminder, null));
+//                builder.setTitle("New Reminder");
+
+                builder.setPositiveButton("create a reminder", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        reminderstextview.setText("A reminder is created !");
+                    }
+                });
+
+                builder.setNegativeButton("cancel", null);
+
+                builder.show();
+
+            }
+        });
+
+    //************************ This is for creating the Navigation Menu*********************************
     //Toolbar (Top)
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarRem);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
 
 
@@ -83,36 +120,10 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(callIntent);
             }
         });
-//**************************************************************************************************
-
-    //Floating Button in Reminders
-    FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnRem);
-        Log.d(TAG,"Add new Remainder");
-        final EditText taskEditText=new EditText(this);
-        fabRem.setImageResource(R.drawable.ic_new_reminder);
-        fabRem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Log.d("AA","BB");
-                final AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
-                LayoutInflater inflator = Reminders.this.getLayoutInflater();
-                builder.setView(inflator.inflate(R.layout.dialog_create_reminder, null));
-//                builder.setTitle("New Reminder");
-                builder.setPositiveButton("create reminder", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                builder.setNegativeButton("cancel", null);
-                builder.show();
-
-            }
-        });
-
+    //**************************************************************************************************
     }
 
-//************************ This is for creating the Navigation Menu*********************************
+    //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
     @Override
     public void onBackPressed() {
@@ -181,17 +192,46 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {
-            it = new Intent(Reminders.this, LoginMenuActivity.class);
-            startActivity(it);
-
-            //Dialouge ??
+            newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//**************************************************************************************************
+    //**************************************************************************************************
+//-----------------------------------Dialog for warning before logging out--------------------------
+    public class LogOutDialog extends DialogFragment {
 
+        TextView yesbtn_logout,nobtn_logout;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            //-----Binding-----------
+            View view = inflater.inflate(R.layout.dialog_logout, container);
+            yesbtn_logout = (TextView) view.findViewById(R.id.yesbtn_logout);
+            nobtn_logout = (TextView) view.findViewById(R.id.nobtn_logout);
+
+            //-----Logics-----------
+            yesbtn_logout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newLogoutFragment.dismiss(); //close the dialog
+                    Intent it = new Intent(Reminders.this, LoginActivity.class);
+                    startActivity(it);
+                    return false;
+                }
+            });
+            nobtn_logout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newLogoutFragment.dismiss(); //close the dialog
+                    return false;
+                }
+            });
+            return view;
+        }
+    }
+//--------------------------------------------------------------------------------------------------
 
 }

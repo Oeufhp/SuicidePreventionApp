@@ -2,30 +2,65 @@
 
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.drive.events.ResourceEvent;
+import com.google.android.gms.vision.text.Line;
 
 public class Resources extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    //---About Others----
+    TextView resourcestextview;
+    //---About Dialog---
+    DialogFragment newAddResourceFragment;
+    DialogFragment newLogoutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resources);
+
+        //---About Others ---
+        resourcestextview =(TextView) findViewById(R.id.resoucestextview);
+        //---About Dialog & Resources---
+        newAddResourceFragment = new AddResourceFragment();
+        newLogoutFragment = new LogOutDialog();
+
+    //---------- Logics -------------------------------------
+    //Floating Button"Add" in Resources
+        FloatingActionButton fabAddRes = (FloatingActionButton) findViewById(R.id.fabBtnAddAResource);
+        //Log.d(TAG,"Add new Remainder");
+        final EditText taskEditText=new EditText(this);
+    //  fabAddRes.setImageResource(R.drawable.ic_new_reminder);
+        fabAddRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newAddResourceFragment.show(getSupportFragmentManager(),"Add a resource");
+            }
+        });
 
         //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
@@ -63,7 +98,7 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
 
             }
         });
-//**************************************************************************************************
+        //**************************************************************************************************
     }
 
     //************************ This is for creating the Navigation Menu*********************************
@@ -135,15 +170,81 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {
-            it = new Intent(Resources.this, LoginMenuActivity.class);
-            startActivity(it);
-
-            //Dialouge ??
+            newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//**************************************************************************************************
+    //**************************************************************************************************
+//------------------------ Dialog for Importing a photo Logics -------------------------------------
+    public class AddResourceFragment extends DialogFragment {
+
+        TextView addresbtn,cancelresbtn;
+        private static final String TAG = "MainActivity";
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            //-----Binding-----------
+            View view = inflater.inflate(R.layout.dialog_add_resources, container);
+            addresbtn = (TextView) view.findViewById(R.id.addresbtn);
+            cancelresbtn = (TextView) view.findViewById(R.id.cancelresbtn);
+
+            //-----Logics-----------
+
+           addresbtn.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   //---add a resource demo---
+                   newAddResourceFragment.dismiss(); //close the dialog
+                   resourcestextview.setText("A resource is added !");
+               }
+           });
+            cancelresbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //---add a resource demo---
+                    newAddResourceFragment.dismiss(); //close the dialog
+                    resourcestextview.setText("Adding a resource is canceled !");
+                }
+            });
+            return view;
+        }
+    }
+    //---------------------------------------------------------------------------------------------
+//-----------------------------------Dialog for warning before logging out--------------------------
+    public class LogOutDialog extends DialogFragment {
+
+        TextView yesbtn_logout,nobtn_logout;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            //-----Binding-----------
+            View view = inflater.inflate(R.layout.dialog_logout, container);
+            yesbtn_logout = (TextView) view.findViewById(R.id.yesbtn_logout);
+            nobtn_logout = (TextView) view.findViewById(R.id.nobtn_logout);
+
+            //-----Logics-----------
+            yesbtn_logout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newLogoutFragment.dismiss(); //close the dialog
+                    Intent it = new Intent(Resources.this, LoginActivity.class);
+                    startActivity(it);
+                    return false;
+                }
+            });
+            nobtn_logout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newLogoutFragment.dismiss(); //close the dialog
+                    return false;
+                }
+            });
+            return view;
+        }
+    }
+//--------------------------------------------------------------------------------------------------
+
 }

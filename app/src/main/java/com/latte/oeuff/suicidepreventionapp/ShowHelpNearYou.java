@@ -52,7 +52,7 @@ public class ShowHelpNearYou extends AppCompatActivity implements  NavigationVie
 //        fragmentTransaction.commit();
 
 
-//************************ This is for creating the Navigation Menu*********************************
+    //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
@@ -88,7 +88,7 @@ public class ShowHelpNearYou extends AppCompatActivity implements  NavigationVie
 
             }
         });
-//**************************************************************************************************
+    //**************************************************************************************************
         HelpNearYou h = new HelpNearYou();
 
     }
@@ -173,6 +173,6 @@ public class ShowHelpNearYou extends AppCompatActivity implements  NavigationVie
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//**************************************************************************************************
+    //**************************************************************************************************
 
 }

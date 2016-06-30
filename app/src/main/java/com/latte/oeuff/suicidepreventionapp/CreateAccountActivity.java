@@ -22,7 +22,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     TextView datetxtview, monthtxtview, yeartxtview;
     ImageButton pickdate;
     EditText email;
-    RadioButton yesbtn, nobtn;
+    RadioButton create_yesbtn, create_nobtn;
     Spinner countryflagspinner;
     TextView countrycodetxtview;
     EditText phoneno;
@@ -45,8 +45,8 @@ public class CreateAccountActivity extends AppCompatActivity {
         //monthspinner = (Spinner)findViewById(R.id.monthspinner);
         //yearspinner = (Spinner)findViewById(R.id.yearspinner);
         email = (EditText)findViewById(R.id.email);
-        yesbtn = (RadioButton)findViewById(R.id.yesbtn);
-        nobtn = (RadioButton)findViewById(R.id.nobtn);
+        create_yesbtn = (RadioButton)findViewById(R.id.create_yesbtn);
+        create_nobtn = (RadioButton)findViewById(R.id.create_nobtn);
 
     //-----------------------for contryflagspinner-------------------------------------
     //https://developer.android.com/guide/topics/ui/controls/spinner.html
@@ -78,6 +78,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
     }
+    //-------------------------------------------------------------------------------------------------------------------------------------
 
     //---------------- Show TimePicker & DatePicker --------------------------------------
 //    public void showTimePickerDialog(View v) {

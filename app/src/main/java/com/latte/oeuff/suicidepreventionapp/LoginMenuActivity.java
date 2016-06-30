@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class LoginMenuActivity extends AppCompatActivity {
     //TextView url;
-    ImageButton login, facebook, gmail,www, create;
+    ImageButton login, facebook, gmail,www, loginmenu_create;
     ImageButton frenchbtn, thaibtn, englishbtn;
 
     @Override
@@ -25,12 +25,12 @@ public class LoginMenuActivity extends AppCompatActivity {
         //facebook = (ImageButton)findViewById(R.id.facebook);
         //gmail = (ImageButton)findViewById(R.id.gmail);
         www = (ImageButton)findViewById(R.id.www);
-        create = (ImageButton)findViewById(R.id.create);
+        loginmenu_create = (ImageButton)findViewById(R.id.loginmenu_create);
         //frenchbtn = (ImageButton)findViewById(R.id.frenchbtn);
         //thaibtn = (ImageButton)findViewById(R.id.thaibtn);
         //frenchbtn = (ImageButton)findViewById(R.id.englishbtn);
 
-        //----------------My Logics-----------------------------------------------
+        //-------------------My Logics--------------------------------------------------------------
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {  //Must add 2 lines in styles.xml to be able to startActivity(it)
@@ -38,7 +38,6 @@ public class LoginMenuActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
-
         //url.setText("http://www.suicidepreventionlifeline.org/");
         //Linkify.addLinks(url, Linkify.ALL);
         www.setOnClickListener(new View.OnClickListener() {
@@ -52,16 +51,13 @@ public class LoginMenuActivity extends AppCompatActivity {
 
             }
         });
-
-        create.setOnClickListener(new View.OnClickListener() {
+        loginmenu_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(LoginMenuActivity.this, CreateAccountActivity.class);
                 startActivity(it);
             }
         });
-
-
-
+        //------------------------------------------------------------------------------------------
     }
 }

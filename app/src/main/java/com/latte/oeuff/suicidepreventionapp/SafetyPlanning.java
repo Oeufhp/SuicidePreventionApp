@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,39 +20,61 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.vision.text.Line;
+
+import org.w3c.dom.Text;
+
 public class SafetyPlanning  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    //TextView addasafetyplanningtextview;
+    //---------------------tabLayout---------------------------------
+    // MyPagerAdapter -> ViewPager -> contents (fragment_ ...)
+        //MyPageAdapter = Base class providing the adapter to populate pages inside of a ViewPager
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private TabLayout tabLayout;    //it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter} that will provide fragments for each of the sections.
+    private ViewPager mViewPager;   //This class will host the section contents
 
-    //The {@link ViewPager} that will host the section contents.
-
-    private ViewPager mViewPager;
+    //---------------------- About dialog ----------------------------------------
+    static DialogFragment newAddSafetyplanningFragment;
+    DialogFragment newLogoutFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safety_planning);
 
-//************************ This is for creating the Navigation Menu*********************************
+        //---About others-------
+
+        //----About dialog------
+       //newAddSafetyplanningFragment = new AddSafetyplanningFragment();
+        newLogoutFragment = new LogOutDialog();
+
+        //------------------------This is for creating the tabLayout and its contents--------------------------
+        //#### Get  ViewPager && set it's PagerAdapter -> so that it can display items ####
+        MyPagerAdapter mMypageAdapter = new MyPagerAdapter(getSupportFragmentManager()); //=Base class providing the adapter to populate pages inside of a ViewPager
+        mViewPager = (ViewPager) findViewById(R.id.container_safetyplanning);
+        mViewPager.setAdapter(mMypageAdapter);
+
+        //#### Give the TabLayout the ViewPager ####
+        tabLayout = (TabLayout)findViewById(R.id.tabLayout);
+//      tabLayout.addTab(tabLayout.newTab().setText("..."));
+        tabLayout.setupWithViewPager(mViewPager);
+
+
+        //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
@@ -86,18 +110,10 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 
             }
         });
-//**************************************************************************************************
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        //**************************************************************************************************
     }
-//************************ This is for creating the Navigation Menu*********************************
+
+    //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
     @Override
     public void onBackPressed() {
@@ -166,17 +182,15 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {
-            it = new Intent(SafetyPlanning.this, LoginMenuActivity.class);
-            startActivity(it);
-
-            //Dialouge ??
+            newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-//**************************************************************************************************
+    //**************************************************************************************************
+
 // --------------------------------Floating menu--------------------------------------------------
 //@Override
 //public void onCreateContextMenu(ContextMenu menu, View v,
@@ -202,75 +216,369 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 //}
 //------------------------------------------------------------------------------------------------
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
+    //SEE THE FLOW OF MyPagerAdapter && FirstFragment/SecondFragment/ThirdFragment IN LOGCAT & ORANGE NOTEBOOK
+//------------ =Base class providing the adapter to populate pages inside of a ViewPager ------------------------
+//--------------"1." This class returns a fragment corresponding to one of the sections/tabs/pages. ----------------------
+    private class MyPagerAdapter extends FragmentPagerAdapter {
+        //constructor
+        public MyPagerAdapter(FragmentManager fm)
+        {
+            super(fm); //use the constructor of FragmentManager class (msectionsPagerAdapter)
+            Log.d("Class:MyPagerAdapter","Method:Constructor");
         }
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
+        //called to instantiate the fragment(PlaceholderFragment: defined as a static inner class below) for the given page.
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_safety_planning, container, false);
-            //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+        public Fragment getItem(int pos) {
+            switch(pos) {   // &&& do method "newInstance" below
+                case 0:
+                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=0)Ins1");
+                    return FirstFragment.newInstance("FirstFragment, Instance 1");
+                case 1:
+                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=1)Ins2");
+                    return SecondFragment.newInstance("SecondFragment, Instance 2");
+                case 2:
+                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=2)Ins3");
+                    return ThirdFragment.newInstance("ThirdFragment, Instance 3");
+                case 3:
+                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=3)Ins4");
+                    return FourthFragment.newInstance("FourthFragment, Instance 4");
+                case 4:
+                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=4)Ins5");
+                    return FifthFragment.newInstance("FifthFragment, Instance 5");
+                case 5:
+                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=5)Ins6");
+                    return SixthFragment.newInstance("SixthFragment, Instance 6");
+                default: return null;
+            }
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
-            return 3;
+            // Show 6 total pages.
+            Log.d("Class:MyPagerAdapter","Method:getCount()");
+            return 6;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    Log.d("Class= SectionPage...","Method= getPageTitle(position=0)");
+                    return "Plan_No1";
                 case 1:
-                    return "SECTION 2";
+                    Log.d("Class= SectionPage...","Method= getPageTitle(position=1)");
+                    return "Plan_No2";
                 case 2:
-                    return "SECTION 3";
+                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    return "Plan_No3";
+                case 3:
+                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    return "Plan_No4";
+                case 4:
+                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    return "Plan_No5";
+                case 5:
+                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    return "Plan_No6";
             }
             return null;
         }
     }
+
+    //----------------------FirstFragement--------------------------------------
+    //2. This class creates a fragment containing a simple view.
+    public static class FirstFragment extends Fragment {
+        LinearLayout addplan_no1_layout, delplan_no1_layout;
+        TextView addasafetyplanningtextview1;
+
+        //This is the main method of this class->create a View (fragment_safetyplanning_plan1)
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View viewfirst = inflater.inflate(R.layout.fragment_safetyplanning_plan1, container, false); //attachToRoot = false important !
+            //-----binding-----------
+            newAddSafetyplanningFragment = new AddSafetyplanningFragment();
+            addplan_no1_layout = (LinearLayout)viewfirst.findViewById(R.id.addplan_no1_layout);
+            delplan_no1_layout = (LinearLayout)viewfirst.findViewById(R.id.delplan_no1_layout);
+            addasafetyplanningtextview1 = (TextView)viewfirst.findViewById(R.id.addasafetyplanningtextview1);
+            //-----Logics------------
+            addplan_no1_layout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newAddSafetyplanningFragment.show(getFragmentManager(),"Add a safetyplanning");
+                    return false;
+                }
+            });
+
+            delplan_no1_layout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    //delete
+                    return false;
+                }
+            });
+
+            Log.d("Class:FirstFragment","Method:onCreateView(...)");
+
+            return viewfirst;
+        }
+
+        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
+        public static FirstFragment newInstance(String text) {
+
+            FirstFragment f = new FirstFragment(); //create a frament for containing a simple view
+            //----Bundle <key, value>----
+            Bundle b = new Bundle();
+            b.putString("msg", text); //put <key,value> into it
+            //---------------------------
+            f.setArguments(b);
+
+            Log.d("Class:FirstFragment","Method:newInstance(FirstFragment, Instance 1 )");
+
+            return f;
+        }
+    }
+
+    //----------------------SecondFragement--------------------------------------
+    //2. This class creates a fragment containing a simple view.
+    public static class SecondFragment extends Fragment {
+
+        //This is the main method of this class->create a View (fragment_safetyplanning_plan2)
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View viewsecond = inflater.inflate(R.layout.fragment_safetyplanning_plan2, container, false);//attachToRoot = false important !
+
+            //-----binding-----------
+
+            //-----Logics------------
+
+
+            Log.d("Class:SecondFragment","Method:onCreateView(...)");
+
+            return viewsecond;
+        }
+
+        //&&& This method create & return "a new instance" of this fragment according to  "String text".
+        public static SecondFragment newInstance(String text) {
+
+            SecondFragment f = new SecondFragment(); //create a frament for containing a simple view
+            //----Bundle <key, value>----
+            Bundle b = new Bundle();
+            b.putString("msg", text); //put <key,value> into it
+            //--------------------------
+            f.setArguments(b);
+
+            Log.d("Class:SecondFragment","Method:newInstance(SecondFragment, Instance 2 )");
+
+            return f;
+        }
+    }
+    //----------------------ThirdFragement--------------------------------------
+    //2. This class creates a fragment containing a simple view.
+    public static class ThirdFragment extends Fragment {
+
+        //This is the main method of this class->create a View (fragment_safetyplanning_plan3)
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View viewthird = inflater.inflate(R.layout.fragment_safetyplanning_plan3, container, false); //attachToRoot = false important !
+
+            //-----binding-----------
+
+            //-----Logics------------
+
+            Log.d("Class:ThirdFragment","Method:onCreateView(...)");
+
+            return viewthird;
+        }
+
+        //&&& This method create & return "a new instance" of this fragment according to  "String text".
+        public static ThirdFragment newInstance(String text) {
+
+            ThirdFragment f = new ThirdFragment(); //create a frament for containing a simple view
+            //----Bundle <key, value>----
+            Bundle b = new Bundle();
+            b.putString("msg", text); //put <key,value> into it
+            //---------------------------
+            f.setArguments(b);
+
+            Log.d("Class:ThirdFragment","Method:newInstance(ThirdFragment, Instance 3 )");
+
+            return f;
+        }
+    }
+
+    //----------------------FourthFragement--------------------------------------
+    //2. This class creates a fragment containing a simple view.
+    public static class FourthFragment extends Fragment {
+
+        //This is the main method of this class->create a View (ffragment_safetyplanning_plan4)
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View viewfourth = inflater.inflate(R.layout.fragment_safetyplanning_plan4, container, false); //attachToRoot = false important !
+
+            //-----binding-----------
+
+            //-----Logics------------
+
+
+            Log.d("Class:FourthFragment","Method:onCreateView(...)");
+
+            return viewfourth;
+        }
+
+        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
+        public static FourthFragment newInstance(String text) {
+
+            FourthFragment f = new FourthFragment(); //create a frament for containing a simple view
+            //----Bundle <key, value>----
+            Bundle b = new Bundle();
+            b.putString("msg", text); //put <key,value> into it
+            //---------------------------
+            f.setArguments(b);
+
+            Log.d("Class:FourthFragment","Method:newInstance(FourthFragment, Instance 4 )");
+
+            return f;
+        }
+    }
+
+    //----------------------FifthFragement--------------------------------------
+    //2. This class creates a fragment containing a simple view.
+    public static class FifthFragment extends Fragment {
+
+        //This is the main method of this class->create a View (fragment_safetyplanning_plan5)
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View viewfifth = inflater.inflate(R.layout.fragment_safetyplanning_plan5, container, false); //attachToRoot = false important !
+
+            //-----binding-----------
+
+            //-----Logics------------
+
+            Log.d("Class:FifthFragment","Method:onCreateView(...)");
+
+            return viewfifth;
+        }
+
+        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
+        public static FifthFragment newInstance(String text) {
+
+            FifthFragment f = new FifthFragment(); //create a frament for containing a simple view
+            //----Bundle <key, value>----
+            Bundle b = new Bundle();
+            b.putString("msg", text); //put <key,value> into it
+            //---------------------------
+            f.setArguments(b);
+
+            Log.d("Class:FifthFragment","Method:newInstance(FifthFragment, Instance 5 )");
+
+            return f;
+        }
+    }
+
+    //----------------------SixthFragement--------------------------------------
+    //2. This class creates a fragment containing a simple view.
+    public static class SixthFragment extends Fragment {
+
+        //This is the main method of this class->create a View (fragment_safetyplanning_plan6)
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View viewsixth = inflater.inflate(R.layout.fragment_safetyplanning_plan6, container, false); //attachToRoot = false important !
+
+            //-----binding-----------
+
+            //-----Logics------------
+
+
+            Log.d("Class:SixthFragment","Method:onCreateView(...)");
+
+            return viewsixth;
+        }
+
+        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
+        public static SixthFragment newInstance(String text) {
+
+            SixthFragment f = new SixthFragment(); //create a frament for containing a simple view
+            //----Bundle <key, value>----
+            Bundle b = new Bundle();
+            b.putString("msg", text); //put <key,value> into it
+            //---------------------------
+            f.setArguments(b);
+
+            Log.d("Class:SixthFragment","Method:newInstance(SixthFragment, Instance 6 )");
+
+            return f;
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------------------
+
+    //------------------------ Dialog for Importing a photo Logics -------------------------------------
+    public static class AddSafetyplanningFragment extends DialogFragment {
+        TextView addplan_btn;
+        TextView cancelplan_btn;
+        private static final String TAG = "MainActivity";
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            //-----Binding-----------
+            View view = inflater.inflate(R.layout.dialog_add_safetyplanning, container);
+            addplan_btn = (TextView)view.findViewById(R.id.addplan_btn);
+            cancelplan_btn = (TextView)view.findViewById(R.id.cancelplan_btn);
+            //-----Logics-----------
+            addplan_btn.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newAddSafetyplanningFragment.dismiss();
+                  //addasafetyplanningtextview.setText("A safety planning is added !"); //IMPROVE IT BEACUSE IT IS COMPLEXED !
+                    return false;
+                }
+            });
+            cancelplan_btn.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newAddSafetyplanningFragment.dismiss();
+                    return false;
+                }
+            });
+
+            return view;
+        }
+    }
+//---------------------------------------------------------------------------------------------
+
+    //-----------------------------------Dialog for warning before logging out--------------------------
+    public class LogOutDialog extends DialogFragment {
+
+        TextView yesbtn_logout,nobtn_logout;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            //-----Binding-----------
+            View view = inflater.inflate(R.layout.dialog_logout, container);
+            yesbtn_logout = (TextView) view.findViewById(R.id.yesbtn_logout);
+            nobtn_logout = (TextView) view.findViewById(R.id.nobtn_logout);
+
+            //-----Logics-----------
+            yesbtn_logout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newLogoutFragment.dismiss(); //close the dialog
+                    Intent it = new Intent(SafetyPlanning.this, LoginActivity.class);
+                    startActivity(it);
+                    return false;
+                }
+            });
+            nobtn_logout.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    newLogoutFragment.dismiss(); //close the dialog
+                    return false;
+                }
+            });
+            return view;
+        }
+    }
+//--------------------------------------------------------------------------------------------------
+
 }

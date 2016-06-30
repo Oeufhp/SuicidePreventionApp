@@ -246,6 +246,6 @@ public class Setting extends AppCompatPreferenceActivity  {
         }
     }
 
-    //--------------Logics across an activity ----------------------
-
+    //--------------Logics across an activity -------------------------
+    //-----------------------------------------------------------------
 }

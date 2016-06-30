@@ -19,9 +19,21 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/yourspace_tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#26A69A" />
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_your_space" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container_yourspace"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabBtn"

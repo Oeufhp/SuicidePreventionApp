@@ -1,0 +1,52 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false"
+
+    tools:context="com.latte.oeuff.suicidepreventionapp.Feeling"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.latte.oeuff.suicidepreventionapp.YourSpace"
+        tools:showIn="@layout/app_bar_your_space"
+        android:orientation="vertical">
+
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Photos coming soon !!! "
+               android:textSize="30dp"
+               android:id="@+id/photostextview"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/photoslayout">
+
+            <ImageView android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:src="@drawable/addphoto_in_home"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="30dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

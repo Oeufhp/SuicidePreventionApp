@@ -16,17 +16,17 @@
         android:textAlignment="center"
         android:layout_weight="0.00"
         android:textColor="#ffffff"
-        android:background="#03A9F4"/>
+        android:background="#FFCC00"/>
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/task_title"
         android:hint="Title"
         android:layout_marginTop="15dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.00"/>
+        android:layout_weight="0.00"
+        android:id="@+id/reminders_title"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
         android:ems="10"
         android:layout_marginTop="15dp"
         android:hint="Description"
-        android:id="@+id/desc_editText"
+        android:id="@+id/reminders_description"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.00"/>
 
