@@ -1,154 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.latte.oeuff.suicidepreventionapp.CreateAccountActivity"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/createbg"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
 
-    android:background="@drawable/createbg"
-    android:orientation="vertical" >
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context="com.latte.oeuff.suicidepreventionapp.CreateAccountActivity">
 
     <!--android:background="#E0E0E0"-->
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gender:"
-            android:id="@+id/textView3"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:textColor="#000000"/>
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Gender:"
+        android:textColor="#000000"/>
 
-    <LinearLayout android:layout_height="wrap_content"
-                  android:layout_width="wrap_content">
-        <RadioGroup android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation='horizontal'
-            android:checkableBehavior="single">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/malebtn"
-            android:checked="true"
-            android:text="Male"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView3"
-            android:layout_marginRight="55dp"    />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/femalebtn"
-            android:checked="false"
-            android:text="Female"
-            android:layout_alignTop="@+id/malebtn"
-            android:layout_marginRight="55dp" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/otherbtn"
-            android:checked="false"
-            android:text="Others"
-            android:layout_alignTop="@+id/femalebtn"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:checkableBehavior="single"
+            android:orientation='horizontal'>
+
+            <RadioButton
+                android:id="@+id/malebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView3"
+                android:layout_marginRight="55dp"
+                android:checked="true"
+                android:text="Male"/>
+
+            <RadioButton
+                android:id="@+id/femalebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/malebtn"
+                android:layout_marginRight="55dp"
+                android:checked="false"
+                android:text="Female"/>
+
+            <RadioButton
+                android:id="@+id/otherbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/femalebtn"
+                android:checked="false"
+                android:text="Others"/>
         </RadioGroup>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:text="Name"
-        android:layout_below="@+id/malebtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/malebtn"
+        android:text="Name"
         android:textColor="#000000"/>
 
-    <LinearLayout android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <EditText
+            android:id="@+id/surname"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/surname"
-            android:hint="surname"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_below="@+id/name"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/name"
+            android:ems="10"
+            android:hint="surname"
+            android:inputType="textPersonName"/>
+
         <EditText
+            android:id="@+id/name"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:hint="name"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:layout_below="@+id/textView4"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView4"
+            android:ems="10"
+            android:hint="name"
+            android:inputType="textPersonName"/>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Birth Date"
-        android:id="@+id/textView8"
-        android:layout_below="@+id/surname"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/surname"
+        android:text="Birth Date"
         android:textColor="#000000"/>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:weightSum="1">
+
         <TextView
+            android:id="@+id/datetxtview"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
-            android:text="Date"
-            android:id="@+id/datetxtview"
-            android:layout_below="@+id/surname"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/surname"
             android:layout_marginRight="40dp"
             android:layout_marginTop="10dp"
-            android:layout_weight="0.14" />
+            android:layout_weight="0.14"
+            android:text="Date"/>
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Month"
             android:id="@+id/monthtxtview"
-            android:layout_below="@+id/surname"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="10dp" />
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Year"
-            android:id="@+id/yeartxtview"
-            android:layout_below="@+id/surname"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/surname"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:text="Month"/>
+
+        <TextView
+            android:id="@+id/yeartxtview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/surname"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="10dp"
+            android:text="Year"/>
+
         <ImageButton
+            android:id="@+id/pickdate"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="36dp"
             android:layout_height="38dp"
-            android:text="Check"
-            android:textSize="10sp"
-            android:id="@+id/pickdate"
             android:layout_gravity="right"
-            android:src="@drawable/calendar"
             android:background="@drawable/button_in_create"
-            android:onClick="showDatePickerDialog"/>
+            android:onClick="showDatePickerDialog"
+            android:src="@drawable/calendar"
+            android:text="Check"
+            android:textSize="10sp"/>
         <!--
         <Spinner
             android:id="@+id/datespinner"
@@ -186,165 +200,182 @@
         -->
     </LinearLayout>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <TextView
+            android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView5"
-            android:text="Email"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/phoneno"
-            android:layout_alignParentLeft="true"
             android:layout_marginRight="180dp"
+            android:text="Email"
             android:textColor="#000000"/>
+
         <TextView
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Get news via email?"
-            android:id="@+id/textView6"
-            android:layout_below="@+id/editText"
             android:layout_alignParentLeft="true"
+            android:layout_below="@+id/editText"
+            android:text="Get news via email?"
             android:textColor="#000000"/>
     </LinearLayout>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <EditText
+            android:id="@+id/email"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/email"
-            android:ems="10"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView5"
-            android:layout_alignParentLeft="true"
-            android:layout_marginRight="30dp" />
+            android:layout_marginRight="30dp"
+            android:ems="10"/>
 
-        <RadioGroup android:layout_width="match_parent"
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation='horizontal'
-            android:checkableBehavior="single">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Yes"
-            android:id="@+id/create_yesbtn"
-            android:checked="true"
-            android:layout_below="@+id/textView6"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="-5dp"
-            android:layout_marginRight="5dp" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No"
-            android:id="@+id/create_nobtn"
-            android:checked="false"
-            android:layout_below="@+id/create_yesbtn"
-            android:layout_alignParentLeft="true" />
+            android:checkableBehavior="single"
+            android:orientation='horizontal'>
+
+            <RadioButton
+                android:id="@+id/create_yesbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/textView6"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="5dp"
+                android:checked="true"
+                android:text="Yes"/>
+
+            <RadioButton
+                android:id="@+id/create_nobtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/create_yesbtn"
+                android:checked="false"
+                android:text="No"/>
         </RadioGroup>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone NO."
-        android:id="@+id/textView7"
-        android:layout_below="@+id/surname"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/surname"
+        android:text="Phone NO."
         android:textColor="#000000"/>
 
-    <LinearLayout android:layout_width="wrap_content"
-                 android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <Spinner
+            android:id="@+id/countryflagspinner"
             android:layout_width="60dp"
             android:layout_height="30dp"
-            android:spinnerMode="dropdown"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView7"
-            android:layout_alignParentLeft="true"
             android:layout_marginTop="10dp"
-            android:id="@+id/countryflagspinner" />
+            android:spinnerMode="dropdown"/>
+
         <TextView
+            android:id="@+id/countrycodetxtview"
             android:layout_width="60dp"
             android:layout_height="match_parent"
-            android:text="+country code"
-            android:id="@+id/countrycodetxtview"
-            android:layout_below="@+id/planets_spinner"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp" />
+            android:layout_below="@+id/planets_spinner"
+            android:layout_marginLeft="20dp"
+            android:text="+country code"/>
+
         <EditText
+            android:id="@+id/phoneno"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/phoneno"
-            android:inputType="textPersonName"
-            android:hint="ie. 6788xxxxx (France)"
-            android:ems="10"
-            android:layout_below="@+id/countrycodetxtview"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp" />
+            android:layout_below="@+id/countrycodetxtview"
+            android:layout_marginLeft="20dp"
+            android:ems="10"
+            android:hint="ie. 6788xxxxx (France)"
+            android:inputType="textPersonName"/>
     </LinearLayout>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="10dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="10dp">
     </LinearLayout>
 
     <TextView
+        android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create an account"
-        android:id="@+id/create"
         android:textColor="#000000"/>
 
-    <LinearLayout android:layout_width="wrap_content"
-                  android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
         <EditText
+            android:id="@+id/username"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
             android:ems="10"
-            android:hint="Username (6-12 letters)" />
+            android:hint="Username (6-12 letters)"/>
+
         <ImageButton
+            android:id="@+id/checkbtn"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:text="Check"
-            android:textSize="10sp"
-            android:id="@+id/checkbtn"
             android:layout_gravity="right"
             android:background="@drawable/button_in_create_2"
-            android:src="@drawable/checkaccount" />
+            android:src="@drawable/checkaccount"
+            android:text="Check"
+            android:textSize="10sp"/>
+
         <TextView
+            android:id="@+id/isvalidtxtview"
             android:layout_width="75dp"
             android:layout_height="36dp"
-            android:text="is valid?"
-            android:id="@+id/isvalidtxtview"
-            android:layout_marginLeft="15dp" />
+            android:layout_marginLeft="15dp"
+            android:text="is valid?"/>
     </LinearLayout>
 
     <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/password"
-            android:ems="10"
-            android:hint="Password(6-12 letters)" />
+        android:id="@+id/password"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password(6-12 letters)"/>
 
     <TextView
+        android:id="@+id/completedtxtview"
         android:layout_width="150dp"
         android:layout_height="30dp"
-        android:id="@+id/completedtxtview"
-        android:textSize="15dp"
+        android:layout_gravity="center_horizontal"
         android:text="completed ? "
-        android:layout_gravity="center_horizontal" />
+        android:textSize="15dp"/>
 
     <Button
+        android:id="@+id/createbtn"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Create"
-        android:id="@+id/createbtn"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_in_create_3"/>
+        android:background="@drawable/button_in_create_3"
+        android:text="Create"/>
 
 </LinearLayout>

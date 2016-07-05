@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:fillViewport="false"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="false"
+            android:orientation="vertical"
 
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity">
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -19,51 +20,56 @@
             android:id="@+id/dialog_feeling_emergency_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Would you like to call the emergency?"
-            android:textSize="25sp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textAlignment="center"
             android:layout_weight="0.00"
+            android:background="#BF360C"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Would you like to call the emergency?"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#ffffff"
-            android:background="#BF360C"/>
+            android:textSize="25sp"/>
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/callemergency"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
             android:layout_margin="10dp"
             android:background="@drawable/squarebtn"
-            android:id="@+id/callemergency">
-            <ImageView android:layout_width="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/emergencycall"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/emergencycall"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="8dp"
                 android:text="Call the emergency"
                 android:textColor="#000000"
-                android:textSize="25dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="8dp" />
+                android:textSize="25dp"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/cancel_emergency"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
             android:layout_margin="10dp"
             android:background="@drawable/squarebtn"
-            android:id="@+id/cancel_emergency">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="8dp"
                 android:text="Cancel"
                 android:textColor="#000000"
-                android:textSize="30dp"
-                android:layout_marginLeft="80dp"
-                android:layout_marginTop="8dp" />
+                android:textSize="30dp"/>
         </LinearLayout>
 
     </LinearLayout>
