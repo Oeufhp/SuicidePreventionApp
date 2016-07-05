@@ -89,13 +89,13 @@ public class YourSpace extends AppCompatActivity
 
         //floating button (bottom)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-        fab.setImageResource(R.drawable.ic_warning_white_40dp);
+        fab.setImageResource(R.drawable.emergencycall);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //This is for going to phone in mobile
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:911"));
+                callIntent.setData(Uri.parse("tel:112"));
                 //no need to request a permission
                 startActivity(callIntent);
             }

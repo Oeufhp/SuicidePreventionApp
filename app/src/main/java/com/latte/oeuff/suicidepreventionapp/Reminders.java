@@ -94,7 +94,8 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
 //                builder.setPositiveButton("create a reminder", new DialogInterface.OnClickListener() {
 //                    @Override
 //                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        reminderstextview.setText("A reminder is created !");
+////                        reminderstextview.setText("A reminder is created !");
+//
 //                    }
 //                });
 //                builder.setNegativeButton("cancel", null);
@@ -189,7 +190,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
 
                 //This is for going to phone in mobile
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:911"));
+                callIntent.setData(Uri.parse("tel:112"));
                 //no need to request a permission
                 startActivity(callIntent);
             }

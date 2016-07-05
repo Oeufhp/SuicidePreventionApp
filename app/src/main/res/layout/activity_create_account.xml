@@ -118,39 +118,39 @@
         android:layout_height="wrap_content"
         android:weightSum="1">
 
-        <TextView
-            android:id="@+id/datetxtview"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/surname"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="0.14"
-            android:text="Date"/>
+        <!--<TextView-->
+            <!--android:id="@+id/datetxtview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_below="@+id/surname"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_weight="0.14"-->
+            <!--android:text="Date"/>-->
 
-        <TextView
-            android:id="@+id/monthtxtview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/surname"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="10dp"
-            android:text="Month"/>
+        <!--<TextView-->
+            <!--android:id="@+id/monthtxtview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_below="@+id/surname"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Month"/>-->
 
-        <TextView
-            android:id="@+id/yeartxtview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/surname"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="10dp"
-            android:text="Year"/>
+        <!--<TextView-->
+            <!--android:id="@+id/yeartxtview"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_below="@+id/surname"-->
+            <!--android:layout_marginRight="40dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:text="Year"/>-->
 
         <ImageButton
             android:id="@+id/pickdate"
@@ -251,8 +251,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/textView6"
-                android:layout_marginLeft="-5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginLeft="-7dp"
+                android:layout_marginRight="3dp"
                 android:checked="true"
                 android:text="Yes"/>
 
@@ -262,6 +263,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@+id/create_yesbtn"
+                android:layout_marginTop="9dp"
                 android:checked="false"
                 android:text="No"/>
         </RadioGroup>
@@ -366,7 +368,9 @@
         android:layout_width="150dp"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
-        android:text="completed ? "
+        android:textAlignment="center"
+        android:text="completed ?"
+        android:layout_marginTop="15dp"
         android:textSize="15dp"/>
 
     <Button
