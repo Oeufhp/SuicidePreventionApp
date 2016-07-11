@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#004D40</color>  //#303F9F
     <color name="colorAccent">#4E342E</color>
     <color name="col_fabBtnRem">#FFC107</color>
-    <color name="fabCol">#F44336</color>
+    <color name="fabCol">#D50000</color>
 
 </resources>

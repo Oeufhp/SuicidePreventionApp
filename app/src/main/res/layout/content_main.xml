@@ -188,8 +188,6 @@
             android:layout_margin="5dp"/>
     </LinearLayout>
 
-
-
 </LinearLayout>
 
 </ScrollView>

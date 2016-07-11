@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -101,6 +102,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 };
     //---Touch to Change---
     /*    home_imageView.setOnTouchListener(new View.OnTouchListener() {
+=======
+
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            shortcut1 = (ImageButton)findViewById(R.id.shortcut1);
+            shortcut2 = (ImageButton)findViewById(R.id.shortcut2);
+            shortcut3 = (ImageButton)findViewById(R.id.shortcut3);
+            shortcut4 = (ImageButton)findViewById(R.id.shortcut4);
+            shortcut1txtview = (TextView)findViewById(R.id.shortcut1txtview);
+            shortcut2txtview = (TextView)findViewById(R.id.shortcut2txtview);
+            shortcut3txtview = (TextView)findViewById(R.id.shortcut3txtview);
+            shortcut4txtview = (TextView)findViewById(R.id.shortcut4txtview);
+            locationtxtview = (TextView)findViewById(R.id.locationtxtview);
+            languagetxtview = (TextView)findViewById(R.id.languagetxtview);
+
+//----------------------------------SlideShow-----------------------------------------//
+//        imageView=(ImageView)findViewById(R.id.slideShowImg);
+//        final int [] imgID=new int[]{drawable.batman,
+//                drawable.bicycle,
+//                drawable.egg,
+//                drawable.dog,
+//                drawable.book_worm,
+//                drawable.car,
+//                drawable.coffee1,
+//                drawable.coffee2,
+//                drawable.smile,
+//                drawable.toilet_paper
+//                };
+
+        imageView=(ImageView)findViewById(R.id.slideShowImg); //android:src="@drawable/demo_slide"  in imageView
+        imageView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                openImageChooser();
+                return false;
+            }
+        });
+    //====Touch to Change====
+    /*    imageView.setOnTouchListener(new View.OnTouchListener() {
+>>>>>>> b01c70cfc8f422e81a672bba90de1de43bd00efe
             int p=0;
             int i=0;
             @Override
@@ -204,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //floating button (bottom)
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-            fab.setImageResource(drawable.ic_warning_white_40dp);
+            fab.setImageResource(drawable.emergencycall); //ic_warning_white_40dp
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -213,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //This is for going to phone in mobile
                     Intent callIntent = new Intent(Intent.ACTION_CALL);
-                    callIntent.setData(Uri.parse("tel:911"));
+                    callIntent.setData(Uri.parse("tel:112"));
                     //no need to request a permission
                     startActivity(callIntent);
 
@@ -270,6 +311,7 @@ public class ImportPhoto extends DialogFragment {
     }
 }
 //---------------------------------------------------------------------------------------------//
+
 //----------------------------------ImageShow Logics-------------------------------------------//
 //***** 1. startActivityForResult() *****
     //---Take a photo---
