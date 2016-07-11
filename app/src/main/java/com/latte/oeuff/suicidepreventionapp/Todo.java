@@ -3,15 +3,12 @@
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
@@ -25,17 +22,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.gms.appindexing.Action;
@@ -44,11 +37,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.latte.oeuff.suicidepreventionapp.data.TaskContract;
 import com.latte.oeuff.suicidepreventionapp.data.TaskDBHelper;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
-
-public class Reminders extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Todo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //-----for reminder-----
     TaskAdapter mTaskAdapter;
@@ -71,16 +61,32 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reminders);
+        setContentView(R.layout.activity_todo);
         //---About Others ---
 //        reminderstextview = (TextView) findViewById(R.id.reminderstextview);
         //---About Dialog & Resources---
         newLogoutFragment = new LogOutDialog();
 
+        //----------------------query todo list when open todo page-------------------------//
+        ListView listView = (ListView)findViewById(R.id.listview_tasks);
+        TaskDBHelper helper = new TaskDBHelper(Todo.this);
+        //Get DBHelper to read from database
+//                        TaskDBHelper helper = new TaskDBHelper(getActivity());
+        SQLiteDatabase sqlDB = helper.getReadableDatabase();
+
+        //Query database to get any existing data
+        Cursor cursor2 = sqlDB.query(TaskContract.TaskEntry.TABLE_NAME,
+                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
+                null, null, null, null, null);
+
+        //Create a new TaskAdapter and bind it to ListView
+        mTaskAdapter = new TaskAdapter(getBaseContext(), cursor2);
+        listView.setAdapter(mTaskAdapter);
+
         //---------- Logics -------------------------------------
-        //Floating Button in Reminders
+        //Floating Button in Todo
         FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnAddAReminder);
-        Log.d(TAG, "Add a new Remainder");
+        Log.d(TAG, "Add new Todo");
         final EditText taskEditText = new EditText(this);
         fabRem.setImageResource(R.drawable.ic_new_reminder);
 //        fabRem.setOnClickListener(new View.OnClickListener() {
@@ -106,10 +112,10 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
         fabRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Todo.this);
                 builder.setTitle("Add a task");
                 builder.setMessage("What do you plan to do?");
-                final EditText inputField=new EditText(Reminders.this);
+                final EditText inputField=new EditText(Todo.this);
                 builder.setView(inputField);
                 builder.setPositiveButton("Add",new DialogInterface.OnClickListener(){
                     @Override
@@ -119,7 +125,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
                         String inputTask = inputField.getText().toString();
 
                         //Get DBHelper to write to database
-                        TaskDBHelper helper = new TaskDBHelper(Reminders.this);
+                        TaskDBHelper helper = new TaskDBHelper(Todo.this);
                         SQLiteDatabase db = helper.getWritableDatabase();
 
                         //Put in the values within a ContentValues.
@@ -245,28 +251,28 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
         //--------- Logics after pressing items on Navigation ----------------
         Intent it;
         if (id == R.id.nav_home) {
-            it = new Intent(Reminders.this, MainActivity.class);
+            it = new Intent(Todo.this, MainActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
-            it = new Intent(Reminders.this, YourSpace.class);
+            it = new Intent(Todo.this, YourSpace.class);
             startActivity(it);
         } else if (id == R.id.nav_reminders) {
-            it = new Intent(Reminders.this, Reminders.class);
+            it = new Intent(Todo.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
-            it = new Intent(Reminders.this, SafetyPlanning.class);
+            it = new Intent(Todo.this, SafetyPlanning.class);
             startActivity(it);
         } else if (id == R.id.nav_resources) {
-            it = new Intent(Reminders.this, Resources.class);
+            it = new Intent(Todo.this, Resources.class);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(Reminders.this, HelpNearYou.class);
+            it = new Intent(Todo.this, HelpNearYou.class);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
-            it = new Intent(Reminders.this, Feeling.class);
+            it = new Intent(Todo.this, Feeling.class);
             startActivity(it);
         } else if (id == R.id.nav_setting) {
-            it = new Intent(Reminders.this, Setting.class);
+            it = new Intent(Todo.this, Setting.class);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
@@ -286,7 +292,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
         mClient.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "Reminders Page", // TODO: Define a title for the content shown.
+                "Todo Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -305,7 +311,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
-                "Reminders Page", // TODO: Define a title for the content shown.
+                "Todo Page", // TODO: Define a title for the content shown.
                 // TODO: If you have web page content that matches this app activity's content,
                 // make sure this auto-generated web page URL is correct.
                 // Otherwise, set the URL to null.
@@ -316,6 +322,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
         AppIndex.AppIndexApi.end(mClient, viewAction);
         mClient.disconnect();
     }
+
 
     //**************************************************************************************************
 //-----------------------------------Dialog for warning before logging out--------------------------
@@ -335,7 +342,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     newLogoutFragment.dismiss(); //close the dialog
-                    Intent it = new Intent(Reminders.this, LoginActivity.class);
+                    Intent it = new Intent(Todo.this, LoginActivity.class);
                     startActivity(it);
                     return false;
                 }

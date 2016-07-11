@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,10 +17,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -176,7 +172,7 @@ public class Feeling extends AppCompatActivity implements NavigationView.OnNavig
             it = new Intent(Feeling.this, YourSpace.class);
             startActivity(it);
         } else if (id == R.id.nav_reminders) {
-            it = new Intent(Feeling.this, Reminders.class);
+            it = new Intent(Feeling.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(Feeling.this, SafetyPlanning.class);

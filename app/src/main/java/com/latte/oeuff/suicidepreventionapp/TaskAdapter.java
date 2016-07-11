@@ -42,8 +42,8 @@ public class TaskAdapter extends CursorAdapter {
         Button done_button = (Button) view.findViewById(R.id.list_item_done_button);
 
         // Extract properties from cursor
-        final String id = cursor.getString(Reminders.COL_TASK_ID);
-        final String task = cursor.getString(Reminders.COL_TASK_NAME);
+        final String id = cursor.getString(Todo.COL_TASK_ID);
+        final String task = cursor.getString(Todo.COL_TASK_NAME);
 
         // Populate views with extracted properties
         textView.setText(task);

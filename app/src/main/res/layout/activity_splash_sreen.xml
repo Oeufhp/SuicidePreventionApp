@@ -15,11 +15,11 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="167dp"
+        android:layout_marginBottom="182dp"
         android:text="Let this app help you !!!"
         android:textColor="#FFFFFF"
-        android:textSize="22dp"/>
+        android:textSize="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

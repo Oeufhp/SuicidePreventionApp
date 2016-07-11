@@ -24,7 +24,7 @@
 
     <string name="title_activity"></string>
     <string name="title_activity_your_space">YourSpace</string>
-    <string name="title_activity_reminders">Reminders</string>
+    <string name="title_activity_todo">Todo</string>
     <string name="title_activity_safety_planning">SafetyPlanning</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_resources">Resources</string>

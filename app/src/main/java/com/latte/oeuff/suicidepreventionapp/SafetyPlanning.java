@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
@@ -21,22 +20,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.google.android.gms.vision.text.Line;
-
-import org.w3c.dom.Text;
 
 public class SafetyPlanning  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //TextView addasafetyplanningtextview;
@@ -163,7 +155,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             it = new Intent(SafetyPlanning.this, YourSpace.class);
             startActivity(it);
         } else if (id == R.id.nav_reminders) {
-            it = new Intent(SafetyPlanning.this, Reminders.class);
+            it = new Intent(SafetyPlanning.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(SafetyPlanning.this, SafetyPlanning.class);

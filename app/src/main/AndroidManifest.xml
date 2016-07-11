@@ -54,8 +54,8 @@
             android:label="@string/title_activity_your_space"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Reminders"
-            android:label="@string/title_activity_reminders"
+            android:name=".Todo"
+            android:label="@string/title_activity_todo"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".SafetyPlanning"
