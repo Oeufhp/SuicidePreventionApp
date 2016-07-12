@@ -14,7 +14,7 @@
         <item
             android:id="@+id/nav_reminders"
             android:icon="@drawable/reminders"
-            android:title="Reminders"/>
+            android:title="Todo"/>
 
         <item
             android:id="@+id/nav_safetyplanning"

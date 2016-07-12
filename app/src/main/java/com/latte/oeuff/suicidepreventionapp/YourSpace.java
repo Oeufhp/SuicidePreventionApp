@@ -1,10 +1,8 @@
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
@@ -26,9 +24,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-import org.w3c.dom.Text;
-import java.io.File;
 
 public class YourSpace extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -163,7 +158,7 @@ public class YourSpace extends AppCompatActivity
             it = new Intent(YourSpace.this, YourSpace.class);
             startActivity(it);
         } else if (id == R.id.nav_reminders) {
-            it = new Intent(YourSpace.this, Reminders.class);
+            it = new Intent(YourSpace.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(YourSpace.this, SafetyPlanning.class);

@@ -2,22 +2,17 @@
 
 package com.latte.oeuff.suicidepreventionapp;
 
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,11 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.google.android.gms.drive.events.ResourceEvent;
-import com.google.android.gms.vision.text.Line;
 
 public class Resources extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //---About Others----
@@ -151,7 +142,7 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
             it = new Intent(Resources.this, YourSpace.class);
             startActivity(it);
         } else if (id == R.id.nav_reminders) {
-            it = new Intent(Resources.this, Reminders.class);
+            it = new Intent(Resources.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(Resources.this, SafetyPlanning.class);
