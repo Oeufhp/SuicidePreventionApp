@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Bitmap bm;
     private String BITMAP_FILE = "bitmap_file";
     private String IMG_PATH = "img_path";
+    private String PHOTO_EXIST="photo_exist";
     //----------------------------------
     boolean home_photoexists = false;
     private int REQUEST_CAPTURE_IMAGE = 1;
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             bm = savedInstanceState.getParcelable(BITMAP_FILE);
             int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
             bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
+
             home_imageView.setImageBitmap(bm);
         }
 
@@ -317,6 +319,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                Bundle extras = data.getExtras();
 //                Bitmap imageBitmap = (Bitmap) extras.get("data");
                 bm = (Bitmap) extras.get("data");
+                if(bm==null)Log.d("NULL","null");
                 //****Save an image into the gallery****
 //###############################################################################################
                 //FileOutputStream out = null;
@@ -346,12 +349,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 //                    Bitmap bitmap=BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
                     bm = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions);
-//                    bm = Bitmap.createScaledBitmap(bm, home_imageView.getWidth(), home_imageView.getHeight(),false);
                     int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
                     bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
+//                    bm = Bitmap.createScaledBitmap(bm, home_imageView.getWidth(), home_imageView.getHeight(),true);
                     home_imageView.setImageBitmap(bm);
                     home_imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //                    home_imageView.setImageURI(selectedUri); //set the image in home_ImageView
+                    home_photoexists=true;
 
                     //save image resource's state
                     extras.putParcelable(BITMAP_FILE, bm);
@@ -360,6 +364,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.putString(IMG_PATH,path);
                     editor.commit();
                     extras.putString(IMG_PATH,path);
+                    extras.putBoolean(PHOTO_EXIST,home_photoexists);
 
 
                 }
@@ -437,7 +442,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //CHECK IN "activity_main_drawer.xml"
-        //--------- Logics after pressing items on Navigation ----------------
+        //--------- Logics after pressing items on Navigation -------------
         Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(MainActivity.this, MainActivity.class);
@@ -515,9 +520,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         SharedPreferences sp = getSharedPreferences("AppSharedPref", 1);
         String path=sp.getString(IMG_PATH,"");
+        home_photoexists=sp.getBoolean(PHOTO_EXIST,true);
         bm=BitmapFactory.decodeFile(path);
-        int nh=(int)(bm.getHeight()*(512.0/bm.getWidth()));
-        bm=Bitmap.createScaledBitmap(bm,512,nh,true);
+        int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
+        bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
         home_imageView.setImageBitmap(bm);
         if(home_photoexists){
             addPhoto_in_home.setVisibility(View.GONE);
@@ -530,6 +536,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onSaveInstanceState(Bundle saveInstancestate) {
         saveInstancestate.putParcelable(BITMAP_FILE, bm);
+        saveInstancestate.putBoolean(PHOTO_EXIST,home_photoexists);
         super.onSaveInstanceState(saveInstancestate);
     }
 
@@ -538,6 +545,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onRestoreInstanceState(restoreInstanceState);
         if (restoreInstanceState != null) {
             bm = restoreInstanceState.getParcelable(BITMAP_FILE);
+            home_photoexists=restoreInstanceState.getBoolean(PHOTO_EXIST);
             int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
             bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
             home_imageView.setImageBitmap(bm);
