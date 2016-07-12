@@ -24,45 +24,36 @@
         android:text="Gender:"
         android:textColor="#000000"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <RadioGroup
-            android:layout_width="match_parent"
+    <LinearLayout android:layout_height="wrap_content"
+                  android:layout_width="wrap_content">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='horizontal'
+            android:checkableBehavior="single">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/malebtn"
+            android:checked="true"
+            android:text="Male"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView3"
+            android:layout_marginRight="50dp"    />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/femalebtn"
+            android:checked="false"
+            android:text="Female"
+            android:layout_alignTop="@+id/malebtn"
+            android:layout_marginRight="55dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checkableBehavior="single"
-            android:orientation='horizontal'>
+            android:orientation='horizontal'/>
 
-            <RadioButton
-                android:id="@+id/malebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView3"
-                android:layout_marginRight="55dp"
-                android:checked="true"
-                android:text="Male"/>
-
-            <RadioButton
-                android:id="@+id/femalebtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/malebtn"
-                android:layout_marginRight="55dp"
-                android:checked="false"
-                android:text="Female"/>
-
-            <RadioButton
-                android:id="@+id/otherbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/femalebtn"
-                android:checked="false"
-                android:text="Others"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -242,30 +233,27 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checkableBehavior="single"
-            android:orientation='horizontal'>
+            android:orientation='horizontal'
+            android:checkableBehavior="single">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:id="@+id/create_yesbtn"
+            android:checked="true"
+            android:layout_below="@+id/textView6"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="-7dp"
+            android:layout_marginRight="3dp" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:id="@+id/create_nobtn"
+            android:checked="false"
+            android:layout_below="@+id/create_yesbtn"
+            android:layout_alignParentLeft="true" />
 
-            <RadioButton
-                android:id="@+id/create_yesbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/textView6"
-                android:layout_marginTop="9dp"
-                android:layout_marginLeft="-7dp"
-                android:layout_marginRight="3dp"
-                android:checked="true"
-                android:text="Yes"/>
-
-            <RadioButton
-                android:id="@+id/create_nobtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/create_yesbtn"
-                android:layout_marginTop="9dp"
-                android:checked="false"
-                android:text="No"/>
         </RadioGroup>
     </LinearLayout>
 

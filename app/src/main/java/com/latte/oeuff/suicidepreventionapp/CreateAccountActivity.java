@@ -38,7 +38,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     //---------Binding--------------------------------------
         malebtn = (RadioButton)findViewById(R.id.malebtn);
         femalebtn = (RadioButton)findViewById(R.id.femalebtn);
-        otherbtn = (RadioButton)findViewById(R.id.otherbtn);
+        //otherbtn = (RadioButton)findViewById(R.id.otherbtn);
         surname = (EditText)findViewById(R.id.surname);
         name = (EditText)findViewById(R.id.name);
         //datespinner = (Spinner)findViewById(R.id.datespinner);

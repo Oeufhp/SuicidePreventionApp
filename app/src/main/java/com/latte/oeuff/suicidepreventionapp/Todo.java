@@ -42,7 +42,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
 
     //-----for reminder-----
     TaskAdapter mTaskAdapter;
-
+    EditText inputField;
     // These indices are tied to TASKS_COLUMNS.  If TASKS_COLUMNS changes, these must change.
     static final int COL_TASK_ID = 0;
     static final int COL_TASK_NAME = 1;

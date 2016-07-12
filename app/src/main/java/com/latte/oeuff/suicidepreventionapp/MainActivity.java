@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -82,12 +83,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         home_imageView = (ImageView) findViewById(id.home_imageview);            //android:src="@drawable/demo_slide"  in home_imageView
         newImportPhotoFragment = new ImportPhoto();
 
-        //-------check: Is bm null? -------------
-            
-                bm = savedInstanceState.getParcelable(BITMAP_FILE);
-                int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
-                bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
-                home_imageView.setImageBitmap(bm);
+        //-----Check: Is bm null ?--------------------
+        if (savedInstanceState != null) {
+            bm = savedInstanceState.getParcelable(BITMAP_FILE);
+            int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
+            bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
+            home_imageView.setImageBitmap(bm);
+        } //PROBLEM
+        else {
+            bm = Bitmap.createBitmap(100, 100,Bitmap.Config.ARGB_8888);
+            home_photoexists = false;
+            //home_imageView.setImageBitmap(bm);
+            //home_imageView.setVisibility(View.INVISIBLE);
+            Log.d("init bitmap","success1");
+        }
+        //----------------------------------------------
 
 
         //---About Others---------
@@ -118,7 +128,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawable.toilet_paper
                 };
     //---Touch to Change---
-    /*    home_imageView.setOnTouchListener(new View.OnTouchListener() {
+        home_imageView.setOnTouchListener(new View.OnTouchListener() {
+
+
+//----------------------------------SlideShow-----------------------------------------//
+//        imageView=(ImageView)findViewById(R.id.slideShowImg);
+//        final int [] imgID=new int[]{drawable.batman,
+//                drawable.bicycle,
+//                drawable.egg,
+//                drawable.dog,
+//                drawable.book_worm,
+//                drawable.car,
+//                drawable.coffee1,
+//                drawable.coffee2,
+//                drawable.smile,
+//                drawable.toilet_paper
+//                };
+
+        imageView=(ImageView)findViewById(R.id.slideShowImg); //android:src="@drawable/demo_slide"  in imageView
+        imageView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                openImageChooser();
+                return false;
+            }
+        });
+    //====Touch to Change====
+    /*    imageView.setOnTouchListener(new View.OnTouchListener() {
+
             int p=0;
             int i=0;
             @Override
@@ -151,6 +188,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         addPhoto_in_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Log.d("addPhoto_in_home","clicked");
                 if (home_photoexists == false) {
                     newImportPhotoFragment.show(getSupportFragmentManager(), "ImportPhoto");
                 }
@@ -286,7 +325,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    //---------------------------------------------------------------------------------------------//
+//---------------------------------------------------------------------------------------------//
+
 //----------------------------------ImageShow Logics-------------------------------------------//
 //***** 1. startActivityForResult() *****
     //---Take a photo---
@@ -349,7 +389,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //gallery
             else if (requestCode == REQUEST_CHOOSE_IMAGE) {
                 Uri selectedUri = data.getData(); //get the Uri from the data
+
+                Log.d("selectedUri:", selectedUri+"");
+
                 if (selectedUri != null) {
+
+                    Log.d("selectedUri","not null");
+
                     String path = getPathFromURI(selectedUri); //@@@ get the real Path from the Uri (Call getPathFromURI below)
                     Log.i(TAG, "Image path: " + path);
                     //---Show an image---
@@ -526,17 +572,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     @Override
     protected void onResume() {
-        SharedPreferences sp = getSharedPreferences("AppSharedPref", 1);
-        String path=sp.getString(IMG_PATH,"");
-        home_photoexists=sp.getBoolean(PHOTO_EXIST,true);
-        bm=BitmapFactory.decodeFile(path);
-        int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
-        bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
-        home_imageView.setImageBitmap(bm);
-        if(home_photoexists){
-            addPhoto_in_home.setVisibility(View.GONE);
-            addPhoto_in_home_small.setVisibility(View.VISIBLE);
+            SharedPreferences sp = getSharedPreferences("AppSharedPref", 1);
+            String path = sp.getString(IMG_PATH, "");
+            home_photoexists = sp.getBoolean(PHOTO_EXIST, true);
+            bm = BitmapFactory.decodeFile(path);
+            int nh;
+
+    //-----Check: Is bm null ?--------------------
+        if(bm !=null){
+            nh = (int) (bm.getHeight() * (2048.0 / bm.getWidth()));
+            bm = Bitmap.createScaledBitmap(bm, 2048, nh, true);
+            home_imageView.setImageBitmap(bm);
+            if (home_photoexists) {
+                addPhoto_in_home.setVisibility(View.GONE);
+                addPhoto_in_home_small.setVisibility(View.VISIBLE);
+            }
+
         }
+        else {
+            bm = Bitmap.createBitmap(100, 100,Bitmap.Config.ARGB_8888);
+            home_photoexists = false;
+            //home_imageView.setImageBitmap(bm);
+            //home_imageView.setVisibility(View.INVISIBLE);
+            Log.d("init bitmap","success2");
+        }
+    //----------------------------------------------
         super.onResume();
     }
 
