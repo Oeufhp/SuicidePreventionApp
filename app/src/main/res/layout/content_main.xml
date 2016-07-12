@@ -1,193 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:fillViewport="false"
-
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity"
-    tools:showIn="@layout/app_bar_main" >
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    android:orientation="vertical"
-    android:background="@drawable/appbg" >
-
-    <FrameLayout android:layout_width="match_parent"
-                 android:layout_height="match_parent">
-        <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="170dp">
-            <ImageView
-                android:id="@+id/home_imageview"
-                android:layout_width="360dp"
-                android:layout_height="155dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/squarebtn"
-                android:scaleType="centerCrop" />
-        </LinearLayout>
-        <ImageButton android:layout_width="360dp"
-                   android:layout_height="155dp"
-                   android:src="@drawable/addphoto_in_home"
-                   android:layout_margin="8dp"
-                   android:id="@+id/addPhoto_in_home"
-                   android:background="@null"
-                    />
-
-        <ImageButton android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:src="@drawable/addphoto_in_home_small"
-            android:layout_marginTop="140dp"
-            android:layout_marginLeft="340dp"
-            android:id="@+id/addPhoto_in_home_small"
-            android:background="@null" />
-    </FrameLayout>
-
-    <LinearLayout android:orientation="horizontal"
-        android:layout_width="380dp"
-        android:layout_height="75dp"
-        android:layout_marginLeft="8dp">
-
-        <FrameLayout android:layout_width="180dp"
-            android:layout_height="75dp">
-            <TextView
-                android:id="@+id/shortcut1txtview"
-                android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:text="Your Space"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="50dp"
-                android:textColor="#000000"/>
-            <ImageButton
-                android:layout_width="180dp"
-                android:layout_height="75dp"
-                android:text="add a shortcut here (1)"
-                android:id="@+id/shortcut1"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:src="@drawable/yourspace"
-                android:background="@drawable/squarebtn"/>
-        </FrameLayout>
-
-        <FrameLayout android:layout_width="180dp"
-                     android:layout_height="75dp">
-            <TextView
-                android:id="@+id/shortcut2txtview"
-                android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:text="Reminders"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="50dp"
-                android:textColor="#000000"/>
-            <ImageButton
-                android:layout_width="180dp"
-                android:layout_height="75dp"
-                android:text="add a shortcut here (2)"
-                android:id="@+id/shortcut2"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:src="@drawable/reminders"
-                android:background="@drawable/squarebtn"/>
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="360dp"
-                  android:layout_height="75dp"
-                  android:layout_marginLeft="8dp">
-
-        <FrameLayout android:layout_width="180dp"
-                     android:layout_height="75dp">
-            <TextView
-                android:id="@+id/shortcut3txtview"
-                android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:text="Resources"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="50dp"
-                android:textColor="#000000"/>
-
-            <ImageButton
-                android:layout_width="180dp"
-                android:layout_height="75dp"
-                android:text="add a shortcut here (3)"
-                android:id="@+id/shortcut3"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:src="@drawable/resources"
-                android:layout_gravity="center"
-                android:background="@drawable/squarebtn"/>
-        </FrameLayout>
-
-        <FrameLayout android:layout_width="180dp"
-                     android:layout_height="75dp">
-            <TextView
-                android:id="@+id/shortcut4txtview"
-                android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:text="Help Near You"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="50dp"
-                android:textColor="#000000"/>
-
-            <ImageButton
-                android:layout_width="180dp"
-                android:layout_height="75dp"
-                android:text="add a shortcut here (4)"
-                android:id="@+id/shortcut4"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:src="@drawable/helpnearyou"
-                android:layout_gravity="left|center_vertical"
-                android:background="@drawable/squarebtn"/>
-        </FrameLayout>
-
-    </LinearLayout>
-
-
-    <LinearLayout android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="8dp">
-        <TextView
-            android:id="@+id/locationtxtview"
-            android:layout_width="180dp"
-            android:layout_height="40dp"
-            android:text="Your location: "
-            android:textColor="#000000"
-            android:background="@drawable/squarebtn"/>
-        <TextView
-            android:id="@+id/languagetxtview"
-            android:layout_width="180dp"
-            android:layout_height="40dp"
-            android:text="Your language:"
-            android:textColor="#000000"
-            android:background="@drawable/squarebtn"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="180dp"
-        android:layout_height="20dp"
-        android:text="Feeling Graph Visualization"
-        android:layout_margin="5dp"
-        android:textColor="#000000"/>
-
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent">
-        <ImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/graphimagview"
-            android:src="@drawable/feeling_graph"
-            android:layout_margin="5dp"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:fillViewport="false"
+            android:orientation="vertical"
 
-</LinearLayout>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity"
+            tools:showIn="@layout/app_bar_main">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/appbg"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/home_imageview"
+                    android:layout_width="357dp"
+                    android:layout_height="153dp"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/squarebtn"
+                    android:scaleType="centerCrop"/>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/addPhoto_in_home"
+                android:layout_width="357dp"
+                android:layout_height="153dp"
+                android:layout_margin="8dp"
+                android:background="@null"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/addphoto_in_home"
+                />
+
+            <ImageButton
+                android:id="@+id/addPhoto_in_home_small"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_marginLeft="340dp"
+                android:layout_marginTop="130dp"
+                android:background="@null"
+                android:src="@drawable/addphoto_in_home_small"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="180dp"
+                android:layout_height="75dp">
+
+                <TextView
+                    android:id="@+id/shortcut1txtview"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Your Space"
+                    android:textColor="#000000"/>
+
+                <ImageButton
+                    android:id="@+id/shortcut1"
+                    android:layout_width="180dp"
+                    android:layout_height="75dp"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:background="@drawable/squarebtn"
+                    android:src="@drawable/yourspace"
+                    android:text="add a shortcut here (1)"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="180dp"
+                android:layout_height="75dp">
+
+                <TextView
+                    android:id="@+id/shortcut2txtview"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Reminders"
+                    android:textColor="#000000"/>
+
+                <ImageButton
+                    android:id="@+id/shortcut2"
+                    android:layout_width="180dp"
+                    android:layout_height="75dp"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:background="@drawable/squarebtn"
+                    android:src="@drawable/reminders"
+                    android:text="add a shortcut here (2)"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="180dp"
+                android:layout_height="75dp">
+
+                <TextView
+                    android:id="@+id/shortcut3txtview"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Resources"
+                    android:textColor="#000000"/>
+
+                <ImageButton
+                    android:id="@+id/shortcut3"
+                    android:layout_width="180dp"
+                    android:layout_height="75dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:layout_row="1"
+                    android:background="@drawable/squarebtn"
+                    android:src="@drawable/resources"
+                    android:text="add a shortcut here (3)"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="180dp"
+                android:layout_height="75dp">
+
+                <TextView
+                    android:id="@+id/shortcut4txtview"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Help Near You"
+                    android:textColor="#000000"/>
+
+                <ImageButton
+                    android:id="@+id/shortcut4"
+                    android:layout_width="180dp"
+                    android:layout_height="75dp"
+                    android:layout_column="1"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_row="1"
+                    android:background="@drawable/squarebtn"
+                    android:src="@drawable/helpnearyou"
+                    android:text="add a shortcut here (4)"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/locationtxtview"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:background="@drawable/squarebtn"
+                android:text="Your location: "
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/languagetxtview"
+                android:layout_width="180dp"
+                android:layout_height="40dp"
+                android:background="@drawable/squarebtn"
+                android:text="Your language:"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:text="Feeling Graph Visualization"
+            android:textColor="#000000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/graphimagview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:src="@drawable/feeling_graph"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </ScrollView>

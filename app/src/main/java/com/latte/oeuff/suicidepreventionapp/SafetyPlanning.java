@@ -104,7 +104,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 
                 //This is for going to phone in mobile
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:911"));
+                callIntent.setData(Uri.parse("tel:112"));
                 //no need to request a permission
                 startActivity(callIntent);
 

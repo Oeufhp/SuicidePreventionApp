@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //floating button (bottom)
             FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-            fab.setImageResource(drawable.emergencycall); //ic_warning_white_40dp
+            fab.setImageResource(drawable.emergencycall);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

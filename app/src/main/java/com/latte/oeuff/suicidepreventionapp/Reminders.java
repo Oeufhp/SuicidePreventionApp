@@ -3,6 +3,7 @@
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,77 +33,193 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.latte.oeuff.suicidepreventionapp.data.TaskContract;
+import com.latte.oeuff.suicidepreventionapp.data.TaskDBHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
 public class Reminders extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    //-----for reminder-----
+    TaskAdapter mTaskAdapter;
+    EditText inputField;
+    // These indices are tied to TASKS_COLUMNS.  If TASKS_COLUMNS changes, these must change.
+    static final int COL_TASK_ID = 0;
+    static final int COL_TASK_NAME = 1;
+
     //---About Others----
     TextView reminderstextview;
     //---About Dialog---
     DialogFragment newLogoutFragment;
-    private static final String TAG="MainActivity";
+    private static final String TAG = "MainActivity";
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient mClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reminders);
         //---About Others ---
-        reminderstextview =(TextView) findViewById(R.id.reminderstextview);
+//        reminderstextview = (TextView) findViewById(R.id.reminderstextview);
         //---About Dialog & Resources---
         newLogoutFragment = new LogOutDialog();
 
-    //---------- Logics -------------------------------------
+        //-----------------------------todo-----------------------------------------------//
+        inputField=new EditText(Reminders.this);
+        String inputTask = inputField.getText().toString();
+
+        //Get DBHelper to write to database
+        TaskDBHelper helper = new TaskDBHelper(Reminders.this);
+//        SQLiteDatabase db = helper.getWritableDatabase();
+        SQLiteDatabase sqlDB = helper.getReadableDatabase();
+        //Put in the values within a ContentValues.
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put(TaskContract.TaskEntry.COLUMN_TASK, inputTask);
+        //Insert the values into the Table for Tasks
+        sqlDB.insertWithOnConflict(
+                TaskContract.TaskEntry.TABLE_NAME,
+                null,
+                values,
+                SQLiteDatabase.CONFLICT_IGNORE);
+
+        //Query database again to get updated data
+        Cursor cursor = sqlDB.query(TaskContract.TaskEntry.TABLE_NAME,
+                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
+                null, null, null, null, null);
+
+        //Swap old data with new data for display
+//                        mTaskAdapter.swapCursor(cursor);
+        //Find the listView
+        ListView listView = (ListView)findViewById(R.id.listview_tasks);
+        //Get DBHelper to read from database
+//                        TaskDBHelper helper = new TaskDBHelper(getActivity());
+//        SQLiteDatabase sqlDB = helper.getReadableDatabase();
+
+        //Query database to get any existing data
+        Cursor cursor1 = sqlDB.query(TaskContract.TaskEntry.TABLE_NAME,
+                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
+                null, null, null, null, null);
+
+        //Create a new TaskAdapter and bind it to ListView
+        mTaskAdapter = new TaskAdapter(getBaseContext(), cursor);
+        listView.setAdapter(mTaskAdapter);
+
+
+        //---------- Logics -------------------------------------
         //Floating Button in Reminders
         FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnAddAReminder);
-        Log.d(TAG,"Add a new Remainder");
-        final EditText taskEditText=new EditText(this);
+        Log.d(TAG, "Add a new Remainder");
+        final EditText taskEditText = new EditText(this);
         fabRem.setImageResource(R.drawable.ic_new_reminder);
+//        fabRem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Log.d("AA","BB");
+//                final AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
+//                LayoutInflater inflator = Reminders.this.getLayoutInflater();
+//                builder.setView(inflator.inflate(R.layout.dialog_create_reminder, null));
+////                builder.setTitle("New Reminder");
+//                builder.setPositiveButton("create a reminder", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+////                        reminderstextview.setText("A reminder is created !");
+//
+//                    }
+//                });
+//                builder.setNegativeButton("cancel", null);
+//                builder.show();
+//            }
+//        });
+    //----------------------for create dialog to do-------------------------//
         fabRem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Log.d("AA","BB");
-                final AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
-                LayoutInflater inflator = Reminders.this.getLayoutInflater();
-                builder.setView(inflator.inflate(R.layout.dialog_create_reminder, null));
-//                builder.setTitle("New Reminder");
-
-                builder.setPositiveButton("create a reminder", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
+                builder.setTitle("Add a task");
+                builder.setMessage("What do you plan to do?");
+              inputField=new EditText(Reminders.this);
+                builder.setView(inputField);
+                builder.setPositiveButton("Add",new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        reminderstextview.setText("A reminder is created !");
+//                        Toast.makeText(Reminders.this, inputField.getText(), Toast.LENGTH_SHORT).show();
+
+                        String inputTask = inputField.getText().toString();
+
+                        //Get DBHelper to write to database
+                        TaskDBHelper helper = new TaskDBHelper(Reminders.this);
+                        SQLiteDatabase db = helper.getWritableDatabase();
+
+                        //Put in the values within a ContentValues.
+                        ContentValues values = new ContentValues();
+                        values.clear();
+                        values.put(TaskContract.TaskEntry.COLUMN_TASK, inputTask);
+                        //Insert the values into the Table for Tasks
+                        db.insertWithOnConflict(
+                                TaskContract.TaskEntry.TABLE_NAME,
+                                null,
+                                values,
+                                SQLiteDatabase.CONFLICT_IGNORE);
+
+                        //Query database again to get updated data
+                        Cursor cursor = db.query(TaskContract.TaskEntry.TABLE_NAME,
+                                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
+                                null, null, null, null, null);
+
+                        //Swap old data with new data for display
+//                        mTaskAdapter.swapCursor(cursor);
+                        //Find the listView
+                        ListView listView = (ListView)findViewById(R.id.listview_tasks);
+                        //Get DBHelper to read from database
+//                        TaskDBHelper helper = new TaskDBHelper(getActivity());
+                        SQLiteDatabase sqlDB = helper.getReadableDatabase();
+
+                        //Query database to get any existing data
+                        Cursor cursor1 = sqlDB.query(TaskContract.TaskEntry.TABLE_NAME,
+                                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
+                                null, null, null, null, null);
+
+                        //Create a new TaskAdapter and bind it to ListView
+                        mTaskAdapter = new TaskAdapter(getBaseContext(), cursor);
+                        listView.setAdapter(mTaskAdapter);
                     }
                 });
-
-                builder.setNegativeButton("cancel", null);
-
-                builder.show();
-
+                builder.setNegativeButton("Cancel", null);
+                builder.create().show();
             }
         });
+        //************************ This is for creating the Navigation Menu*********************************
+        //Toolbar (Top)
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
 
-    //************************ This is for creating the Navigation Menu*********************************
-    //Toolbar (Top)
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
 
+        // top-level container of "Navigation Drawer" (side)
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(  //=tie together "functionality of DrawerLayout" <-> "framework ActionBar"
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);                         //Set a listener to be notified of drawer events
+        toggle.syncState();                                       //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout
 
-    // top-level container of "Navigation Drawer" (side)
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-    ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(  //=tie together "functionality of DrawerLayout" <-> "framework ActionBar"
-    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-    drawer.setDrawerListener(toggle);                         //Set a listener to be notified of drawer events
-    toggle.syncState();                                       //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout
-
-    //view of "Navigation Drawer" (side)
-    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(this);
-    //*****To uncover colors of icon**********
-    navigationView.setItemIconTintList(null);
+        //view of "Navigation Drawer" (side)
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        //*****To uncover colors of icon**********
+        navigationView.setItemIconTintList(null);
 
         //floating button (bottom)
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
@@ -115,12 +232,15 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
 
                 //This is for going to phone in mobile
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:911"));
+                callIntent.setData(Uri.parse("tel:112"));
                 //no need to request a permission
                 startActivity(callIntent);
             }
         });
-    //**************************************************************************************************
+        //**************************************************************************************************
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        mClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     //************************ This is for creating the Navigation Menu*********************************
@@ -190,8 +310,7 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_setting) {
             it = new Intent(Reminders.this, Setting.class);
             startActivity(it);
-        }
-        else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
         }
 
@@ -199,11 +318,52 @@ public class Reminders extends AppCompatActivity implements NavigationView.OnNav
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        mClient.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Reminders Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.latte.oeuff.suicidepreventionapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(mClient, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Reminders Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://com.latte.oeuff.suicidepreventionapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(mClient, viewAction);
+        mClient.disconnect();
+    }
+
     //**************************************************************************************************
 //-----------------------------------Dialog for warning before logging out--------------------------
     public class LogOutDialog extends DialogFragment {
 
-        TextView yesbtn_logout,nobtn_logout;
+        TextView yesbtn_logout, nobtn_logout;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -9,11 +9,11 @@
     tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:id="@+id/app_bar"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -42,17 +42,17 @@
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/col_fabBtnRem"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|start" />
+        app:layout_anchorGravity="bottom|end"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabBtnDelAReminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/del_big"
-        app:backgroundTint="#C0392B"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/fabBtnDelAReminder"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="@dimen/fab_margin"-->
+    <!--android:src="@drawable/del_big"-->
+    <!--app:backgroundTint="#C0392B"-->
+    <!--app:layout_anchor="@id/app_bar"-->
+    <!--app:layout_anchorGravity="bottom|end" />-->
 
 
     <android.support.design.widget.FloatingActionButton
@@ -62,7 +62,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/fabCol"
-        app:fabSize="normal"
-        app:elevation="5dp" />
+        app:elevation="5dp"
+        app:fabSize="normal"/>
 
 </android.support.design.widget.CoordinatorLayout>

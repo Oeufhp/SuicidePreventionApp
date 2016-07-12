@@ -1,92 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:fillViewport="false"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="false"
+            android:orientation="vertical"
 
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.latte.oeuff.suicidepreventionapp.MainActivity">
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_margin="15dp"
         android:background="@drawable/squarebtn"
-        android:layout_margin="15dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/dialog_addphoto_in_home_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Plan_No2"
-            android:textSize="25sp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:textAlignment="center"
+            android:layout_margin="10dp"
             android:layout_weight="0.00"
-            android:textColor="#000000"
             android:background="#EEFF41"
-            android:layout_margin="10dp"/>
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="Plan_No2"
+            android:textAlignment="center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#000000"
+            android:textSize="25sp"/>
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/addplan_no2_layout"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal"
             android:layout_margin="10dp"
             android:background="@drawable/squarebtn"
-            android:id="@+id/addplan_no2_layout">
-            <ImageView android:layout_width="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/add"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/add"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
                 android:text="Add a plan"
                 android:textColor="#000000"
-                android:textSize="25dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp" />
+                android:textSize="25dp"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/delplan_no2_layout"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:orientation="horizontal"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="2dp"
-            android:layout_marginBottom="8dp"
             android:background="@drawable/squarebtn"
-            android:id="@+id/delplan_no2_layout">
-            <ImageView android:layout_width="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/del"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/del"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
                 android:text="Delete a plan"
                 android:textColor="#000000"
-                android:textSize="25dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp" />
+                android:textSize="25dp"/>
         </LinearLayout>
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/planno2layout"
+            android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:orientation="horizontal"
             android:layout_margin="10dp"
             android:background="@drawable/squarebtn"
-            android:id="@+id/planno2layout">
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/addasafetyplanningtextview2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/addasafetyplanningtextview2" />
+                android:text="New Text"/>
         </LinearLayout>
 
 
