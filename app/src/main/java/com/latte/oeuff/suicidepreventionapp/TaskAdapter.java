@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.latte.oeuff.suicidepreventionapp.data.TaskContract;
@@ -39,7 +40,9 @@ public class TaskAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         // Find Views to populate in inflated template
         TextView textView = (TextView) view.findViewById(R.id.list_item_task_textview);
-        Button done_button = (Button) view.findViewById(R.id.list_item_done_button);
+//        Button done_button = (Button) view.findViewById(R.id.list_item_done_button);
+        ImageButton done_button=(ImageButton)view.findViewById(R.id.list_item_done_button);
+        done_button.setBackgroundResource(R.drawable.done_button);
 
         // Extract properties from cursor
         final String id = cursor.getString(Todo.COL_TASK_ID);

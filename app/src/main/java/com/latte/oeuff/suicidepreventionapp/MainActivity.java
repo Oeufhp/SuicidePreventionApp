@@ -1,19 +1,13 @@
 package com.latte.oeuff.suicidepreventionapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -35,13 +29,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.latte.oeuff.suicidepreventionapp.R.*;
-import static com.latte.oeuff.suicidepreventionapp.R.drawable.add;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
     //----About ImageShow-----
@@ -127,32 +118,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawable.smile,
                 drawable.toilet_paper
                 };
-    //---Touch to Change---
-        home_imageView.setOnTouchListener(new View.OnTouchListener() {
 
-
-//----------------------------------SlideShow-----------------------------------------//
-//        imageView=(ImageView)findViewById(R.id.slideShowImg);
-//        final int [] imgID=new int[]{drawable.batman,
-//                drawable.bicycle,
-//                drawable.egg,
-//                drawable.dog,
-//                drawable.book_worm,
-//                drawable.car,
-//                drawable.coffee1,
-//                drawable.coffee2,
-//                drawable.smile,
-//                drawable.toilet_paper
-//                };
-
-        imageView=(ImageView)findViewById(R.id.slideShowImg); //android:src="@drawable/demo_slide"  in imageView
-        imageView.setOnTouchListener(new View.OnTouchListener(){
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                openImageChooser();
-                return false;
-            }
-        });
     //====Touch to Change====
     /*    imageView.setOnTouchListener(new View.OnTouchListener() {
 
