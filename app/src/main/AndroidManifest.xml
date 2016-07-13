@@ -12,14 +12,16 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!-- Use permission for access external storage -->
-    <uses-permission android:name="android.permission.READ_EXERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXERNAL_STORAGE" />
 
     <!-- Use permission for using a camera -->
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="true" />
-    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -87,11 +89,20 @@
         <activity
             android:name=".ShowHelpNearYou"
             android:label="@string/title_activity_show_help_near_you"
-            android:theme="@style/AppTheme.NoActionBar"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--
+ ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".HelpNearYouOverview" />
+        <activity android:name=".SurveyOverview" />
+        <activity android:name=".Survey" />
+        <activity android:name=".SurveyHistory" />
+        <activity android:name=".SurveyVisualization"></activity>
     </application>
 
 </manifest>

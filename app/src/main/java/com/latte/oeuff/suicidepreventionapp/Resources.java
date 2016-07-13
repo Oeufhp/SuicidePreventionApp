@@ -141,7 +141,7 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(Resources.this, YourSpace.class);
             startActivity(it);
-        } else if (id == R.id.nav_reminders) {
+        } else if (id == R.id.nav_todo) {
             it = new Intent(Resources.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
@@ -151,13 +151,13 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
             it = new Intent(Resources.this, Resources.class);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(Resources.this, HelpNearYou.class);
+            it = new Intent(Resources.this, HelpNearYouOverview.class);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(Resources.this, Feeling.class);
             startActivity(it);
-        } else if (id == R.id.nav_setting) {
-            it = new Intent(Resources.this, Setting.class);
+        } else if (id == R.id.nav_survey) {
+            it = new Intent(Resources.this, SurveyOverview.class);
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {

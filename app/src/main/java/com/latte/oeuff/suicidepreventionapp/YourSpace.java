@@ -157,7 +157,7 @@ public class YourSpace extends AppCompatActivity
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(YourSpace.this, YourSpace.class);
             startActivity(it);
-        } else if (id == R.id.nav_reminders) {
+        } else if (id == R.id.nav_todo) {
             it = new Intent(YourSpace.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
@@ -167,13 +167,13 @@ public class YourSpace extends AppCompatActivity
             it = new Intent(YourSpace.this, Resources.class);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(YourSpace.this, HelpNearYou.class);
+            it = new Intent(YourSpace.this, HelpNearYouOverview.class);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(YourSpace.this, Feeling.class);
             startActivity(it);
-        } else if (id == R.id.nav_setting) {
-            it = new Intent(YourSpace.this, Setting.class);
+        } else if (id == R.id.nav_survey) {
+            it = new Intent(YourSpace.this, SurveyOverview.class);
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {

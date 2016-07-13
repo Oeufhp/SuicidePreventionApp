@@ -2,15 +2,14 @@ package com.latte.oeuff.suicidepreventionapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -26,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,85 +43,108 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class LoginActivity extends AppCompatActivity {
-    //**********Volley*********************
+public class SurveyHistory extends AppCompatActivity {
+    //*******************************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
-    //-------------------------------------
-    EditText user,pass;
-    Button loginbtn;
-    TextView forgotpass;
+    //----Others-----------
+    TextView seesurveyhistory_textview;
+    LinearLayout seesurveyhistory_layout;
+    Button seesurveyhistorybtn;
+    //----getIntent--------
+    Intent it;
+    String username,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_survey_history);
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
-        //-----tie vars to id--------------------------------------------------
-        user = (EditText)findViewById(R.id.user);
-        pass = (EditText)findViewById(R.id.pass);
-        loginbtn = (Button)findViewById(R.id.loginbtn);
-        forgotpass = (TextView)findViewById(R.id.forgotpass);
+        //----------getIntent---------
+        it =getIntent();
+        username = it.getStringExtra("username");
+        password = it.getStringExtra("password");
+        //--------- Binding -------------
+        seesurveyhistory_textview = (TextView)findViewById(R.id.seesurveyhistory_textview);
+        seesurveyhistory_layout = (LinearLayout)findViewById(R.id.seesurveyhistory_layout);
+        seesurveyhistorybtn = (Button)findViewById(R.id.seesurveyhistorybtn);
 
-        //----- For a faster login: get Intent (below "tie vars to id") ----------------------------------------------------
-        Intent it = getIntent();
-        if(it != null){
-            user.setText(it.getStringExtra("username"));
-            pass.setText(it.getStringExtra("password"));
-        }
-
-        //----- My Logics ----------------------------------------
-        loginbtn.setOnClickListener(new View.OnClickListener() {
+        //-------My Logics --------------------
+        seesurveyhistorybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                seesurveyhistory_textview.setVisibility(View.GONE);
+                seesurveyhistory_layout.removeAllViews();
+                seesurveyhistory();
             }
         });
-        //----------------------------------------------------------------------------------------------------
-        //------Link and change textView to be same as the link-------      //HOW TO LINK PERFECTLY ???
-//        forgotpass.setText("Forgot your pasword");
-//        Linkify.addLinks(forgotpass, Linkify.ALL);
-
-        //---------------------------------------------------------------------------------------------
     }
 
-    //-------------------------Login-----------------------------------------------------------
-    public void login() {
-
+    //------------------  seesurveyhistory --------------------------------
+    public void seesurveyhistory(){
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
-        //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/login";
-        String url = "http://auth.oeufhp.me/beleaf.php/login";
-        //---------Process Dialog----------------
-        final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+        //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
+        String url = "http://auth.oeufhp.me/beleaf.php/seesurveyhistory";
+        //---------Message----------------
+        final ProgressDialog pd = new ProgressDialog(SurveyHistory.this);
         pd.setMessage("loading...");
         pd.show();
 
-        //----------Post Request---------------
+        //----------POST Request---------------
         //https://github.com/codepath/android_guides/wiki/Networking-with-the-Volley-Library
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 pd.dismiss(); //Dismiss & Removing it from the screen
                 try {
-                    Log.d("login's response",response);
+                    Log.d("seesurvey... response",response);
+                    //-----------My logics---------------
+                    String seesurveyhistory="";
+
+                    //1 get value(=String) from response(=json array)
                     JSONObject jsonResponse = new JSONObject(response);
-                    String login_status = jsonResponse.getString("login_status");
-                    //-----------My Logics---------------
-                    if(login_status.equals("1")){
-                        Toast.makeText(getApplicationContext(),"login", Toast.LENGTH_SHORT).show();
-                        Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                        it.putExtra("username",user.getText().toString());
-                        it.putExtra("password",pass.getText().toString());
-                            /*Bundle extras = new Bundle();
-                                extras.putString("username", username_login_edittext.getText().toString());
-                                extras.putString("password", password_login_edittext.getText().toString());
-                            it.putExtras(extras);*/
-                        startActivity(it);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"login failed", Toast.LENGTH_SHORT).show();
+                    String stringResponse = jsonResponse.getString("seesurveyhistory");
+
+                    //2 change type from String->json array
+                    //http://stackoverflow.com/questions/9961018/getting-specific-value-from-jsonarray
+                    JSONArray jsonarray_stringResponse = new JSONArray(stringResponse);
+
+                    for(int i=0; i < jsonarray_stringResponse.length();i++){
+                        //3 get value(=json object = "one jsonObject" which is json array) from json array
+                        JSONObject jsonobject_jsonarray_stringResponse = jsonarray_stringResponse.getJSONObject(i);
+
+                        //4 get value(= String = each value in "one jsonObject") from "one jsonObject"
+                        String username = jsonobject_jsonarray_stringResponse.getString("username");
+                        //  String password = jsonobject_jsonarray_stringResponse.getString("password");
+                        String sentdate = jsonobject_jsonarray_stringResponse.getString("sentdate");
+                        String survey_q1_ans = jsonobject_jsonarray_stringResponse.getString("survey_q1_ans");
+                        String survey_q2_ans = jsonobject_jsonarray_stringResponse.getString("survey_q2_ans");
+                        String survey_q3_ans = jsonobject_jsonarray_stringResponse.getString("survey_q3_ans");
+                        String survey_q4_ans = jsonobject_jsonarray_stringResponse.getString("survey_q4_ans");
+                        String survey_q5_ans = jsonobject_jsonarray_stringResponse.getString("survey_q5_ans");
+                        String totalscore = jsonobject_jsonarray_stringResponse.getString("totalScore");
+
+                        seesurveyhistory =  " Record:"+(i+1)+" "+"username:"+username+" "+"sentdate:"+sentdate+" "
+                                +"Q1ans:"+survey_q1_ans+" "
+                                +"Q2ans:"+survey_q2_ans+" "
+                                +"Q3ans:"+survey_q3_ans+" "
+                                +"Q4ans:"+survey_q4_ans+" "
+                                +"Q5ans:"+survey_q5_ans+" "
+                                +"total score:"+totalscore+" ";
+                        //-------------- Show survey history ---------------------------------------
+                        TextView aline =new TextView(SurveyHistory.this); //create a textview without binding to XML file
+                        aline.setText(seesurveyhistory);
+                        seesurveyhistory_layout.setBackgroundColor(Color.TRANSPARENT);
+                        seesurveyhistory_layout.addView(aline); //add that textview in the LinearLayout
+                        System.getProperty("line.separator"); //go to a new line
+
+                        TextView space = new TextView(SurveyHistory.this);
+                        space.setText("-------------------------------------------");
+                        seesurveyhistory_layout.addView(space);
+                        System.getProperty("line.separator");
+
                     }
 
                 } catch (JSONException e) {
@@ -162,9 +185,8 @@ public class LoginActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 // the POST parameters:
-                params.put("username", user.getText().toString());
-                params.put("password", pass.getText().toString());
-
+                params.put("username", username);
+                params.put("password", password);
                 return params;
             }
         };
@@ -232,4 +254,5 @@ public class LoginActivity extends AppCompatActivity {
 
     }
     //-------------------------------------------------------------------------
+
 }

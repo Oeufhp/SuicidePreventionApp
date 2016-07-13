@@ -171,7 +171,7 @@ public class Feeling extends AppCompatActivity implements NavigationView.OnNavig
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(Feeling.this, YourSpace.class);
             startActivity(it);
-        } else if (id == R.id.nav_reminders) {
+        } else if (id == R.id.nav_todo) {
             it = new Intent(Feeling.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
@@ -181,13 +181,13 @@ public class Feeling extends AppCompatActivity implements NavigationView.OnNavig
             it = new Intent(Feeling.this, Resources.class);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(Feeling.this, HelpNearYou.class);
+            it = new Intent(Feeling.this, HelpNearYouOverview.class);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(Feeling.this, Feeling.class);
             startActivity(it);
-        } else if (id==R.id.nav_setting){
-            it = new Intent(Feeling.this, Setting.class);
+        } else if (id==R.id.nav_survey){
+            it = new Intent(Feeling.this, SurveyOverview.class);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");

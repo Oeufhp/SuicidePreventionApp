@@ -40,6 +40,10 @@ import java.util.Date;
 import static com.latte.oeuff.suicidepreventionapp.R.*;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
+    //----getIntent--------
+    Intent it;
+    String username,password;
+
     //----About ImageShow-----
     ImageView home_imageView;
 
@@ -72,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //----getIntent-----------
+        it = getIntent();
+        username = it.getStringExtra("username");
+        password = it.getStringExtra("password");
+
         //----About ImageShow-----
         addPhoto_in_home = (ImageButton) findViewById(R.id.addPhoto_in_home);
         addPhoto_in_home_small = (ImageButton) findViewById(R.id.addPhoto_in_home_small);
@@ -79,17 +88,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         newImportPhotoFragment = new ImportPhoto();
 
         //-----Check: Is bm null ?--------------------
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null) { //not null
             bm = savedInstanceState.getParcelable(BITMAP_FILE);
             int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
             bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
             home_imageView.setImageBitmap(bm);
-        } //PROBLEM
-        else {
+        }
+        else { //null
+            //generate an init bitmap for solving null obj reference
             bm = Bitmap.createBitmap(100, 100,Bitmap.Config.ARGB_8888);
+            //important
             home_photoexists = false;
-            //home_imageView.setImageBitmap(bm);
-            //home_imageView.setVisibility(View.INVISIBLE);
             Log.d("init bitmap","success1");
         }
         //----------------------------------------------
@@ -219,6 +228,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, YourSpace.class);
+                it.putExtra("username",username);
+                it.putExtra("password", password);
                 startActivity(it);
             }
         });
@@ -226,6 +237,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, Todo.class);
+                it.putExtra("username",username);
+                it.putExtra("password", password);
                 startActivity(it);
             }
         });
@@ -233,13 +246,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, Resources.class);
+                it.putExtra("username",username);
+                it.putExtra("password", password);
                 startActivity(it);
             }
         });
         shortcut4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this, HelpNearYou.class);
+            public void onClick(View v) {    //go to HelpNearYouOverview.class
+                Intent it = new Intent(MainActivity.this, HelpNearYouOverview.class);
+                it.putExtra("username",username);
+                it.putExtra("password", password);
                 startActivity(it);
             }
         });
@@ -503,27 +520,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(MainActivity.this, MainActivity.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(MainActivity.this, YourSpace.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
-        } else if (id == R.id.nav_reminders) {
+        } else if (id == R.id.nav_todo) {
             it = new Intent(MainActivity.this, Todo.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(MainActivity.this, SafetyPlanning.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_resources) {
             it = new Intent(MainActivity.this, Resources.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
-        } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(MainActivity.this, HelpNearYou.class);
+        } else if (id == R.id.nav_helpnearyou) {    //go to HelpNearYouOverview.class
+            it = new Intent(MainActivity.this, HelpNearYouOverview.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(MainActivity.this, Feeling.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
-        } else if (id == R.id.nav_setting) {
-            it = new Intent(MainActivity.this, Setting.class);
+        } else if (id == R.id.nav_survey) {
+            it = new Intent(MainActivity.this, SurveyOverview.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
@@ -582,7 +615,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             int nh;
 
     //-----Check: Is bm null ?--------------------
-        if(bm !=null){
+        if(bm !=null){ //not null
             nh = (int) (bm.getHeight() * (2048.0 / bm.getWidth()));
             bm = Bitmap.createScaledBitmap(bm, 2048, nh, true);
             home_imageView.setImageBitmap(bm);
@@ -592,11 +625,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         }
-        else {
+        else { //null
+            //generate an init bitmap for solving null obj reference
             bm = Bitmap.createBitmap(100, 100,Bitmap.Config.ARGB_8888);
+            //important
             home_photoexists = false;
-            //home_imageView.setImageBitmap(bm);
-            //home_imageView.setVisibility(View.INVISIBLE);
             Log.d("init bitmap","success2");
         }
     //----------------------------------------------
