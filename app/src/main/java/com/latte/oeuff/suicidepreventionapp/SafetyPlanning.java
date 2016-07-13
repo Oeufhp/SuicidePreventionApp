@@ -154,7 +154,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(SafetyPlanning.this, YourSpace.class);
             startActivity(it);
-        } else if (id == R.id.nav_reminders) {
+        } else if (id == R.id.nav_todo) {
             it = new Intent(SafetyPlanning.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
@@ -164,13 +164,13 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             it = new Intent(SafetyPlanning.this, Resources.class);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(SafetyPlanning.this, HelpNearYou.class);
+            it = new Intent(SafetyPlanning.this, HelpNearYouOverview.class);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(SafetyPlanning.this, Feeling.class);
             startActivity(it);
-        } else if (id == R.id.nav_setting) {
-            it = new Intent(SafetyPlanning.this, Setting.class);
+        } else if (id == R.id.nav_survey) {
+            it = new Intent(SafetyPlanning.this, SurveyOverview.class);
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {

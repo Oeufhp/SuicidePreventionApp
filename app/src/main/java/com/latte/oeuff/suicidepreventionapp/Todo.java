@@ -256,7 +256,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(Todo.this, YourSpace.class);
             startActivity(it);
-        } else if (id == R.id.nav_reminders) {
+        } else if (id == R.id.nav_todo) {
             it = new Intent(Todo.this, Todo.class);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
@@ -266,13 +266,13 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
             it = new Intent(Todo.this, Resources.class);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
-            it = new Intent(Todo.this, HelpNearYou.class);
+            it = new Intent(Todo.this, HelpNearYouOverview.class);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(Todo.this, Feeling.class);
             startActivity(it);
-        } else if (id == R.id.nav_setting) {
-            it = new Intent(Todo.this, Setting.class);
+        } else if (id == R.id.nav_survey) {
+            it = new Intent(Todo.this, SurveyOverview.class);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
