@@ -7,9 +7,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
@@ -33,11 +35,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.latte.oeuff.suicidepreventionapp.R.*;
+import static com.latte.oeuff.suicidepreventionapp.R.drawable.add;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
     //----getIntent--------
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String BITMAP_FILE = "bitmap_file";
     private String IMG_PATH = "img_path";
     private String PHOTO_EXIST="photo_exist";
+    private static Uri fileUri = null;
     //----------------------------------
     boolean home_photoexists = false;
     private int REQUEST_CAPTURE_IMAGE = 1;
@@ -103,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         //----------------------------------------------
 
+
         //---About Others---------
         shortcut1 = (ImageButton) findViewById(R.id.shortcut1);
         shortcut2 = (ImageButton) findViewById(R.id.shortcut2);
@@ -131,21 +137,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawable.toilet_paper
                 };
     //---Touch to Change---
-    /*    home_imageView.setOnTouchListener(new View.OnTouchListener() {
-=======
+        home_imageView.setOnTouchListener(new View.OnTouchListener() {
 
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            shortcut1 = (ImageButton)findViewById(R.id.shortcut1);
-            shortcut2 = (ImageButton)findViewById(R.id.shortcut2);
-            shortcut3 = (ImageButton)findViewById(R.id.shortcut3);
-            shortcut4 = (ImageButton)findViewById(R.id.shortcut4);
-            shortcut1txtview = (TextView)findViewById(R.id.shortcut1txtview);
-            shortcut2txtview = (TextView)findViewById(R.id.shortcut2txtview);
-            shortcut3txtview = (TextView)findViewById(R.id.shortcut3txtview);
-            shortcut4txtview = (TextView)findViewById(R.id.shortcut4txtview);
-            locationtxtview = (TextView)findViewById(R.id.locationtxtview);
-            languagetxtview = (TextView)findViewById(R.id.languagetxtview);
 
 //----------------------------------SlideShow-----------------------------------------//
 //        imageView=(ImageView)findViewById(R.id.slideShowImg);
@@ -171,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     //====Touch to Change====
     /*    imageView.setOnTouchListener(new View.OnTouchListener() {
->>>>>>> b01c70cfc8f422e81a672bba90de1de43bd00efe
+
             int p=0;
             int i=0;
             @Override
@@ -361,9 +354,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         addPhoto_in_home_small.setVisibility(View.VISIBLE);
 
         home_imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (home_imageIntent.resolveActivity(getPackageManager()) != null) {
+//        if (home_imageIntent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(home_imageIntent, REQUEST_CAPTURE_IMAGE);
-        }
+//        }
+        //---------------------testing------------------------------//
+
+        //---------------------testing------------------------------//
     }
 
     //---Choose an image from the gallery---
@@ -379,15 +375,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //***** 2. Receive a result back *****
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+//        super.onActivityResult(requestCode,resultCode,data);
         if (resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
+            Bundle extras =data.getExtras();
             //take a photo
             if (requestCode == REQUEST_CAPTURE_IMAGE) {
-//                Bundle extras = data.getExtras();
-//                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                bm = (Bitmap) extras.get("data");
-                if(bm==null)Log.d("NULL","null");
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+//                bm = (Bitmap) extras.get("data");
                 //****Save an image into the gallery****
 //###############################################################################################
                 //FileOutputStream out = null;
@@ -398,12 +392,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //imageBitmap = BitmapFactory.decodeFile(out);
 
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                MediaStore.Images.Media.insertImage(getContentResolver(), bm, "BeLeaF", timeStamp);
-                //---Show an image---
+                MediaStore.Images.Media.insertImage(getContentResolver(), imageBitmap, "BeLeaF", timeStamp);
+//                //---Show an image---
 //                Bitmap resultimageBitmap = getResizedBitmap(imageBitmap,home_imageView.getWidth(), home_imageView.getHeight());
-                home_imageView.setImageBitmap(bm);
-                //save image resource's state
-                extras.putParcelable(BITMAP_FILE, bm);
+
+                int nh=(int)(imageBitmap.getHeight()*(2048.0/imageBitmap.getWidth()));
+                imageBitmap=Bitmap.createScaledBitmap(imageBitmap,2048,nh,true);
+                home_imageView.setImageBitmap(imageBitmap);
+//                //save image resource's state
+                extras.putParcelable(BITMAP_FILE, imageBitmap);
 //##############################################################################################
             }
             //gallery
