@@ -88,7 +88,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnAddAReminder);
         Log.d(TAG, "Add new Todo");
         final EditText taskEditText = new EditText(this);
-        fabRem.setImageResource(R.drawable.ic_new_reminder);
+        fabRem.setImageResource(R.drawable.ic_new_todo);
 //        fabRem.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
