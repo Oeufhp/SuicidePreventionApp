@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 //import class "TaskDBHelper" into here
@@ -46,11 +46,13 @@ public class TaskAdapter extends CursorAdapter {
     //Bind all data to a given view.
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+
         Log.d("bindView", "reach");
 
         //1. Find Views to populate in inflated template
         TextView list_todo_textview = (TextView) view.findViewById(R.id.list_todo_textview);
-        Button done_button = (Button) view.findViewById(R.id.list_todo_done_button);
+        ImageButton done_button = (ImageButton) view.findViewById(R.id.list_todo_done_button);
+        done_button.setBackgroundResource(R.drawable.done_button);
 
         //2. Extract properties from cursor **
         final String id = cursor.getString(Todo.COL_TASK_ID);
