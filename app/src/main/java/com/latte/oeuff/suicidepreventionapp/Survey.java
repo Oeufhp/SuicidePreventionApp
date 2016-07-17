@@ -1,3 +1,5 @@
+//The logic is same as in "CreateAccountActivity.java"
+
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.app.ProgressDialog;
@@ -49,11 +51,14 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class Survey extends AppCompatActivity implements View.OnClickListener{
-    //*******************************
+    //************ Volley *******************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
-    //----Others-------------
+    //----getIntent--------
+    Intent it;
+    String username,password;
+    //---- Others -------------
     RadioGroup q1_group, q2_group, q3_group, q4_group, q5_group;
     RadioButton q1_1, q1_2, q1_3, q1_4,  q2_1, q2_2, q2_3, q2_4,  q3_1, q3_2, q3_3, q3_4,  q4_1, q4_2, q4_3, q4_4,  q5_1, q5_2, q5_3, q5_4;
     Button sendsurveybtn;
@@ -61,9 +66,6 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
     //----Answers------------
     String[] survey_answers = new String[5];
     int totalScore = 0;
-    //----getIntent--------
-    Intent it;
-    String username,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -304,10 +306,10 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
     public void sendsurvey() throws ParseException {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/sendsurvey";
-        String url = "http://auth.oeufhp.me/beleaf.php/sendsurvey";
+        String url = "http://auth.oeufhp.me/beleafTest.php/sendsurvey";
         //---------Message----------------
         final ProgressDialog pd = new ProgressDialog(Survey.this);
-        pd.setMessage("loading...");
+        pd.setMessage("Sending...");
         pd.show();
 
         //getCurrent date & time
@@ -338,7 +340,7 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                pd.dismiss(); //Dismiss & Removing it from the screen
+
                 try {
                     Log.d("sendsurvey' response",response);
                     JSONObject jsonResponse = new JSONObject(response);
@@ -358,6 +360,10 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                         Toast.makeText(getApplicationContext(), "sendsurvey failed", Toast.LENGTH_SHORT).show();
                         clear_survey();
                     }
+
+                    //----- if try is success -> dismiss the dialog ---------
+                    pd.dismiss(); //Dismiss & Removing it from the screen
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -387,7 +393,8 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                         } else if (error instanceof ParseError) {
                             Log.e("Volley", "ParseError");
                         }
-                        //-----------------------------------------------------------------
+                        //--------if error -> dismiss the dialog ---------
+                        pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
         )
@@ -474,4 +481,3 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
     }
     //-------------------------------------------------------------------------
 }
-

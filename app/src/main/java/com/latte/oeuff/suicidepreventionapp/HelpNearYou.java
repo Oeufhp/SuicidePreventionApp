@@ -1,4 +1,7 @@
 //google map activity: scrolling activity: Insert codes of "Navigation Drawer Activity"
+//https://developers.google.com/maps/documentation/android-api/map
+//The logic is same as in "CreateAccountActivity.java"
+//***getnearbyplaces_gps() / getnearbyplaces_search() / GPS are work in a smartphone but not in a genymotion emulator .***
 
 package com.latte.oeuff.suicidepreventionapp;
 
@@ -7,26 +10,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -79,7 +69,10 @@ import javax.net.ssl.X509TrustManager;
 
 public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, /*there are methods I can override*/
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
-
+    //*********** Volley ********************
+    RequestQueue requestQueue;
+    static TrustManager[] trustManagers;
+    static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //---About Google Map's set up----------
     LocationRequest mLocationRequest;        //https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest
     GoogleApiClient mGoogleApiClient; //&&&
@@ -90,17 +83,10 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     LatLng latLng;
     Location mLastLocation;
     Marker mCurrLocation;
-
     //------Check gps status-----------------
     LocationManager manager;
     boolean gps_status;
-
-    //*********** Volley ********************
-    RequestQueue requestQueue;
-    static TrustManager[] trustManagers;
-    static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
-
-    //--------------My variables--------------------------
+    //--------------Others--------------------------
     Intent it;
     Double displacement;
     String place_keyword_city, place_keyword_country;
@@ -117,28 +103,11 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_near_you);
-
-        //---------- set up fot Google Map---------------------------------
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        //It's a wrapper around a view of a map to automatically handle the necessary life cycle needs.
-        //https://developers.google.com/android/reference/com/google/android/gms/maps/SupportMapFragment
-        mFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mFragment.getMapAsync(this);
-
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
-
-        url = "https://freegeoip.net/json/";
-        //Intent it = getIntent();
-        //url = it.getStringExtra("web"); //url = https://freegeoip.net/json/ + it.getStringExtra("web");
-
-        //------Check gps status-----------------
-        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
-        gps_status = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-
-        //********************getIntent***********************************************
+        //************* getIntent ****************************
         it = getIntent();
-
+        //-------Check Intent from previous activity "city & country" : null (nearby places) , not null (search nearby places) ---------
         if(it.getStringExtra("input_city").equals("empty") && it.getStringExtra("input_country").equals("empty") && !( it.getStringExtra("displacement").equals("empty") ) ) {
             place_keyword_city="empty";
             place_keyword_country="empty";
@@ -150,51 +119,67 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
             place_keyword_country = it.getStringExtra("input_country").toLowerCase().trim();
             getnearbyplaces_search();
         }
+        //---------- set up fot Google Map---------------------------------
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used. It's a wrapper around a view of a map to automatically handle the necessary life cycle needs.
+        //https://developers.google.com/android/reference/com/google/android/gms/maps/SupportMapFragment
+        mFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mFragment.getMapAsync(this);
+        //------Check gps status-----------------
+        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+        gps_status = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
         //------ ProcessDialog "Loading..." + Show toast of url -----------------
         pd = new ProgressDialog(HelpNearYou.this);
         pd.setMessage("loading...");
-//PROBLEM        pd.show();
+        pd.show();
 
-
-//        //For getting constant current location
-//        //=========== Same as GeoIP.java========================
-//        ConnectivityManager connMgr = (ConnectivityManager)
-//                getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-//        if (networkInfo != null && networkInfo.isConnected()) {
-//            new DownloadData().execute(url);
-//        } else {
-//            Toast.makeText(this,"No network connection available !!!",Toast.LENGTH_SHORT).show();
-//        }
-//        //=====================================================
+    //For getting constant current location
+//        url = "https://freegeoip.net/json/";
+//        Intent it = getIntent();
+//        url = it.getStringExtra("web"); //url = https://freegeoip.net/json/ + it.getStringExtra("web");
+//    //=========== Same as GeoIP.java========================
+//    ConnectivityManager connMgr = (ConnectivityManager)
+//            getSystemService(Context.CONNECTIVITY_SERVICE);
+//    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+//    if (networkInfo != null && networkInfo.isConnected()) {
+//        new DownloadData().execute(url);
+//    } else {
+//        Toast.makeText(this,"No network connection available !!!",Toast.LENGTH_SHORT).show();
+//    }
+//    //=====================================================
 
     }
 
-    //---------------------- Show Gps Dialog -------------------------------
+    //----------------- Show gps dialog if it's not open ----------------------------
     private void showGPSDisabledAlertToUser(){
+        //declaire a dialog
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        //set "cancel" button
         alertDialogBuilder.setNegativeButton("Cancel",
                 new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
-                        dialog.cancel();
+                        dialog.cancel(); //cancel & close a dialog
                     }
                 });
+        //set message
         alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
                 .setCancelable(false)
+                //set "enable gps" button
                 .setPositiveButton("Enable GPS",
                         new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int id){
+                            public void onClick(DialogInterface dialog, int id){ //go to settings to open gps
                                 Intent callGPSSettingIntent = new Intent(
                                         android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 startActivity(callGPSSettingIntent);
                             }
                         });
+        //create & show a dialog
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
     }
 
 //    //For getting constant current location
+
 //    //======================== Same as GeoIP.java==============================================
 //
 //    private class DownloadData extends AsyncTask<String, Void, String> {
@@ -314,11 +299,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     public void getnearbyplaces_gps(){
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
-        String url = "http://auth.oeufhp.me/beleaf.php/getnearbyplaces_gps";
-        //---------Message----------------
-        final ProgressDialog pd = new ProgressDialog(HelpNearYou.this);
-        pd.setMessage("loading...");
-        pd.show();
+        String url = "http://auth.oeufhp.me/beleafTest.php/getnearbyplaces_gps";
 
         if(gps_status) {
             Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
@@ -327,11 +308,9 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
             StringRequest postRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    pd.dismiss(); //Dismiss & Removing it from the screen
                     try {
                         Log.d("getnear_gps:", response);
                         //-----------My logics---------------
-
                         //1 get value(=String) from response(=json array)
                         JSONObject jsonResponse = new JSONObject(response);
                         String stringResponse = jsonResponse.getString("getnearbyplaces_gps");
@@ -416,7 +395,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
 
                         }
 
-                        //-----dismiss-----
+                        //----- if try is success -> dismiss the dialog ---------
                         pd.dismiss();
 
                         //##############################################################################
@@ -450,7 +429,8 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                             } else if (error instanceof ParseError) {
                                 Log.e("Volley", "ParseError");
                             }
-                            //-----------------------------------------------------------------
+                            //--------if error -> dismiss the dialog ---------
+                            pd.dismiss();
                         }
                     }
             ) {
@@ -473,22 +453,23 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         }
     }
     //-----------------------------------------------------------------------------------------------------
+
     //-------------------------  getnearbyplaces_search ---------------------------------------------------
     public void getnearbyplaces_search(){
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
-        String url = "http://auth.oeufhp.me/beleaf.php/getnearbyplaces_search";
+        String url = "http://auth.oeufhp.me/beleafTest.php/getnearbyplaces_search";
         //---------Message----------------
-        final ProgressDialog pd = new ProgressDialog(HelpNearYou.this);
-        pd.setMessage("loading...");
-        pd.show();
+//            final ProgressDialog pd_search = new ProgressDialog(NearbyPlaces.this);
+//            pd_search.setMessage("pd_search...");
+//            pd_search.show(); //PROBLEM
 
         //----------POST Request---------------
         //https://github.com/codepath/android_guides/wiki/Networking-with-the-Volley-Library
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                pd.dismiss(); //Dismiss & Removing it from the screen
+
                 try {
                     Log.d("getnear_search:" ,response);
                     //-----------My logics---------------
@@ -547,10 +528,8 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                         if( nearby_places_array[i+1][2] == null ) break;
 
                     }
-
-                    //-----dismiss-----
+                    //--------if try is success -> dismiss the dialog ---------
                     pd.dismiss();
-
                     //##############################################################################
 
                 } catch (JSONException e) {
@@ -582,7 +561,8 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                         } else if (error instanceof ParseError) {
                             Log.e("Volley", "ParseError");
                         }
-                        //-----------------------------------------------------------------
+                        //--------if error -> dismiss the dialog ---------
+                        pd.dismiss();
                     }
                 }
         )
@@ -627,8 +607,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
             mGoogleApiClient.connect(); //FLOW NO.3
 
         }
-
-        //----------
+        //-------------------------------------
 
 
 
@@ -735,7 +714,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
 //    }
 
 
-    //----------------------Volley----------------------------------------------
+    //---------------------- Volley ----------------------------------------------
     //Volley is a library for send & receive msg better
     //http://stackoverflow.com/questions/17045795/making-a-https-request-using-android-volley,
     //HttpsTrustManager is use for Trust self-certificated and I choose to use TrustAllCertificated.

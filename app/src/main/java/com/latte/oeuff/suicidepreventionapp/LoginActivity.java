@@ -1,3 +1,6 @@
+
+//The logic is same as in "CreateAccountActivity.java"
+
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.app.ProgressDialog;
@@ -48,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
-    //-------------------------------------
+    //---------- Others ---------------------------
     EditText user,pass;
     Button loginbtn;
     TextView forgotpass;
@@ -64,8 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         pass = (EditText)findViewById(R.id.pass);
         loginbtn = (Button)findViewById(R.id.loginbtn);
         forgotpass = (TextView)findViewById(R.id.forgotpass);
-
-        //----- For a faster login: get Intent (below "tie vars to id") ----------------------------------------------------
+        //----- For a faster login: get Intent (MUST BE BELOW "tie vars to id") ----------------------------------------------------
         Intent it = getIntent();
         if(it != null){
             user.setText(it.getStringExtra("username"));
@@ -79,12 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                 login();
             }
         });
-        //----------------------------------------------------------------------------------------------------
-        //------Link and change textView to be same as the link-------      //HOW TO LINK PERFECTLY ???
-//        forgotpass.setText("Forgot your pasword");
-//        Linkify.addLinks(forgotpass, Linkify.ALL);
 
-        //---------------------------------------------------------------------------------------------
+        //------Link and change textView to be same as the link-------   //PROBLEM forgetpass
+        //forgotpass.setText("Forgot your pasword");
+        //Linkify.addLinks(forgotpass, Linkify.ALL);
+
     }
 
     //-------------------------Login-----------------------------------------------------------
@@ -103,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                pd.dismiss(); //Dismiss & Removing it from the screen
+
                 try {
                     Log.d("login's response",response);
                     JSONObject jsonResponse = new JSONObject(response);
@@ -123,6 +124,9 @@ public class LoginActivity extends AppCompatActivity {
                     else{
                         Toast.makeText(getApplicationContext(),"login failed", Toast.LENGTH_SHORT).show();
                     }
+
+                    //----- if try is success -> dismiss the dialog ---------
+                    pd.dismiss();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -153,7 +157,8 @@ public class LoginActivity extends AppCompatActivity {
                         } else if (error instanceof ParseError) {
                             Log.e("Volley", "ParseError");
                         }
-                        //-----------------------------------------------------------------
+                        //--------if error -> dismiss the dialog ---------
+                        pd.dismiss();
                     }
                 }
         )

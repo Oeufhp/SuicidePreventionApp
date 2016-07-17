@@ -21,9 +21,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -55,26 +62,21 @@ import javax.net.ssl.X509TrustManager;
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    //==========Volley====================
+    //********** Volley ***********************************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
-    //===================================
-
+    //---------- Others -----------------------------------
     RadioButton malebtn, femalebtn, otherbtn;
         String gender="m"; //m (default)/ f / o
     EditText surname,name;
-
-    //******** About Calendar ***********************
+    //About Calendar
     TextView daytxtview, monthtxtview, yeartxtview;
     ImageButton pickdate;
-    private int mYear;
-    private int mMonth; //must +1
-    private int mDay;
+    private int mYear, mMonth, mDay; //mMonth must +1
     static final int DATE_DIALOG_ID = 0;
         String str_birthdate;
-    //**********************************************
-
+    //
     EditText email;
     RadioButton create_yesbtn, create_nobtn;
         String create_btn="y"; //y(default) / n
@@ -82,45 +84,38 @@ public class CreateAccountActivity extends AppCompatActivity {
     TextView countrycodetxtview;
     EditText phoneno;
     EditText username, password;
+    ImageButton checkbtn;
     TextView isvalidtxtview, completedview;
     Button  createbtn;
-    ImageButton checkbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-    //============= Volley ============================
+    //******************* Volley ***************************
         requestQueue = Volley.newRequestQueue(this);
-    //---------Binding--------------------------------------
+    //---------------- Binding -------------------------------
         malebtn = (RadioButton)findViewById(R.id.malebtn);
         femalebtn = (RadioButton)findViewById(R.id.femalebtn);
         otherbtn = (RadioButton)findViewById(R.id.otherbtn);
         surname = (EditText)findViewById(R.id.surname);
         name = (EditText)findViewById(R.id.name);
-
-        //********** About Calendar *****************************
+        //About Calendar
         daytxtview = (TextView)findViewById(R.id.daytxtview);
         monthtxtview = (TextView)findViewById(R.id.monthtxtview);
         yeartxtview = (TextView)findViewById(R.id.yeartxtview);
         pickdate = (ImageButton)findViewById(R.id.pickdate);
-        //*****************************************************
-
+        //
         email = (EditText)findViewById(R.id.email);
         create_yesbtn = (RadioButton)findViewById(R.id.create_yesbtn);
         create_nobtn = (RadioButton)findViewById(R.id.create_nobtn);
-
-    //-----------------------for contryflagspinner-------------------------------------
-    //https://developer.android.com/guide/topics/ui/controls/spinner.html
-
+        //for contryflagspinner: https://developer.android.com/guide/topics/ui/controls/spinner.html
         countryflagspinner = (Spinner)findViewById(R.id.countryflagspinner);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.countryflagspinner, android.R.layout.simple_spinner_item);
+            // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.countryflagspinner, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         countryflagspinner.setAdapter(adapter);
-    //-------------------------------------------------------------------------------
-
+        //
         countrycodetxtview = (TextView) findViewById(R.id.countrycodetxtview);
         phoneno = (EditText)findViewById(R.id.phoneno);
         username = (EditText)findViewById(R.id.username);
@@ -131,7 +126,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         createbtn = (Button)findViewById(R.id.createbtn);
 
     //---------------- My Logics ----------------------------------------------------
-        //----gender----------------------------------------------------
+        //----gender--------------------------
         malebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,8 +148,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 Log.d("gender1",gender);
             }
         });
-
-        //-------About calendar -----------------------------------------------
+        //-------About calendar ------------
         //******* Show a DatePickerDialog ************
         pickdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +168,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         updateDisplay();
         Log.d("updateDisplay","reach");
 
-        //-------------- Get news via email ? ----------------------------
+        //-------------- get news via email ? ----------------------------
         create_yesbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,8 +233,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     //**************** Show TimePicker & DatePicker *******************************
-    //This class is for creating a Calendar up-to-date
-    //https://developer.android.com/guide/topics/ui/controls/pickers.html
+    //This class is for creating a Calendar up-to-date: https://developer.android.com/guide/topics/ui/controls/pickers.html
 
     // the call back received when the user "sets" the date in the dialog
     private DatePickerDialog.OnDateSetListener mDateSetListener =
@@ -251,7 +244,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                     mDay = dayOfMonth;
                     updateDisplay();
                     Log.d("DatePickerDialog","reach");
-                }
+            }
             };
 
     //return DatePickerDialog
@@ -265,7 +258,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         return null;
     }
 
-    //update month day year
+    //update year, month, day
     private void updateDisplay() {
         daytxtview.setText(mDay+"");
         monthtxtview.setText(mMonth+"");
@@ -274,8 +267,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         Log.d("str_sentdate", str_birthdate);
     }
 
-//===================== createanaccount ======================================================
-
+    //===================== createanaccount ======================================================
     public void create() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/createanaccount";
@@ -289,10 +281,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         //https://github.com/codepath/android_guides/wiki/Networking-with-the-Volley-Library
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
-            //2.FLOW No.2
+            //create FLOW NO.2: To get "response" from APIs (APIs --(JSON)--> Volley ->"response")
             @Override
             public void onResponse(String response) {
-                pd.dismiss(); //Dismiss & Removing it from the screen
 
                 try {
                     Log.d(" create's response",response);
@@ -314,6 +305,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"create failed", Toast.LENGTH_LONG).show();
                     }
 
+                    //----- if try is success -> dismiss the dialog ---------
+                    pd.dismiss();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -323,11 +317,33 @@ public class CreateAccountActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+
+                        //-----------Check error (useful !)-----------------------------------------------
+                        NetworkResponse networkResponse = error.networkResponse;
+                        if (networkResponse != null) {
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
+                        }
+
+                        if (error instanceof TimeoutError) {
+                            Log.e("Volley", "TimeoutError");
+                        } else if (error instanceof NoConnectionError) {
+                            Log.e("Volley", "NoConnectionError");
+                        } else if (error instanceof AuthFailureError) {
+                            Log.e("Volley", "AuthFailureError");
+                        } else if (error instanceof ServerError) {
+                            Log.e("Volley", "ServerError");
+                        } else if (error instanceof NetworkError) {
+                            Log.e("Volley", "NetworkError");
+                        } else if (error instanceof ParseError) {
+                            Log.e("Volley", "ParseError");
+                        }
+                        //--------if error -> dismiss the dialog ---------
+                        pd.dismiss();
                     }
                 }
         )
         {
-            //Flow NO 1.
+            //create FLOW NO.1: To put params in "postRequest"-> Volley --(post method, JSON)--> APIs
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -336,9 +352,6 @@ public class CreateAccountActivity extends AppCompatActivity {
                 params.put("surname", surname.getText().toString());
                 params.put("name", name.getText().toString());
                 //----About Calendar----------
-                //params.put("day", daytxtview.getText().toString());
-                //params.put("month", monthtxtview.getText().toString());
-                //params.put("year", yeartxtview.getText().toString());
                 params.put("birthdate", str_birthdate);
                 //----------------------------
                 params.put("email", email.getText().toString());
@@ -346,24 +359,23 @@ public class CreateAccountActivity extends AppCompatActivity {
                 params.put("countryflagspinner", countryflagspinner.getSelectedItem().toString());
                 params.put("codetextview", countrycodetxtview.getText().toString());
                 params.put("phoneno", phoneno.getText().toString());
-
                 //username
                 params.put("username", username.getText().toString());
                 //password
                 params.put("password", password.getText().toString());
 
-                //---Problem------------
+                //---Check the inputs------------
                 Log.d("gender",gender);
-                Log.d("surname",surname.getText().toString());
-                Log.d("name",name.getText().toString());
+                Log.d("surname, name",surname.getText().toString() + " " + name.getText().toString());
                 Log.d("birthdate",str_birthdate);
                 Log.d("email", email.getText().toString());
                 Log.d("create_btn",create_btn);
-//                Log.d("countryflagspinner",countryflagspinner.getSelectedItem().toString());
-//                Log.d("codetextview",countrycodetxtview.getText().toString());
-//                Log.d("phoneno",phoneno.getText().toString());
-//                Log.d("username",username.getText().toString());
-//                Log.d("password",password.getText().toString());
+                Log.d("countryflagspinner",countryflagspinner.getSelectedItem().toString());
+                Log.d("codetextview",countrycodetxtview.getText().toString());
+                Log.d("phoneno",phoneno.getText().toString());
+                Log.d("username",username.getText().toString());
+                Log.d("password",password.getText().toString());
+                //-------------------
 
                 return params;
             }

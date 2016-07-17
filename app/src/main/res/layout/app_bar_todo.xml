@@ -36,11 +36,11 @@
     <include layout="@layout/content_todo"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabBtnAddAReminder"
+        android:id="@+id/fabBtnAddTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/col_fabBtnRem"
+        app:backgroundTint="@color/col_fabBtnAddTodo"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"/>
 
