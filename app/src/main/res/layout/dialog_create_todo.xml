@@ -5,14 +5,14 @@
               android:orientation="vertical">
 
     <TextView
-        android:id="@+id/dialog_create_reminder_header"
+        android:id="@+id/dialog_create_todo_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.00"
         android:background="#FFCC00"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
-        android:text="Create new reminder"
+        android:text="What do you plan to do ?"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#ffffff"
@@ -20,24 +20,13 @@
 
 
     <EditText
-        android:id="@+id/reminders_title"
+        android:id="@+id/todo_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:layout_weight="0.00"
-        android:hint="Title"/>
-
-    <!--<EditText-->
-        <!--android:id="@+id/reminders_description"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginTop="15dp"-->
-        <!--android:layout_weight="0.00"-->
-        <!--android:ems="10"-->
-        <!--android:hint="Description"-->
-        <!--android:inputType="textMultiLine"/>-->
+        android:hint="Your plan to do..."/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -48,19 +37,19 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <DatePicker
-                android:id="@+id/datePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.00"/>
+            <!--<DatePicker-->
+                <!--android:id="@+id/todo_datePicker"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_weight="0.00"/>-->
 
-            <TimePicker
-                android:id="@+id/timePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.00"/>
+            <!--<TimePicker-->
+                <!--android:id="@+id/todo_timePicker"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:layout_weight="0.00"/>-->
 
         </LinearLayout>
 

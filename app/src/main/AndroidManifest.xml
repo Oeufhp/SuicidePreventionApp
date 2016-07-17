@@ -11,17 +11,18 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-    <!-- Use permission for access external storage -->
-    <uses-permission android:name="android.permission.READ_EXERNAL_STORAGE" />
-
-    <!-- Use permission for using a camera -->
+    <!-- Use permission for using a camera & video -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
 
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+
+    <!-- Use permission for an external storage -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- About the application -->
 
     <application
         android:allowBackup="true"
@@ -39,6 +40,7 @@
                 <!-- Constant Value: Should be displayed in the top-level launcher -->
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginMenuActivity"
             android:label="BeLeaF" />
@@ -67,14 +69,6 @@
             android:name=".Resources"
             android:label="@string/title_activity_resources"
             android:theme="@style/AppTheme" />
-        <!--
-             The API key(linked to the encryption key) for Google Maps is in (See the file "res/values/google_maps_api.xml") & is  used to sign the APK.
-             You need a different API key for each encryption key. You can define the keys for the debug and release targets in src/debug/ and src/release/.
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".HelpNearYou"
             android:label="@string/title_activity_help_near_you" />
@@ -83,26 +77,25 @@
             android:label="@string/title_activity_feeling"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TimePickerFragment" />
-        <activity
-            android:name=".Setting"
-            android:label="@string/title_activity_setting" />
-        <activity
-            android:name=".ShowHelpNearYou"
-            android:label="@string/title_activity_show_help_near_you"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!--
- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
-        -->
+
+        <!-- Auto-generated to add Google Play services to your project for App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <activity android:name=".HelpNearYouOverview" />
         <activity android:name=".SurveyOverview" />
         <activity android:name=".Survey" />
         <activity android:name=".SurveyHistory" />
         <activity android:name=".SurveyVisualization"></activity>
+
+        <!--
+            The API key(linked to the encryption key) for Google Maps is in (See the file "res/values/google_maps_api.xml") & is  used to sign the APK.
+            You need a different API key for each encryption key. You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
     </application>
 
 </manifest>

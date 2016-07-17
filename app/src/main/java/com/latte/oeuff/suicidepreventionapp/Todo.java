@@ -1,7 +1,11 @@
 //scrolling activity: Insert codes of "Navigation Drawer Activity"
+//create a "Todo" listview is work in a smartphone but not in a genymotion emulator
+//http://muggingsg.com/university/android-app-tutorial-todo-app-using-fragments/
 
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,152 +24,111 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import java.util.Calendar;
 
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.latte.oeuff.suicidepreventionapp.data.TaskContract;
+//import com.latte.oeuff.suicidepreventionapp.data.TaskContract;
 import com.latte.oeuff.suicidepreventionapp.data.TaskDBHelper;
-
 
 public class Todo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //-----for reminder-----
+    //-----for Todo-------------
     TaskAdapter mTaskAdapter;
     EditText inputField;
+    String taskinput, dateinput;
     // These indices are tied to TASKS_COLUMNS.  If TASKS_COLUMNS changes, these must change.
     static final int COL_TASK_ID = 0;
     static final int COL_TASK_NAME = 1;
+    static final int COL_TASK_DATE = 2;
 
-    //---About Others----
-    TextView reminderstextview;
+    //-------About Calendar------
+    private int mYear, mMonth, mDay; //mMonth must +1
+    static final int DATE_DIALOG_ID = 0;
+    //DatePicker todo_datePicker; not work
+
     //---About Dialog---
     DialogFragment newLogoutFragment;
     private static final String TAG = "MainActivity";
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient mClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
-        //---About Others ---
-//        reminderstextview = (TextView) findViewById(R.id.reminderstextview);
+
         //---About Dialog & Resources---
         newLogoutFragment = new LogOutDialog();
 
-        //----------------------query todo list when open todo page-------------------------//
+        //----------------------Query todo list when open "todo" page-------------------------//
         ListView listView = (ListView)findViewById(R.id.listview_tasks);
         TaskDBHelper helper = new TaskDBHelper(Todo.this);
-        //Get DBHelper to read from database
-//                        TaskDBHelper helper = new TaskDBHelper(getActivity());
-        SQLiteDatabase sqlDB = helper.getReadableDatabase();
+        SQLiteDatabase sqlDB = helper.getReadableDatabase(); //Get helper into "dqlDB" to read from database
 
         //Query database to get any existing data
-        Cursor cursor2 = sqlDB.query(TaskContract.TaskEntry.TABLE_NAME,
-                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
+            //https://developer.android.com/reference/android/database/Cursor.html
+            //This interface provides random read-write access to the result set returned by a database query.
+        Cursor cursor_tmp = sqlDB.query(TaskDBHelper.TaskContract.TaskEntry.TABLE_NAME, new String[]
+                        {TaskDBHelper.TaskContract.TaskEntry._ID, TaskDBHelper.TaskContract.TaskEntry.COLUMN_TASK, TaskDBHelper.TaskContract.TaskEntry.COLUMN_DATE},
                 null, null, null, null, null);
 
         //Create a new TaskAdapter and bind it to ListView
-        mTaskAdapter = new TaskAdapter(getBaseContext(), cursor2);
+        mTaskAdapter = new TaskAdapter(getBaseContext(), cursor_tmp);
         listView.setAdapter(mTaskAdapter);
 
-        //---------- Logics -------------------------------------
-        //Floating Button in Todo
-        FloatingActionButton fabRem = (FloatingActionButton) findViewById(R.id.fabBtnAddAReminder);
+        Log.d("mTaskAdapter","is set");
+        //----------------------------------------------------------------------------------//
+        //***** get the current date ****
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH) + 1; //must +1
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        Log.d("get the current date","reach");
+
+        //------------------------------ Logics --------------------------------------------------------
+        //----------------------for create a dialog "to do" -------------------------
+        FloatingActionButton fabBtnAddTodo = (FloatingActionButton) findViewById(R.id.fabBtnAddTodo);
         Log.d(TAG, "Add new Todo");
-        final EditText taskEditText = new EditText(this);
-        fabRem.setImageResource(R.drawable.ic_new_reminder);
-//        fabRem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Log.d("AA","BB");
-//                final AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
-//                LayoutInflater inflator = Reminders.this.getLayoutInflater();
-//                builder.setView(inflator.inflate(R.layout.dialog_create_reminder, null));
-////                builder.setTitle("New Reminder");
-//                builder.setPositiveButton("create a reminder", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-////                        reminderstextview.setText("A reminder is created !");
-//
-//                    }
-//                });
-//                builder.setNegativeButton("cancel", null);
-//                builder.show();
-//            }
-//        });
-    //----------------------for create dialog to do-------------------------//
-        fabRem.setOnClickListener(new View.OnClickListener() {
+        fabBtnAddTodo.setImageResource(R.drawable.ic_new_todo);
+
+        fabBtnAddTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //1. Create an dialog
+                //************ IMPORTANT: These can fix a bug of "showing a task" *********************
+                LayoutInflater inflator = Todo.this.getLayoutInflater(); //**
+                final View view_dialog_todo = inflator.inflate(R.layout.dialog_create_todo, null); //**
+                inputField = (EditText)view_dialog_todo.findViewById(R.id.todo_title);
                 AlertDialog.Builder builder = new AlertDialog.Builder(Todo.this);
-                builder.setTitle("Add a task");
-                builder.setMessage("What do you plan to do?");
-                final EditText inputField=new EditText(Todo.this);
-                builder.setView(inputField);
+                builder.setView(view_dialog_todo);
+                //*********************************************************************************
+
                 builder.setPositiveButton("Add",new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                        Toast.makeText(Reminders.this, inputField.getText(), Toast.LENGTH_SHORT).show();
 
-                        String inputTask = inputField.getText().toString();
+                        Log.d("reach","here");
+                        Log.d("inputField",inputField.getText().toString());
 
-                        //Get DBHelper to write to database
-                        TaskDBHelper helper = new TaskDBHelper(Todo.this);
-                        SQLiteDatabase db = helper.getWritableDatabase();
+                        //*** important : to show a calendar dialog *******
+                        showDialog(DATE_DIALOG_ID);
+                        Log.d("Todo-onclick","success");
 
-                        //Put in the values within a ContentValues.
-                        ContentValues values = new ContentValues();
-                        values.clear();
-                        values.put(TaskContract.TaskEntry.COLUMN_TASK, inputTask);
-                        //Insert the values into the Table for Tasks
-                        db.insertWithOnConflict(
-                                TaskContract.TaskEntry.TABLE_NAME,
-                                null,
-                                values,
-                                SQLiteDatabase.CONFLICT_IGNORE);
-
-                        //Query database again to get updated data
-                        Cursor cursor = db.query(TaskContract.TaskEntry.TABLE_NAME,
-                                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
-                                null, null, null, null, null);
-
-                        //Swap old data with new data for display
-//                        mTaskAdapter.swapCursor(cursor);
-                        //Find the listView
-                        ListView listView = (ListView)findViewById(R.id.listview_tasks);
-                        //Get DBHelper to read from database
-//                        TaskDBHelper helper = new TaskDBHelper(getActivity());
-                        SQLiteDatabase sqlDB = helper.getReadableDatabase();
-
-                        //Query database to get any existing data
-                        Cursor cursor1 = sqlDB.query(TaskContract.TaskEntry.TABLE_NAME,
-                                new String[]{TaskContract.TaskEntry._ID, TaskContract.TaskEntry.COLUMN_TASK},
-                                null, null, null, null, null);
-
-                        //Create a new TaskAdapter and bind it to ListView
-                        mTaskAdapter = new TaskAdapter(getBaseContext(), cursor);
-                        listView.setAdapter(mTaskAdapter);
                     }
                 });
                 builder.setNegativeButton("Cancel", null);
                 builder.create().show();
+                //builder.show();
+                Log.d("create a dialog","success");
             }
         });
+
         //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -202,10 +165,98 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
             }
         });
         //**************************************************************************************************
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        mClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
+    //**************** Show TimePicker & DatePicker *******************************
+    //This class is for creating a Calendar up-to-date: https://developer.android.com/guide/topics/ui/controls/pickers.html
+
+    //FLOW NO.1 return DatePickerDialog
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                return new DatePickerDialog(this, mDateSetListener, mYear, mMonth, mDay);
+        }
+        Log.d("onCreateDialog","reach");
+        return null;
+    }
+
+    //FLOW NO.2  the call back received when the user "sets" the date in the dialog
+    private DatePickerDialog.OnDateSetListener mDateSetListener =
+            new DatePickerDialog.OnDateSetListener() {
+                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+                    //FLOW NO.3 Above &&&&
+                    mYear = year;
+                    mMonth = monthOfYear + 1; //must +1
+                    mDay = dayOfMonth;
+                    Log.d("DatePickerDialog","reach");
+                    Log.d("date after choosing:", mYear + ": " + mMonth + ": "+mDay);
+
+                    //@@@ Keep task input into "taskinput"
+                        taskinput = inputField.getText().toString();
+                        Log.d("taskinput: ", taskinput);
+
+                    //@@@ Keep date input into "dateinput"
+                    dateinput = mDay + "/" + mMonth + "/" + mYear;
+                    Log.d("dateinput: ",dateinput);
+
+                    //@@@ Execute to store & show the inputs
+                    addTodo();
+
+
+                }
+            };
+
+    //************************ Add a "to do" list  ****************************************************
+    //FLOW NO. 4
+    public void addTodo(){
+
+        //1.1 Get DBHelper to write into the database
+        TaskDBHelper helper = new TaskDBHelper(Todo.this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        //1.2 Put in the values within a ContentValues.
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put(TaskDBHelper.TaskContract.TaskEntry.COLUMN_TASK, taskinput);
+        values.put(TaskDBHelper.TaskContract.TaskEntry.COLUMN_DATE, dateinput);
+
+        //1.3 Insert the values into the Table for Tasks
+        db.insertWithOnConflict(
+                TaskDBHelper.TaskContract.TaskEntry.TABLE_NAME,
+                null,
+                values,
+                SQLiteDatabase.CONFLICT_IGNORE);
+
+        //1.4 Query database again to get updated data
+            //https://developer.android.com/reference/android/database/Cursor.html
+            //This interface provides random read-write access to the result set returned by a database query.
+        Cursor cursor = db.query(TaskDBHelper.TaskContract.TaskEntry.TABLE_NAME,
+                new String[]{TaskDBHelper.TaskContract.TaskEntry._ID, TaskDBHelper.TaskContract.TaskEntry.COLUMN_TASK, TaskDBHelper.TaskContract.TaskEntry.COLUMN_DATE},
+                null, null, null, null, null);
+       // Swap in a new Cursor, returning the old Cursor.
+        mTaskAdapter.swapCursor(cursor);
+
+        //1.5 Find the listView
+        ListView listView = (ListView)findViewById(R.id.listview_tasks);
+        SQLiteDatabase sqlDB = helper.getReadableDatabase();
+
+        //1.6 Query database to get any existing data
+            //https://developer.android.com/reference/android/database/Cursor.html
+            //This interface provides random read-write access to the result set returned by a database query.
+        Cursor cursor1 = sqlDB.query(TaskDBHelper.TaskContract.TaskEntry.TABLE_NAME,
+                new String[]{TaskDBHelper.TaskContract.TaskEntry._ID, TaskDBHelper.TaskContract.TaskEntry.COLUMN_TASK, TaskDBHelper.TaskContract.TaskEntry.COLUMN_DATE},
+                null, null, null, null, null);
+
+        //1.7 Create a new TaskAdapter and bind it to ListView
+        mTaskAdapter = new TaskAdapter(getBaseContext(), cursor);
+        listView.setAdapter(mTaskAdapter);
+
+        Log.d("addTodo","success");
+
+    }
+    //FLOW NO.5 , NO.6 are at TaskAdapter.java
 
     //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
@@ -286,46 +337,15 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        mClient.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Todo Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.latte.oeuff.suicidepreventionapp/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(mClient, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Todo Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app URL is correct.
-                Uri.parse("android-app://com.latte.oeuff.suicidepreventionapp/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(mClient, viewAction);
-        mClient.disconnect();
     }
-
-
     //**************************************************************************************************
-//-----------------------------------Dialog for warning before logging out--------------------------
+
+    //-----------------------------------Dialog for warning before logging out--------------------------
     public class LogOutDialog extends DialogFragment {
 
         TextView yesbtn_logout, nobtn_logout;

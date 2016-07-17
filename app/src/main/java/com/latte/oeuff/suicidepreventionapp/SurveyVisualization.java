@@ -1,3 +1,5 @@
+//The logic is same as in "CreateAccountActivity.java"
+
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.app.ProgressDialog;
@@ -14,9 +16,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -40,18 +49,21 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class SurveyVisualization extends AppCompatActivity {
-    //*******************************
+    //********** Volley *********************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
+    //----getIntent--------
+    Intent it;
+    String username,password;
     //----Others-----------
     FrameLayout seesurveyvisualization_layout;
-    //    FrameLayout line1_layout, line2_layout, line3_layout, line4_layout;
+    //  FrameLayout line1_layout, line2_layout, line3_layout, line4_layout;
     TextView visualizationstatus_textview;
     Button seesurveyvisualizationbtn;
+
     //----Graph-----------
     ImageView graph_imageview;
-
     //1-7 red / 8-11 orange / 12-15 yellow / 16-20 green
     ImageView reddot_col1, reddot_col2, reddot_col3, reddot_col4, reddot_col5;                 // 0 <= totalScoew <= 7  red
     ImageView orangedot_col1, orangedot_col2, orangedot_col3, orangedot_col4, orangedot_col5;  // 8 <= totalScore <= 11 orange
@@ -63,10 +75,6 @@ public class SurveyVisualization extends AppCompatActivity {
 //    int sumDrawLine = 0;
 //    DrawCanvas[] drawCanvasDrawLine_array = new DrawCanvas[4];
 //    int cdl_index=0;
-
-    //----getIntent--------
-    Intent it;
-    String username,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,15 +100,6 @@ public class SurveyVisualization extends AppCompatActivity {
 
         //--------- Graph --------------
         graph_imageview = (ImageView)findViewById(R.id.graph_imageview);
-
-        //Descale graph img
-        Drawable myDrawable = getResources().getDrawable(R.drawable.graph); //PROBLEM
-        Bitmap bit_graph      = ((BitmapDrawable) myDrawable).getBitmap();
-
-        int nh=(int)(bit_graph.getHeight()*(1024.0/bit_graph.getWidth()));
-        bit_graph= Bitmap.createScaledBitmap(bit_graph,1024,nh,true);
-        graph_imageview.setImageBitmap(bit_graph);
-
         //reddot
         reddot_col1 = (ImageView)findViewById(R.id.reddot_col1);
         reddot_col2 = (ImageView)findViewById(R.id.reddot_col2);
@@ -139,7 +138,7 @@ public class SurveyVisualization extends AppCompatActivity {
     public void seesurveyvisualization(){
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyvisualization";
-        String url = "http://auth.oeufhp.me/beleaf.php/seesurveyvisualization";
+        String url = "http://auth.oeufhp.me/beleafTest.php/seesurveyvisualization";
         //---------Message----------------
         final ProgressDialog pd = new ProgressDialog(SurveyVisualization.this);
         pd.setMessage("loading...");
@@ -150,7 +149,7 @@ public class SurveyVisualization extends AppCompatActivity {
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                pd.dismiss(); //Dismiss & Removing it from the screen
+
                 try {
                     Log.d("see..response", response);
                     //-----------My logics---------------
@@ -297,7 +296,8 @@ public class SurveyVisualization extends AppCompatActivity {
                         visualizationData[4][2]="-1";
                     }
                     //=============================================================
-
+                    //-----if try is success -> dismiss the dialog ---------
+                    pd.dismiss(); //Dismiss & Removing it from the screen
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -307,6 +307,28 @@ public class SurveyVisualization extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
+
+                        //-----------Check error (useful !)-----------------------------------------------
+                        NetworkResponse networkResponse = error.networkResponse;
+                        if (networkResponse != null) {
+                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                        }
+
+                        if (error instanceof TimeoutError) {
+                            Log.e("Volley", "TimeoutError");
+                        }else if(error instanceof NoConnectionError){
+                            Log.e("Volley", "NoConnectionError");
+                        } else if (error instanceof AuthFailureError) {
+                            Log.e("Volley", "AuthFailureError");
+                        } else if (error instanceof ServerError) {
+                            Log.e("Volley", "ServerError");
+                        } else if (error instanceof NetworkError) {
+                            Log.e("Volley", "NetworkError");
+                        } else if (error instanceof ParseError) {
+                            Log.e("Volley", "ParseError");
+                        }
+                        //--------if error -> dismiss the dialog ---------
+                        pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
         )

@@ -45,7 +45,7 @@ public class Resources extends AppCompatActivity implements NavigationView.OnNav
         FloatingActionButton fabAddRes = (FloatingActionButton) findViewById(R.id.fabBtnAddAResource);
         //Log.d(TAG,"Add new Remainder");
         final EditText taskEditText=new EditText(this);
-    //  fabAddRes.setImageResource(R.drawable.ic_new_reminder);
+    //  fabAddRes.setImageResource(R.drawable.ic_new_todo);
         fabAddRes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

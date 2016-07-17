@@ -1,3 +1,5 @@
+//The logic is same as in "CreateAccountActivity.java"
+
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.app.ProgressDialog;
@@ -44,17 +46,17 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class SurveyHistory extends AppCompatActivity {
-    //*******************************
+    //************** Volley *****************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
+    //----getIntent--------
+    Intent it;
+    String username,password;
     //----Others-----------
     TextView seesurveyhistory_textview;
     LinearLayout seesurveyhistory_layout;
     Button seesurveyhistorybtn;
-    //----getIntent--------
-    Intent it;
-    String username,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class SurveyHistory extends AppCompatActivity {
     public void seesurveyhistory(){
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
-        String url = "http://auth.oeufhp.me/beleaf.php/seesurveyhistory";
+        String url = "http://auth.oeufhp.me/beleafTest.php/seesurveyhistory";
         //---------Message----------------
         final ProgressDialog pd = new ProgressDialog(SurveyHistory.this);
         pd.setMessage("loading...");
@@ -97,7 +99,7 @@ public class SurveyHistory extends AppCompatActivity {
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                pd.dismiss(); //Dismiss & Removing it from the screen
+
                 try {
                     Log.d("seesurvey... response",response);
                     //-----------My logics---------------
@@ -145,6 +147,9 @@ public class SurveyHistory extends AppCompatActivity {
                         seesurveyhistory_layout.addView(space);
                         System.getProperty("line.separator");
 
+                        //----- if try is success -> dismiss the dialog ---------
+                        pd.dismiss(); //Dismiss & Removing it from the screen
+
                     }
 
                 } catch (JSONException e) {
@@ -176,7 +181,8 @@ public class SurveyHistory extends AppCompatActivity {
                         } else if (error instanceof ParseError) {
                             Log.e("Volley", "ParseError");
                         }
-                        //-----------------------------------------------------------------
+                        //--------if error -> dismiss the dialog ---------
+                        pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
         )

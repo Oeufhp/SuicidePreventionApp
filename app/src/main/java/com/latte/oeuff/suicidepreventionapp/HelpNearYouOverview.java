@@ -44,6 +44,9 @@ public class HelpNearYouOverview extends AppCompatActivity {
                     it.putExtra("displacement", searchbyplaces_gps_editttext.getText().toString());
                     startActivity(it);
                 }
+                else {
+                    Toast.makeText(getApplicationContext(),"You have to complete your inputs !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         searchnearbyplacesbtn.setOnClickListener(new View.OnClickListener() {
