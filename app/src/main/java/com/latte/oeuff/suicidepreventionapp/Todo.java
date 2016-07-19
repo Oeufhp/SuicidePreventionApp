@@ -129,7 +129,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
                 builder.setView(view_dialog_todo);
                 //*********************************************************************************
 
-                builder.setPositiveButton("Add",new DialogInterface.OnClickListener(){
+                builder.setPositiveButton("Next",new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

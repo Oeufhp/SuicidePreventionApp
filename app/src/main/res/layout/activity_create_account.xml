@@ -191,16 +191,17 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="200dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView5"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="28dp"
             android:ems="10"
             android:inputType="textEmailAddress"/>
 
@@ -217,7 +218,7 @@
             android:checked="true"
             android:layout_below="@+id/textView6"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="-7dp"
+            android:layout_marginLeft="-7.5dp"
             android:layout_marginRight="3dp" />
         <RadioButton
             android:layout_width="wrap_content"
@@ -243,11 +244,12 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/countryflagspinner"
-            android:layout_width="60dp"
+            android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -257,8 +259,9 @@
 
         <TextView
             android:id="@+id/countrycodetxtview"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/planets_spinner"
             android:layout_marginLeft="20dp"
@@ -272,7 +275,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/countrycodetxtview"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="2dp"
             android:ems="10"
             android:hint="ie. 6788xxxxx (France)"
             android:inputType="number"/>

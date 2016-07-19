@@ -109,6 +109,7 @@
         android:layout_alignLeft="@+id/loginmenu_create"
         android:layout_alignStart="@+id/loginmenu_create"
         android:background="@null"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/www"/>
 
     <TextView

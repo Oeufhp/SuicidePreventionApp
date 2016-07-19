@@ -24,6 +24,7 @@
                   app:layout_behavior="@string/appbar_scrolling_view_behavior"
                   tools:context="com.latte.oeuff.suicidepreventionapp.YourSpace"
                   tools:showIn="@layout/app_bar_your_space">
+
     </LinearLayout>
 
 </ScrollView>

@@ -11,6 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <!--For using the internet-->
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Use permission for using a camera & video -->
     <uses-feature
         android:name="android.hardware.camera"
@@ -25,6 +27,7 @@
     <!-- About the application -->
 
     <application
+        android:name=".gallery.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="BeLeaF"
