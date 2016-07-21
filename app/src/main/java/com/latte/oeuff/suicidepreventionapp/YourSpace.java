@@ -1,5 +1,6 @@
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,9 +8,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -25,11 +31,33 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.latte.oeuff.suicidepreventionapp.gallery.activity.SlideshowDialogFragment;
+import com.latte.oeuff.suicidepreventionapp.gallery.adapter.GalleryAdapter;
+import com.latte.oeuff.suicidepreventionapp.gallery.app.AppController;
+import com.latte.oeuff.suicidepreventionapp.gallery.model.Image;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class YourSpace extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //----getIntent--------
     Intent it;
     String username,password;
+
+//--------for gallery----------
+    private static String TAG=YourSpace.class.getSimpleName();
+    private static final String endpoint="http://cloud.oeufhp.me/img/glide.json";
+    private  static ArrayList<Image> images;
+    private  static ProgressDialog pDialog;
+    private  static GalleryAdapter mAdapter;
+    protected static RecyclerView recyclerView;
 
 //--------------About tabLayout-----------
     // MyPagerAdapter -> ViewPager -> contents (fragment_your_space_photos / videos / diary )
@@ -263,28 +291,60 @@ public class YourSpace extends AppCompatActivity
         //2. Class"FirstFragment" creates a fragment containing a simple view.
     public static class FirstFragment extends Fragment {
 
+
         //This is the main method of this class->create a View (fragment_your_space_photos)
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View viewfirst = inflater.inflate(R.layout.fragment_your_space_photos, container, false); //attachToRoot = false important !
 
             //-----binding-----------
-            final TextView photostextview = (TextView)viewfirst.findViewById(R.id.photostextview);
+//            final TextView photostextview = (TextView)viewfirst.findViewById(R.id.photostextview);
             //-----Logics------------
-            photostextview.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    photostextview.setText("Change!!!");
-                    return false;
-                }
-            });
+//            photostextview.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    photostextview.setText("Change!!!");
+//                    return false;
+//                }
+//            });
+//
+//            Log.d("Class:FirstFragment","Method:onCreateView(...)");
 
-            Log.d("Class:FirstFragment","Method:onCreateView(...)");
+            //----------------------testing---------------------//
+            recyclerView=(RecyclerView)viewfirst.findViewById(R.id.recycler_view);
+            pDialog = new ProgressDialog(getContext());
+            images = new ArrayList<>();
+            mAdapter = new GalleryAdapter(getContext(), images);
+            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(mAdapter);
+             recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getContext(), recyclerView, new GalleryAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("images", images);
+                bundle.putInt("position", position);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+                newFragment.setArguments(bundle);
+                newFragment.show(ft, "slideshow");
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+            fetchImages();
+            //----------------------testing---------------------//
+
 
             return viewfirst;
         }
 
-        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
+//        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
         public static FirstFragment newInstance(String text) {
 
             FirstFragment f = new FirstFragment(); //create a frament for containing a simple view
@@ -298,6 +358,51 @@ public class YourSpace extends AppCompatActivity
 
             return f;
         }
+            private void fetchImages() {
+
+                pDialog.setMessage("Downloading json...");
+                pDialog.show();
+
+                JsonArrayRequest req = new JsonArrayRequest(endpoint,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            Log.d(TAG, response.toString());
+                            pDialog.hide();
+
+                            images.clear();
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject object = response.getJSONObject(i);
+                                    Image image = new Image();
+                                    image.setName(object.getString("name"));
+
+                                    JSONObject url = object.getJSONObject("url");
+//                                    image.setSmall(url.getString("small"));
+                                    image.setMedium(url.getString("medium"));
+//                                    image.setLarge(url.getString("large"));
+                                    image.setAuthor(object.getString("author"));
+
+                                    images.add(image);
+
+                                    } catch (JSONException e) {
+                                        Log.e(TAG, "Json parsing error: " + e.getMessage());
+                                    }
+                                }
+
+                                mAdapter.notifyDataSetChanged();
+                        }
+                    }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e(TAG, "Error: " + error.getMessage());
+                                pDialog.hide();
+                            }
+                        });
+
+    // Adding request to request queue
+    AppController.getInstance().addToRequestQueue(req);
+}
     }
 
     //----------------------SecondFragement--------------------------------------

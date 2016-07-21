@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,6 +63,9 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
                     it.putExtra("input_city", "empty");
                     it.putExtra("input_country", "empty");
                     it.putExtra("displacement", searchbyplaces_gps_editttext.getText().toString());
+
+                    Log.d("nearbyplacesbtn","here");
+
                     startActivity(it);
                 }
                 else {

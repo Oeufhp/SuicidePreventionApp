@@ -54,7 +54,7 @@ import static com.latte.oeuff.suicidepreventionapp.R.*;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener { //Listener for handling events on navigation items
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
 
     //----About ImageShow-----
     ImageView home_imageView;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Bitmap bm;
     private String BITMAP_FILE = "bitmap_file";
     private String IMG_PATH = "img_path";
-    private String PHOTO_EXIST="photo_exist";
+    private String PHOTO_EXIST = "photo_exist";
     private static Uri fileUri = null;
     int[] feeling_states;
     //----------------------------------
@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (savedInstanceState != null) {
             Log.d("onCre", "saveInstan not null");
             bm = savedInstanceState.getParcelable(BITMAP_FILE);
-            int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
-            bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
+            int nh = (int) (bm.getHeight() * (2048.0 / bm.getWidth()));
+            bm = Bitmap.createScaledBitmap(bm, 2048, nh, true);
             home_imageView.setImageBitmap(bm);
             feeling_states = savedInstanceState.getIntArray("feeling_states");
 
@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
 
-                Log.d("addPhoto_in_home","clicked");
+                Log.d("addPhoto_in_home", "clicked");
                 if (home_photoexists == false) {
                     newImportPhotoFragment.show(getSupportFragmentManager(), "ImportPhoto");
                 }
@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, YourSpace.class);
-                it.putExtra("username",username);
+                it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
             }
@@ -352,7 +352,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, Todo.class);
-                it.putExtra("username",username);
+                it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
             }
@@ -370,7 +370,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {    //go to HelpNearYouOverview.class
                 Intent it = new Intent(MainActivity.this, HelpNearYouOverview.class);
-                it.putExtra("username",username);
+                it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
             }
@@ -547,7 +547,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 //---------------------------------------------------------------------------------------------//
 
-//----------------------------------ImageShow Logics-------------------------------------------//
+    //----------------------------------ImageShow Logics-------------------------------------------//
 //***** 1. startActivityForResult() *****
     //---Take a photo---
     void openCamera() {
@@ -558,7 +558,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         home_imageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 //        if (home_imageIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(home_imageIntent, REQUEST_CAPTURE_IMAGE);
+        startActivityForResult(home_imageIntent, REQUEST_CAPTURE_IMAGE);
 //        }
     }
 
@@ -577,7 +577,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode,resultCode,data);
         if (resultCode == RESULT_OK) {
-            Bundle extras =data.getExtras();
+            Bundle extras = data.getExtras();
             //take a photo
             if (requestCode == REQUEST_CAPTURE_IMAGE) {
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
@@ -596,8 +596,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //---Show an image---
 //                Bitmap resultimageBitmap = getResizedBitmap(imageBitmap,home_imageView.getWidth(), home_imageView.getHeight());
 
-                int nh=(int)(imageBitmap.getHeight()*(2048.0/imageBitmap.getWidth()));
-                imageBitmap=Bitmap.createScaledBitmap(imageBitmap,2048,nh,true);
+                int nh = (int) (imageBitmap.getHeight() * (2048.0 / imageBitmap.getWidth()));
+                imageBitmap = Bitmap.createScaledBitmap(imageBitmap, 2048, nh, true);
                 home_imageView.setImageBitmap(imageBitmap);
 
               //**** save image resource's state
@@ -609,11 +609,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             else if (requestCode == REQUEST_CHOOSE_IMAGE) {
                 Uri selectedUri = data.getData(); //get the Uri from the data
 
-                Log.d("selectedUri:", selectedUri+"");
+                Log.d("selectedUri:", selectedUri + "");
 
                 if (selectedUri != null) {
 
-                    Log.d("selectedUri","not null");
+                    Log.d("selectedUri", "not null");
 
                     String path = getPathFromURI(selectedUri); //@@@ get the real Path from the Uri (Call getPathFromURI below)
                     Log.i(TAG, "Image path: " + path);
@@ -640,6 +640,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     editor.commit();
                     extras.putString(IMG_PATH,path);
                     extras.putBoolean(PHOTO_EXIST,home_photoexists);
+//=======
+//                    home_photoexists = true;
+//
+//                    if (bm == null) { //null
+//                        //generate an init bitmap for solving null obj reference
+//                        bm = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+//                        //important
+//                        home_photoexists = false;
+//                    } else {
+//                        //save image resource's state
+//                        extras.putParcelable(BITMAP_FILE, bm);
+//                        SharedPreferences sp = getSharedPreferences("AppSharedPref", 1);
+//                        SharedPreferences.Editor editor = sp.edit();
+//                        editor.putString(IMG_PATH, path);
+//                        editor.commit();
+//                        extras.putString(IMG_PATH, path);
+//                        extras.putBoolean(PHOTO_EXIST, home_photoexists);
+//                    }
+//
+//>>>>>>> 89c154c5dfc596777784cf3059e9fb85f8974843
                 }
             }
         }
@@ -719,37 +739,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(MainActivity.this, MainActivity.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(MainActivity.this, YourSpace.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_todo) {
             it = new Intent(MainActivity.this, Todo.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(MainActivity.this, SafetyPlanning.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {    //go to HelpNearYouOverview.class
             it = new Intent(MainActivity.this, HelpNearYouOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(MainActivity.this, Feeling.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_survey) {
             it = new Intent(MainActivity.this, SurveyOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
@@ -828,6 +848,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //-----Check: Is bm null ?--------------------
         if(bm !=null){ //not null
+//=======
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        SharedPreferences sp = getSharedPreferences("AppSharedPref", 1);
+//        String path = sp.getString(IMG_PATH, "");
+//        home_photoexists = sp.getBoolean(PHOTO_EXIST, true);
+//        bm = BitmapFactory.decodeFile(path);
+//        int nh;
+//
+//        //-----Check: Is bm null ?--------------------
+//        if (bm != null) { //not null
+//>>>>>>> 89c154c5dfc596777784cf3059e9fb85f8974843
             nh = (int) (bm.getHeight() * (2048.0 / bm.getWidth()));
             bm = Bitmap.createScaledBitmap(bm, 2048, nh, true);
             home_imageView.setImageBitmap(bm);
@@ -836,15 +873,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 addPhoto_in_home_small.setVisibility(View.VISIBLE);
             }
 
-        }
-        else { //null
+        } else { //null
             //generate an init bitmap for solving null obj reference
-            bm = Bitmap.createBitmap(100, 100,Bitmap.Config.ARGB_8888);
+            bm = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
             //important
             home_photoexists = false;
-            Log.d("init bitmap","success2");
+            Log.d("init bitmap", "success2");
         }
-
         super.onResume();
     }
 
@@ -875,11 +910,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onRestoreInstanceState(restoreInstanceState);
         if (restoreInstanceState != null) {
             bm = restoreInstanceState.getParcelable(BITMAP_FILE);
-            home_photoexists=restoreInstanceState.getBoolean(PHOTO_EXIST);
-            int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
-            bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
+            home_photoexists = restoreInstanceState.getBoolean(PHOTO_EXIST);
+            int nh = (int) (bm.getHeight() * (2048.0 / bm.getWidth()));
+            bm = Bitmap.createScaledBitmap(bm, 2048, nh, true);
             home_imageView.setImageBitmap(bm);
-            if(home_photoexists){
+            if (home_photoexists) {
                 addPhoto_in_home.setVisibility(View.GONE);
                 addPhoto_in_home_small.setVisibility(View.VISIBLE);
             }

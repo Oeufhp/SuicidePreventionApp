@@ -103,8 +103,28 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         //----------------------for create a dialog "to do" -------------------------
         FloatingActionButton fabBtnAddTodo = (FloatingActionButton) findViewById(R.id.fabBtnAddTodo);
         Log.d(TAG, "Add new Todo");
-        fabBtnAddTodo.setImageResource(R.drawable.ic_new_todo);
+//        fabRem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Log.d("AA","BB");
+//                final AlertDialog.Builder builder = new AlertDialog.Builder(Reminders.this);
+//                LayoutInflater inflator = Reminders.this.getLayoutInflater();
+//                builder.setView(inflator.inflate(R.layout.dialog_create_reminder, null));
+////                builder.setTitle("New Reminder");
+//                builder.setPositiveButton("create a reminder", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+////                        reminderstextview.setText("A reminder is created !");
+//
+//                    }
+//                });
+//                builder.setNegativeButton("cancel", null);
+//                builder.show();
+//            }
+//        });
+    //----------------------for create dialog to do-------------------------//
 
+        fabBtnAddTodo.setImageResource(R.drawable.ic_new_todo);
         fabBtnAddTodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +137,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
                 builder.setView(view_dialog_todo);
                 //*********************************************************************************
 
-                builder.setPositiveButton("Add",new DialogInterface.OnClickListener(){
+                builder.setPositiveButton("Next",new DialogInterface.OnClickListener(){
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

@@ -10,7 +10,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="com.latte.oeuff.suicidepreventionapp.Feeling">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:orientation="vertical"
@@ -22,36 +22,41 @@
                   tools:context="com.latte.oeuff.suicidepreventionapp.YourSpace"
                   tools:showIn="@layout/app_bar_your_space">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/linearLayout"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_gravity="center_horizontal">-->
 
-            <TextView
-                android:id="@+id/photostextview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Photos coming soon !!! "
-                android:textSize="30dp"/>
-        </LinearLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/photostextview"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Photos coming soon !!! "-->
+                <!--android:textSize="30dp"/>-->
+        <!--</LinearLayout>-->
 
-        <LinearLayout
-            android:id="@+id/photoslayout"
+        <!--<LinearLayout-->
+            <!--android:id="@+id/photoslayout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:gravity="center_horizontal">-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:src="@drawable/addphoto_in_home"/>-->
+
+        <!--</LinearLayout>-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:src="@drawable/addphoto_in_home"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>
