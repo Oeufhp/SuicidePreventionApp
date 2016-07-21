@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DialogFragment newLogoutFragment;
 
     //---About Others---------
-    ImageButton shortcut1, shortcut2, shortcut3, shortcut4;
-    TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview;
+    ImageButton shortcut1, shortcut2, shortcut3, shortcut4,shortcut5,shortcut6;
+    TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview,shortcut5txtview,shortcut6txtview;
     TextView locationtxtview, languagetxtview;
     String TAG = "MainActivity";
 
@@ -104,12 +104,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shortcut2 = (ImageButton) findViewById(R.id.shortcut2);
         shortcut3 = (ImageButton) findViewById(R.id.shortcut3);
         shortcut4 = (ImageButton) findViewById(R.id.shortcut4);
+        shortcut5=(ImageButton) findViewById(id.shortcut5);
+        shortcut6=(ImageButton) findViewById(id.shortcut6);
         shortcut1txtview = (TextView) findViewById(R.id.shortcut1txtview);
         shortcut2txtview = (TextView) findViewById(R.id.shortcut2txtview);
         shortcut3txtview = (TextView) findViewById(R.id.shortcut3txtview);
         shortcut4txtview = (TextView) findViewById(R.id.shortcut4txtview);
-        locationtxtview = (TextView) findViewById(R.id.locationtxtview);
-        languagetxtview = (TextView) findViewById(R.id.languagetxtview);
+        shortcut5txtview = (TextView) findViewById(R.id.shortcut5txtview);
+        shortcut4txtview = (TextView) findViewById(R.id.shortcut6txtview);
         //-----About Dialog--------
         newLogoutFragment = new LogOutDialog();
 
@@ -213,6 +215,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {    //go to HelpNearYouOverview.class
                 Intent it = new Intent(MainActivity.this, HelpNearYouOverview.class);
+                it.putExtra("username", username);
+                it.putExtra("password", password);
+                startActivity(it);
+            }
+        });
+        shortcut5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {    //go to HelpNearYouOverview.class
+                Intent it = new Intent(MainActivity.this, SafetyPlanning.class);
+                it.putExtra("username", username);
+                it.putExtra("password", password);
+                startActivity(it);
+            }
+        });
+        shortcut6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {    //go to HelpNearYouOverview.class
+                Intent it = new Intent(MainActivity.this, Feeling.class);
                 it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);

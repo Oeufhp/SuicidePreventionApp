@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-//-----2.TaskDBHelper: open the database to "Ececute "--------
+//-----2.TaskDBHelper: open the database to "Execute "--------
 public class TaskDBHelper extends SQLiteOpenHelper {
 
     //---- 1.TaskContract: Defines <1.Constants> which used to access the data  & <2.Other features of a content provider> ---------

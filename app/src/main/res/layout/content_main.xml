@@ -85,8 +85,7 @@
                     android:layout_column="1"
                     android:layout_row="0"
                     android:background="@drawable/squarebtn"
-                    android:src="@drawable/yourspace"
-                    android:text="add a shortcut here (1)"/>
+                    android:src="@drawable/yourspace"/>
             </FrameLayout>
 
             <FrameLayout
@@ -109,8 +108,7 @@
                     android:layout_column="1"
                     android:layout_row="0"
                     android:background="@drawable/squarebtn"
-                    android:src="@drawable/list"
-                    android:text="add a shortcut here (2)"/>
+                    android:src="@drawable/list"/>
             </FrameLayout>
 
         </LinearLayout>
@@ -142,8 +140,9 @@
                     android:layout_gravity="center"
                     android:layout_row="1"
                     android:background="@drawable/squarebtn"
-                    android:src="@drawable/resources"
-                    android:text="add a shortcut here (3)"/>
+                    android:src="@drawable/resources"/>
+
+
             </FrameLayout>
 
             <FrameLayout
@@ -167,36 +166,73 @@
                     android:layout_gravity="left|center_vertical"
                     android:layout_row="1"
                     android:background="@drawable/squarebtn"
-                    android:src="@drawable/helpnearyou"
-                    android:text="add a shortcut here (4)"/>
+                    android:src="@drawable/helpnearyou"/>
             </FrameLayout>
 
+
         </LinearLayout>
-
-
         <LinearLayout
             android:layout_width="360dp"
-            android:layout_height="40dp"
-            android:layout_margin="8dp"
+            android:layout_height="75dp"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/locationtxtview"
+            <FrameLayout
                 android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:background="@drawable/squarebtn"
-                android:text="Your location: "
-                android:textColor="#000000"/>
+                android:layout_height="75dp">
 
-            <TextView
-                android:id="@+id/languagetxtview"
-                android:layout_width="180dp"
-                android:layout_height="40dp"
-                android:background="@drawable/squarebtn"
-                android:text="Your language:"
-                android:textColor="#000000"/>
+                <TextView
+                    android:id="@+id/shortcut5txtview"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Safety Planning"
+                    android:textColor="#000000"/>
+
+                <ImageButton
+                    android:id="@+id/shortcut5"
+                    android:layout_width="180dp"
+                    android:layout_height="75dp"
+                    android:layout_column="0"
+                    android:layout_gravity="center"
+                    android:layout_row="1"
+                    android:background="@drawable/squarebtn"
+                    android:src="@drawable/safetyplanning"/>
+
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp">
+
+                <TextView
+                    android:id="@+id/shortcut6txtview"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Your Feelings"
+                    android:textColor="#000000"/>
+
+                <ImageButton
+                    android:id="@+id/shortcut6"
+                    android:layout_width="180dp"
+                    android:layout_height="75dp"
+                    android:layout_column="1"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_row="1"
+                    android:background="@drawable/squarebtn"
+                    android:src="@drawable/feeling"/>
+            </FrameLayout>
+
+
         </LinearLayout>
+
+
+
+
 
         <TextView
             android:layout_width="180dp"
