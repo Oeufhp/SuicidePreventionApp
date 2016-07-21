@@ -34,6 +34,10 @@ import android.widget.Toast;
 
 
 public class SafetyPlanning  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    //----getIntent--------
+    Intent it;
+    String username,password;
+
     //TextView addasafetyplanningtextview;
     //---------------------tabLayout---------------------------------
     // MyPagerAdapter -> ViewPager -> contents (fragment_ ...)
@@ -66,7 +70,11 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_safety_planning);
 
-        //---About others-------
+        //----getIntent-----------
+        it = getIntent();
+        username = it.getStringExtra("username");
+        password = it.getStringExtra("password");
+
 
         //----About dialog------
        //newAddSafetyplanningFragment = new AddSafetyplanningFragment();
@@ -168,27 +176,38 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(SafetyPlanning.this, MainActivity.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(SafetyPlanning.this, YourSpace.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_todo) {
             it = new Intent(SafetyPlanning.this, Todo.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(SafetyPlanning.this, SafetyPlanning.class);
-            startActivity(it);
-        } else if (id == R.id.nav_resources) {
-            it = new Intent(SafetyPlanning.this, Resources.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
             it = new Intent(SafetyPlanning.this, HelpNearYouOverview.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(SafetyPlanning.this, Feeling.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_survey) {
             it = new Intent(SafetyPlanning.this, SurveyOverview.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         }
         else if (id == R.id.nav_logout) {

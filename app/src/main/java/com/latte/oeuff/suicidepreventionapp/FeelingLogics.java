@@ -1,19 +1,11 @@
-
-//The logic is same as in "CreateAccountActivity.java"
-
 package com.latte.oeuff.suicidepreventionapp;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.util.Linkify;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -29,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.apache.tools.ant.Main;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,86 +40,113 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class LoginActivity extends AppCompatActivity {
-    //**********Volley*********************
+public class FeelingLogics extends AppCompatActivity {
+    //********** Volley *********************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
-    //---------- Others ---------------------------
-    EditText user,pass;
-    Button loginbtn;
-    TextView forgotpass;
+    //----getIntent--------
+    Intent it;
+    String username,password;
+    //----visualization------
+    String[][] visualizationData;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_main);
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
-        //-----tie vars to id--------------------------------------------------
-        user = (EditText)findViewById(R.id.user);
-        pass = (EditText)findViewById(R.id.pass);
-        loginbtn = (Button)findViewById(R.id.loginbtn);
-        forgotpass = (TextView)findViewById(R.id.forgotpass);
-        //----- For a faster login: get Intent (MUST BE BELOW "tie vars to id") ----------------------------------------------------
-        Intent it = getIntent();
-        if(it != null){
-            user.setText(it.getStringExtra("username"));
-            pass.setText(it.getStringExtra("password"));
-        }
+        //----------getIntent---------
+        it = getIntent();
+        username = it.getStringExtra("username");
+        password = it.getStringExtra("password");
 
-        //----- My Logics ----------------------------------------
-        loginbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
+        Log.d("twice","ok");
+        Log.d("user",username);
+        Log.d("pass",password);
 
-        //------Link and change textView to be same as the link-------   //PROBLEM forgetpass
-        //forgotpass.setText("Forgot your pasword");
-        //Linkify.addLinks(forgotpass, Linkify.ALL);
+        //---------- Visualization ------------------------------
+        visualizationData = new String[5][3];
+        seefeelingvisualization();
 
     }
 
-    //-------------------------Login-----------------------------------------------------------
-    public void login() {
-
+    //------------------  seesurveyvisualization --------------------------------
+    public void seefeelingvisualization(){
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
-        //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/login";
-        String url = "http://auth.oeufhp.me/beleaf.php/login";
-        //---------Process Dialog----------------
-        final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+        //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyvisualization";
+        String url = "http://auth.oeufhp.me/beleaf.php/seefeelingvisualization";
+        //---------Message----------------
+        final ProgressDialog pd = new ProgressDialog(FeelingLogics.this);
         pd.setMessage("loading...");
         pd.show();
 
-        //----------Post Request---------------
+        //----------POST Request---------------
         //https://github.com/codepath/android_guides/wiki/Networking-with-the-Volley-Library
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
-                    Log.d("login's response",response);
+                    Log.d("see feeling..response", response);
+                    //-----------My logics---------------
+//1.APIs:
+//1.1 get first n rows sorted by date & time -OK
+//1.2 send back to the app only totalScore
+//1.3 create a new graph using...?
+
+                    //Map<String, String> visualizationData = new HashMap<>();
+
+                    //1 get value(=String) from response(=json array)
                     JSONObject jsonResponse = new JSONObject(response);
-                    String login_status = jsonResponse.getString("login_status");
-                    //-----------My Logics---------------
-                    if(login_status.equals("1")){
-                        Toast.makeText(getApplicationContext(),"login", Toast.LENGTH_SHORT).show();
-                        Intent it = new Intent(LoginActivity.this, MainActivity.class); //PROBLEM
-                        it.putExtra("username",user.getText().toString());
-                        it.putExtra("password",pass.getText().toString());
-                            /*Bundle extras = new Bundle();
-                                extras.putString("username", username_login_edittext.getText().toString());
-                                extras.putString("password", password_login_edittext.getText().toString());
-                            it.putExtras(extras);*/
-                        startActivity(it);
+                    String stringResponse = jsonResponse.getString("seefeelingvisualization");
+                    Log.d("see..strRes", stringResponse);
+
+                    //2 change type from String->json array
+                    //http://stackoverflow.com/questions/9961018/getting-specific-value-from-jsonarray
+                    JSONArray jsonarray_stringResponse = new JSONArray(stringResponse);
+
+                    for (int i = jsonarray_stringResponse.length() - 1; i >= 0; i--) {
+                        //3 get value(=json object = "one jsonObject" which is json array) from json array
+                        JSONObject jsonobject_jsonarray_stringResponse = jsonarray_stringResponse.getJSONObject(i);
+
+                        //4 get value(= String = each value in "one jsonObject") from "one jsonObject"
+                        String username = jsonobject_jsonarray_stringResponse.getString("username");
+                        //  String password = jsonobject_jsonarray_stringResponse.getString("password");
+                        String sentdate = jsonobject_jsonarray_stringResponse.getString("sentdate");
+                        String feeling = jsonobject_jsonarray_stringResponse.getString("feeling");
+
+                        visualizationData[jsonarray_stringResponse.length() - 1 - i][0] = username;
+                        visualizationData[jsonarray_stringResponse.length() - 1 - i][1] = sentdate;
+                        visualizationData[jsonarray_stringResponse.length() - 1 - i][2] = feeling;
+
+                        Log.d("totalScoreSCORE:", visualizationData[jsonarray_stringResponse.length() - 1 - i][2]);
                     }
-                    else{
-                        Toast.makeText(getApplicationContext(),"login failed", Toast.LENGTH_SHORT).show();
+                    //-------------Check String[][]------------------------------------
+                    for (int i = 0; i < visualizationData.length; i++) {
+                        for (int j = 0; j < visualizationData[i].length; j++) {
+                            if (visualizationData[i][j] == null) {
+                                visualizationData[i][j] = "-1";      //AND THIS CANNOT BE USED ANYMORE...
+                            }
+
+                            Log.d("String i:" + i + " j:" + j + "->", visualizationData[i][j]);
+                        }
                     }
 
-                    //----- if try is success -> dismiss the dialog ---------
+                    //-------------- Send the data to "SurveyAndroidPlot" (in String) ---------------------------
+                    //Catch a case str_seriesNumbers[?] == -1 in "SurveyAndroidPlot.java"
+                    Intent it = new Intent(FeelingLogics.this, MainActivity.class);
+                    it.putExtra("username",username);
+                    it.putExtra("password",password);
+                    it.putExtra("str_dot1",visualizationData[0][2]);
+                    it.putExtra("str_dot2",visualizationData[1][2]);
+                    it.putExtra("str_dot3",visualizationData[2][2]);
+                    it.putExtra("str_dot4",visualizationData[3][2]);
+                    it.putExtra("str_dot5",visualizationData[4][2]);
+                    startActivity(it);
+                    //Show survey visualization in "SurveyAndroidPlot"
                     pd.dismiss();
 
                 } catch (JSONException e) {
@@ -158,7 +179,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e("Volley", "ParseError");
                         }
                         //--------if error -> dismiss the dialog ---------
-                        pd.dismiss();
+                        pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
         )
@@ -167,13 +188,11 @@ public class LoginActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 // the POST parameters:
-                params.put("username", user.getText().toString());
-                params.put("password", pass.getText().toString());
-
+                params.put("username", username);
+                params.put("password", password);
                 return params;
             }
         };
-
         requestQueue.add(postRequest);
     }
 

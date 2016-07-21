@@ -107,6 +107,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         requestQueue = Volley.newRequestQueue(this);
         //************* getIntent ****************************
         it = getIntent();
+
         //-------Check Intent from previous activity "city & country" : null (nearby places) , not null (search nearby places) ---------
         if(it.getStringExtra("input_city").equals("empty") && it.getStringExtra("input_country").equals("empty") && !( it.getStringExtra("displacement").equals("empty") ) ) {
             place_keyword_city="empty";
@@ -128,10 +129,12 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
         gps_status = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
+        Log.d("reach2","here");
+
         //------ ProcessDialog "Loading..." + Show toast of url -----------------
         pd = new ProgressDialog(HelpNearYou.this);
         pd.setMessage("loading...");
-        pd.show();
+        pd.show(); //problem
 
     //For getting constant current location
 //        url = "https://freegeoip.net/json/";
@@ -301,6 +304,8 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
         String url = "http://auth.oeufhp.me/beleafTest.php/getnearbyplaces_gps";
 
+        Log.d("gps", gps_status+"");
+
         if(gps_status) {
             Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
             //----------GET Request---------------
@@ -447,6 +452,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         }
         else {
             pd.dismiss();
+            Log.d("gps=false","reach");
             Toast.makeText(this, "GPS is Disable in your devide", Toast.LENGTH_SHORT).show();
             showGPSDisabledAlertToUser();
 
