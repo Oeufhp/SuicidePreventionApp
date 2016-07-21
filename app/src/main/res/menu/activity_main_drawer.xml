@@ -20,11 +20,6 @@
             android:id="@+id/nav_safetyplanning"
             android:icon="@drawable/safetyplanning"
             android:title="Safety Planning"/>
-
-        <item
-            android:id="@+id/nav_resources"
-            android:icon="@drawable/resources"
-            android:title="Resources"/>
         <item
             android:id="@+id/nav_helpnearyou"
             android:icon="@drawable/helpnearyou"
@@ -33,13 +28,12 @@
             android:id="@+id/nav_feeling"
             android:icon="@drawable/feeling"
             android:title="Feeling"/>
+        <item
+            android:id="@+id/nav_survey"
+            android:icon="@drawable/survey"
+            android:title="Survey"/>
     </group>
         <item android:title=""/>
-
-        <item
-                android:id="@+id/nav_survey"
-                android:icon="@drawable/settingimg"
-                android:title="Survey"/>
         <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/logout"

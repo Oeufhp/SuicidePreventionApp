@@ -23,7 +23,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- About the application -->
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -40,7 +39,6 @@
                 <!-- Constant Value: Should be displayed in the top-level launcher -->
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginMenuActivity"
             android:label="BeLeaF" />
@@ -66,27 +64,31 @@
             android:label="@string/title_activity_safety_planning"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Resources"
-            android:label="@string/title_activity_resources"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".HelpNearYou"
             android:label="@string/title_activity_help_near_you" />
         <activity
             android:name=".Feeling"
             android:label="@string/title_activity_feeling"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FeelingLogics"></activity>
         <activity android:name=".TimePickerFragment" />
 
         <!-- Auto-generated to add Google Play services to your project for App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity android:name=".HelpNearYouOverview" />
-        <activity android:name=".SurveyOverview" />
+
+        <activity
+            android:name=".HelpNearYouOverview"
+            android:label="Help Near You"
+        />
+        <activity
+            android:name=".SurveyOverview"
+            android:label="Survey"
+        />
         <activity android:name=".Survey" />
         <activity android:name=".SurveyHistory" />
-        <activity android:name=".SurveyVisualization"></activity>
+        <activity android:name=".SurveyVisualization" />
 
         <!--
             The API key(linked to the encryption key) for Google Maps is in (See the file "res/values/google_maps_api.xml") & is  used to sign the APK.
@@ -96,6 +98,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".Survey_Cage" />
+        <activity android:name=".Survey_C_ssrs" />
+        <activity android:name=".SurveyHistory_Cage" />
+        <activity android:name=".SurveyHistoryOverview" />
+        <activity android:name=".SurveyVisualizationOverview" />
+        <activity android:name=".SurveyVisualization_Cage_Logics" />
+        <activity android:name=".SurveyVisualization_Cage"></activity>
     </application>
 
 </manifest>

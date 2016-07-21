@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.latte.oeuff.suicidepreventionapp.SurveyOverview"
+    tools:showIn="@layout/app_bar_survey_overview"
+    android:background="@drawable/appbg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cage_icon"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="15dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do CAGE"
+                android:id="@+id/cagebtn"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/squarebtn" />
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/c_ssrs_icon"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="15dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Do C_SSRS "
+                android:id="@+id/c_ssrsbtn"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/squarebtn"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/seehis_icon"
+                android:layout_marginLeft="72dp"
+                android:layout_marginTop="15dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="See the history"
+                android:id="@+id/surveyhistorybtn"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/squarebtn"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/seevis_icon"
+                android:layout_marginLeft="72dp"
+                android:layout_marginTop="15dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="see the visualization"
+                android:id="@+id/seeupdatebtn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/squarebtn"
+                android:layout_marginLeft="20dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

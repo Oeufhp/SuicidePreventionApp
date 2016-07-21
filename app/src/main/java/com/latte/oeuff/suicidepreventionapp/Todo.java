@@ -39,6 +39,9 @@ import java.util.Calendar;
 import com.latte.oeuff.suicidepreventionapp.data.TaskDBHelper;
 
 public class Todo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    //----getIntent--------
+    Intent it;
+    String username,password;
 
     //-----for Todo-------------
     TaskAdapter mTaskAdapter;
@@ -65,6 +68,11 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
 
         //---About Dialog & Resources---
         newLogoutFragment = new LogOutDialog();
+
+        //----getIntent-----------
+        it = getIntent();
+        username = it.getStringExtra("username");
+        password = it.getStringExtra("password");
 
         //----------------------Query todo list when open "todo" page-------------------------//
         ListView listView = (ListView)findViewById(R.id.listview_tasks);
@@ -303,27 +311,38 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(Todo.this, MainActivity.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(Todo.this, YourSpace.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_todo) {
             it = new Intent(Todo.this, Todo.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(Todo.this, SafetyPlanning.class);
-            startActivity(it);
-        } else if (id == R.id.nav_resources) {
-            it = new Intent(Todo.this, Resources.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
             it = new Intent(Todo.this, HelpNearYouOverview.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(Todo.this, Feeling.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_survey) {
             it = new Intent(Todo.this, SurveyOverview.class);
+            it.putExtra("username",username);
+            it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");

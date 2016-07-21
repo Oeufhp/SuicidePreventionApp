@@ -1,59 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--This xml file is for creating the Navigation Menu only
+(link: this->app_bar_main.xml(*) /main.xml/ nav_header_main.xml / activity_main_drawer.xml (*)->content_main.xml
+and other files are similar to this. )
+-->
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.latte.oeuff.suicidepreventionapp.SurveyOverview"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <TextView
+    <include
+        layout="@layout/app_bar_survey_overview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Survey Overview"
-        android:textSize="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_height="match_parent"/>
 
-    <Button
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Do survey "
-        android:id="@+id/dosurveybtn"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="See the history"
-        android:id="@+id/surveyhistorybtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
-        android:layout_gravity="center_horizontal"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="see the visualization"
-        android:id="@+id/seeupdatebtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"/>
-
-    Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="gps"
-    android:id="@+id/gpsbtn"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="30dp"
-    android:layout_gravity="center_horizontal"/>
-
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>

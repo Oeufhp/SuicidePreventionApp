@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.latte.oeuff.suicidepreventionapp.HelpNearYouOverview"
+    tools:showIn="@layout/app_bar_help_near_you_overview"
+    android:background="@drawable/appbg">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.latte.oeuff.suicidepreventionapp.HelpNearYouOverview"
+        android:orientation="vertical"
+        android:background="@drawable/appbg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search by displacement(km)"
+            android:textSize="18dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchnearbyplaces_gps_edittext"
+            android:hint="Displacement (km) "
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gps_icon"
+            android:background="@color/ap_transparent"
+            android:id="@+id/nearbyplacesbtn"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search by City and Country"
+            android:textSize="18dp"
+            android:layout_gravity="left"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchnearbyplaces_city_edittext"
+            android:hint="City"
+            android:layout_gravity="center_horizontal" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchnearbyplaces_country_edittext"
+            android:hint="Country"
+            android:layout_gravity="center_horizontal" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/map_icon"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/searchnearbyplacesbtn"
+            android:layout_margin="10dp"
+            android:background="@color/ap_transparent"/>
+
+    </LinearLayout>
+
+</ScrollView>
+
