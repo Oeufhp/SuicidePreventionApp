@@ -90,15 +90,25 @@
             android:layout_height="400dp"
             android:layout_margin="10dp"
             android:background="@drawable/squarebtn"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/addasafetyplanningtextview6"
-                android:layout_width="wrap_content"
+                android:textAlignment="center"
+                android:id="@+id/safetyPlanningTopic6"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="New Text"/>
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="Please add a plan"/>
+            <TextView
+                android:id="@+id/safetyPlanningMsg6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:text="Please add a plan"/>
         </LinearLayout>
-
 
     </LinearLayout>
 

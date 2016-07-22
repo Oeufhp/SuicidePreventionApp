@@ -3,6 +3,7 @@
 package com.latte.oeuff.suicidepreventionapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -29,6 +30,8 @@ import android.view.ViewGroup;
 
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class SafetyPlanning  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //----getIntent--------
@@ -43,7 +46,20 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
     private TabLayout tabLayout;    //it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter} that will provide fragments for each of the sections.
     private ViewPager mViewPager;   //This class will host the section contents
 
+    //-----------For Safety Planning----------------
+    static final int COL_SP_ID=0;
+    static final int COL_SP_TOPIC=1;
+    static final int COL_SP_MSG=2;
+    private static final String TOPIC="topic";
+    private static final String MESSAGE="message";
+    private static TextView safetyPlanningTopic1,safetyPlanningMsg1;
+    private static TextView safetyPlanningTopic2,safetyPlanningMsg2;
+    private static TextView safetyPlanningTopic3,safetyPlanningMsg3;
+    private static TextView safetyPlanningTopic4,safetyPlanningMsg4;
+    private static TextView safetyPlanningTopic5,safetyPlanningMsg5;
+    private static TextView safetyPlanningTopic6,safetyPlanningMsg6;
 
+    //-----------For Safety Planning----------------
 
     //---------------------- About dialog ----------------------------------------
     static DialogFragment newAddSafetyplanningFragment;
@@ -303,22 +319,25 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
     //2. This class creates a fragment containing a simple view.
     public static class FirstFragment extends Fragment {
         LinearLayout addplan_no1_layout, delplan_no1_layout;
-        TextView addasafetyplanningtextview1;
+//        TextView addasafetyplanningtextview1;
 
         //This is the main method of this class->create a View (fragment_safetyplanning_plan1)
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View viewfirst = inflater.inflate(R.layout.fragment_safetyplanning_plan1, container, false); //attachToRoot = false important !
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
+            final View viewfirst = inflater.inflate(R.layout.fragment_safetyplanning_plan1, container, false); //attachToRoot = false important !
             //-----binding-----------
             newAddSafetyplanningFragment = new AddSafetyplanningFragment();
             addplan_no1_layout = (LinearLayout)viewfirst.findViewById(R.id.addplan_no1_layout);
             delplan_no1_layout = (LinearLayout)viewfirst.findViewById(R.id.delplan_no1_layout);
-            addasafetyplanningtextview1 = (TextView)viewfirst.findViewById(R.id.addasafetyplanningtextview1);
+//            addasafetyplanningtextview1 = (TextView)viewfirst.findViewById(R.id.addasafetyplanningtextview1);
+            safetyPlanningTopic1=(TextView) viewfirst.findViewById(R.id.safetyPlanningTopic1);
+            safetyPlanningMsg1=(TextView) viewfirst.findViewById(R.id.safetyPlanningMsg1);
             //-----Logics------------
             addplan_no1_layout.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     newAddSafetyplanningFragment.show(getFragmentManager(),"Add a safetyplanning");
+
                     return false;
                 }
             });
@@ -528,22 +547,24 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 
     //------------------------ Dialog for Importing a photo Logics -------------------------------------
     public static class AddSafetyplanningFragment extends DialogFragment {
-        TextView addplan_btn;
-        TextView cancelplan_btn;
+        TextView addplan_btn,cancelplan_btn;
+        TextView SPtopic,SPMsg;
+
         private static final String TAG = "MainActivity";
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             //-----Binding-----------
             View view = inflater.inflate(R.layout.dialog_add_safetyplanning, container);
+            SPtopic=(TextView)view.findViewById(R.id.SPTopic);
+            SPMsg=(TextView)view.findViewById(R.id.SPMsg);
             addplan_btn = (TextView)view.findViewById(R.id.addplan_btn);
             cancelplan_btn = (TextView)view.findViewById(R.id.cancelplan_btn);
             //-----Logics-----------
             addplan_btn.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    newAddSafetyplanningFragment.dismiss();
-                  //addasafetyplanningtextview.setText("A safety planning is added !"); //IMPROVE IT BEACUSE IT IS COMPLEXED !
+                  newAddSafetyplanningFragment.dismiss();
                     return false;
                 }
             });
@@ -593,5 +614,6 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         }
     }
 //--------------------------------------------------------------------------------------------------
+//---------------------------Add safety Plans to SQLiteDB--------------------------------
 
 }
