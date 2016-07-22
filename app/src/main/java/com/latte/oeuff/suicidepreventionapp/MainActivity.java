@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageButton shortcut1, shortcut2, shortcut3, shortcut4;
     TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview;
     TextView locationtxtview, languagetxtview;
+//    TextView displayname;
+
     String TAG = "MainActivity";
 
     //----Android Plot-------
@@ -104,6 +106,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
+
+        //----displayname in navigation drawer ------
+//        displayname = (TextView)findViewById(id.displayname);
+//        displayname.setText(username);
 
         //----About ImageShow-----
         addPhoto_in_home = (ImageButton) findViewById(R.id.addPhoto_in_home);

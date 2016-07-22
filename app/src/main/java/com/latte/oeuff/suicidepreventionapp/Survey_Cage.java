@@ -268,8 +268,8 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                         Toast.makeText(getApplicationContext(), "sendsurvey_cage", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         //-----Return to SurveyOverview--------
-                        Intent it = new Intent(Survey_Cage.this, SurveyOverview.class);
-                        startActivity(it);
+//                        Intent it = new Intent(Survey_Cage.this, SurveyOverview.class);
+//                        startActivity(it);
                     }
                     else {
                         sendsurveystatus_textview.setText("sendsurvey_cage failed");

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
+    android:orientation="vertical"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.latte.oeuff.suicidepreventionapp.Survey_C_ssrs">
+
+<LinearLayout android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="15dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C_ssrs"
+        android:textSize="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q3: Have you been thinking about how you might do this?"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textColor="#000000"
+        android:textSize="16dp"/>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='horizontal'
+            android:checkableBehavior="single"
+            android:id="@+id/q3_group">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:id="@+id/q3_yes"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_marginLeft="50dp" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:id="@+id/q3_no"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_marginLeft="30dp"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <EditText android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/q3_yes_edittext"
+        android:hint="Please describe"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q4: Have you had these thoughts and had some intention of acting on them? "
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textColor="#000000"
+        android:textSize="16dp"/>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='horizontal'
+            android:checkableBehavior="single"
+            android:id="@+id/q4_group">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:id="@+id/q4_yes"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_marginLeft="50dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:id="@+id/q4_no"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_marginLeft="30dp"/>
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <EditText android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/q4_yes_edittext"
+        android:hint="Please describe"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q5: Have you started to work out or worked out the details of how to kill yourself? Do you intend to carry out this plan? "
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textColor="#000000"
+        android:textSize="16dp"/>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='horizontal'
+            android:checkableBehavior="single"
+            android:id="@+id/q5_group">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes"
+                android:id="@+id/q5_yes"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_marginLeft="50dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No"
+                android:id="@+id/q5_no"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:layout_marginLeft="30dp"/>
+
+        </RadioGroup>
+    </LinearLayout>
+    <EditText android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/q5_yes_edittext"
+        android:hint="Please describe"/>
+
+    <ImageButton android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sendsurveybtn"
+        android:background="@color/ap_transparent"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/send_c_ssrs_btn_second"/>
+
+</LinearLayout>
+
+</ScrollView>
