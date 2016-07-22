@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
+    android:orientation="vertical"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.latte.oeuff.suicidepreventionapp.Survey_C_ssrs">
+
+<LinearLayout android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="15dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C_ssrs"
+        android:textSize="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q1: How many times have you had these thoughts?"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:textColor="#000000"
+        android:textSize="18dp"/>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='vertical'
+            android:checkableBehavior="single"
+            android:id="@+id/q1_group"
+            android:layout_marginLeft="40dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Less than once a week"
+                android:id="@+id/inten_q1_1"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Once a week"
+                android:id="@+id/inten_q1_2"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2-5 times in week"
+                android:id="@+id/inten_q1_3"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily or almost daily"
+                android:id="@+id/inten_q1_4"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Daily or almost daily"
+                android:id="@+id/inten_q1_5"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q2: When you have the thoughts how long do they last?"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:textColor="#000000"/>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='vertical'
+            android:checkableBehavior="single"
+            android:id="@+id/q2_group"
+            android:layout_marginLeft="40dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fleeting - few seconds or minutes"
+                android:id="@+id/inten_q2_1"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Less than 1 hour/some of the time "
+                android:id="@+id/inten_q2_2"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1-4 hours/a lot of time"
+                android:id="@+id/inten_q2_3"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4-8 hours/most of day"
+                android:id="@+id/inten_q2_4"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More than 8 hours/persistent or continuous"
+                android:id="@+id/inten_q2_5"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q3: Could/can you stop thinking about killing yourself or wanting to die if you want to?"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:textColor="#000000" />
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='vertical'
+            android:checkableBehavior="single"
+            android:id="@+id/q3_group"
+            android:layout_marginLeft="40dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Does not attempt to control thoughts"
+                android:id="@+id/inten_q3_0"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Easily able to control thoughts"
+                android:id="@+id/inten_q3_1"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Can control thoughts with little difficulty "
+                android:id="@+id/inten_q3_2"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Can control thoughts with some difficulty"
+                android:id="@+id/inten_q3_3"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Can control thoughts  with a lot of difficulty"
+                android:id="@+id/inten_q3_4"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unable to control thoughts"
+                android:id="@+id/inten_q3_5"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q4: Are there things - anyone or anything (e.g., family, religion, pain of death) - that stopped you from wanting to die or acting on thoughts of committing suicide?"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:textColor="#000000" />
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='vertical'
+            android:checkableBehavior="single"
+            android:id="@+id/inten_q4_group"
+            android:layout_marginLeft="40dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Does not apply"
+                android:id="@+id/inten_q4_0"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deterrents definitely stopped you from attempting suicide"
+                android:id="@+id/inten_q4_1"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deterrents probably stopped you "
+                android:id="@+id/inten_q4_2"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Uncertain that deterrents stopped you "
+                android:id="@+id/inten_q4_3"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deterrents most likely did not stop you "
+                android:id="@+id/inten_q4_4"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deterrents definitely did not stop you "
+                android:id="@+id/inten_q4_5"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q5: What sort of reasons did you have for thinking about wanting to die or killing yourself?  Was it to end the pain or stop the way you were feeling (in other words you couldn’t go on living with this pain or how you were feeling) or was it to get attention, revenge or a reaction from others? Or both?"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:textSize="18dp"
+        android:textColor="#000000" />
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+        <RadioGroup android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation='vertical'
+            android:checkableBehavior="single"
+            android:id="@+id/q5_group"
+            android:layout_marginLeft="40dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Does not apply"
+                android:id="@+id/inten_q5_0"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Completely to get attention, revenge or a reaction from others"
+                android:id="@+id/inten_q5_1"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mostly to get attention, revenge or a reaction from others "
+                android:id="@+id/inten_q5_2"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=") Equally to get attention, revenge or a reaction from others and to end/stop the pain"
+                android:id="@+id/inten_q5_3"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mostly to end or stop the pain (you couldn’t go on living with the pain or how you were feeling)"
+                android:id="@+id/inten_q5_4"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Completely to end or stop the pain (you couldn’t go on living with the pain or  how you were feeling)"
+                android:id="@+id/inten_q5_5"
+                android:layout_alignBottom="@+id/radioButton"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_alignStart="@+id/textView3"
+                android:textSize="12dp"/>
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <ImageButton android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sendsurveybtn"
+        android:background="@color/ap_transparent"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:id="@+id/send_c_ssrs_btn_second"/>
+
+</LinearLayout>
+
+</ScrollView>

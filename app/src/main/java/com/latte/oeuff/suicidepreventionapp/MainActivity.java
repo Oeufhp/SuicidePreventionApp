@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Bitmap bitmapProfile;
     TextView displayname;
     ImageView imageView_in_nav;
+
+
     String TAG = "MainActivity";
 
     //----Android Plot-------
@@ -110,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
+
+        //----displayname in navigation drawer ------
+//        displayname = (TextView)findViewById(id.displayname);
+//        displayname.setText(username);
 
         //----About ImageShow-----
         addPhoto_in_home = (ImageButton) findViewById(R.id.addPhoto_in_home);
@@ -381,7 +387,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         shortcut5.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {    //go to HelpNearYouOverview.class
+            public void onClick(View v) {    //go to Feeling.class
                 Intent it = new Intent(MainActivity.this, Feeling.class);
                 it.putExtra("username", username);
                 it.putExtra("password", password);
@@ -390,8 +396,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         shortcut6.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {    //go to HelpNearYouOverview.class
-                Intent it = new Intent(MainActivity.this, Survey.class);
+            public void onClick(View v) {    //go to SurveyOverview.class
+
+                Intent it = new Intent(MainActivity.this, SurveyOverview.class);
                 it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
