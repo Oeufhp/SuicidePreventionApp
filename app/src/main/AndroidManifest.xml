@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.latte.oeuff.suicidepreventionapp">
+    package="com.latte.oeuff.suicidepreventionapp" >
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -8,10 +8,11 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <!-- The ACCESS_COARSE/FINE_LOCATION permissions must specify coarse or fine location permissions. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
-    <!--For using the internet-->
+    <!-- For using the internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Use permission for using a camera & video -->
     <uses-feature
@@ -23,18 +24,18 @@
     <!-- Use permission for an external storage -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <!-- About the application -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+ <!-- About the application -->
     <application
         android:name=".gallery.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="BeLeaF"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
         <!-- Change your first activity here -->
-        <activity android:name=".SplashSreen">
+        <activity android:name=".SplashSreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- Constant Value: Start as a main entry point, does not expect to receive data -->
@@ -73,7 +74,7 @@
             android:name=".Feeling"
             android:label="@string/title_activity_feeling"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FeelingLogics"></activity>
+        <activity android:name=".FeelingLogics" />
         <activity android:name=".TimePickerFragment" />
 
         <!-- Auto-generated to add Google Play services to your project for App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
@@ -83,12 +84,10 @@
 
         <activity
             android:name=".HelpNearYouOverview"
-            android:label="Help Near You"
-        />
+            android:label="Help Near You" />
         <activity
             android:name=".SurveyOverview"
-            android:label="Survey"
-        />
+            android:label="Survey" />
         <activity android:name=".Survey" />
         <activity android:name=".SurveyHistory" />
         <activity android:name=".SurveyVisualization" />
@@ -107,7 +106,7 @@
         <activity android:name=".SurveyHistoryOverview" />
         <activity android:name=".SurveyVisualizationOverview" />
         <activity android:name=".SurveyVisualization_Cage_Logics" />
-        <activity android:name=".SurveyVisualization_Cage"></activity>
+        <activity android:name=".SurveyVisualization_Cage" />
     </application>
 
 </manifest>

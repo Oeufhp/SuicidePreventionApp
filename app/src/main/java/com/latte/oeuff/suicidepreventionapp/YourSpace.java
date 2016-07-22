@@ -49,23 +49,25 @@ public class YourSpace extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
 
-//--------for gallery----------
-    private static String TAG=YourSpace.class.getSimpleName();
-    private static final String endpoint="http://cloud.oeufhp.me/img/glide.json";
-    private  static ArrayList<Image> images;
-    private  static ProgressDialog pDialog;
-    private  static GalleryAdapter mAdapter;
+    TextView displayname;
+
+    //--------for gallery----------
+    private static String TAG = YourSpace.class.getSimpleName();
+    private static final String endpoint = "http://cloud.oeufhp.me/img/glide.json";
+    private static ArrayList<Image> images;
+    private static ProgressDialog pDialog;
+    private static GalleryAdapter mAdapter;
     protected static RecyclerView recyclerView;
 
 //--------------About tabLayout-----------
     // MyPagerAdapter -> ViewPager -> contents (fragment_your_space_photos / videos / diary )
-        //MyPageAdapter = Base class providing the adapter to populate pages inside of a ViewPager
+    //MyPageAdapter = Base class providing the adapter to populate pages inside of a ViewPager
 
     private TabLayout yourspace_tabLayout;    //it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter} that will provide fragments for each of the sections.
     private ViewPager mViewPager;   //This class will host the section contents
-//----------------About Dialog --------------
+    //----------------About Dialog --------------
     DialogFragment newLogoutFragment;
 
     @Override
@@ -88,17 +90,17 @@ public class YourSpace extends AppCompatActivity
 //            }
 //        });
 
-    //------------------------This is for creating the tabLayout and its contents--------------------------//
+        //------------------------This is for creating the tabLayout and its contents--------------------------//
         //#### Get  ViewPager && set it's PagerAdapter -> so that it can display items ####
         MyPagerAdapter mMypageAdapter = new MyPagerAdapter(getSupportFragmentManager()); //=Base class providing the adapter to populate pages inside of a ViewPager
         mViewPager = (ViewPager) findViewById(R.id.container_yourspace);
         mViewPager.setAdapter(mMypageAdapter);
 
         //#### Give the TabLayout the ViewPager ####
-        yourspace_tabLayout = (TabLayout)findViewById(R.id.yourspace_tabLayout);
+        yourspace_tabLayout = (TabLayout) findViewById(R.id.yourspace_tabLayout);
         //yourspace_tabLayout.addTab(tabLayout.newTab().setText("..."));
         yourspace_tabLayout.setupWithViewPager(mViewPager);
-    //------------------------------------------------------------------------------------------------------//
+        //------------------------------------------------------------------------------------------------------//
 
         //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
@@ -115,6 +117,13 @@ public class YourSpace extends AppCompatActivity
         //view of "Navigation Drawer" (side)
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //------------------For header username-------------------------
+        View header=navigationView.getHeaderView(0);
+        displayname =(TextView)header.findViewById(R.id.displayname);
+        displayname.setText(username);
+        //------------------For header username-------------------------
+
         //*****To uncover colors of icon**********
         navigationView.setItemIconTintList(null);
 
@@ -134,7 +143,7 @@ public class YourSpace extends AppCompatActivity
         //**************************************************************************************************
 
         //--------------Logics across an activity ------------------------------
-            //Don't forget to create XML for this logic !
+        //Don't forget to create XML for this logic !
 //        aaa = (TextView)findViewById(R.id.aaa);
 //        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 //        String go = prefs.getString("keyChannel",null);
@@ -149,7 +158,7 @@ public class YourSpace extends AppCompatActivity
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) { //GravityCompat = Compatibility shim for accessing newer functionality from Gravity
-                                                        //Gravity =  Standard constants, tools for placing an object within a potentially larger container
+            //Gravity =  Standard constants, tools for placing an object within a potentially larger container
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -186,44 +195,43 @@ public class YourSpace extends AppCompatActivity
 
         //CHECK IN "activity_main_drawer.xml"
         //--------- Logics after pressing items on Navigation ----------------
-        Intent it ;
+        Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(YourSpace.this, MainActivity.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(YourSpace.this, YourSpace.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_todo) {
             it = new Intent(YourSpace.this, Todo.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(YourSpace.this, SafetyPlanning.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
             it = new Intent(YourSpace.this, HelpNearYouOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(YourSpace.this, Feeling.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_survey) {
             it = new Intent(YourSpace.this, SurveyOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
-        }
-        else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
         }
 
@@ -237,36 +245,36 @@ public class YourSpace extends AppCompatActivity
     //=Base class providing the adapter to populate pages inside of a ViewPager
 
     //------------------------ MyPagerAdapter ----------------------------------------------------
-        //"1." Class"MyPagerAdapter" returns a fragment corresponding to one of the sections/tabs/pages.
+    //"1." Class"MyPagerAdapter" returns a fragment corresponding to one of the sections/tabs/pages.
     private class MyPagerAdapter extends FragmentPagerAdapter {
         //constructor
-        public MyPagerAdapter(FragmentManager fm)
-        {
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm); //use the constructor of FragmentManager class (msectionsPagerAdapter)
-            Log.d("Class:MyPagerAdapter","Method:Constructor");
+            Log.d("Class:MyPagerAdapter", "Method:Constructor");
         }
 
         //called to instantiate the fragment(PlaceholderFragment: defined as a static inner class below) for the given page.
         @Override
         public Fragment getItem(int pos) {
-            switch(pos) {   // &&& do method "newInstance" below
+            switch (pos) {   // &&& do method "newInstance" below
                 case 0:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=0)Ins1");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=0)Ins1");
                     return FirstFragment.newInstance("FirstFragment, Instance 1");
                 case 1:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=1)Ins2");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=1)Ins2");
                     return SecondFragment.newInstance("SecondFragment, Instance 2");
                 case 2:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=2)Ins3");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=2)Ins3");
                     return ThirdFragment.newInstance("ThirdFragment, Instance 3");
-                default: return null;
+                default:
+                    return null;
             }
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            Log.d("Class:MyPagerAdapter","Method:getCount()");
+            Log.d("Class:MyPagerAdapter", "Method:getCount()");
             return 3;
         }
 
@@ -274,13 +282,13 @@ public class YourSpace extends AppCompatActivity
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=0)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=0)");
                     return "Photos";
                 case 1:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=1)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=1)");
                     return "Videos";
                 case 2:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=2)");
                     return "Diary";
             }
             return null;
@@ -288,7 +296,7 @@ public class YourSpace extends AppCompatActivity
     }
 
     //----------------------FirstFragement--------------------------------------
-        //2. Class"FirstFragment" creates a fragment containing a simple view.
+    //2. Class"FirstFragment" creates a fragment containing a simple view.
     public static class FirstFragment extends Fragment {
 
 
@@ -311,7 +319,7 @@ public class YourSpace extends AppCompatActivity
 //            Log.d("Class:FirstFragment","Method:onCreateView(...)");
 
             //----------------------testing---------------------//
-            recyclerView=(RecyclerView)viewfirst.findViewById(R.id.recycler_view);
+            recyclerView = (RecyclerView) viewfirst.findViewById(R.id.recycler_view);
             pDialog = new ProgressDialog(getContext());
             images = new ArrayList<>();
             mAdapter = new GalleryAdapter(getContext(), images);
@@ -319,24 +327,24 @@ public class YourSpace extends AppCompatActivity
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(mAdapter);
-             recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getContext(), recyclerView, new GalleryAdapter.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("images", images);
-                bundle.putInt("position", position);
+            recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getContext(), recyclerView, new GalleryAdapter.ClickListener() {
+                @Override
+                public void onClick(View view, int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("images", images);
+                    bundle.putInt("position", position);
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
-                newFragment.setArguments(bundle);
-                newFragment.show(ft, "slideshow");
-            }
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(ft, "slideshow");
+                }
 
-            @Override
-            public void onLongClick(View view, int position) {
+                @Override
+                public void onLongClick(View view, int position) {
 
-            }
-        }));
+                }
+            }));
             fetchImages();
             //----------------------testing---------------------//
 
@@ -344,7 +352,7 @@ public class YourSpace extends AppCompatActivity
             return viewfirst;
         }
 
-//        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
+        //        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
         public static FirstFragment newInstance(String text) {
 
             FirstFragment f = new FirstFragment(); //create a frament for containing a simple view
@@ -354,16 +362,17 @@ public class YourSpace extends AppCompatActivity
             //---------------------------
             f.setArguments(b);
 
-            Log.d("Class:FirstFragment","Method:newInstance(FirstFragment, Instance 1 )");
+            Log.d("Class:FirstFragment", "Method:newInstance(FirstFragment, Instance 1 )");
 
             return f;
         }
-            private void fetchImages() {
 
-                pDialog.setMessage("Downloading json...");
-                pDialog.show();
+        private void fetchImages() {
 
-                JsonArrayRequest req = new JsonArrayRequest(endpoint,
+            pDialog.setMessage("Downloading json...");
+            pDialog.show();
+
+            JsonArrayRequest req = new JsonArrayRequest(endpoint,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
@@ -385,28 +394,28 @@ public class YourSpace extends AppCompatActivity
 
                                     images.add(image);
 
-                                    } catch (JSONException e) {
-                                        Log.e(TAG, "Json parsing error: " + e.getMessage());
-                                    }
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "Json parsing error: " + e.getMessage());
                                 }
+                            }
 
-                                mAdapter.notifyDataSetChanged();
+                            mAdapter.notifyDataSetChanged();
                         }
                     }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.e(TAG, "Error: " + error.getMessage());
-                                pDialog.hide();
-                            }
-                        });
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e(TAG, "Error: " + error.getMessage());
+                    pDialog.hide();
+                }
+            });
 
-    // Adding request to request queue
-    AppController.getInstance().addToRequestQueue(req);
-}
+            // Adding request to request queue
+            AppController.getInstance().addToRequestQueue(req);
+        }
     }
 
     //----------------------SecondFragement--------------------------------------
-        //2. class"SecondFragment" creates a fragment containing a simple view.
+    //2. class"SecondFragment" creates a fragment containing a simple view.
     public static class SecondFragment extends Fragment {
 
         //This is the main method of this class->create a View (fragment_your_space_videos)
@@ -415,7 +424,7 @@ public class YourSpace extends AppCompatActivity
             View viewsecond = inflater.inflate(R.layout.fragment_your_space_videos, container, false);//attachToRoot = false important !
 
             //-----binding-----------
-            final TextView videostextview = (TextView)viewsecond.findViewById(R.id.videostextview);
+            final TextView videostextview = (TextView) viewsecond.findViewById(R.id.videostextview);
             //-----Logics------------
             videostextview.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -425,7 +434,7 @@ public class YourSpace extends AppCompatActivity
                 }
             });
 
-            Log.d("Class:SecondFragment","Method:onCreateView(...)");
+            Log.d("Class:SecondFragment", "Method:onCreateView(...)");
 
             return viewsecond;
         }
@@ -440,13 +449,14 @@ public class YourSpace extends AppCompatActivity
             //--------------------------
             f.setArguments(b);
 
-            Log.d("Class:SecondFragment","Method:newInstance(SecondFragment, Instance 2 )");
+            Log.d("Class:SecondFragment", "Method:newInstance(SecondFragment, Instance 2 )");
 
             return f;
         }
     }
+
     //----------------------ThirdFragement--------------------------------------
-        //3. Class"ThirdFragment" creates a fragment containing a simple view.
+    //3. Class"ThirdFragment" creates a fragment containing a simple view.
     public static class ThirdFragment extends Fragment {
 
         //This is the main method of this class->create a View (fragment_your_space_diary)
@@ -455,7 +465,7 @@ public class YourSpace extends AppCompatActivity
             View viewthird = inflater.inflate(R.layout.fragment_your_space_diary, container, false); //attachToRoot = false important !
 
             //-----binding-----------
-            final TextView diarytextview = (TextView)viewthird.findViewById(R.id.diarytextview);
+            final TextView diarytextview = (TextView) viewthird.findViewById(R.id.diarytextview);
             //-----Logics------------
             diarytextview.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -465,7 +475,7 @@ public class YourSpace extends AppCompatActivity
                 }
             });
 
-            Log.d("Class:ThirdFragment","Method:onCreateView(...)");
+            Log.d("Class:ThirdFragment", "Method:onCreateView(...)");
 
             return viewthird;
         }
@@ -480,17 +490,17 @@ public class YourSpace extends AppCompatActivity
             //---------------------------
             f.setArguments(b);
 
-            Log.d("Class:SecondFragment","Method:newInstance(ThirdFragment, Instance 3 )");
+            Log.d("Class:SecondFragment", "Method:newInstance(ThirdFragment, Instance 3 )");
 
             return f;
         }
     }
 //-----------------------------------------------------------------------------------------------------//
 
-//--------------------------Dialog for warning before logging out--------------------------
+    //--------------------------Dialog for warning before logging out--------------------------
     public class LogOutDialog extends DialogFragment {
 
-        TextView yesbtn_logout,nobtn_logout;
+        TextView yesbtn_logout, nobtn_logout;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

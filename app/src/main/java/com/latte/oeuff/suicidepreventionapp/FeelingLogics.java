@@ -47,13 +47,12 @@ public class FeelingLogics extends AppCompatActivity {
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
     //----visualization------
     String[][] visualizationData;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //************** Volley **********************
@@ -63,9 +62,9 @@ public class FeelingLogics extends AppCompatActivity {
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
 
-        Log.d("twice","ok");
-        Log.d("user",username);
-        Log.d("pass",password);
+        Log.d("twice", "ok");
+        Log.d("user", username);
+        Log.d("pass", password);
 
         //---------- Visualization ------------------------------
         visualizationData = new String[5][3];
@@ -74,7 +73,7 @@ public class FeelingLogics extends AppCompatActivity {
     }
 
     //------------------  seesurveyvisualization --------------------------------
-    public void seefeelingvisualization(){
+    public void seefeelingvisualization() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyvisualization";
         String url = "http://auth.oeufhp.me/beleaf.php/seefeelingvisualization";
@@ -138,13 +137,13 @@ public class FeelingLogics extends AppCompatActivity {
                     //-------------- Send the data to "SurveyAndroidPlot" (in String) ---------------------------
                     //Catch a case str_seriesNumbers[?] == -1 in "SurveyAndroidPlot.java"
                     Intent it = new Intent(FeelingLogics.this, MainActivity.class);
-                    it.putExtra("username",username);
-                    it.putExtra("password",password);
-                    it.putExtra("str_dot1",visualizationData[0][2]);
-                    it.putExtra("str_dot2",visualizationData[1][2]);
-                    it.putExtra("str_dot3",visualizationData[2][2]);
-                    it.putExtra("str_dot4",visualizationData[3][2]);
-                    it.putExtra("str_dot5",visualizationData[4][2]);
+                    it.putExtra("username", username);
+                    it.putExtra("password", password);
+                    it.putExtra("str_dot1", visualizationData[0][2]);
+                    it.putExtra("str_dot2", visualizationData[1][2]);
+                    it.putExtra("str_dot3", visualizationData[2][2]);
+                    it.putExtra("str_dot4", visualizationData[3][2]);
+                    it.putExtra("str_dot5", visualizationData[4][2]);
                     startActivity(it);
                     //Show survey visualization in "SurveyAndroidPlot"
                     pd.dismiss();
@@ -162,12 +161,12 @@ public class FeelingLogics extends AppCompatActivity {
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -182,8 +181,7 @@ public class FeelingLogics extends AppCompatActivity {
                         pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

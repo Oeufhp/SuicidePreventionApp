@@ -33,6 +33,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.Calendar;
 
 //import com.latte.oeuff.suicidepreventionapp.data.TaskContract;
@@ -41,7 +42,9 @@ import com.latte.oeuff.suicidepreventionapp.data.TaskDBHelper;
 public class Todo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
+
+    TextView displayname;
 
     //-----for Todo-------------
     TaskAdapter mTaskAdapter;
@@ -75,13 +78,13 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         password = it.getStringExtra("password");
 
         //----------------------Query todo list when open "todo" page-------------------------//
-        ListView listView = (ListView)findViewById(R.id.listview_tasks);
+        ListView listView = (ListView) findViewById(R.id.listview_tasks);
         TaskDBHelper helper = new TaskDBHelper(Todo.this);
         SQLiteDatabase sqlDB = helper.getReadableDatabase(); //Get helper into "dqlDB" to read from database
 
         //Query database to get any existing data
-            //https://developer.android.com/reference/android/database/Cursor.html
-            //This interface provides random read-write access to the result set returned by a database query.
+        //https://developer.android.com/reference/android/database/Cursor.html
+        //This interface provides random read-write access to the result set returned by a database query.
         Cursor cursor_tmp = sqlDB.query(TaskDBHelper.TaskContract.TaskEntry.TABLE_NAME, new String[]
                         {TaskDBHelper.TaskContract.TaskEntry._ID, TaskDBHelper.TaskContract.TaskEntry.COLUMN_TASK, TaskDBHelper.TaskContract.TaskEntry.COLUMN_DATE},
                 null, null, null, null, null);
@@ -90,14 +93,14 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         mTaskAdapter = new TaskAdapter(getBaseContext(), cursor_tmp);
         listView.setAdapter(mTaskAdapter);
 
-        Log.d("mTaskAdapter","is set");
+        Log.d("mTaskAdapter", "is set");
         //----------------------------------------------------------------------------------//
         //***** get the current date ****
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH) + 1; //must +1
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        Log.d("get the current date","reach");
+        Log.d("get the current date", "reach");
 
         //------------------------------ Logics --------------------------------------------------------
         //----------------------for create a dialog "to do" -------------------------
@@ -122,7 +125,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
 //                builder.show();
 //            }
 //        });
-    //----------------------for create dialog to do-------------------------//
+        //----------------------for create dialog to do-------------------------//
 
         fabBtnAddTodo.setImageResource(R.drawable.ic_new_todo);
         fabBtnAddTodo.setOnClickListener(new View.OnClickListener() {
@@ -132,28 +135,28 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
                 //************ IMPORTANT: These can fix a bug of "showing a task" *********************
                 LayoutInflater inflator = Todo.this.getLayoutInflater(); //**
                 final View view_dialog_todo = inflator.inflate(R.layout.dialog_create_todo, null); //**
-                inputField = (EditText)view_dialog_todo.findViewById(R.id.todo_title);
+                inputField = (EditText) view_dialog_todo.findViewById(R.id.todo_title);
                 AlertDialog.Builder builder = new AlertDialog.Builder(Todo.this);
                 builder.setView(view_dialog_todo);
                 //*********************************************************************************
 
-                builder.setPositiveButton("Next",new DialogInterface.OnClickListener(){
+                builder.setPositiveButton("Next", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Log.d("reach","here");
-                        Log.d("inputField",inputField.getText().toString());
+                        Log.d("reach", "here");
+                        Log.d("inputField", inputField.getText().toString());
 
                         //*** important : to show a calendar dialog *******
                         showDialog(DATE_DIALOG_ID);
-                        Log.d("Todo-onclick","success");
+                        Log.d("Todo-onclick", "success");
 
                     }
                 });
                 builder.setNegativeButton("Cancel", null);
                 builder.create().show();
                 //builder.show();
-                Log.d("create a dialog","success");
+                Log.d("create a dialog", "success");
             }
         });
 
@@ -173,6 +176,13 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         //view of "Navigation Drawer" (side)
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //------------------For header username-------------------------
+        View header=navigationView.getHeaderView(0);
+        displayname =(TextView)header.findViewById(R.id.displayname);
+        displayname.setText(username);
+        //------------------For header username-------------------------
+
         //*****To uncover colors of icon**********
         navigationView.setItemIconTintList(null);
 
@@ -205,7 +215,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
             case DATE_DIALOG_ID:
                 return new DatePickerDialog(this, mDateSetListener, mYear, mMonth, mDay);
         }
-        Log.d("onCreateDialog","reach");
+        Log.d("onCreateDialog", "reach");
         return null;
     }
 
@@ -218,16 +228,16 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
                     mYear = year;
                     mMonth = monthOfYear + 1; //must +1
                     mDay = dayOfMonth;
-                    Log.d("DatePickerDialog","reach");
-                    Log.d("date after choosing:", mYear + ": " + mMonth + ": "+mDay);
+                    Log.d("DatePickerDialog", "reach");
+                    Log.d("date after choosing:", mYear + ": " + mMonth + ": " + mDay);
 
                     //@@@ Keep task input into "taskinput"
-                        taskinput = inputField.getText().toString();
-                        Log.d("taskinput: ", taskinput);
+                    taskinput = inputField.getText().toString();
+                    Log.d("taskinput: ", taskinput);
 
                     //@@@ Keep date input into "dateinput"
                     dateinput = mDay + "/" + mMonth + "/" + mYear;
-                    Log.d("dateinput: ",dateinput);
+                    Log.d("dateinput: ", dateinput);
 
                     //@@@ Execute to store & show the inputs
                     addTodo();
@@ -238,7 +248,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
 
     //************************ Add a "to do" list  ****************************************************
     //FLOW NO. 4
-    public void addTodo(){
+    public void addTodo() {
 
         //1.1 Get DBHelper to write into the database
         TaskDBHelper helper = new TaskDBHelper(Todo.this);
@@ -258,21 +268,21 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
                 SQLiteDatabase.CONFLICT_IGNORE);
 
         //1.4 Query database again to get updated data
-            //https://developer.android.com/reference/android/database/Cursor.html
-            //This interface provides random read-write access to the result set returned by a database query.
+        //https://developer.android.com/reference/android/database/Cursor.html
+        //This interface provides random read-write access to the result set returned by a database query.
         Cursor cursor = db.query(TaskDBHelper.TaskContract.TaskEntry.TABLE_NAME,
                 new String[]{TaskDBHelper.TaskContract.TaskEntry._ID, TaskDBHelper.TaskContract.TaskEntry.COLUMN_TASK, TaskDBHelper.TaskContract.TaskEntry.COLUMN_DATE},
                 null, null, null, null, null);
-       // Swap in a new Cursor, returning the old Cursor.
+        // Swap in a new Cursor, returning the old Cursor.
         mTaskAdapter.swapCursor(cursor);
 
         //1.5 Find the listView
-        ListView listView = (ListView)findViewById(R.id.listview_tasks);
+        ListView listView = (ListView) findViewById(R.id.listview_tasks);
         SQLiteDatabase sqlDB = helper.getReadableDatabase();
 
         //1.6 Query database to get any existing data
-            //https://developer.android.com/reference/android/database/Cursor.html
-            //This interface provides random read-write access to the result set returned by a database query.
+        //https://developer.android.com/reference/android/database/Cursor.html
+        //This interface provides random read-write access to the result set returned by a database query.
         Cursor cursor1 = sqlDB.query(TaskDBHelper.TaskContract.TaskEntry.TABLE_NAME,
                 new String[]{TaskDBHelper.TaskContract.TaskEntry._ID, TaskDBHelper.TaskContract.TaskEntry.COLUMN_TASK, TaskDBHelper.TaskContract.TaskEntry.COLUMN_DATE},
                 null, null, null, null, null);
@@ -281,7 +291,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         mTaskAdapter = new TaskAdapter(getBaseContext(), cursor);
         listView.setAdapter(mTaskAdapter);
 
-        Log.d("addTodo","success");
+        Log.d("addTodo", "success");
 
     }
     //FLOW NO.5 , NO.6 are at TaskAdapter.java
@@ -331,37 +341,37 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(Todo.this, MainActivity.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(Todo.this, YourSpace.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_todo) {
             it = new Intent(Todo.this, Todo.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(Todo.this, SafetyPlanning.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
             it = new Intent(Todo.this, HelpNearYouOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(Todo.this, Feeling.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_survey) {
             it = new Intent(Todo.this, SurveyOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_logout) {

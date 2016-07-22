@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //---------- Others ---------------------------
-    EditText user,pass;
+    EditText user, pass;
     Button loginbtn;
     TextView forgotpass;
 
@@ -63,13 +63,13 @@ public class LoginActivity extends AppCompatActivity {
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
         //-----tie vars to id--------------------------------------------------
-        user = (EditText)findViewById(R.id.user);
-        pass = (EditText)findViewById(R.id.pass);
-        loginbtn = (Button)findViewById(R.id.loginbtn);
-        forgotpass = (TextView)findViewById(R.id.forgotpass);
+        user = (EditText) findViewById(R.id.user);
+        pass = (EditText) findViewById(R.id.pass);
+        loginbtn = (Button) findViewById(R.id.loginbtn);
+        forgotpass = (TextView) findViewById(R.id.forgotpass);
         //----- For a faster login: get Intent (MUST BE BELOW "tie vars to id") ----------------------------------------------------
         Intent it = getIntent();
-        if(it != null){
+        if (it != null) {
             user.setText(it.getStringExtra("username"));
             pass.setText(it.getStringExtra("password"));
         }
@@ -106,23 +106,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 try {
-                    Log.d("login's response",response);
+                    Log.d("login's response", response);
                     JSONObject jsonResponse = new JSONObject(response);
                     String login_status = jsonResponse.getString("login_status");
                     //-----------My Logics---------------
-                    if(login_status.equals("1")){
-                        Toast.makeText(getApplicationContext(),"login", Toast.LENGTH_SHORT).show();
+                    if (login_status.equals("1")) {
+                        Toast.makeText(getApplicationContext(), "login", Toast.LENGTH_SHORT).show();
                         Intent it = new Intent(LoginActivity.this, MainActivity.class); //PROBLEM
-                        it.putExtra("username",user.getText().toString());
-                        it.putExtra("password",pass.getText().toString());
+                        it.putExtra("username", user.getText().toString());
+                        it.putExtra("password", pass.getText().toString());
                             /*Bundle extras = new Bundle();
                                 extras.putString("username", username_login_edittext.getText().toString());
                                 extras.putString("password", password_login_edittext.getText().toString());
                             it.putExtras(extras);*/
                         startActivity(it);
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(),"login failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "login failed", Toast.LENGTH_SHORT).show();
                     }
 
                     //----- if try is success -> dismiss the dialog ---------
@@ -141,12 +140,12 @@ public class LoginActivity extends AppCompatActivity {
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -161,8 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                         pd.dismiss();
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

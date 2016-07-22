@@ -52,7 +52,7 @@ public class SurveyHistory extends AppCompatActivity {
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
     //----Others-----------
     TextView seesurveyhistory_textview;
     LinearLayout seesurveyhistory_layout;
@@ -65,13 +65,13 @@ public class SurveyHistory extends AppCompatActivity {
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
         //----------getIntent---------
-        it =getIntent();
+        it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
         //--------- Binding -------------
-        seesurveyhistory_textview = (TextView)findViewById(R.id.seesurveyhistory_textview);
-        seesurveyhistory_layout = (LinearLayout)findViewById(R.id.seesurveyhistory_layout);
-        seesurveyhistorybtn = (Button)findViewById(R.id.seesurveyhistorybtn);
+        seesurveyhistory_textview = (TextView) findViewById(R.id.seesurveyhistory_textview);
+        seesurveyhistory_layout = (LinearLayout) findViewById(R.id.seesurveyhistory_layout);
+        seesurveyhistorybtn = (Button) findViewById(R.id.seesurveyhistorybtn);
 
         //-------My Logics --------------------
         seesurveyhistorybtn.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +85,7 @@ public class SurveyHistory extends AppCompatActivity {
     }
 
     //------------------  seesurveyhistory --------------------------------
-    public void seesurveyhistory(){
+    public void seesurveyhistory() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
         String url = "http://auth.oeufhp.me/beleafTest.php/seesurveyhistory";
@@ -101,9 +101,9 @@ public class SurveyHistory extends AppCompatActivity {
             public void onResponse(String response) {
 
                 try {
-                    Log.d("seesurvey... response",response);
+                    Log.d("seesurvey... response", response);
                     //-----------My logics---------------
-                    String seesurveyhistory="";
+                    String seesurveyhistory = "";
 
                     //1 get value(=String) from response(=json array)
                     JSONObject jsonResponse = new JSONObject(response);
@@ -113,7 +113,7 @@ public class SurveyHistory extends AppCompatActivity {
                     //http://stackoverflow.com/questions/9961018/getting-specific-value-from-jsonarray
                     JSONArray jsonarray_stringResponse = new JSONArray(stringResponse);
 
-                    for(int i=0; i < jsonarray_stringResponse.length();i++){
+                    for (int i = 0; i < jsonarray_stringResponse.length(); i++) {
                         //3 get value(=json object = "one jsonObject" which is json array) from json array
                         JSONObject jsonobject_jsonarray_stringResponse = jsonarray_stringResponse.getJSONObject(i);
 
@@ -128,15 +128,15 @@ public class SurveyHistory extends AppCompatActivity {
                         String survey_q5_ans = jsonobject_jsonarray_stringResponse.getString("survey_q5_ans");
                         String totalscore = jsonobject_jsonarray_stringResponse.getString("totalScore");
 
-                        seesurveyhistory =  " Record:"+(i+1)+" "+"username:"+username+" "+"sentdate:"+sentdate+" "
-                                +"Q1ans:"+survey_q1_ans+" "
-                                +"Q2ans:"+survey_q2_ans+" "
-                                +"Q3ans:"+survey_q3_ans+" "
-                                +"Q4ans:"+survey_q4_ans+" "
-                                +"Q5ans:"+survey_q5_ans+" "
-                                +"total score:"+totalscore+" ";
+                        seesurveyhistory = " Record:" + (i + 1) + " " + "username:" + username + " " + "sentdate:" + sentdate + " "
+                                + "Q1ans:" + survey_q1_ans + " "
+                                + "Q2ans:" + survey_q2_ans + " "
+                                + "Q3ans:" + survey_q3_ans + " "
+                                + "Q4ans:" + survey_q4_ans + " "
+                                + "Q5ans:" + survey_q5_ans + " "
+                                + "total score:" + totalscore + " ";
                         //-------------- Show survey history ---------------------------------------
-                        TextView aline =new TextView(SurveyHistory.this); //create a textview without binding to XML file
+                        TextView aline = new TextView(SurveyHistory.this); //create a textview without binding to XML file
                         aline.setText(seesurveyhistory);
                         seesurveyhistory_layout.setBackgroundColor(Color.TRANSPARENT);
                         seesurveyhistory_layout.addView(aline); //add that textview in the LinearLayout
@@ -165,12 +165,12 @@ public class SurveyHistory extends AppCompatActivity {
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -185,8 +185,7 @@ public class SurveyHistory extends AppCompatActivity {
                         pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

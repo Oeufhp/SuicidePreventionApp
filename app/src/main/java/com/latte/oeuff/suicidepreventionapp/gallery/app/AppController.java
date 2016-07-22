@@ -13,31 +13,34 @@ import com.android.volley.toolbox.Volley;
 
 //For more information visits ->http://www.androidhive.info/2016/04/android-glide-image-library-building-image-gallery-app/
 public class AppController extends Application {
-    public static final String TAG=AppController.class.getSimpleName();
+    public static final String TAG = AppController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
     private static AppController mInstance;
 
     @Override
-    public void onCreate(){
+    public void onCreate() {
         super.onCreate();
-        mInstance=this;
+        mInstance = this;
     }
 
-    public static synchronized AppController getInstance(){
+    public static synchronized AppController getInstance() {
         return mInstance;
     }
-    public RequestQueue getRequestQueue(){
-        if(mRequestQueue==null){
-            mRequestQueue= Volley.newRequestQueue(getApplicationContext());
+
+    public RequestQueue getRequestQueue() {
+        if (mRequestQueue == null) {
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return mRequestQueue;
     }
-    public <T> void addToRequestQueue(Request<T> req, String tag){
+
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
         //set the default tag if tag is empty;
-        req.setTag(TextUtils.isEmpty(tag)?TAG:tag);
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
         getRequestQueue().add(req);
     }
+
     public <T> void addToRequestQueue(Request<T> req) {
         req.setTag(TAG);
         getRequestQueue().add(req);

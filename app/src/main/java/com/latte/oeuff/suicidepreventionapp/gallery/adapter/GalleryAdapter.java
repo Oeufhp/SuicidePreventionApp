@@ -25,12 +25,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     private List<Image> images;
     private Context mContext;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView thumbnail;
 
-        public MyViewHolder(View view){
-                super(view);
-                thumbnail=(ImageView)view.findViewById(R.id.thumbnail);
+        public MyViewHolder(View view) {
+            super(view);
+            thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
         }
     }
 
@@ -38,6 +38,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         mContext = context;
         this.images = images;
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())

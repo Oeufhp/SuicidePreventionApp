@@ -26,12 +26,14 @@ import android.widget.Toast;
 
 public class HelpNearYouOverview extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    ImageButton nearbyplacesbtn,searchnearbyplacesbtn ;
+    ImageButton nearbyplacesbtn, searchnearbyplacesbtn;
     EditText searchbyplaces_gps_editttext, searchnearbyplaces_city_edittext, searchnearbyplaces_country_edittext;
 
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
+
+    TextView displayname;
 
     //---About Dialog---
     DialogFragment newLogoutFragment;
@@ -41,35 +43,34 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_near_you_overview);
         //----------getIntent---------
-        it =getIntent();
+        it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
             /*Bundle b = getIntent().getExtras();
                 String username = b.getString("username");
                 String password = b.getString("password");*/
         //--------- binding ----------
-        nearbyplacesbtn = (ImageButton)findViewById(R.id.nearbyplacesbtn);
-        searchbyplaces_gps_editttext = (EditText)findViewById(R.id.searchnearbyplaces_gps_edittext);
-        searchnearbyplaces_city_edittext = (EditText)findViewById(R.id.searchnearbyplaces_city_edittext);
-        searchnearbyplaces_country_edittext = (EditText)findViewById(R.id.searchnearbyplaces_country_edittext);
-        searchnearbyplacesbtn = (ImageButton)findViewById(R.id.searchnearbyplacesbtn);
+        nearbyplacesbtn = (ImageButton) findViewById(R.id.nearbyplacesbtn);
+        searchbyplaces_gps_editttext = (EditText) findViewById(R.id.searchnearbyplaces_gps_edittext);
+        searchnearbyplaces_city_edittext = (EditText) findViewById(R.id.searchnearbyplaces_city_edittext);
+        searchnearbyplaces_country_edittext = (EditText) findViewById(R.id.searchnearbyplaces_country_edittext);
+        searchnearbyplacesbtn = (ImageButton) findViewById(R.id.searchnearbyplacesbtn);
 
         //---------My logics ---------
         nearbyplacesbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( ! (searchbyplaces_gps_editttext.getText().toString().equals("")) ) {
+                if (!(searchbyplaces_gps_editttext.getText().toString().equals(""))) {
                     Intent it = new Intent(HelpNearYouOverview.this, HelpNearYou.class);
                     it.putExtra("input_city", "empty");
                     it.putExtra("input_country", "empty");
                     it.putExtra("displacement", searchbyplaces_gps_editttext.getText().toString());
 
-                    Log.d("nearbyplacesbtn","here");
+                    Log.d("nearbyplacesbtn", "here");
 
                     startActivity(it);
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"You have to complete your inputs !", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "You have to complete your inputs !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -78,15 +79,14 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
             public void onClick(View v) {
 
                 //*************** important: getText().toString().equals("") ************************
-                if( ! (searchnearbyplaces_city_edittext.getText().toString().equals("")) && ! (searchnearbyplaces_country_edittext.getText().toString().equals(""))){
+                if (!(searchnearbyplaces_city_edittext.getText().toString().equals("")) && !(searchnearbyplaces_country_edittext.getText().toString().equals(""))) {
                     Intent it = new Intent(HelpNearYouOverview.this, HelpNearYou.class);
                     it.putExtra("input_city", searchnearbyplaces_city_edittext.getText().toString());
                     it.putExtra("input_country", searchnearbyplaces_country_edittext.getText().toString());
-                    it.putExtra("displacement", "empty" );
+                    it.putExtra("displacement", "empty");
                     startActivity(it);
-                }
-                else {
-                    Toast.makeText(getApplicationContext(),"You have to complete your inputs !", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "You have to complete your inputs !", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -106,6 +106,13 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
         //view of "Navigation Drawer" (side)
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //------------------For header username-------------------------
+        View header=navigationView.getHeaderView(0);
+        displayname =(TextView)header.findViewById(R.id.displayname);
+        displayname.setText(username);
+        //------------------For header username-------------------------
+
         //*****To uncover colors of icon**********
         navigationView.setItemIconTintList(null);
 
@@ -132,7 +139,7 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
     //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
     @Override
-    public void onBackPressed () {
+    public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) { //GravityCompat = Compatibility shim for accessing newer functionality from Gravity
             //Gravity =  Standard constants, tools for placing an object within a potentially larger container
@@ -144,7 +151,7 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
 
     //Initialize the contents of the Activity's standard options menu
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate(add) the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu); //MenuInflater allows you to inflate the context menu from a menu resource
         //Bind "MainActivity.java" <-> main.xml for using "setting popup-menu"
@@ -152,8 +159,7 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item)
-    { // Called when the user selects an item from the options menu. Handle action bar item clicks here.
+    public boolean onOptionsItemSelected(MenuItem item) { // Called when the user selects an item from the options menu. Handle action bar item clicks here.
 
         int id = item.getItemId();
 
@@ -167,8 +173,7 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected (MenuItem item)
-    { //This method is called whenever a navigation item in your action bar is selected
+    public boolean onNavigationItemSelected(MenuItem item) { //This method is called whenever a navigation item in your action bar is selected
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -218,6 +223,7 @@ public class HelpNearYouOverview extends AppCompatActivity implements Navigation
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     //**************************************************************************************************
 //---------------------------- Dialog for warning before logging out -------------------------------//
     public class LogOutDialog extends DialogFragment {

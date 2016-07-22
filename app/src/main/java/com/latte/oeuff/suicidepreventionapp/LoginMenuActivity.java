@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class LoginMenuActivity extends AppCompatActivity {
     //TextView url;
-    ImageButton login, facebook, gmail,www, loginmenu_create;
+    ImageButton login, facebook, gmail, www, loginmenu_create;
     ImageButton frenchbtn, thaibtn, englishbtn;
 
     @Override
@@ -22,11 +22,11 @@ public class LoginMenuActivity extends AppCompatActivity {
 
         //-----Tie variables to id in xml----------------------
         //url = (TextView)findViewById(R.id.url);
-        login = (ImageButton)findViewById(R.id.login);
+        login = (ImageButton) findViewById(R.id.login);
         //facebook = (ImageButton)findViewById(R.id.facebook);
         //gmail = (ImageButton)findViewById(R.id.gmail);
-        www = (ImageButton)findViewById(R.id.www);
-        loginmenu_create = (ImageButton)findViewById(R.id.loginmenu_create);
+        www = (ImageButton) findViewById(R.id.www);
+        loginmenu_create = (ImageButton) findViewById(R.id.loginmenu_create);
         //frenchbtn = (ImageButton)findViewById(R.id.frenchbtn);
         //thaibtn = (ImageButton)findViewById(R.id.thaibtn);
         //frenchbtn = (ImageButton)findViewById(R.id.englishbtn);

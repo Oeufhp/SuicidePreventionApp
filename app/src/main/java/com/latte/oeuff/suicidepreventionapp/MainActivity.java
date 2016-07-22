@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     boolean home_photoexists = false;
     private int REQUEST_CAPTURE_IMAGE = 1;
     private int REQUEST_CHOOSE_IMAGE = 2;
+    private int REQUEST_CHANGE_PROFILE_IMG=3;
     Intent home_imageIntent;
     ImageButton addPhoto_in_home, addPhoto_in_home_small;
 
@@ -79,9 +80,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DialogFragment newLogoutFragment;
 
     //---About Others---------
-    ImageButton shortcut1, shortcut2, shortcut3, shortcut4,shortcut5,shortcut6;
-    TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview,shortcut5txtview,shortcut6txtview;
+    ImageButton shortcut1, shortcut2, shortcut3, shortcut4, shortcut5, shortcut6;
+    TextView shortcut1txtview, shortcut2txtview, shortcut3txtview, shortcut4txtview, shortcut5txtview, shortcut6txtview;
     TextView locationtxtview, languagetxtview;
+
+    //----------About username and image--------
+    Bitmap bitmapProfile;
+    TextView displayname;
+    ImageView imageView_in_nav;
     String TAG = "MainActivity";
 
     //----Android Plot-------
@@ -111,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         home_imageView = (ImageView) findViewById(id.home_imageview);            //android:src="@drawable/demo_slide"  in home_imageView
         newImportPhotoFragment = new ImportPhoto();
 
-    //**** REACH"1"  MUST REACH(feeling_states) 1. FLOW-startActivity: NO.1 Check saveInstanceState ( !null / null ) --------------------
+        //**** REACH"1"  MUST REACH(feeling_states) 1. FLOW-startActivity: NO.1 Check saveInstanceState ( !null / null ) --------------------
         sp = getSharedPreferences("MainSp", 1);
 
         if (savedInstanceState != null) {
@@ -123,19 +129,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             feeling_states = savedInstanceState.getIntArray("feeling_states");
 
             //**** 1. FLOW-startActivity: NO.2 Check feeling_states ( !null / null ) -------
-            if(feeling_states != null){
-                Log.d("saveIns not null","feeling not null");
+            if (feeling_states != null) {
+                Log.d("saveIns not null", "feeling not null");
+            } else {
+                Log.d("saveIns not null", "feeling  null");
             }
-            else {
-                Log.d("saveIns not null","feeling  null");
-            }
-        }
-        else {
+        } else {
             //generate an init bitmap for solving null obj reference
             Log.d("oncCre", "saveInstan null");
-            bm = Bitmap.createBitmap(100, 100,Bitmap.Config.ARGB_8888);
+            bm = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
             home_photoexists = false;       //important
-            Log.d("init bitmap","success1");
+            Log.d("init bitmap", "success1");
 
             // Get the values from SharedPref
             feeling_states = new int[5];
@@ -146,19 +150,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             feeling_states[4] = sp.getInt("feeling_states_5", 1);
         }
 
-    //**** 2. Flow-refresh: NO.1: Go to "FeelingLogics.java" ----------------------------
-        refreshbtn_home= (ImageButton)findViewById(R.id.refreshbtn_home);
+        //**** 2. Flow-refresh: NO.1: Go to "FeelingLogics.java" ----------------------------
+        refreshbtn_home = (ImageButton) findViewById(R.id.refreshbtn_home);
         refreshbtn_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, FeelingLogics.class);
-                it.putExtra("username",username);
+                it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
             }
         });
 
-    //**** MUST REACH(dot1-5) 2. Flow-refresh: NO.2: Receive & check the data from "FeelingLogics.java" -----------
+        //**** MUST REACH(dot1-5) 2. Flow-refresh: NO.2: Receive & check the data from "FeelingLogics.java" -----------
         str_dot1 = it.getStringExtra("str_dot1");
         str_dot2 = it.getStringExtra("str_dot2");
         str_dot3 = it.getStringExtra("str_dot3");
@@ -166,8 +170,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         str_dot5 = it.getStringExtra("str_dot5");
 
         //2.2.1 Check that they are null (reach here from activities)  OR  not null (... from refresh_btn)
-        if(str_dot1 != null) {
-            Log.d(" str_dot not null","reach here from refresh_btn");
+        if (str_dot1 != null) {
+            Log.d(" str_dot not null", "reach here from refresh_btn");
             //----------- Rearrange the data (in int) -----------------------------------------------
             dot1 = Integer.parseInt(str_dot1);
             dot2 = Integer.parseInt(str_dot2);
@@ -182,19 +186,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             feeling_states[3] = dot4;
             feeling_states[4] = dot5;
 
-        }
-        else {
-            Log.d("str_dot null","reach here from activities");
-            if(feeling_states != null){
-                Log.d("str_dot null / feeling ","not null");
+        } else {
+            Log.d("str_dot null", "reach here from activities");
+            if (feeling_states != null) {
+                Log.d("str_dot null / feeling ", "not null");
                 dot1 = feeling_states[0];
                 dot2 = feeling_states[1];
                 dot3 = feeling_states[2];
                 dot4 = feeling_states[3];
                 dot5 = feeling_states[4];
-            }
-            else {
-                Log.d("str_dot null / feeling ","null");
+            } else {
+                Log.d("str_dot null / feeling ", "null");
                 dot1 = -1;
                 dot2 = -1;
                 dot3 = -1;
@@ -203,12 +205,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
-    //**** MUST REACH(series1Numbers) 3.Flow-prepare: NO.1 : Get the data to preapare & androidplot ------------------
+        //**** MUST REACH(series1Numbers) 3.Flow-prepare: NO.1 : Get the data to preapare & androidplot ------------------
         series1Numbers = new Number[]{dot1, dot2, dot3, dot4, dot5};
         list_seriesNumbers = new LinkedList<Number>();
 
         //**** Keep feeling_states in SharedPreferences -------
-        if(feeling_states !=null) {
+        if (feeling_states != null) {
             SharedPreferences.Editor editor = sp.edit();
             editor.putInt("feeling_states_1", feeling_states[0]);
             editor.putInt("feeling_states_2", feeling_states[1]);
@@ -227,47 +229,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         //3.1.2 Check list_seriesNumbers (empty / ! empty)
-            if (list_seriesNumbers.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Please do at least 3 surveys before", Toast.LENGTH_SHORT).show();
+        if (list_seriesNumbers.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Please do at least 3 surveys before", Toast.LENGTH_SHORT).show();
 //                Intent it = new Intent(MainActivity.this, SurveyOverview.class);
 //                it.putExtra("username",username);
 //                it.putExtra("password", password);
 //                startActivity(it);                    //problem
-            } else {
-                //series1Numbers = list_seriesNumbers.toArray(series1Numbers); //REAL PROBLEM !
-                series1Numbers = new Number[list_seriesNumbers.size()];
+        } else {
+            //series1Numbers = list_seriesNumbers.toArray(series1Numbers); //REAL PROBLEM !
+            series1Numbers = new Number[list_seriesNumbers.size()];
 
-                //----According to android plot's condition -----------------
-                if (series1Numbers.length < 3) {
-                    Toast.makeText(getApplicationContext(), "Please do at least 3 surveys before", Toast.LENGTH_SHORT).show();
-                    Intent it = new Intent(MainActivity.this, SurveyOverview.class);
+            //----According to android plot's condition -----------------
+            if (series1Numbers.length < 3) {
+                Toast.makeText(getApplicationContext(), "Please do at least 3 surveys before", Toast.LENGTH_SHORT).show();
+                Intent it = new Intent(MainActivity.this, SurveyOverview.class);
 //                    it.putExtra("username",username);
 //                    it.putExtra("password", password);
 //                    startActivity(it);                //problem
-                } else {
-                    //for loop with multiple conditions
-                    for (int i = list_seriesNumbers.size() - 1, j = 0; i >= 0 && j < series1Numbers.length; i--, j++) {
-                        series1Numbers[j] = list_seriesNumbers.get(i);
-                    }
-                    //----------Android Plot (Arrays-> XYSeries -> Formatters -> Create) -------------------------
-                    plot = (XYPlot) findViewById(id.plot_home);
-                    androidplot();
+            } else {
+                //for loop with multiple conditions
+                for (int i = list_seriesNumbers.size() - 1, j = 0; i >= 0 && j < series1Numbers.length; i--, j++) {
+                    series1Numbers[j] = list_seriesNumbers.get(i);
                 }
+                //----------Android Plot (Arrays-> XYSeries -> Formatters -> Create) -------------------------
+                plot = (XYPlot) findViewById(id.plot_home);
+                androidplot();
             }
+        }
 
         //---About Others---------
         shortcut1 = (ImageButton) findViewById(R.id.shortcut1);
         shortcut2 = (ImageButton) findViewById(R.id.shortcut2);
         shortcut3 = (ImageButton) findViewById(R.id.shortcut3);
         shortcut4 = (ImageButton) findViewById(R.id.shortcut4);
-        shortcut5=(ImageButton) findViewById(id.shortcut5);
-        shortcut6=(ImageButton) findViewById(id.shortcut6);
+        shortcut5 = (ImageButton) findViewById(R.id.shortcut5);
+        shortcut6 = (ImageButton) findViewById(R.id.shortcut6);
         shortcut1txtview = (TextView) findViewById(R.id.shortcut1txtview);
         shortcut2txtview = (TextView) findViewById(R.id.shortcut2txtview);
         shortcut3txtview = (TextView) findViewById(R.id.shortcut3txtview);
         shortcut4txtview = (TextView) findViewById(R.id.shortcut4txtview);
         shortcut5txtview = (TextView) findViewById(R.id.shortcut5txtview);
-        shortcut4txtview = (TextView) findViewById(R.id.shortcut6txtview);
+        shortcut6txtview = (TextView) findViewById(R.id.shortcut6txtview);
         //-----About Dialog--------
         newLogoutFragment = new LogOutDialog();
 
@@ -363,7 +365,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(MainActivity.this, SafetyPlanning.class);
-                it.putExtra("username",username);
+                it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
             }
@@ -380,7 +382,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shortcut5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {    //go to HelpNearYouOverview.class
-                Intent it = new Intent(MainActivity.this, SafetyPlanning.class);
+                Intent it = new Intent(MainActivity.this, Feeling.class);
                 it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
@@ -389,7 +391,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shortcut6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {    //go to HelpNearYouOverview.class
-                Intent it = new Intent(MainActivity.this, Feeling.class);
+                Intent it = new Intent(MainActivity.this, Survey.class);
                 it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
@@ -412,7 +414,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //view of "Navigation Drawer" (side)
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
+
+        //------------------For header username and image-------------------------
+        View header=navigationView.getHeaderView(0);
+        displayname =(TextView)header.findViewById(id.displayname);
+        displayname.setText(username);
+        imageView_in_nav=(ImageView)header.findViewById(R.id.imageView_in_nav);
+        imageView_in_nav.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Image"), REQUEST_CHANGE_PROFILE_IMG);
+
+                return false;
+            }
+        });
+
+        //------------------For header username and image-------------------------
+
         //*****To uncover colors of icon**********
         navigationView.setItemIconTintList(null);
 
@@ -434,93 +457,92 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 //**************************************************************************************************
-//--------------Logics across an activity ----------------------
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putString("keyChannel", "12345");
-//        editor.commit();// commit is important here.
 //---------------------------------------------------------------
     }
 
-//----------- androidplot() ------------------------------------------------------------
-        public void androidplot() {
-            //1."Arrays"  (of y-values to plot) (ABOVE)
+    //----------- androidplot() ------------------------------------------------------------
+    public void androidplot() {
+        //1."Arrays"  (of y-values to plot) (ABOVE)
 
-            //-------------Check String[][]------------------------------------
-            //**** Keep feeling_states
-            for (int x = 0; x < series1Numbers.length; x++) {
-                Log.d("seriesNumbers x:" + x + "->", series1Numbers[x]+"");
-            }
+        //-------------Check String[][]------------------------------------
+        //**** Keep feeling_states
+        for (int x = 0; x < series1Numbers.length; x++) {
+            Log.d("seriesNumbers x:" + x + "->", series1Numbers[x] + "");
+        }
 
-            //2.Arrays -> "XYSeries" (Y_VALS_ONLY = use the element index as the x value)
-            XYSeries series = new SimpleXYSeries(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series");
+        //2.Arrays -> "XYSeries" (Y_VALS_ONLY = use the element index as the x value)
+        XYSeries series = new SimpleXYSeries(Arrays.asList(series1Numbers), SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, "Series");
 
-            //3.XYSeries - > "Formatters" (using LineAndPointRenderer and configure them from xml)
-            LineAndPointFormatter seriesFormat = new LineAndPointFormatter();
-            seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
-            seriesFormat.configure(getApplicationContext(), R.xml.line_point_formatter_with_labels_2);
+        //3.XYSeries - > "Formatters" (using LineAndPointRenderer and configure them from xml)
+        LineAndPointFormatter seriesFormat = new LineAndPointFormatter();
+        seriesFormat.setPointLabelFormatter(new PointLabelFormatter());
+        seriesFormat.configure(getApplicationContext(), R.xml.line_point_formatter_with_labels_2);
 
-            //----------Just for fun -----------------------------------------
-            seriesFormat.setInterpolationParams(
-                    new CatmullRomInterpolator.Params(20, CatmullRomInterpolator.Type.Centripetal));
-            // add an "dash" effect to the series2 line:
+        //----------Just for fun -----------------------------------------
+        seriesFormat.setInterpolationParams(
+                new CatmullRomInterpolator.Params(20, CatmullRomInterpolator.Type.Centripetal));
+        // add an "dash" effect to the series2 line:
         //        seriesFormat.getLinePaint().setPathEffect(
         //                new DashPathEffect(new float[]{ PixelUtils.dpToPix(20), PixelUtils.dpToPix(15)}, 5));
         //                               //( new float[] {intervals}(no.1, no.2) , float phase }
 
-            //https://developer.android.com/reference/android/graphics/DashPathEffect.html
-            // just for fun, add some smoothing to the lines: see: http://androidplot.com/smooth-curves-and-androidplot/
-            //------------------------------------------------------------------
+        //https://developer.android.com/reference/android/graphics/DashPathEffect.html
+        // just for fun, add some smoothing to the lines: see: http://androidplot.com/smooth-curves-and-androidplot/
+        //------------------------------------------------------------------
 
-            //---4.Plot Setting--- //SORT THE CODES LIKE THIS !
-            //http://stackoverflow.com/questions/35164669/androidplot-background-start-end-values-and-ranges
+        //---4.Plot Setting--- //SORT THE CODES LIKE THIS !
+        //http://stackoverflow.com/questions/35164669/androidplot-background-start-end-values-and-ranges
 
-            //plot.setBackgroundResource(R.drawable.appbg);
-            plot.setGridPadding(0, 0, 0, 0);                    //= left, top, right, bottom
-            plot.getGraphWidget().setMarginRight(20);           //Set (domain/range) margins
-            plot.getDomainLabelWidget().setMargins(50,0,0,0);   //Set (domain / range) label 's margins
-            //plot.getRangeLabelWidget().setHeight(0);
-            //plot.getRangeLabelWidget().setPadding(0, 0, 0, 0);
-            plot.getRangeLabelWidget().setMargins(50, 0, 0, 100);
+        //plot.setBackgroundResource(R.drawable.appbg);
+        plot.setGridPadding(0, 0, 0, 0);                    //= left, top, right, bottom
+        plot.getGraphWidget().setMarginRight(20);           //Set (domain/range) margins
+        plot.getDomainLabelWidget().setMargins(50, 0, 0, 0);   //Set (domain / range) label 's margins
+        //plot.getRangeLabelWidget().setHeight(0);
+        //plot.getRangeLabelWidget().setPadding(0, 0, 0, 0);
+        plot.getRangeLabelWidget().setMargins(50, 0, 0, 100);
 
-            //4.1 Domain
-            plot.getGraphWidget().setDomainLabelOrientation(0); //Rotate (domain / range) value labels (under the graph) < - is turn left / + is turn right>
-            plot.getGraphWidget().getDomainTickLabelPaint().setTextSize(PixelUtils.dpToPix(10)); //Set (domain / range) letter size
-            plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1); //Set (domain / range) incremnt by val
-            plot.centerOnDomainOrigin(3);                       //Set the center value of an (domain / range) axis
-            plot.setDomainValueFormat(new DecimalFormat("#.#") { //Set (domain/range) formats
-                @Override
-                public StringBuffer format(double d, StringBuffer sb, FieldPosition fp) {
-                    return sb.append(((int)d + 1) + ""); //Set the start point (shortcut to convert d+1 into a String)
-                }
+        //4.1 Domain
+        plot.getGraphWidget().setDomainLabelOrientation(0); //Rotate (domain / range) value labels (under the graph) < - is turn left / + is turn right>
+        plot.getGraphWidget().getDomainTickLabelPaint().setTextSize(PixelUtils.dpToPix(10)); //Set (domain / range) letter size
+        plot.setDomainStep(XYStepMode.INCREMENT_BY_VAL, 1); //Set (domain / range) incremnt by val
+        plot.centerOnDomainOrigin(3);                       //Set the center value of an (domain / range) axis
+        plot.setDomainValueFormat(new DecimalFormat("#.#") { //Set (domain/range) formats
+            @Override
+            public StringBuffer format(double d, StringBuffer sb, FieldPosition fp) {
+                return sb.append(((int) d + 1) + ""); //Set the start point (shortcut to convert d+1 into a String)
+            }
 
-                // unused
-                @Override
-                public StringBuffer format(long l, StringBuffer stringBuffer, FieldPosition fieldPosition) { return null;}
+            // unused
+            @Override
+            public StringBuffer format(long l, StringBuffer stringBuffer, FieldPosition fieldPosition) {
+                return null;
+            }
 
-                // unused
-                @Override
-                public Number parse(String s, ParsePosition parsePosition) { return null;}
-            });
-            plot.setDomainBoundaries(0,4, BoundaryMode.FIXED);   //Set (domain / range) boundaries with BoundaryMode
+            // unused
+            @Override
+            public Number parse(String s, ParsePosition parsePosition) {
+                return null;
+            }
+        });
+        plot.setDomainBoundaries(0, 4, BoundaryMode.FIXED);   //Set (domain / range) boundaries with BoundaryMode
 
-            //4.2 Range
-            plot.setTicksPerRangeLabel(1);                      //Set the amount of light lines between each pair of (horizontal / vertical) lines
-            plot.getGraphWidget().getRangeTickLabelPaint().setTextSize(PixelUtils.dpToPix(8));
-            plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
-            plot.setRangeBoundaries(1,6, BoundaryMode.FIXED);   //Set (domain / range) boundaries with BoundaryMode
-            plot.setRangeValueFormat(new DecimalFormat("#.#"));
+        //4.2 Range
+        plot.setTicksPerRangeLabel(1);                      //Set the amount of light lines between each pair of (horizontal / vertical) lines
+        plot.getGraphWidget().getRangeTickLabelPaint().setTextSize(PixelUtils.dpToPix(8));
+        plot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
+        plot.setRangeBoundaries(1, 6, BoundaryMode.FIXED);   //Set (domain / range) boundaries with BoundaryMode
+        plot.setRangeValueFormat(new DecimalFormat("#.#"));
 
-            //PROBLEM How to use
+        //PROBLEM How to use
         //      plot.setRangeStepValue(30);
         //      plot.setDomainStepValue(5);
         //      plot.setDomainStep(XYStepMode.SUBDIVIDE, 5);
         //      plot.setRangeStep(XYStepMode.SUBDIVIDE, 20);
 
-            //---5. Create (add a new series' to the xyplot)---
-            plot.addSeries(series, seriesFormat);
+        //---5. Create (add a new series' to the xyplot)---
+        plot.addSeries(series, seriesFormat);
 
-            Log.d("androidplot","finished");
+        Log.d("androidplot", "finished");
     }
 
 
@@ -620,7 +642,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 imageBitmap = Bitmap.createScaledBitmap(imageBitmap, 2048, nh, true);
                 home_imageView.setImageBitmap(imageBitmap);
 
-              //**** save image resource's state
+                //**** save image resource's state
                 Log.d("onAct", "extra if");
                 extras.putParcelable(BITMAP_FILE, imageBitmap);
 //##############################################################################################
@@ -642,24 +664,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     BitmapFactory.Options bmOptions = new BitmapFactory.Options();
 //                    Bitmap bitmap=BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
                     bm = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions); //PROBLEM
-                    int nh=(int)(bm.getHeight()*(2048.0/bm.getWidth()));
-                    bm=Bitmap.createScaledBitmap(bm,2048,nh,true);
+                    int nh = (int) (bm.getHeight() * (2048.0 / bm.getWidth()));
+                    bm = Bitmap.createScaledBitmap(bm, 2048, nh, true);
 //                    bm = Bitmap.createScaledBitmap(bm, home_imageView.getWidth(), home_imageView.getHeight(),true);
                     home_imageView.setImageBitmap(bm);
                     home_imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //                    home_imageView.setImageURI(selectedUri); //set the image in home_ImageView
-                    home_photoexists=true;
+                    home_photoexists = true;
 
                     //**** IMPORTANT:  Save image resource's state  //PROBLEM
-                        //https://developer.android.com/training/basics/activity-lifecycle/pausing.html#Resume
+                    //https://developer.android.com/training/basics/activity-lifecycle/pausing.html#Resume
                     Log.d("onAct", "extra else");
                     extras.putParcelable(BITMAP_FILE, bm);
 //                    SharedPreferences sp2=getSharedPreferences("AppSharedPref",1);
-                    SharedPreferences.Editor editor=sp.edit();
-                    editor.putString(IMG_PATH,path);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString(IMG_PATH, path);
                     editor.commit();
-                    extras.putString(IMG_PATH,path);
-                    extras.putBoolean(PHOTO_EXIST,home_photoexists);
+                    extras.putString(IMG_PATH, path);
+                    extras.putBoolean(PHOTO_EXIST, home_photoexists);
 //=======
 //                    home_photoexists = true;
 //
@@ -680,6 +702,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                    }
 //
 //>>>>>>> 89c154c5dfc596777784cf3059e9fb85f8974843
+                }
+            }
+            //change profile image
+            else if (requestCode == REQUEST_CHANGE_PROFILE_IMG) {
+                Uri selectedUri = data.getData(); //get the Uri from the data
+
+                Log.d("selectedUri:", selectedUri + "");
+
+                if (selectedUri != null) {
+
+                    Log.d("selectedUri", "not null");
+
+                    String path = getPathFromURI(selectedUri); //@@@ get the real Path from the Uri (Call getPathFromURI below)
+                    Log.i(TAG, "Image path: " + path);
+                    //---Show an image---
+                    File image = new File(path);
+                    Uri uri=Uri.fromFile(image);
+//                    BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+//                    Bitmap bitmap=BitmapFactory.decodeFile(image.getAbsolutePath(),bmOptions);
+//                    bitmapProfile = BitmapFactory.decodeFile(image.getAbsolutePath(), bmOptions); //PROBLEM
+//                    int nh = (int) (bitmapProfile.getHeight() * (2048.0 / bitmapProfile.getWidth()));
+//                    bitmapProfile = Bitmap.createScaledBitmap(bitmapProfile, 2048, nh, true);
+//                    bm = Bitmap.createScaledBitmap(bm, home_imageView.getWidth(), home_imageView.getHeight(),true);
+                    imageView_in_nav.setImageURI(uri);
+//                    imageView_in_nav.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 }
             }
         }
@@ -840,16 +887,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //**** REACH"2","5" : Called when returning to focus on this activity (Called everytime including when it starts)
     @Override
     protected void onResume() {
-            Log.d("onResume", "resume");
+        Log.d("onResume", "resume");
 
 //            SharedPreferences sp2 = getSharedPreferences("AppSharedPref", 1);
-            String path = sp.getString(IMG_PATH, "");
-            home_photoexists = sp.getBoolean(PHOTO_EXIST, true);
-            bm = BitmapFactory.decodeFile(path);
-            int nh;
+        String path = sp.getString(IMG_PATH, "");
+        home_photoexists = sp.getBoolean(PHOTO_EXIST, true);
+        bm = BitmapFactory.decodeFile(path);
+        int nh;
 
         //------ Check feeling -----------------------------
-        if(feeling_states != null) {
+        if (feeling_states != null) {
             int feeling_states_1 = sp.getInt("feeling_states_1", 1);
             int feeling_states_2 = sp.getInt("feeling_states_2", 1);
             int feeling_states_3 = sp.getInt("feeling_states_3", 1);
@@ -861,13 +908,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             feeling_states[2] = feeling_states_3;
             feeling_states[3] = feeling_states_4;
             feeling_states[4] = feeling_states_5;
-        }
-        else if (feeling_states == null) {
-            Log.d("resume","feeling_null");
+        } else if (feeling_states == null) {
+            Log.d("resume", "feeling_null");
         }
 
         //-----Check: Is bm null ?--------------------
-        if(bm !=null){ //not null
+        if (bm != null) { //not null
 //=======
 //    @Override
 //    protected void onPause() {
@@ -906,7 +952,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //**** REACH"3" :  Called when this activity is interrupted by others (So It's not focused but visible)
     //Save the data here such as "Auto-Saved"
     @Override
-    protected void onPause(){
+    protected void onPause() {
         Log.d("onPause", "Pause");
         super.onPause();
     }
@@ -916,14 +962,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onSaveInstanceState(Bundle saveInstancestate) {
         Log.d("onSaveIns", "save");
         saveInstancestate.putParcelable(BITMAP_FILE, bm);
-        saveInstancestate.putBoolean(PHOTO_EXIST,home_photoexists);
+        saveInstancestate.putBoolean(PHOTO_EXIST, home_photoexists);
         saveInstancestate.putIntArray("feeling_states", feeling_states);
         super.onSaveInstanceState(saveInstancestate);
         Log.d("onSaveIns", "end");
     }
 
     //**** Call the saved states when recreating this activity again
-        //https://developer.android.com/training/basics/activity-lifecycle/recreating.html
+    //https://developer.android.com/training/basics/activity-lifecycle/recreating.html
     @Override
     protected void onRestoreInstanceState(Bundle restoreInstanceState) {
         Log.d("onRestore", "restore");

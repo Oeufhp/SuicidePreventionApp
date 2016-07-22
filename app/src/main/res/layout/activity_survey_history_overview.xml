@@ -1,74 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.latte.oeuff.suicidepreventionapp.SurveyHistoryOverview"
-    android:orientation="vertical"
-    android:background="@drawable/appbg">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/appbg"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context="com.latte.oeuff.suicidepreventionapp.SurveyHistoryOverview">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Survey History Overview"
-        android:textSize="25dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
+        android:text="Survey History Overview"
         android:textColor="#000000"
+        android:textSize="25dp"
         android:textStyle="bold"/>
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/cage_icon"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="15dp"/>
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/seehis_icon"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"/>
-        <Button
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CAGE History"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/cage_icon"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/seehis_icon"/>
+
+        <Button
             android:id="@+id/cagehistorybtn"
-            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/squarebtn" />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/squarebtn"
+            android:text="CAGE History"/>
     </LinearLayout>
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/c_ssrs_icon"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="15dp"/>
-        <ImageView android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/seehis_icon"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"/>
-        <Button
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="C_SSRS History"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/c_ssrs_icon"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/seehis_icon"/>
+
+        <Button
             android:id="@+id/c_ssrshistorybtn"
-            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/squarebtn"/>
+            android:layout_marginTop="10dp"
+            android:background="@drawable/squarebtn"
+            android:text="C_SSRS History"/>
     </LinearLayout>
 
 </LinearLayout>

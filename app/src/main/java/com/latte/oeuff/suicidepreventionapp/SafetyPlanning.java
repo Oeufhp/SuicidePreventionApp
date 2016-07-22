@@ -33,31 +33,33 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class SafetyPlanning  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SafetyPlanning extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
+
+    TextView displayname;
 
     //TextView addasafetyplanningtextview;
     //---------------------tabLayout---------------------------------
     // MyPagerAdapter -> ViewPager -> contents (fragment_ ...)
-        //MyPageAdapter = Base class providing the adapter to populate pages inside of a ViewPager
+    //MyPageAdapter = Base class providing the adapter to populate pages inside of a ViewPager
 
     private TabLayout tabLayout;    //it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter} that will provide fragments for each of the sections.
     private ViewPager mViewPager;   //This class will host the section contents
 
     //-----------For Safety Planning----------------
-    static final int COL_SP_ID=0;
-    static final int COL_SP_TOPIC=1;
-    static final int COL_SP_MSG=2;
-    private static final String TOPIC="topic";
-    private static final String MESSAGE="message";
-    private static TextView safetyPlanningTopic1,safetyPlanningMsg1;
-    private static TextView safetyPlanningTopic2,safetyPlanningMsg2;
-    private static TextView safetyPlanningTopic3,safetyPlanningMsg3;
-    private static TextView safetyPlanningTopic4,safetyPlanningMsg4;
-    private static TextView safetyPlanningTopic5,safetyPlanningMsg5;
-    private static TextView safetyPlanningTopic6,safetyPlanningMsg6;
+    static final int COL_SP_ID = 0;
+    static final int COL_SP_TOPIC = 1;
+    static final int COL_SP_MSG = 2;
+    private static final String TOPIC = "topic";
+    private static final String MESSAGE = "message";
+    private static TextView safetyPlanningTopic1, safetyPlanningMsg1;
+    private static TextView safetyPlanningTopic2, safetyPlanningMsg2;
+    private static TextView safetyPlanningTopic3, safetyPlanningMsg3;
+    private static TextView safetyPlanningTopic4, safetyPlanningMsg4;
+    private static TextView safetyPlanningTopic5, safetyPlanningMsg5;
+    private static TextView safetyPlanningTopic6, safetyPlanningMsg6;
 
     //-----------For Safety Planning----------------
 
@@ -77,7 +79,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 
 
         //----About dialog------
-       //newAddSafetyplanningFragment = new AddSafetyplanningFragment();
+        //newAddSafetyplanningFragment = new AddSafetyplanningFragment();
         newLogoutFragment = new LogOutDialog();
 
         //------------------------This is for creating the tabLayout and its contents--------------------------
@@ -87,7 +89,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         mViewPager.setAdapter(mMypageAdapter);
 
         //#### Give the TabLayout the ViewPager ####
-        tabLayout = (TabLayout)findViewById(R.id.tabLayout);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 //      tabLayout.addTab(tabLayout.newTab().setText("..."));
         tabLayout.setupWithViewPager(mViewPager);
 
@@ -108,6 +110,13 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         //view of "Navigation Drawer" (side)
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //------------------For header username-------------------------
+        View header=navigationView.getHeaderView(0);
+        displayname =(TextView)header.findViewById(R.id.displayname);
+        displayname.setText(username);
+        //------------------For header username-------------------------
+
         //*****To uncover colors of icon**********
         navigationView.setItemIconTintList(null);
 
@@ -176,41 +185,40 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         Intent it;
         if (id == R.id.nav_home) {
             it = new Intent(SafetyPlanning.this, MainActivity.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_yourspace) {
             it = new Intent(SafetyPlanning.this, YourSpace.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_todo) {
             it = new Intent(SafetyPlanning.this, Todo.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_safetyplanning) {
             it = new Intent(SafetyPlanning.this, SafetyPlanning.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_helpnearyou) {
             it = new Intent(SafetyPlanning.this, HelpNearYouOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_feeling) {
             it = new Intent(SafetyPlanning.this, Feeling.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
         } else if (id == R.id.nav_survey) {
             it = new Intent(SafetyPlanning.this, SurveyOverview.class);
-            it.putExtra("username",username);
+            it.putExtra("username", username);
             it.putExtra("password", password);
             startActivity(it);
-        }
-        else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             newLogoutFragment.show(getSupportFragmentManager(), "LogOut");
         }
 
@@ -250,42 +258,42 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 //--------------"1." This class returns a fragment corresponding to one of the sections/tabs/pages. ----------------------
     private class MyPagerAdapter extends FragmentPagerAdapter {
         //constructor
-        public MyPagerAdapter(FragmentManager fm)
-        {
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm); //use the constructor of FragmentManager class (msectionsPagerAdapter)
-            Log.d("Class:MyPagerAdapter","Method:Constructor");
+            Log.d("Class:MyPagerAdapter", "Method:Constructor");
         }
 
         //called to instantiate the fragment(PlaceholderFragment: defined as a static inner class below) for the given page.
         @Override
         public Fragment getItem(int pos) {
-            switch(pos) {   // &&& do method "newInstance" below
+            switch (pos) {   // &&& do method "newInstance" below
                 case 0:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=0)Ins1");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=0)Ins1");
                     return FirstFragment.newInstance("FirstFragment, Instance 1");
                 case 1:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=1)Ins2");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=1)Ins2");
                     return SecondFragment.newInstance("SecondFragment, Instance 2");
                 case 2:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=2)Ins3");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=2)Ins3");
                     return ThirdFragment.newInstance("ThirdFragment, Instance 3");
                 case 3:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=3)Ins4");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=3)Ins4");
                     return FourthFragment.newInstance("FourthFragment, Instance 4");
                 case 4:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=4)Ins5");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=4)Ins5");
                     return FifthFragment.newInstance("FifthFragment, Instance 5");
                 case 5:
-                    Log.d("Class:MyPagerAdapter","Method:getItem(pos=5)Ins6");
+                    Log.d("Class:MyPagerAdapter", "Method:getItem(pos=5)Ins6");
                     return SixthFragment.newInstance("SixthFragment, Instance 6");
-                default: return null;
+                default:
+                    return null;
             }
         }
 
         @Override
         public int getCount() {
             // Show 6 total pages.
-            Log.d("Class:MyPagerAdapter","Method:getCount()");
+            Log.d("Class:MyPagerAdapter", "Method:getCount()");
             return 6;
         }
 
@@ -293,22 +301,22 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=0)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=0)");
                     return "Plan_No1";
                 case 1:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=1)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=1)");
                     return "Plan_No2";
                 case 2:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=2)");
                     return "Plan_No3";
                 case 3:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=2)");
                     return "Plan_No4";
                 case 4:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=2)");
                     return "Plan_No5";
                 case 5:
-                    Log.d("Class= SectionPage...","Method= getPageTitle(position=2)");
+                    Log.d("Class= SectionPage...", "Method= getPageTitle(position=2)");
                     return "Plan_No6";
             }
             return null;
@@ -327,16 +335,16 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             final View viewfirst = inflater.inflate(R.layout.fragment_safetyplanning_plan1, container, false); //attachToRoot = false important !
             //-----binding-----------
             newAddSafetyplanningFragment = new AddSafetyplanningFragment();
-            addplan_no1_layout = (LinearLayout)viewfirst.findViewById(R.id.addplan_no1_layout);
-            delplan_no1_layout = (LinearLayout)viewfirst.findViewById(R.id.delplan_no1_layout);
+            addplan_no1_layout = (LinearLayout) viewfirst.findViewById(R.id.addplan_no1_layout);
+            delplan_no1_layout = (LinearLayout) viewfirst.findViewById(R.id.delplan_no1_layout);
 //            addasafetyplanningtextview1 = (TextView)viewfirst.findViewById(R.id.addasafetyplanningtextview1);
-            safetyPlanningTopic1=(TextView) viewfirst.findViewById(R.id.safetyPlanningTopic1);
-            safetyPlanningMsg1=(TextView) viewfirst.findViewById(R.id.safetyPlanningMsg1);
+            safetyPlanningTopic1 = (TextView) viewfirst.findViewById(R.id.safetyPlanningTopic1);
+            safetyPlanningMsg1 = (TextView) viewfirst.findViewById(R.id.safetyPlanningMsg1);
             //-----Logics------------
             addplan_no1_layout.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    newAddSafetyplanningFragment.show(getFragmentManager(),"Add a safetyplanning");
+                    newAddSafetyplanningFragment.show(getFragmentManager(), "Add a safetyplanning");
 
                     return false;
                 }
@@ -350,7 +358,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
                 }
             });
 
-            Log.d("Class:FirstFragment","Method:onCreateView(...)");
+            Log.d("Class:FirstFragment", "Method:onCreateView(...)");
 
             return viewfirst;
         }
@@ -365,7 +373,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //---------------------------
             f.setArguments(b);
 
-            Log.d("Class:FirstFragment","Method:newInstance(FirstFragment, Instance 1 )");
+            Log.d("Class:FirstFragment", "Method:newInstance(FirstFragment, Instance 1 )");
 
             return f;
         }
@@ -385,7 +393,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //-----Logics------------
 
 
-            Log.d("Class:SecondFragment","Method:onCreateView(...)");
+            Log.d("Class:SecondFragment", "Method:onCreateView(...)");
 
             return viewsecond;
         }
@@ -400,11 +408,12 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //--------------------------
             f.setArguments(b);
 
-            Log.d("Class:SecondFragment","Method:newInstance(SecondFragment, Instance 2 )");
+            Log.d("Class:SecondFragment", "Method:newInstance(SecondFragment, Instance 2 )");
 
             return f;
         }
     }
+
     //----------------------ThirdFragement--------------------------------------
     //2. This class creates a fragment containing a simple view.
     public static class ThirdFragment extends Fragment {
@@ -418,7 +427,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 
             //-----Logics------------
 
-            Log.d("Class:ThirdFragment","Method:onCreateView(...)");
+            Log.d("Class:ThirdFragment", "Method:onCreateView(...)");
 
             return viewthird;
         }
@@ -433,7 +442,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //---------------------------
             f.setArguments(b);
 
-            Log.d("Class:ThirdFragment","Method:newInstance(ThirdFragment, Instance 3 )");
+            Log.d("Class:ThirdFragment", "Method:newInstance(ThirdFragment, Instance 3 )");
 
             return f;
         }
@@ -453,7 +462,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //-----Logics------------
 
 
-            Log.d("Class:FourthFragment","Method:onCreateView(...)");
+            Log.d("Class:FourthFragment", "Method:onCreateView(...)");
 
             return viewfourth;
         }
@@ -468,7 +477,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //---------------------------
             f.setArguments(b);
 
-            Log.d("Class:FourthFragment","Method:newInstance(FourthFragment, Instance 4 )");
+            Log.d("Class:FourthFragment", "Method:newInstance(FourthFragment, Instance 4 )");
 
             return f;
         }
@@ -487,7 +496,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 
             //-----Logics------------
 
-            Log.d("Class:FifthFragment","Method:onCreateView(...)");
+            Log.d("Class:FifthFragment", "Method:onCreateView(...)");
 
             return viewfifth;
         }
@@ -502,7 +511,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //---------------------------
             f.setArguments(b);
 
-            Log.d("Class:FifthFragment","Method:newInstance(FifthFragment, Instance 5 )");
+            Log.d("Class:FifthFragment", "Method:newInstance(FifthFragment, Instance 5 )");
 
             return f;
         }
@@ -522,7 +531,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //-----Logics------------
 
 
-            Log.d("Class:SixthFragment","Method:onCreateView(...)");
+            Log.d("Class:SixthFragment", "Method:onCreateView(...)");
 
             return viewsixth;
         }
@@ -537,7 +546,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
             //---------------------------
             f.setArguments(b);
 
-            Log.d("Class:SixthFragment","Method:newInstance(SixthFragment, Instance 6 )");
+            Log.d("Class:SixthFragment", "Method:newInstance(SixthFragment, Instance 6 )");
 
             return f;
         }
@@ -547,8 +556,8 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
 
     //------------------------ Dialog for Importing a photo Logics -------------------------------------
     public static class AddSafetyplanningFragment extends DialogFragment {
-        TextView addplan_btn,cancelplan_btn;
-        TextView SPtopic,SPMsg;
+        TextView addplan_btn, cancelplan_btn;
+        TextView SPtopic, SPMsg;
 
         private static final String TAG = "MainActivity";
 
@@ -556,15 +565,15 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             //-----Binding-----------
             View view = inflater.inflate(R.layout.dialog_add_safetyplanning, container);
-            SPtopic=(TextView)view.findViewById(R.id.SPTopic);
-            SPMsg=(TextView)view.findViewById(R.id.SPMsg);
-            addplan_btn = (TextView)view.findViewById(R.id.addplan_btn);
-            cancelplan_btn = (TextView)view.findViewById(R.id.cancelplan_btn);
+            SPtopic = (TextView) view.findViewById(R.id.SPTopic);
+            SPMsg = (TextView) view.findViewById(R.id.SPMsg);
+            addplan_btn = (TextView) view.findViewById(R.id.addplan_btn);
+            cancelplan_btn = (TextView) view.findViewById(R.id.cancelplan_btn);
             //-----Logics-----------
             addplan_btn.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                  newAddSafetyplanningFragment.dismiss();
+                    newAddSafetyplanningFragment.dismiss();
                     return false;
                 }
             });
@@ -584,7 +593,7 @@ public class SafetyPlanning  extends AppCompatActivity implements NavigationView
     //-----------------------------------Dialog for warning before logging out--------------------------
     public class LogOutDialog extends DialogFragment {
 
-        TextView yesbtn_logout,nobtn_logout;
+        TextView yesbtn_logout, nobtn_logout;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

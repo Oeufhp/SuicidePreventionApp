@@ -55,7 +55,7 @@ public class SurveyVisualization extends AppCompatActivity {
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
     //----Others-----------
     FrameLayout seesurveyvisualization_layout;
     //  FrameLayout line1_layout, line2_layout, line3_layout, line4_layout;
@@ -83,47 +83,47 @@ public class SurveyVisualization extends AppCompatActivity {
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
         //----------getIntent---------
-        it =getIntent();
+        it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
         //--------- Binding -------------
-        seesurveyvisualization_layout =(FrameLayout)findViewById(R.id.seesurveyvisualization_layout);
+        seesurveyvisualization_layout = (FrameLayout) findViewById(R.id.seesurveyvisualization_layout);
         //-------The application may be doing too much work on its main thread.-------
 //       line1_layout = (FrameLayout)findViewById(R.id.line1_layout);
 //       line2_layout = (FrameLayout)findViewById(R.id.line2_layout);
 //       line3_layout = (FrameLayout)findViewById(R.id.line3_layout);
 //       line4_layout = (FrameLayout)findViewById(R.id.line4_layout);
 
-        visualizationstatus_textview = (TextView)findViewById(R.id.visualizationstatus_textview);
-        visualizationstatus_textview = (TextView)findViewById(R.id.visualizationstatus_textview);
-        seesurveyvisualizationbtn =(Button)findViewById(R.id.seesurveyvisualizationbtn);
+        visualizationstatus_textview = (TextView) findViewById(R.id.visualizationstatus_textview);
+        visualizationstatus_textview = (TextView) findViewById(R.id.visualizationstatus_textview);
+        seesurveyvisualizationbtn = (Button) findViewById(R.id.seesurveyvisualizationbtn);
 
         //--------- Graph --------------
-        graph_imageview = (ImageView)findViewById(R.id.graph_imageview);
+        graph_imageview = (ImageView) findViewById(R.id.graph_imageview);
         //reddot
-        reddot_col1 = (ImageView)findViewById(R.id.reddot_col1);
-        reddot_col2 = (ImageView)findViewById(R.id.reddot_col2);
-        reddot_col3 = (ImageView)findViewById(R.id.reddot_col3);
-        reddot_col4 = (ImageView)findViewById(R.id.reddot_col4);
-        reddot_col5 = (ImageView)findViewById(R.id.reddot_col5);
+        reddot_col1 = (ImageView) findViewById(R.id.reddot_col1);
+        reddot_col2 = (ImageView) findViewById(R.id.reddot_col2);
+        reddot_col3 = (ImageView) findViewById(R.id.reddot_col3);
+        reddot_col4 = (ImageView) findViewById(R.id.reddot_col4);
+        reddot_col5 = (ImageView) findViewById(R.id.reddot_col5);
         //orangedot
-        orangedot_col1 = (ImageView)findViewById(R.id.orangedot_col1);
-        orangedot_col2 = (ImageView)findViewById(R.id.orangedot_col2);
-        orangedot_col3 = (ImageView)findViewById(R.id.orangedot_col3);
-        orangedot_col4 = (ImageView)findViewById(R.id.orangedot_col4);
-        orangedot_col5 = (ImageView)findViewById(R.id.orangedot_col5);
+        orangedot_col1 = (ImageView) findViewById(R.id.orangedot_col1);
+        orangedot_col2 = (ImageView) findViewById(R.id.orangedot_col2);
+        orangedot_col3 = (ImageView) findViewById(R.id.orangedot_col3);
+        orangedot_col4 = (ImageView) findViewById(R.id.orangedot_col4);
+        orangedot_col5 = (ImageView) findViewById(R.id.orangedot_col5);
         //yellowdot
-        yellowdot_col1 = (ImageView)findViewById(R.id.yellowdot_col1);
-        yellowdot_col2 = (ImageView)findViewById(R.id.yellowdot_col2);
-        yellowdot_col3 = (ImageView)findViewById(R.id.yellowdot_col3);
-        yellowdot_col4 = (ImageView)findViewById(R.id.yellowdot_col4);
-        yellowdot_col5 = (ImageView)findViewById(R.id.yellowdot_col5);
+        yellowdot_col1 = (ImageView) findViewById(R.id.yellowdot_col1);
+        yellowdot_col2 = (ImageView) findViewById(R.id.yellowdot_col2);
+        yellowdot_col3 = (ImageView) findViewById(R.id.yellowdot_col3);
+        yellowdot_col4 = (ImageView) findViewById(R.id.yellowdot_col4);
+        yellowdot_col5 = (ImageView) findViewById(R.id.yellowdot_col5);
         //greendot
-        greendot_col1 = (ImageView)findViewById(R.id.greendot_col1);
-        greendot_col2 = (ImageView)findViewById(R.id.greendot_col2);
-        greendot_col3 = (ImageView)findViewById(R.id.greendot_col3);
-        greendot_col4 = (ImageView)findViewById(R.id.greendot_col4);
-        greendot_col5 = (ImageView)findViewById(R.id.greendot_col5);
+        greendot_col1 = (ImageView) findViewById(R.id.greendot_col1);
+        greendot_col2 = (ImageView) findViewById(R.id.greendot_col2);
+        greendot_col3 = (ImageView) findViewById(R.id.greendot_col3);
+        greendot_col4 = (ImageView) findViewById(R.id.greendot_col4);
+        greendot_col5 = (ImageView) findViewById(R.id.greendot_col5);
 
         //-------My Logics --------------------
         seesurveyvisualizationbtn.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +135,7 @@ public class SurveyVisualization extends AppCompatActivity {
     }
 
     //------------------  seesurveyvisualization --------------------------------
-    public void seesurveyvisualization(){
+    public void seesurveyvisualization() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyvisualization";
         String url = "http://auth.oeufhp.me/beleafTest.php/seesurveyvisualization";
@@ -170,7 +170,7 @@ public class SurveyVisualization extends AppCompatActivity {
                     //http://stackoverflow.com/questions/9961018/getting-specific-value-from-jsonarray
                     JSONArray jsonarray_stringResponse = new JSONArray(stringResponse);
 
-                    for (int i = jsonarray_stringResponse.length()-1; i >=0 ; i--) {
+                    for (int i = jsonarray_stringResponse.length() - 1; i >= 0; i--) {
                         //3 get value(=json object = "one jsonObject" which is json array) from json array
                         JSONObject jsonobject_jsonarray_stringResponse = jsonarray_stringResponse.getJSONObject(i);
 
@@ -180,16 +180,16 @@ public class SurveyVisualization extends AppCompatActivity {
                         String sentdate = jsonobject_jsonarray_stringResponse.getString("sentdate");
                         String totalscore = jsonobject_jsonarray_stringResponse.getString("totalScore");
 
-                        visualizationData[jsonarray_stringResponse.length()-1-i][0] = username;
-                        visualizationData[jsonarray_stringResponse.length()-1-i][1] = sentdate;
-                        visualizationData[jsonarray_stringResponse.length()-1-i][2] = totalscore;
+                        visualizationData[jsonarray_stringResponse.length() - 1 - i][0] = username;
+                        visualizationData[jsonarray_stringResponse.length() - 1 - i][1] = sentdate;
+                        visualizationData[jsonarray_stringResponse.length() - 1 - i][2] = totalscore;
 
-                        Log.d("totalScoreSCORE:",visualizationData[jsonarray_stringResponse.length()-1-i][2]);
+                        Log.d("totalScoreSCORE:", visualizationData[jsonarray_stringResponse.length() - 1 - i][2]);
                     }
                     //-------------Check String[][]------------------------------------
-                    for (int i = 0; i <visualizationData.length; i++) {
+                    for (int i = 0; i < visualizationData.length; i++) {
                         for (int j = 0; j < visualizationData[i].length; j++) {
-                            if(visualizationData[i][j]==null) {
+                            if (visualizationData[i][j] == null) {
                                 visualizationData[i][j] = "-1";      //AND THIS CANNOT BE USED ANYMORE...
                             }
 
@@ -205,95 +205,90 @@ public class SurveyVisualization extends AppCompatActivity {
                     if (Integer.parseInt(visualizationData[0][2]) >= 0 && Integer.parseInt(visualizationData[0][2]) <= 7) {
                         reddot_col1.setVisibility(View.VISIBLE);
                         //totalScore, scoreRange(red,orange,yellow,green), dot, col
-                        setDot_col(Integer.parseInt(visualizationData[0][2]),"red", reddot_col1,1);
+                        setDot_col(Integer.parseInt(visualizationData[0][2]), "red", reddot_col1, 1);
                     } else if (Integer.parseInt(visualizationData[0][2]) >= 8 && Integer.parseInt(visualizationData[0][2]) <= 11) {
                         orangedot_col1.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[0][2]),"orange", orangedot_col1,1);
+                        setDot_col(Integer.parseInt(visualizationData[0][2]), "orange", orangedot_col1, 1);
                     } else if (Integer.parseInt(visualizationData[0][2]) >= 12 && Integer.parseInt(visualizationData[0][2]) <= 15) {
                         yellowdot_col1.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[0][2]),"yellow", yellowdot_col1,1);
+                        setDot_col(Integer.parseInt(visualizationData[0][2]), "yellow", yellowdot_col1, 1);
                     } else if (Integer.parseInt(visualizationData[0][2]) >= 16 && Integer.parseInt(visualizationData[0][2]) <= 20) {
                         greendot_col1.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[0][2]),"green", greendot_col1,1);
-                    }
-                    else {
-                        visualizationData[0][2]="-1";
+                        setDot_col(Integer.parseInt(visualizationData[0][2]), "green", greendot_col1, 1);
+                    } else {
+                        visualizationData[0][2] = "-1";
                     }
 
                     //----col 2 ------
                     if (Integer.parseInt(visualizationData[1][2]) >= 0 && Integer.parseInt(visualizationData[1][2]) <= 7) {
                         reddot_col2.setVisibility(View.VISIBLE);
                         //totalScore, scoreRange(red,orange,yellow,green), dot
-                        setDot_col(Integer.parseInt(visualizationData[1][2]),"red", reddot_col2,2);
+                        setDot_col(Integer.parseInt(visualizationData[1][2]), "red", reddot_col2, 2);
                     } else if (Integer.parseInt(visualizationData[1][2]) >= 8 && Integer.parseInt(visualizationData[1][2]) <= 11) {
                         orangedot_col2.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[1][2]),"orange", orangedot_col2,2);
+                        setDot_col(Integer.parseInt(visualizationData[1][2]), "orange", orangedot_col2, 2);
                     } else if (Integer.parseInt(visualizationData[1][2]) >= 12 && Integer.parseInt(visualizationData[1][2]) <= 15) {
                         yellowdot_col2.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[1][2]),"yellow", yellowdot_col2,2);
+                        setDot_col(Integer.parseInt(visualizationData[1][2]), "yellow", yellowdot_col2, 2);
                     } else if (Integer.parseInt(visualizationData[1][2]) >= 16 && Integer.parseInt(visualizationData[1][2]) <= 20) {
                         greendot_col2.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[1][2]),"green", greendot_col2,2);
-                    }
-                    else {
-                        visualizationData[1][2]="-1";
+                        setDot_col(Integer.parseInt(visualizationData[1][2]), "green", greendot_col2, 2);
+                    } else {
+                        visualizationData[1][2] = "-1";
                     }
 
                     //----col 3 ------
                     if (Integer.parseInt(visualizationData[2][2]) >= 0 && Integer.parseInt(visualizationData[2][2]) <= 7) {
                         reddot_col3.setVisibility(View.VISIBLE);
                         //totalScore, scoreRange(red,orange,yellow,green), dot
-                        setDot_col(Integer.parseInt(visualizationData[2][2]),"red", reddot_col3,3);
+                        setDot_col(Integer.parseInt(visualizationData[2][2]), "red", reddot_col3, 3);
                     } else if (Integer.parseInt(visualizationData[2][2]) >= 8 && Integer.parseInt(visualizationData[2][2]) <= 11) {
                         orangedot_col3.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[2][2]),"orange", orangedot_col3,3);
+                        setDot_col(Integer.parseInt(visualizationData[2][2]), "orange", orangedot_col3, 3);
                     } else if (Integer.parseInt(visualizationData[2][2]) >= 12 && Integer.parseInt(visualizationData[2][2]) <= 15) {
                         yellowdot_col3.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[2][2]),"yellow", yellowdot_col3,3);
+                        setDot_col(Integer.parseInt(visualizationData[2][2]), "yellow", yellowdot_col3, 3);
                     } else if (Integer.parseInt(visualizationData[2][2]) >= 16 && Integer.parseInt(visualizationData[2][2]) <= 20) {
                         greendot_col3.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[2][2]),"green", greendot_col3,3);
-                    }
-                    else {
-                        visualizationData[2][2]="-1";
+                        setDot_col(Integer.parseInt(visualizationData[2][2]), "green", greendot_col3, 3);
+                    } else {
+                        visualizationData[2][2] = "-1";
                     }
 
                     //----col 4 ------
                     if (Integer.parseInt(visualizationData[3][2]) >= 0 && Integer.parseInt(visualizationData[3][2]) <= 7) {
                         reddot_col4.setVisibility(View.VISIBLE);
                         //totalScore, scoreRange(red,orange,yellow,green), dot
-                        setDot_col(Integer.parseInt(visualizationData[3][2]),"red", reddot_col4,4);
+                        setDot_col(Integer.parseInt(visualizationData[3][2]), "red", reddot_col4, 4);
                     } else if (Integer.parseInt(visualizationData[3][2]) >= 8 && Integer.parseInt(visualizationData[3][2]) <= 11) {
                         orangedot_col4.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[3][2]),"orange", orangedot_col4,4);
+                        setDot_col(Integer.parseInt(visualizationData[3][2]), "orange", orangedot_col4, 4);
                     } else if (Integer.parseInt(visualizationData[3][2]) >= 12 && Integer.parseInt(visualizationData[3][2]) <= 15) {
                         yellowdot_col4.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[3][2]),"yellow", yellowdot_col4,4);
+                        setDot_col(Integer.parseInt(visualizationData[3][2]), "yellow", yellowdot_col4, 4);
                     } else if (Integer.parseInt(visualizationData[3][2]) >= 16 && Integer.parseInt(visualizationData[3][2]) <= 20) {
                         greendot_col4.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[3][2]),"green", greendot_col4,4);
-                    }
-                    else {
-                        visualizationData[3][2]="-1";
+                        setDot_col(Integer.parseInt(visualizationData[3][2]), "green", greendot_col4, 4);
+                    } else {
+                        visualizationData[3][2] = "-1";
                     }
 
                     //----col 5 ------
                     if (Integer.parseInt(visualizationData[4][2]) >= 0 && Integer.parseInt(visualizationData[4][2]) <= 7) {
                         reddot_col5.setVisibility(View.VISIBLE);
                         //totalScore, scoreRange(red,orange,yellow,green), dot
-                        setDot_col(Integer.parseInt(visualizationData[4][2]),"red", reddot_col5,5);
+                        setDot_col(Integer.parseInt(visualizationData[4][2]), "red", reddot_col5, 5);
                     } else if (Integer.parseInt(visualizationData[4][2]) >= 8 && Integer.parseInt(visualizationData[4][2]) <= 11) {
                         orangedot_col5.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[4][2]),"orange", orangedot_col5,5);
+                        setDot_col(Integer.parseInt(visualizationData[4][2]), "orange", orangedot_col5, 5);
                     } else if (Integer.parseInt(visualizationData[4][2]) >= 12 && Integer.parseInt(visualizationData[4][2]) <= 15) {
                         yellowdot_col5.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[4][2]),"yellow", yellowdot_col5,5);
+                        setDot_col(Integer.parseInt(visualizationData[4][2]), "yellow", yellowdot_col5, 5);
                     } else if (Integer.parseInt(visualizationData[4][2]) >= 16 && Integer.parseInt(visualizationData[4][2]) <= 20) {
                         greendot_col5.setVisibility(View.VISIBLE);
-                        setDot_col(Integer.parseInt(visualizationData[4][2]),"green", greendot_col5,5);
-                    }
-                    else {
-                        visualizationData[4][2]="-1";
+                        setDot_col(Integer.parseInt(visualizationData[4][2]), "green", greendot_col5, 5);
+                    } else {
+                        visualizationData[4][2] = "-1";
                     }
                     //=============================================================
                     //-----if try is success -> dismiss the dialog ---------
@@ -311,12 +306,12 @@ public class SurveyVisualization extends AppCompatActivity {
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -331,8 +326,7 @@ public class SurveyVisualization extends AppCompatActivity {
                         pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -347,121 +341,101 @@ public class SurveyVisualization extends AppCompatActivity {
     }
 
     //-----------------------setDot_col-------------------------------------------
-    public void setDot_col(int totalScore ,String scoreRange, ImageView dot, int col){
+    public void setDot_col(int totalScore, String scoreRange, ImageView dot, int col) {
 
-        Log.d("totalScore:scoreRange", totalScore+" "+scoreRange);
+        Log.d("totalScore:scoreRange", totalScore + " " + scoreRange);
 
         //----This will help to set imageView position--------
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
 
         //------col no.-----------------------
-        if(col==1)  {
+        if (col == 1) {
             params.leftMargin = 153;
         }
-        if(col==2)     {
+        if (col == 2) {
             params.leftMargin = 263;
         }
-        if(col==3)     {
+        if (col == 3) {
             params.leftMargin = 370;
         }
-        if(col==4)     {
+        if (col == 4) {
             params.leftMargin = 476;
         }
-        if(col==5)     {
+        if (col == 5) {
             params.leftMargin = 585;
         }
 
         //-------color range-------
-        if(scoreRange.equals("red")){
+        if (scoreRange.equals("red")) {
 
             //---------totalScore------------
-            if(totalScore==0)     {
+            if (totalScore == 0) {
                 //params.setMargins(0,496, 0,0); //setMargins(int left, int top, int right, int bottom)
                 params.topMargin = 496;
-            }
-            else if(totalScore==1){
+            } else if (totalScore == 1) {
                 //params.setMargins(0,477, 0,0);
                 params.topMargin = 477;
-            }
-            else if(totalScore==2){
+            } else if (totalScore == 2) {
                 //params.setMargins(0,458, 0,0);
                 params.topMargin = 458;
-            }
-            else if(totalScore==3){
+            } else if (totalScore == 3) {
                 // params.setMargins(0,439, 0,0);
                 params.topMargin = 439;
-            }
-            else if(totalScore==4){
+            } else if (totalScore == 4) {
                 //params.setMargins(0,419, 0,0);
                 params.topMargin = 419;
-            }
-            else if(totalScore==5) {
+            } else if (totalScore == 5) {
                 //params.setMargins(0,400, 0,0); //correct
                 params.topMargin = 400;
-            }
-            else if(totalScore==6){
+            } else if (totalScore == 6) {
                 //params.setMargins(0,383, 0,0);
                 params.topMargin = 383;
-            }
-            else if(totalScore==7){
+            } else if (totalScore == 7) {
                 //params.setMargins(0,364, 0,0);
                 params.topMargin = 364;
             }
-        }
-        else if(scoreRange.equals("orange")){
-            if(totalScore==8){
+        } else if (scoreRange.equals("orange")) {
+            if (totalScore == 8) {
                 //params.setMargins(0,345, 0,0);
                 params.topMargin = 345;
-            }
-            else if(totalScore==9){
+            } else if (totalScore == 9) {
                 //params.setMargins(0,326, 0,0);
                 params.topMargin = 326;
-            }
-            else if(totalScore==10){
+            } else if (totalScore == 10) {
                 //params.setMargins(0,306, 0,0);
                 params.topMargin = 306;
-            }
-            else if(totalScore==11){
+            } else if (totalScore == 11) {
                 //params.setMargins(0,287, 0,0); //correct
                 params.topMargin = 287;
             }
-        }
-        else if(scoreRange.equals("yellow")){
-            if(totalScore==12){
+        } else if (scoreRange.equals("yellow")) {
+            if (totalScore == 12) {
                 //params.setMargins(0,269, 0,0); //correct
                 params.topMargin = 269;
-            }
-            else if(totalScore==13){
+            } else if (totalScore == 13) {
                 //params.setMargins(0,249, 0,0);
                 params.topMargin = 249;
-            }
-            else if(totalScore==14){
+            } else if (totalScore == 14) {
                 //params.setMargins(0,230, 0,0);
                 params.topMargin = 230;
-            }
-            else if(totalScore==15){
+            } else if (totalScore == 15) {
                 //params.setMargins(0,210, 0,0);
                 params.topMargin = 210;
             }
-        }
-        else if(scoreRange.equals("green")){
-            if(totalScore==16){
+        } else if (scoreRange.equals("green")) {
+            if (totalScore == 16) {
                 //params.setMargins(0,191, 0,0); //correct
                 params.topMargin = 191;
-            }
-            else if(totalScore==17){
+            } else if (totalScore == 17) {
                 //params.setMargins(0,171, 0,0);
                 params.topMargin = 171;
-            }
-            else if(totalScore==18){
+            } else if (totalScore == 18) {
                 //params.setMargins(0,152, 0,0);
                 params.topMargin = 152;
-            }
-            else if(totalScore==19){
+            } else if (totalScore == 19) {
                 //params.setMargins(0,132, 0,0); //+ about 19.5 (ALL) from point 20
                 params.topMargin = 132;
-            }
-            else if(totalScore==20){
+            } else if (totalScore == 20) {
                 //params.setMargins(0,113, 0,0); //correct
                 params.topMargin = 113;
             }

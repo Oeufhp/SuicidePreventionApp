@@ -50,7 +50,7 @@ public class SurveyVisualization_Cage_Logics extends AppCompatActivity {
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
 
 
     @Override
@@ -61,7 +61,7 @@ public class SurveyVisualization_Cage_Logics extends AppCompatActivity {
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
         //----------getIntent---------
-        it =getIntent();
+        it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
 
@@ -70,7 +70,7 @@ public class SurveyVisualization_Cage_Logics extends AppCompatActivity {
     }
 
     //------------------  seesurveyvisualization_cage --------------------------------
-    public void seesurveyvisualization_cage(){
+    public void seesurveyvisualization_cage() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyvisualization";
         String url = "http://auth.oeufhp.me/beleaf.php/seesurveyvisualization_cage";
@@ -154,12 +154,12 @@ public class SurveyVisualization_Cage_Logics extends AppCompatActivity {
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -174,8 +174,7 @@ public class SurveyVisualization_Cage_Logics extends AppCompatActivity {
                         pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();

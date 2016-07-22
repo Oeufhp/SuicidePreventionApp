@@ -7,17 +7,18 @@ import java.io.Serializable;
  */
 
 //For more information visits ->http://www.androidhive.info/2016/04/android-glide-image-library-building-image-gallery-app/
-public class Image implements Serializable{
+public class Image implements Serializable {
     private String name;
     private String medium;
     private String author;
 
-    public Image(){}
+    public Image() {
+    }
 
-    public Image(String name,String medium,String author){
-        this.name=name;
-        this.medium=medium;
-        this.author=author;
+    public Image(String name, String medium, String author) {
+        this.name = name;
+        this.medium = medium;
+        this.author = author;
     }
 
     public String getName() {

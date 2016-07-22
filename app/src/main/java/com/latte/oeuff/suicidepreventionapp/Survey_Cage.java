@@ -51,17 +51,17 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class Survey_Cage extends AppCompatActivity implements View.OnClickListener{
+public class Survey_Cage extends AppCompatActivity implements View.OnClickListener {
     //************ Volley *******************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
     //---- Others -------------
     RadioGroup q1_group, q2_group, q3_group, q4_group;
-    RadioButton q1_yes, q1_no, q2_yes, q2_no, q3_yes, q3_no,q4_yes, q4_no ;
+    RadioButton q1_yes, q1_no, q2_yes, q2_no, q3_yes, q3_no, q4_yes, q4_no;
     ImageButton sendsurveybtn;
     TextView sendsurveystatus_textview;
     //----Answers------------
@@ -75,29 +75,37 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
         //----------getIntent---------
-        it =getIntent();
+        it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
         //--------- binding ----------
         //Q1
-        q1_group = (RadioGroup)findViewById(R.id.q1_group);
-        q1_yes = (RadioButton)findViewById(R.id.q1_yes); q1_yes.setOnClickListener(this);
-        q1_no = (RadioButton)findViewById(R.id.q1_no); q1_no.setOnClickListener(this);
+        q1_group = (RadioGroup) findViewById(R.id.q1_group);
+        q1_yes = (RadioButton) findViewById(R.id.q1_yes);
+        q1_yes.setOnClickListener(this);
+        q1_no = (RadioButton) findViewById(R.id.q1_no);
+        q1_no.setOnClickListener(this);
         //Q2
-        q2_group = (RadioGroup)findViewById(R.id.q2_group);
-        q2_yes = (RadioButton)findViewById(R.id.q2_yes); q2_yes.setOnClickListener(this);
-        q2_no = (RadioButton)findViewById(R.id.q2_no); q2_no.setOnClickListener(this);
+        q2_group = (RadioGroup) findViewById(R.id.q2_group);
+        q2_yes = (RadioButton) findViewById(R.id.q2_yes);
+        q2_yes.setOnClickListener(this);
+        q2_no = (RadioButton) findViewById(R.id.q2_no);
+        q2_no.setOnClickListener(this);
         //Q3
-        q3_group = (RadioGroup)findViewById(R.id.q3_group);
-        q3_yes = (RadioButton)findViewById(R.id.q3_yes); q3_yes.setOnClickListener(this);
-        q3_no = (RadioButton)findViewById(R.id.q3_no); q3_no.setOnClickListener(this);
+        q3_group = (RadioGroup) findViewById(R.id.q3_group);
+        q3_yes = (RadioButton) findViewById(R.id.q3_yes);
+        q3_yes.setOnClickListener(this);
+        q3_no = (RadioButton) findViewById(R.id.q3_no);
+        q3_no.setOnClickListener(this);
         //Q4
-        q4_group = (RadioGroup)findViewById(R.id.q4_group);
-        q4_yes = (RadioButton)findViewById(R.id.q4_yes); q4_yes.setOnClickListener(this);
-        q4_no = (RadioButton)findViewById(R.id.q4_no); q4_no.setOnClickListener(this);
+        q4_group = (RadioGroup) findViewById(R.id.q4_group);
+        q4_yes = (RadioButton) findViewById(R.id.q4_yes);
+        q4_yes.setOnClickListener(this);
+        q4_no = (RadioButton) findViewById(R.id.q4_no);
+        q4_no.setOnClickListener(this);
 
-        sendsurveybtn = (ImageButton)findViewById(R.id.sendsurveybtn);
-        sendsurveystatus_textview = (TextView)findViewById(R.id.sendsurveystatus_textview);
+        sendsurveybtn = (ImageButton) findViewById(R.id.sendsurveybtn);
+        sendsurveystatus_textview = (TextView) findViewById(R.id.sendsurveystatus_textview);
 
         //-----------------------------------My logics ----------------------------------------------------
         //************************* 1. Keep ans and points *****************************************
@@ -114,16 +122,16 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                 switch (q1_ans) {
                     case R.id.q1_yes:
                         totalScore = totalScore + 1;
-                        survey_answers[0]="1";
-                        Log.d("Q1 score",totalScore+"");
+                        survey_answers[0] = "1";
+                        Log.d("Q1 score", totalScore + "");
                         break;
                     case R.id.q1_no:
                         totalScore = totalScore + 0;
-                        survey_answers[0]="0";
-                        Log.d("Q1 score",totalScore+"");
+                        survey_answers[0] = "0";
+                        Log.d("Q1 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
@@ -133,16 +141,16 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                 switch (q2_ans) {
                     case R.id.q2_yes:
                         totalScore = totalScore + 1;
-                        survey_answers[1]="1";
-                        Log.d("Q2 score",totalScore+"");
+                        survey_answers[1] = "1";
+                        Log.d("Q2 score", totalScore + "");
                         break;
                     case R.id.q2_no:
                         totalScore = totalScore + 0;
-                        survey_answers[1]="0";
-                        Log.d("Q2 score",totalScore+"");
+                        survey_answers[1] = "0";
+                        Log.d("Q2 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
@@ -152,16 +160,16 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                 switch (q3_ans) {
                     case R.id.q3_yes:
                         totalScore = totalScore + 1;
-                        survey_answers[2]="1";
-                        Log.d("Q3 score",totalScore+"");
+                        survey_answers[2] = "1";
+                        Log.d("Q3 score", totalScore + "");
                         break;
                     case R.id.q3_no:
                         totalScore = totalScore + 0;
-                        survey_answers[2]="0";
-                        Log.d("Q3 score",totalScore+"");
+                        survey_answers[2] = "0";
+                        Log.d("Q3 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
@@ -171,23 +179,23 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                 switch (q4_ans) {
                     case R.id.q4_yes:
                         totalScore = totalScore + 1;
-                        survey_answers[3]="1";
-                        Log.d("Q4 score",totalScore+"");
+                        survey_answers[3] = "1";
+                        Log.d("Q4 score", totalScore + "");
                         break;
                     case R.id.q4_no:
                         totalScore = totalScore + 0;
-                        survey_answers[3]="0";
-                        Log.d("Q4 score",totalScore+"");
+                        survey_answers[3] = "0";
+                        Log.d("Q4 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
                 }
 
-                Log.d("totalScore:",totalScore+"");
-                if(unfinished==false) {
+                Log.d("totalScore:", totalScore + "");
+                if (unfinished == false) {
                     for (int i = 0; i < survey_answers.length; i++) {
                         Log.d("ans " + (i + 1) + ": ", survey_answers[i]);
                     }
@@ -206,8 +214,9 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
     }
+
     //------- To clear a survey -----------
-    public void clear_survey(){
+    public void clear_survey() {
         q1_group.clearCheck(); //Clear checked raioButton in radioGroup"q1_group"
         q2_group.clearCheck();
         q3_group.clearCheck();
@@ -240,11 +249,11 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
         //3. get the correct date(=String): http://stackoverflow.com/questions/23068676/how-to-get-current-timestamp-in-string-format-in-java-yyyy-mm-dd-hh-mm-ss
         //###
         final String strSentDate = mSimpleDateFormat.format(new java.util.Date());
-        Log.d("strSentDate",strSentDate);
+        Log.d("strSentDate", strSentDate);
         //4. convert from "String"->"Date": http://stackoverflow.com/questions/6510724/how-to-convert-java-string-to-date-object
         DateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         Date sentdate = null;
-        try{
+        try {
             sentdate = mDateFormat.parse(strSentDate); //"String" strSentDate is parsed to be "Date"
         } catch (ParseException e) {
             e.printStackTrace();
@@ -258,20 +267,19 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.d("sendsurvey_cage res",response);
+                    Log.d("sendsurvey_cage res", response);
                     JSONObject jsonResponse = new JSONObject(response);
                     String sendsurvey_status = jsonResponse.getString("sendsurvey_cage_status");
 
                     //-----------My logics---------------
-                    if(sendsurvey_status.equals("1")) {
+                    if (sendsurvey_status.equals("1")) {
                         sendsurveystatus_textview.setText("sendsurvey_cage");
                         Toast.makeText(getApplicationContext(), "sendsurvey_cage", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         //-----Return to SurveyOverview--------
                         Intent it = new Intent(Survey_Cage.this, SurveyOverview.class);
                         startActivity(it);
-                    }
-                    else {
+                    } else {
                         sendsurveystatus_textview.setText("sendsurvey_cage failed");
                         Toast.makeText(getApplicationContext(), "sendsurvey_cage failed", Toast.LENGTH_SHORT).show();
                         clear_survey();
@@ -293,12 +301,12 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -313,8 +321,7 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                         pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -326,7 +333,7 @@ public class Survey_Cage extends AppCompatActivity implements View.OnClickListen
                 params.put("survey_cage_q2_ans", survey_answers[1]);
                 params.put("survey_cage_q3_ans", survey_answers[2]);
                 params.put("survey_cage_q4_ans", survey_answers[3]);
-                params.put("totalScore",totalScore+"");
+                params.put("totalScore", totalScore + "");
 
                 return params;
             }

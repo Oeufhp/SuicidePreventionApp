@@ -35,13 +35,13 @@
         android:inputType="textPassword"/>
 
     <!--<EditText-->
-        <!--android:id="@+id/showOutput"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignLeft="@+id/pass"-->
-        <!--android:layout_alignStart="@+id/pass"-->
-        <!--android:layout_below="@+id/loginbtn"-->
-        <!--android:layout_marginTop="41dp"/>-->
+    <!--android:id="@+id/showOutput"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignLeft="@+id/pass"-->
+    <!--android:layout_alignStart="@+id/pass"-->
+    <!--android:layout_below="@+id/loginbtn"-->
+    <!--android:layout_marginTop="41dp"/>-->
 
     <Button
         android:id="@+id/loginbtn"

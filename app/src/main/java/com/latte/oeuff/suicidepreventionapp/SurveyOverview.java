@@ -21,10 +21,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class SurveyOverview extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    Button cagebtn, c_ssrsbtn, surveyhistorybtn, seeupdatebtn ;
+    Button cagebtn, c_ssrsbtn, surveyhistorybtn, seeupdatebtn;
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
 
     //---About Dialog---
     DialogFragment newLogoutFragment;
@@ -81,47 +81,47 @@ public class SurveyOverview extends AppCompatActivity implements NavigationView.
         });
 
         //************************ This is for creating the Navigation Menu*********************************
-         //Toolbar (Top)
-         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-         setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
+        //Toolbar (Top)
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar); //Set a Toolbar to act as  ActionBar for this Activity
 
-         // top-level container of "Navigation Drawer" (side)
-         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(  //=tie together "functionality of DrawerLayout" <-> "framework ActionBar"
-         this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-         drawer.setDrawerListener(toggle);                         //Set a listener to be notified of drawer events
-         toggle.syncState();                                       //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout
+        // top-level container of "Navigation Drawer" (side)
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(  //=tie together "functionality of DrawerLayout" <-> "framework ActionBar"
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);                         //Set a listener to be notified of drawer events
+        toggle.syncState();                                       //Synchronize the state of the drawer indicator/affordance with the linked DrawerLayout
 
-         //view of "Navigation Drawer" (side)
-         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-         navigationView.setNavigationItemSelectedListener(this);
-         //*****To uncover colors of icon**********
-         navigationView.setItemIconTintList(null);
+        //view of "Navigation Drawer" (side)
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        //*****To uncover colors of icon**********
+        navigationView.setItemIconTintList(null);
 
-         //floating button (bottom)
-         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-         fab.setImageResource(R.drawable.emergencycall);
-         fab.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
-            //                        .setAction("Action", null).show();
+        //floating button (bottom)
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
+        fab.setImageResource(R.drawable.emergencycall);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
+                //                        .setAction("Action", null).show();
 
-            //This is for going to phone in mobile
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:112"));
-            //no need to request a permission
-            startActivity(callIntent);
+                //This is for going to phone in mobile
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:112"));
+                //no need to request a permission
+                startActivity(callIntent);
 
             }
         });
-         //**************************************************************************************************
+        //**************************************************************************************************
     }
 
     //************************ This is for creating the Navigation Menu*********************************
     //Close "Navigation Drawer"
     @Override
-    public void onBackPressed () {
+    public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) { //GravityCompat = Compatibility shim for accessing newer functionality from Gravity
             //Gravity =  Standard constants, tools for placing an object within a potentially larger container
@@ -133,7 +133,7 @@ public class SurveyOverview extends AppCompatActivity implements NavigationView.
 
     //Initialize the contents of the Activity's standard options menu
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate(add) the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu); //MenuInflater allows you to inflate the context menu from a menu resource
         //Bind "MainActivity.java" <-> main.xml for using "setting popup-menu"
@@ -141,8 +141,7 @@ public class SurveyOverview extends AppCompatActivity implements NavigationView.
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item)
-    { // Called when the user selects an item from the options menu. Handle action bar item clicks here.
+    public boolean onOptionsItemSelected(MenuItem item) { // Called when the user selects an item from the options menu. Handle action bar item clicks here.
 
         int id = item.getItemId();
 
@@ -156,8 +155,7 @@ public class SurveyOverview extends AppCompatActivity implements NavigationView.
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected (MenuItem item)
-    { //This method is called whenever a navigation item in your action bar is selected
+    public boolean onNavigationItemSelected(MenuItem item) { //This method is called whenever a navigation item in your action bar is selected
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -207,6 +205,7 @@ public class SurveyOverview extends AppCompatActivity implements NavigationView.
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     //**************************************************************************************************
 //---------------------------- Dialog for warning before logging out -------------------------------//
     public class LogOutDialog extends DialogFragment {

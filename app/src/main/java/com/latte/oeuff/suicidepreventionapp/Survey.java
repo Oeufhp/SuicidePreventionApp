@@ -50,17 +50,17 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class Survey extends AppCompatActivity implements View.OnClickListener{
+public class Survey extends AppCompatActivity implements View.OnClickListener {
     //************ Volley *******************
     RequestQueue requestQueue;
     static TrustManager[] trustManagers;
     static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
     //----getIntent--------
     Intent it;
-    String username,password;
+    String username, password;
     //---- Others -------------
     RadioGroup q1_group, q2_group, q3_group, q4_group, q5_group;
-    RadioButton q1_1, q1_2, q1_3, q1_4,  q2_1, q2_2, q2_3, q2_4,  q3_1, q3_2, q3_3, q3_4,  q4_1, q4_2, q4_3, q4_4,  q5_1, q5_2, q5_3, q5_4;
+    RadioButton q1_1, q1_2, q1_3, q1_4, q2_1, q2_2, q2_3, q2_4, q3_1, q3_2, q3_3, q3_4, q4_1, q4_2, q4_3, q4_4, q5_1, q5_2, q5_3, q5_4;
     Button sendsurveybtn;
     TextView sendsurveystatus_textview;
     //----Answers------------
@@ -74,43 +74,63 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
         //************** Volley **********************
         requestQueue = Volley.newRequestQueue(this);
         //----------getIntent---------
-        it =getIntent();
+        it = getIntent();
         username = it.getStringExtra("username");
         password = it.getStringExtra("password");
         //--------- binding ----------
         //Q1
-        q1_group = (RadioGroup)findViewById(R.id.q1_group);
-        q1_1 = (RadioButton)findViewById(R.id.q1_1); q1_1.setOnClickListener(this);
-        q1_2 = (RadioButton)findViewById(R.id.q1_2); q1_2.setOnClickListener(this);
-        q1_3 = (RadioButton)findViewById(R.id.q1_3); q1_3.setOnClickListener(this);
-        q1_4 = (RadioButton)findViewById(R.id.q1_4); q1_4.setOnClickListener(this);
+        q1_group = (RadioGroup) findViewById(R.id.q1_group);
+        q1_1 = (RadioButton) findViewById(R.id.q1_1);
+        q1_1.setOnClickListener(this);
+        q1_2 = (RadioButton) findViewById(R.id.q1_2);
+        q1_2.setOnClickListener(this);
+        q1_3 = (RadioButton) findViewById(R.id.q1_3);
+        q1_3.setOnClickListener(this);
+        q1_4 = (RadioButton) findViewById(R.id.q1_4);
+        q1_4.setOnClickListener(this);
         //Q2
-        q2_group = (RadioGroup)findViewById(R.id.q2_group);
-        q2_1 = (RadioButton)findViewById(R.id.q2_1); q2_1.setOnClickListener(this);
-        q2_2 = (RadioButton)findViewById(R.id.q2_2); q2_2.setOnClickListener(this);
-        q2_3 = (RadioButton)findViewById(R.id.q2_3); q2_3.setOnClickListener(this);
-        q2_4 = (RadioButton)findViewById(R.id.q2_4); q2_4.setOnClickListener(this);
+        q2_group = (RadioGroup) findViewById(R.id.q2_group);
+        q2_1 = (RadioButton) findViewById(R.id.q2_1);
+        q2_1.setOnClickListener(this);
+        q2_2 = (RadioButton) findViewById(R.id.q2_2);
+        q2_2.setOnClickListener(this);
+        q2_3 = (RadioButton) findViewById(R.id.q2_3);
+        q2_3.setOnClickListener(this);
+        q2_4 = (RadioButton) findViewById(R.id.q2_4);
+        q2_4.setOnClickListener(this);
         //Q3
-        q3_group = (RadioGroup)findViewById(R.id.q3_group);
-        q3_1 = (RadioButton)findViewById(R.id.q3_1); q3_1.setOnClickListener(this);
-        q3_2 = (RadioButton)findViewById(R.id.q3_2); q3_2.setOnClickListener(this);
-        q3_3 = (RadioButton)findViewById(R.id.q3_3); q3_3.setOnClickListener(this);
-        q3_4 = (RadioButton)findViewById(R.id.q3_4); q3_4.setOnClickListener(this);
+        q3_group = (RadioGroup) findViewById(R.id.q3_group);
+        q3_1 = (RadioButton) findViewById(R.id.q3_1);
+        q3_1.setOnClickListener(this);
+        q3_2 = (RadioButton) findViewById(R.id.q3_2);
+        q3_2.setOnClickListener(this);
+        q3_3 = (RadioButton) findViewById(R.id.q3_3);
+        q3_3.setOnClickListener(this);
+        q3_4 = (RadioButton) findViewById(R.id.q3_4);
+        q3_4.setOnClickListener(this);
         //Q4
-        q4_group = (RadioGroup)findViewById(R.id.q4_group);
-        q4_1 = (RadioButton)findViewById(R.id.q4_1); q4_1.setOnClickListener(this);
-        q4_2 = (RadioButton)findViewById(R.id.q4_2); q4_2.setOnClickListener(this);
-        q4_3 = (RadioButton)findViewById(R.id.q4_3); q4_3.setOnClickListener(this);
-        q4_4 = (RadioButton)findViewById(R.id.q4_4); q4_4.setOnClickListener(this);
+        q4_group = (RadioGroup) findViewById(R.id.q4_group);
+        q4_1 = (RadioButton) findViewById(R.id.q4_1);
+        q4_1.setOnClickListener(this);
+        q4_2 = (RadioButton) findViewById(R.id.q4_2);
+        q4_2.setOnClickListener(this);
+        q4_3 = (RadioButton) findViewById(R.id.q4_3);
+        q4_3.setOnClickListener(this);
+        q4_4 = (RadioButton) findViewById(R.id.q4_4);
+        q4_4.setOnClickListener(this);
         //Q5
-        q5_group = (RadioGroup)findViewById(R.id.q5_group);
-        q5_1 = (RadioButton)findViewById(R.id.q5_1); q5_1.setOnClickListener(this);
-        q5_2 = (RadioButton)findViewById(R.id.q5_2); q5_2.setOnClickListener(this);
-        q5_3 = (RadioButton)findViewById(R.id.q5_3); q5_3.setOnClickListener(this);
-        q5_4 = (RadioButton)findViewById(R.id.q5_4); q5_4.setOnClickListener(this);
+        q5_group = (RadioGroup) findViewById(R.id.q5_group);
+        q5_1 = (RadioButton) findViewById(R.id.q5_1);
+        q5_1.setOnClickListener(this);
+        q5_2 = (RadioButton) findViewById(R.id.q5_2);
+        q5_2.setOnClickListener(this);
+        q5_3 = (RadioButton) findViewById(R.id.q5_3);
+        q5_3.setOnClickListener(this);
+        q5_4 = (RadioButton) findViewById(R.id.q5_4);
+        q5_4.setOnClickListener(this);
 
-        sendsurveybtn = (Button)findViewById(R.id.sendsurveybtn);
-        sendsurveystatus_textview = (TextView)findViewById(R.id.sendsurveystatus_textview);
+        sendsurveybtn = (Button) findViewById(R.id.sendsurveybtn);
+        sendsurveystatus_textview = (TextView) findViewById(R.id.sendsurveystatus_textview);
 
         //-----------------------------------My logics ----------------------------------------------------
         //************************* 1. Keep ans and points *****************************************
@@ -127,26 +147,26 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                 switch (q1_ans) {
                     case R.id.q1_1:
                         totalScore = totalScore + 1;
-                        survey_answers[0]="1";
-                        Log.d("Q1 score",totalScore+"");
+                        survey_answers[0] = "1";
+                        Log.d("Q1 score", totalScore + "");
                         break;
                     case R.id.q1_2:
                         totalScore = totalScore + 2;
-                        survey_answers[0]="2";
-                        Log.d("Q1 score",totalScore+"");
+                        survey_answers[0] = "2";
+                        Log.d("Q1 score", totalScore + "");
                         break;
                     case R.id.q1_3:
                         totalScore = totalScore + 3;
-                        survey_answers[0]="3";
-                        Log.d("Q1 score",totalScore+"");
+                        survey_answers[0] = "3";
+                        Log.d("Q1 score", totalScore + "");
                         break;
                     case R.id.q1_4:
                         totalScore = totalScore + 4;
-                        survey_answers[0]="4";
-                        Log.d("Q1 score",totalScore+"");
+                        survey_answers[0] = "4";
+                        Log.d("Q1 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
@@ -156,26 +176,26 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                 switch (q2_ans) {
                     case R.id.q2_1:
                         totalScore = totalScore + 1;
-                        survey_answers[1]="1";
-                        Log.d("Q2 score",totalScore+"");
+                        survey_answers[1] = "1";
+                        Log.d("Q2 score", totalScore + "");
                         break;
                     case R.id.q2_2:
                         totalScore = totalScore + 2;
-                        survey_answers[1]="2";
-                        Log.d("Q2 score",totalScore+"");
+                        survey_answers[1] = "2";
+                        Log.d("Q2 score", totalScore + "");
                         break;
                     case R.id.q2_3:
                         totalScore = totalScore + 3;
-                        survey_answers[1]="3";
-                        Log.d("Q2 score",totalScore+"");
+                        survey_answers[1] = "3";
+                        Log.d("Q2 score", totalScore + "");
                         break;
                     case R.id.q2_4:
                         totalScore = totalScore + 4;
-                        survey_answers[1]="4";
-                        Log.d("Q2 score",totalScore+"");
+                        survey_answers[1] = "4";
+                        Log.d("Q2 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
@@ -185,26 +205,26 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                 switch (q3_ans) {
                     case R.id.q3_1:
                         totalScore = totalScore + 1;
-                        survey_answers[2]="1";
-                        Log.d("Q3 score",totalScore+"");
+                        survey_answers[2] = "1";
+                        Log.d("Q3 score", totalScore + "");
                         break;
                     case R.id.q3_2:
                         totalScore = totalScore + 2;
-                        survey_answers[2]="2";
-                        Log.d("Q3 score",totalScore+"");
+                        survey_answers[2] = "2";
+                        Log.d("Q3 score", totalScore + "");
                         break;
                     case R.id.q3_3:
                         totalScore = totalScore + 3;
-                        survey_answers[2]="3";
-                        Log.d("Q3 score",totalScore+"");
+                        survey_answers[2] = "3";
+                        Log.d("Q3 score", totalScore + "");
                         break;
                     case R.id.q3_4:
                         totalScore = totalScore + 4;
-                        survey_answers[2]="4";
-                        Log.d("Q3 score",totalScore+"");
+                        survey_answers[2] = "4";
+                        Log.d("Q3 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
@@ -214,26 +234,26 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                 switch (q4_ans) {
                     case R.id.q4_1:
                         totalScore = totalScore + 1;
-                        survey_answers[3]="1";
-                        Log.d("Q4 score",totalScore+"");
+                        survey_answers[3] = "1";
+                        Log.d("Q4 score", totalScore + "");
                         break;
                     case R.id.q4_2:
                         totalScore = totalScore + 2;
-                        survey_answers[3]="2";
-                        Log.d("Q4 score",totalScore+"");
+                        survey_answers[3] = "2";
+                        Log.d("Q4 score", totalScore + "");
                         break;
                     case R.id.q4_3:
                         totalScore = totalScore + 3;
-                        survey_answers[3]="3";
-                        Log.d("Q4 score",totalScore+"");
+                        survey_answers[3] = "3";
+                        Log.d("Q4 score", totalScore + "");
                         break;
                     case R.id.q4_4:
                         totalScore = totalScore + 4;
-                        survey_answers[3]="4";
-                        Log.d("Q4 score",totalScore+"");
+                        survey_answers[3] = "4";
+                        Log.d("Q4 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
@@ -243,33 +263,33 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                 switch (q5_ans) {
                     case R.id.q5_1:
                         totalScore = totalScore + 1;
-                        survey_answers[4]="1";
-                        Log.d("Q5 score",totalScore+"");
+                        survey_answers[4] = "1";
+                        Log.d("Q5 score", totalScore + "");
                         break;
                     case R.id.q5_2:
                         totalScore = totalScore + 2;
-                        survey_answers[4]="2";
-                        Log.d("Q5 score",totalScore+"");
+                        survey_answers[4] = "2";
+                        Log.d("Q5 score", totalScore + "");
                         break;
                     case R.id.q5_3:
                         totalScore = totalScore + 3;
-                        survey_answers[4]="3";
-                        Log.d("Q45 score",totalScore+"");
+                        survey_answers[4] = "3";
+                        Log.d("Q45 score", totalScore + "");
                         break;
                     case R.id.q5_4:
                         totalScore = totalScore + 4;
-                        survey_answers[4]="4";
-                        Log.d("Q5 score",totalScore+"");
+                        survey_answers[4] = "4";
+                        Log.d("Q5 score", totalScore + "");
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(),"You have not answered all questions yet...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "You have not answered all questions yet...", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         unfinished = true;
                         break;
                 }
 
-                Log.d("totalScore:",totalScore+"");
-                if(unfinished==false) {
+                Log.d("totalScore:", totalScore + "");
+                if (unfinished == false) {
                     for (int i = 0; i < survey_answers.length; i++) {
                         Log.d("ans " + (i + 1) + ": ", survey_answers[i]);
                     }
@@ -288,8 +308,9 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
 
     }
+
     //------- To clear a survey -----------
-    public void clear_survey(){
+    public void clear_survey() {
         q1_group.clearCheck(); //Clear checked raioButton in radioGroup"q1_group"
         q2_group.clearCheck();
         q3_group.clearCheck();
@@ -323,11 +344,11 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
         //3. get the correct date(=String): http://stackoverflow.com/questions/23068676/how-to-get-current-timestamp-in-string-format-in-java-yyyy-mm-dd-hh-mm-ss
         //###
         final String strSentDate = mSimpleDateFormat.format(new java.util.Date());
-        Log.d("strSentDate",strSentDate);
+        Log.d("strSentDate", strSentDate);
         //4. convert from "String"->"Date": http://stackoverflow.com/questions/6510724/how-to-convert-java-string-to-date-object
         DateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
         Date sentdate = null;
-        try{
+        try {
             sentdate = mDateFormat.parse(strSentDate); //"String" strSentDate is parsed to be "Date"
         } catch (ParseException e) {
             e.printStackTrace();
@@ -342,20 +363,19 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
             public void onResponse(String response) {
 
                 try {
-                    Log.d("sendsurvey' response",response);
+                    Log.d("sendsurvey' response", response);
                     JSONObject jsonResponse = new JSONObject(response);
                     String sendsurvey_status = jsonResponse.getString("sendsurvey_status");
 
                     //-----------My logics---------------
-                    if(sendsurvey_status.equals("1")) {
+                    if (sendsurvey_status.equals("1")) {
                         sendsurveystatus_textview.setText("sendsurvey");
                         Toast.makeText(getApplicationContext(), "sendsurvey", Toast.LENGTH_SHORT).show();
                         clear_survey();
                         //-----Return to SurveyOverview--------
                         Intent it = new Intent(Survey.this, SurveyOverview.class);
                         startActivity(it);
-                    }
-                    else {
+                    } else {
                         sendsurveystatus_textview.setText("sendsurvey failed");
                         Toast.makeText(getApplicationContext(), "sendsurvey failed", Toast.LENGTH_SHORT).show();
                         clear_survey();
@@ -377,12 +397,12 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -397,8 +417,7 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                         pd.dismiss(); //Dismiss & Removing it from the screen
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
@@ -411,7 +430,7 @@ public class Survey extends AppCompatActivity implements View.OnClickListener{
                 params.put("survey_q3_ans", survey_answers[2]);
                 params.put("survey_q4_ans", survey_answers[3]);
                 params.put("survey_q5_ans", survey_answers[4]);
-                params.put("totalScore",totalScore+"");
+                params.put("totalScore", totalScore + "");
 
                 return params;
             }

@@ -1,73 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.latte.oeuff.suicidepreventionapp.Survey_Cage"
-    android:orientation="vertical"
-    android:background="@drawable/appbg">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/appbg"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin"
+              tools:context="com.latte.oeuff.suicidepreventionapp.Survey_Cage">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CAGE questionnaire"
-        android:textSize="25dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
+        android:text="CAGE questionnaire"
         android:textColor="#000000"
+        android:textSize="25dp"
         android:textStyle="bold"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="widely used screening test for problem drinking and potential alcohol problems"
-        android:textSize="12dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
+        android:text="widely used screening test for problem drinking and potential alcohol problems"
+        android:textSize="12dp"
         android:textStyle="italic"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Q1: Have you ever felt you needed to Cut down on your drinking?"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"
-        android:textSize="15dp"
-        android:textColor="#000000" />
+        android:text="Q1: Have you ever felt you needed to Cut down on your drinking?"
+        android:textColor="#000000"
+        android:textSize="15dp"/>
 
-    <LinearLayout android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-        <RadioGroup android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/q1_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation='horizontal'
             android:checkableBehavior="single"
-            android:id="@+id/q1_group">
+            android:orientation='horizontal'>
+
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes"
                 android:id="@+id/q1_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="Yes"/>
+
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No"
                 android:id="@+id/q1_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="No"/>
 
         </RadioGroup>
     </LinearLayout>
@@ -76,40 +82,45 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
         android:text="Q2: Have people Annoyed you by criticizing your drinking?"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
         android:textColor="#000000"
         android:textSize="15dp"/>
 
-    <LinearLayout android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-        <RadioGroup android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/q2_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation='horizontal'
             android:checkableBehavior="single"
-            android:id="@+id/q2_group">
+            android:orientation='horizontal'>
+
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes"
                 android:id="@+id/q2_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="Yes"/>
+
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No"
                 android:id="@+id/q2_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="No"/>
 
         </RadioGroup>
     </LinearLayout>
@@ -118,40 +129,45 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
         android:text="Q3: Have you ever felt Guilty about drinking?"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
         android:textColor="#000000"
         android:textSize="15dp"/>
 
-    <LinearLayout android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-        <RadioGroup android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/q3_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation='horizontal'
             android:checkableBehavior="single"
-            android:id="@+id/q3_group">
+            android:orientation='horizontal'>
+
             <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yes"
                 android:id="@+id/q3_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="Yes"/>
+
             <RadioButton
+                android:id="@+id/q3_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No"
-                android:id="@+id/q3_no"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="No"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -159,59 +175,64 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Q4: Have you ever felt you needed a drink first thing in the morning (Eye-opener) to steady your nerves or to get rid of a hangover?"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp"
+        android:text="Q4: Have you ever felt you needed a drink first thing in the morning (Eye-opener) to steady your nerves or to get rid of a hangover?"
         android:textColor="#000000"
         android:textSize="15dp"/>
 
-    <LinearLayout android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-        <RadioGroup android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/q4_group"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation='horizontal'
             android:checkableBehavior="single"
-            android:id="@+id/q4_group">
+            android:orientation='horizontal'>
+
             <RadioButton
+                android:id="@+id/q4_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yes"
-                android:id="@+id/q4_yes"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="Yes"/>
+
             <RadioButton
+                android:id="@+id/q4_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No"
-                android:id="@+id/q4_no"
                 android:layout_alignBottom="@+id/radioButton"
                 android:layout_alignLeft="@+id/textView3"
                 android:layout_alignStart="@+id/textView3"
                 android:layout_marginLeft="70dp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:text="No"/>
         </RadioGroup>
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="status..."
         android:id="@+id/sendsurveystatus_textview"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="5dp" />
-
-    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sendsurveybtn"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:src="@drawable/sendsurveybtn"
-        android:background="#00000000"/>
+        android:text="status..."/>
+
+    <ImageButton
+        android:id="@+id/sendsurveybtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="#00000000"
+        android:src="@drawable/sendsurveybtn"/>
 
 
 </LinearLayout>

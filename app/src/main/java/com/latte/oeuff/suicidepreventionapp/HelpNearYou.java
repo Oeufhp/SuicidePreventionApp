@@ -109,13 +109,12 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         it = getIntent();
 
         //-------Check Intent from previous activity "city & country" : null (nearby places) , not null (search nearby places) ---------
-        if(it.getStringExtra("input_city").equals("empty") && it.getStringExtra("input_country").equals("empty") && !( it.getStringExtra("displacement").equals("empty") ) ) {
-            place_keyword_city="empty";
-            place_keyword_country="empty";
+        if (it.getStringExtra("input_city").equals("empty") && it.getStringExtra("input_country").equals("empty") && !(it.getStringExtra("displacement").equals("empty"))) {
+            place_keyword_city = "empty";
+            place_keyword_country = "empty";
             displacement = Double.parseDouble(it.getStringExtra("displacement"));
             getnearbyplaces_gps();
-        }
-        else {
+        } else {
             place_keyword_city = it.getStringExtra("input_city").toLowerCase().trim();
             place_keyword_country = it.getStringExtra("input_country").toLowerCase().trim();
             getnearbyplaces_search();
@@ -126,17 +125,17 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         mFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mFragment.getMapAsync(this);
         //------Check gps status-----------------
-        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE );
+        manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         gps_status = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        Log.d("reach2","here");
+        Log.d("reach2", "here");
 
         //------ ProcessDialog "Loading..." + Show toast of url -----------------
         pd = new ProgressDialog(HelpNearYou.this);
         pd.setMessage("loading...");
         pd.show(); //problem
 
-    //For getting constant current location
+        //For getting constant current location
 //        url = "https://freegeoip.net/json/";
 //        Intent it = getIntent();
 //        url = it.getStringExtra("web"); //url = https://freegeoip.net/json/ + it.getStringExtra("web");
@@ -154,13 +153,13 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     }
 
     //----------------- Show gps dialog if it's not open ----------------------------
-    private void showGPSDisabledAlertToUser(){
+    private void showGPSDisabledAlertToUser() {
         //declaire a dialog
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         //set "cancel" button
         alertDialogBuilder.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel(); //cancel & close a dialog
                     }
                 });
@@ -169,8 +168,8 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                 .setCancelable(false)
                 //set "enable gps" button
                 .setPositiveButton("Enable GPS",
-                        new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int id){ //go to settings to open gps
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) { //go to settings to open gps
                                 Intent callGPSSettingIntent = new Intent(
                                         android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 startActivity(callGPSSettingIntent);
@@ -299,14 +298,14 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
 //    }
 
     //------------------------- getnearbysearch_gps ------------------------------------------------------
-    public void getnearbyplaces_gps(){
+    public void getnearbyplaces_gps() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
         String url = "http://auth.oeufhp.me/beleafTest.php/getnearbyplaces_gps";
 
-        Log.d("gps", gps_status+"");
+        Log.d("gps", gps_status + "");
 
-        if(gps_status) {
+        if (gps_status) {
             Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
             //----------GET Request---------------
             //https://github.com/codepath/android_guides/wiki/Networking-with-the-Volley-Library
@@ -449,10 +448,9 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
             };
 
             requestQueue.add(postRequest);
-        }
-        else {
+        } else {
             pd.dismiss();
-            Log.d("gps=false","reach");
+            Log.d("gps=false", "reach");
             Toast.makeText(this, "GPS is Disable in your devide", Toast.LENGTH_SHORT).show();
             showGPSDisabledAlertToUser();
 
@@ -461,7 +459,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     //-----------------------------------------------------------------------------------------------------
 
     //-------------------------  getnearbyplaces_search ---------------------------------------------------
-    public void getnearbyplaces_search(){
+    public void getnearbyplaces_search() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/seesurveyhistory";
         String url = "http://auth.oeufhp.me/beleafTest.php/getnearbyplaces_search";
@@ -477,7 +475,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
             public void onResponse(String response) {
 
                 try {
-                    Log.d("getnear_search:" ,response);
+                    Log.d("getnear_search:", response);
                     //-----------My logics---------------
 
                     //1 get value(=String) from response(=json array)
@@ -488,7 +486,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                     //http://stackoverflow.com/questions/9961018/getting-specific-value-from-jsonarray
                     JSONArray jsonarray_stringResponse = new JSONArray(stringResponse);
 
-                    for(int i=0; i < jsonarray_stringResponse.length();i++){
+                    for (int i = 0; i < jsonarray_stringResponse.length(); i++) {
                         //3 get value(=json object = "one jsonObject" which is json array) from json array
                         JSONObject jsonobject_jsonarray_stringResponse = jsonarray_stringResponse.getJSONObject(i);
 
@@ -518,20 +516,20 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                     }
 
                     //################ Show  nearbyplaces_location_map ##############################
-                    for(int i=0; i < nearby_places_array.length; i++) {
+                    for (int i = 0; i < nearby_places_array.length; i++) {
 
                         Double nLatitude = Double.parseDouble(nearby_places_array[i][4]);
                         Double nLongitude = Double.parseDouble(nearby_places_array[i][5]);
 
-                        Log.d("getnear_search_show i="+i, "nLatitude:" + nLatitude + " nLongitude:" + nLongitude);
+                        Log.d("getnear_search_show i=" + i, "nLatitude:" + nLatitude + " nLongitude:" + nLongitude);
 
-                        LatLng tnearby = new LatLng(nLatitude, nLongitude );
-                        String newline = System.getProperty( "line.separator" );
-                        marker = mGoogleMap.addMarker(new MarkerOptions().position(tnearby).title(nearby_places_array[i][2]).snippet("Address: " + nearby_places_array[i][3]+ newline + "Phone NO.: " + nearby_places_array[i][6] + newline + "Info: " + nearby_places_array[i][7] ).icon(BitmapDescriptorFactory.fromResource(R.drawable.helpnearyouicon))); //Add a marker in the map
+                        LatLng tnearby = new LatLng(nLatitude, nLongitude);
+                        String newline = System.getProperty("line.separator");
+                        marker = mGoogleMap.addMarker(new MarkerOptions().position(tnearby).title(nearby_places_array[i][2]).snippet("Address: " + nearby_places_array[i][3] + newline + "Phone NO.: " + nearby_places_array[i][6] + newline + "Info: " + nearby_places_array[i][7]).icon(BitmapDescriptorFactory.fromResource(R.drawable.helpnearyouicon))); //Add a marker in the map
                         mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(tnearby, 10), 500, null);
 
                         //---check for breaking out of this loop-----
-                        if( nearby_places_array[i+1][2] == null ) break;
+                        if (nearby_places_array[i + 1][2] == null) break;
 
                     }
                     //--------if try is success -> dismiss the dialog ---------
@@ -551,12 +549,12 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                         //-----------Check error (useful !)-----------------------------------------------
                         NetworkResponse networkResponse = error.networkResponse;
                         if (networkResponse != null) {
-                            Log.e("Volley", "Error. HTTP Status Code:"+networkResponse.statusCode);
+                            Log.e("Volley", "Error. HTTP Status Code:" + networkResponse.statusCode);
                         }
 
                         if (error instanceof TimeoutError) {
                             Log.e("Volley", "TimeoutError");
-                        }else if(error instanceof NoConnectionError){
+                        } else if (error instanceof NoConnectionError) {
                             Log.e("Volley", "NoConnectionError");
                         } else if (error instanceof AuthFailureError) {
                             Log.e("Volley", "AuthFailureError");
@@ -571,13 +569,12 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
                         pd.dismiss();
                     }
                 }
-        )
-        {
+        ) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 // the POST parameters:
-                params.put("place_keyword_city", place_keyword_city );
+                params.put("place_keyword_city", place_keyword_city);
                 params.put("place_keyword_country", place_keyword_country);
                 return params;
             }
@@ -592,7 +589,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-        Log.d("onMapReady","reach");
+        Log.d("onMapReady", "reach");
 
         mGoogleMap = googleMap;
         //-------------------- UI Settings --------------------------------------
@@ -606,7 +603,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         }
         //*********IMPORTANT: Enable blue circle + "zoom to my location" Button**************
         if (place_keyword_city.equals("empty") && place_keyword_country.equals("empty")) {
-            Toast.makeText(getApplicationContext(),"gps", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "gps", Toast.LENGTH_SHORT);
 
             mGoogleMap.setMyLocationEnabled(true);
             buildGoogleApiClient(); //FLOW NO.2
@@ -616,14 +613,13 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         //-------------------------------------
 
 
-
     }
 
     //FLOW NO.2 : Builder to configure a GoogleApiClient &&&
     // https://developers.google.com/android/reference/com/google/android/gms/location/LocationRequest#constants
     protected synchronized void buildGoogleApiClient() {
 
-        Log.d("buildGoogleApiClient","reach");
+        Log.d("buildGoogleApiClient", "reach");
 
         //&&&
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -637,7 +633,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onConnected(Bundle bundle) {
 
-        Log.d("onConnected","reach");
+        Log.d("onConnected", "reach");
 
         //---Just following a condition-------
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -662,7 +658,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
             mGoogleMap.clear(); //###
             latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             //****important: how to decorate icon (img must be png)*****
-            mCurrLocation = mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("My Current Location").snippet("My Latitude:" + mLastLocation.getLatitude() +", My Longitude:" + mLastLocation.getLongitude()).icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocationicon)));
+            mCurrLocation = mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("My Current Location").snippet("My Latitude:" + mLastLocation.getLatitude() + ", My Longitude:" + mLastLocation.getLongitude()).icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocationicon)));
 
         }
     }
@@ -671,7 +667,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     @Override
     public void onLocationChanged(Location location) {
 
-        Log.d("onLocationChanged","reach");
+        Log.d("onLocationChanged", "reach");
 
         //------remove previous current location marker and add new one at current position--------
         if (mCurrLocation != null) {
@@ -679,7 +675,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         }
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
         //****important: how to decorate icon (img must be png)*****
-        mCurrLocation = mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("My Current Location").snippet("My Latitude:" + mLastLocation.getLatitude() +", My Longitude:" + mLastLocation.getLongitude()).icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocationicon)));
+        mCurrLocation = mGoogleMap.addMarker(new MarkerOptions().position(latLng).title("My Current Location").snippet("My Latitude:" + mLastLocation.getLatitude() + ", My Longitude:" + mLastLocation.getLongitude()).icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocationicon)));
 
         //Toast.makeText(this,"Location Changed",Toast.LENGTH_SHORT).show();
         //If you only need one location, unregister the listener
@@ -694,7 +690,7 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
 
-            Log.d("onPause","success");
+            Log.d("onPause", "success");
 
         }
     }
@@ -702,12 +698,12 @@ public class HelpNearYou extends FragmentActivity implements OnMapReadyCallback,
     //-------------------------------- Unused ---------------------------------------------------
     @Override
     public void onConnectionSuspended(int i) {
-        Toast.makeText(this,"onConnectionSuspended",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "onConnectionSuspended", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Toast.makeText(this,"onConnectionFailed",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "onConnectionFailed", Toast.LENGTH_SHORT).show();
     }
 
     //https://developer.android.com/reference/android/app/Activity.html

@@ -35,6 +35,7 @@ public class SlideshowDialogFragment extends DialogFragment {
         SlideshowDialogFragment f = new SlideshowDialogFragment();
         return f;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,10 +60,12 @@ public class SlideshowDialogFragment extends DialogFragment {
 
         return v;
     }
+
     private void setCurrentItem(int position) {
         viewPager.setCurrentItem(position, false);
         displayMetaInfo(selectedPosition);
     }
+
     //  page change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
@@ -94,7 +97,7 @@ public class SlideshowDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        setStyle(STYLE_NO_FRAME,R.style.AppTheme);
+        setStyle(STYLE_NO_FRAME, R.style.AppTheme);
     }
 
     //  adapter

@@ -16,43 +16,44 @@ public class TaskDBHelper extends SQLiteOpenHelper {
     //Each of xxxEntry corresponds to a table in the database.
     public class TaskContract {
         public class TaskEntry implements BaseColumns {
-            public static final String TABLE_NAME="tasks";
-            public static final String COLUMN_TASK="task";
-            public static final String COLUMN_DATE="date";
+            public static final String TABLE_NAME = "tasks";
+            public static final String COLUMN_TASK = "task";
+            public static final String COLUMN_DATE = "date";
         }
     }
 
     //fields
-    public static final String DATABASE_NAME="task.db";
-    private static int DATABASE_VERSION = 1 ;
+    public static final String DATABASE_NAME = "task.db";
+    private static int DATABASE_VERSION = 1;
 
     //constructor
-    public TaskDBHelper(Context context){
-        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+    public TaskDBHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         //Create (very sensitive string (including space))
-        final String SQL_CREATE_TASKS_TABLE="CREATE TABLE " + TaskContract.TaskEntry.TABLE_NAME +
-                " ( "+ TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY, "   +
-                      TaskContract.TaskEntry.COLUMN_TASK + " TEXT NOT NULL, " +
-                      TaskContract.TaskEntry.COLUMN_DATE + " TEXT NOT NULL ); " ;
+        final String SQL_CREATE_TASKS_TABLE = "CREATE TABLE " + TaskContract.TaskEntry.TABLE_NAME +
+                " ( " + TaskContract.TaskEntry._ID + " INTEGER PRIMARY KEY, " +
+                TaskContract.TaskEntry.COLUMN_TASK + " TEXT NOT NULL, " +
+                TaskContract.TaskEntry.COLUMN_DATE + " TEXT NOT NULL ); ";
         //Execute
         sqLiteDatabase.execSQL(SQL_CREATE_TASKS_TABLE);
-        Log.d("create","task.db");
+        Log.d("create", "task.db");
     }
 
     //Update the table schema if the stored "version number" is lower than requested in constructor.
     //"version number" https://www.sqlite.org/versionnumbers.html
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        Log.d("onUp..oldVersion",oldVersion+"");
-        Log.d("onUp..newVersion",newVersion+"");
+        Log.d("onUp..oldVersion", oldVersion + "");
+        Log.d("onUp..newVersion", newVersion + "");
 
-        if(newVersion > oldVersion){
+        if (newVersion > oldVersion) {
             Log.d("newVer > oldVer", "reach");
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TaskContract.TaskEntry.TABLE_NAME);
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TaskContract.TaskEntry.TABLE_NAME);
             onCreate(sqLiteDatabase);
         }
     }
