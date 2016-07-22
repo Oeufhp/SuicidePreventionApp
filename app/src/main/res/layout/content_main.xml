@@ -141,14 +141,8 @@
                     android:layout_gravity="center"
                     android:layout_row="1"
                     android:background="@drawable/squarebtn"
-<<<<<<< HEAD
-                    android:src="@drawable/resources"/>
-
-
-=======
                     android:src="@drawable/safetyplanning"
                     android:text="add a shortcut here (3)"/>
->>>>>>> d4a8fd6e33cf4adbcf06fb418a4101b62ff7fb42
             </FrameLayout>
 
             <FrameLayout
@@ -193,7 +187,7 @@
                     android:layout_height="40dp"
                     android:textAlignment="center"
                     android:layout_marginTop="5dp"
-                    android:text="Safety Planning"
+                    android:text="Feeling"
                     android:textColor="#000000"/>
 
                 <ImageButton
@@ -204,7 +198,7 @@
                     android:layout_gravity="center"
                     android:layout_row="1"
                     android:background="@drawable/squarebtn"
-                    android:src="@drawable/safetyplanning"/>
+                    android:src="@drawable/feeling"/>
 
 
             </FrameLayout>
@@ -219,7 +213,7 @@
                     android:layout_height="40dp"
                     android:textAlignment="center"
                     android:layout_marginTop="5dp"
-                    android:text="Your Feelings"
+                    android:text="Survey"
                     android:textColor="#000000"/>
 
                 <ImageButton
@@ -230,24 +224,12 @@
                     android:layout_gravity="left|center_vertical"
                     android:layout_row="1"
                     android:background="@drawable/squarebtn"
-                    android:src="@drawable/feeling"/>
+                    android:src="@drawable/survey"/>
             </FrameLayout>
 
 
         </LinearLayout>
 
-<<<<<<< HEAD
-
-
-
-
-        <TextView
-            android:layout_width="180dp"
-            android:layout_height="20dp"
-            android:layout_margin="5dp"
-            android:text="Feeling Graph Visualization"
-            android:textColor="#000000"/>
-=======
         <LinearLayout android:layout_height="40dp"
                       android:layout_width="match_parent">
             <TextView
@@ -256,7 +238,6 @@
                 android:layout_margin="5dp"
                 android:text="Feeling Graph Visualization"
                 android:textColor="#000000"/>
->>>>>>> d4a8fd6e33cf4adbcf06fb418a4101b62ff7fb42
 
             <ImageButton
                 android:layout_width="wrap_content"

@@ -386,7 +386,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shortcut5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {    //go to HelpNearYouOverview.class
-                Intent it = new Intent(MainActivity.this, SafetyPlanning.class);
+                Intent it = new Intent(MainActivity.this, Feeling.class);
                 it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
@@ -395,7 +395,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         shortcut6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {    //go to HelpNearYouOverview.class
-                Intent it = new Intent(MainActivity.this, Feeling.class);
+                Intent it = new Intent(MainActivity.this, SurveyOverview.class);
                 it.putExtra("username", username);
                 it.putExtra("password", password);
                 startActivity(it);
