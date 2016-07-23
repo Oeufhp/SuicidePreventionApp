@@ -1,0 +1,272 @@
+[
+    {
+        "name": "quote1",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/icecream_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote1.jpg" // url path to an image
+            // "large": "http://cloud.oeufhp.me/img/icecream.jpg"
+        },
+        "author": "Lillian Dickson"
+    },
+    {
+        "name": "quote2",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/guys_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote2.jpg"
+            // "large": "http://cloud.oeufhp.me/img/guys.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote3",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/black_benz_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote3.jpg"
+            // "large": "http://cloud.oeufhp.me/img/black_benz.jpg"
+        },
+        "author": "My dear valentine"
+    },
+    {
+        "name": "quote4",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/white_benz_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote4.jpg"
+            // "large": "http://cloud.oeufhp.me/img/white_benz.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote5",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/kfc_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote5.jpg"
+            // "large": "http://cloud.oeufhp.me/img/kfc.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote6",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/bagutte_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote6.jpg"
+            // "large": "http://cloud.oeufhp.me/img/bagutte.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote7",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/bridge_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote7.jpg"
+            // "large": "http://cloud.oeufhp.me/img/bridge.jpg"
+        },
+        "author": "My dear valentine"
+    },
+    {
+        "name": "quote8",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/coffee_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote8.jpg"
+            // "large": "http://cloud.oeufhp.me/img/coffee.jpg"
+        },
+        "author": "Confucius"
+    },
+    {
+        "name": "quote9",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/coffe2_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote9.jpg"
+            // "large": "http://cloud.oeufhp.me/img/coffee2.jpg"
+        },
+        "author": "Cesare Pavese"
+    },
+    {
+        "name": "quote10",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote10.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "George Bernard Shaw"
+    },
+    {
+        "name": "quote11",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote11.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Marcus Aurelius"
+    },
+    {
+        "name": "quote12",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote12.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Irving Berlin"
+    },
+    {
+        "name": "quote13",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote13.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Soren Kierkegaard"
+    },
+    {
+        "name": "quote14",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote14.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Mark Twain"
+    },
+    {
+        "name": "quote15",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote15.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Kushandwizdom"
+    },
+    {
+        "name": "quote16",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote16.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote17",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote17.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote18",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote18.png"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "couraino.com"
+    },
+    {
+        "name": "quote19",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote19.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote20",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote20.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "www.sadandlovepicture.in"
+    },
+    {
+        "name": "quote21",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote21.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote22",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote22.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Albert Einstein"
+    },
+    {
+        "name": "quote23",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote23.jpeg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote24",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote24.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "whowhatwear.com"
+    },
+    {
+        "name": "quote25",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote25.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Peter Drucker"
+    },
+    {
+        "name": "quote26",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote26.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Audrey Hepburn"
+    },
+    {
+        "name": "quote27",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote27.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "curiano.com"
+    },
+    {
+        "name": "quote28",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote28.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "My dear valentine"
+    },
+    {
+        "name": "quote29",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote29.jpg"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "anonymous"
+    },
+    {
+        "name": "quote30",
+        "url": {
+            // "small": "http://cloud.oeufhp.me/img/miniShip_sml.jpg",
+            "medium": "http://cloud.oeufhp.me/img/quote30.png"
+            // "large": "http://cloud.oeufhp.me/img/miniShip.jpg"
+        },
+        "author": "Tupac Shakur"
+    }
+]
