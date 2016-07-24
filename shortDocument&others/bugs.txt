@@ -1,0 +1,5 @@
+Bugs now.
+- You can't change cover photo in home page by taking picture.
+- find help service around your current location by specific radius makes the app crashed.
+- Sometimes the app runs out of memory.(not RAM and storage but we don't know what is that memory).
+- In some menu functions, logout function crashed.
