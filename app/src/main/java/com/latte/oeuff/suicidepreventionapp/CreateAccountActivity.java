@@ -271,7 +271,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     public void create() {
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/createanaccount";
-        String url = "http://auth.oeufhp.me/beleaf.php/createanaccount";
+        String url = "http://auth.oeufhp.me/beleaf.php/createanaccount"; // Use the URL that link to API
         //---------Process Dialog----------------
         final ProgressDialog pd = new ProgressDialog(CreateAccountActivity.this);
         pd.setMessage("Creating...");

@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
         HttpsTrustManager.allowAllSSL(); //Trusting all certificates
         //String url = "http://ahealth.burnwork.space/vip/myapp/suicidePreventionAPIs.php/login";
-        String url = "http://auth.oeufhp.me/beleaf.php/login";
+        String url = "http://auth.oeufhp.me/beleaf.php/login"; //use the URL that link to API file
         //---------Process Dialog----------------
         final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
         pd.setMessage("loading...");

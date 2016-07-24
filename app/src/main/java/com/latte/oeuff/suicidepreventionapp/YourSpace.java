@@ -55,7 +55,7 @@ public class YourSpace extends AppCompatActivity
 
     //--------for gallery----------
     private static String TAG = YourSpace.class.getSimpleName();
-    private static final String endpoint = "http://cloud.oeufhp.me/img/glide.json";
+    private static final String endpoint = "http://cloud.oeufhp.me/img/glide.json"; // Use the URL that link to JSON file
     private static ArrayList<Image> images;
     private static ProgressDialog pDialog;
     private static GalleryAdapter mAdapter;

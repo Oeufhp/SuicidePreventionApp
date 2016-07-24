@@ -48,7 +48,7 @@ public class LoginMenuActivity extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.addCategory(Intent.CATEGORY_BROWSABLE);
                 //intent.setData(Uri.parse("http://www.suicidepreventionlifeline.org/"));
-                intent.setData(Uri.parse("http://oeufhp.me/"));
+                intent.setData(Uri.parse("http://oeufhp.me/")); // Use the url that link to API
                 startActivity(intent);
 
             }
