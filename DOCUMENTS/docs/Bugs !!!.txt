@@ -1,0 +1,8 @@
+Bugs
+- You can't use a photo taken through the application to be the cover photo in the home page (MainActivity).
+- There is an error in  "Help Near You page" -> "Search by displacement(km)" in the last presentation but not in the presentation before the last one. 
+	So we think there is a problem happening in the android device we use...not in codes.
+- Photos in "Yourspace" disappear
+- There is an error after clicking 'add' button in "SafetyPlanning"
+* Sometimes the app runs out of memory(not the RAM and the storage of an android device).
+

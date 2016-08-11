@@ -51,7 +51,7 @@ public class YourSpace extends AppCompatActivity
     Intent it;
     String username,password;
 
-//--------for gallery----------
+    //--------for gallery----------
     private static String TAG=YourSpace.class.getSimpleName();
     private static final String endpoint="http://cloud.oeufhp.me/img/glide.json";
     private  static ArrayList<Image> images;
@@ -61,11 +61,11 @@ public class YourSpace extends AppCompatActivity
 
 //--------------About tabLayout-----------
     // MyPagerAdapter -> ViewPager -> contents (fragment_your_space_photos / videos / diary )
-        //MyPageAdapter = Base class providing the adapter to populate pages inside of a ViewPager
+    //MyPageAdapter = Base class providing the adapter to populate pages inside of a ViewPager
 
     private TabLayout yourspace_tabLayout;    //it may be best to switch to a {@link android.support.v4.app.FragmentStatePagerAdapter} that will provide fragments for each of the sections.
     private ViewPager mViewPager;   //This class will host the section contents
-//----------------About Dialog --------------
+    //----------------About Dialog --------------
     DialogFragment newLogoutFragment;
 
     @Override
@@ -88,7 +88,7 @@ public class YourSpace extends AppCompatActivity
 //            }
 //        });
 
-    //------------------------This is for creating the tabLayout and its contents--------------------------//
+        //------------------------This is for creating the tabLayout and its contents--------------------------//
         //#### Get  ViewPager && set it's PagerAdapter -> so that it can display items ####
         MyPagerAdapter mMypageAdapter = new MyPagerAdapter(getSupportFragmentManager()); //=Base class providing the adapter to populate pages inside of a ViewPager
         mViewPager = (ViewPager) findViewById(R.id.container_yourspace);
@@ -98,7 +98,7 @@ public class YourSpace extends AppCompatActivity
         yourspace_tabLayout = (TabLayout)findViewById(R.id.yourspace_tabLayout);
         //yourspace_tabLayout.addTab(tabLayout.newTab().setText("..."));
         yourspace_tabLayout.setupWithViewPager(mViewPager);
-    //------------------------------------------------------------------------------------------------------//
+        //------------------------------------------------------------------------------------------------------//
 
         //************************ This is for creating the Navigation Menu*********************************
         //Toolbar (Top)
@@ -134,7 +134,7 @@ public class YourSpace extends AppCompatActivity
         //**************************************************************************************************
 
         //--------------Logics across an activity ------------------------------
-            //Don't forget to create XML for this logic !
+        //Don't forget to create XML for this logic !
 //        aaa = (TextView)findViewById(R.id.aaa);
 //        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 //        String go = prefs.getString("keyChannel",null);
@@ -149,7 +149,7 @@ public class YourSpace extends AppCompatActivity
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) { //GravityCompat = Compatibility shim for accessing newer functionality from Gravity
-                                                        //Gravity =  Standard constants, tools for placing an object within a potentially larger container
+            //Gravity =  Standard constants, tools for placing an object within a potentially larger container
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
@@ -237,7 +237,7 @@ public class YourSpace extends AppCompatActivity
     //=Base class providing the adapter to populate pages inside of a ViewPager
 
     //------------------------ MyPagerAdapter ----------------------------------------------------
-        //"1." Class"MyPagerAdapter" returns a fragment corresponding to one of the sections/tabs/pages.
+    //"1." Class"MyPagerAdapter" returns a fragment corresponding to one of the sections/tabs/pages.
     private class MyPagerAdapter extends FragmentPagerAdapter {
         //constructor
         public MyPagerAdapter(FragmentManager fm)
@@ -288,7 +288,7 @@ public class YourSpace extends AppCompatActivity
     }
 
     //----------------------FirstFragement--------------------------------------
-        //2. Class"FirstFragment" creates a fragment containing a simple view.
+    //2. Class"FirstFragment" creates a fragment containing a simple view.
     public static class FirstFragment extends Fragment {
 
 
@@ -319,24 +319,24 @@ public class YourSpace extends AppCompatActivity
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(mAdapter);
-             recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getContext(), recyclerView, new GalleryAdapter.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("images", images);
-                bundle.putInt("position", position);
+            recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getContext(), recyclerView, new GalleryAdapter.ClickListener() {
+                @Override
+                public void onClick(View view, int position) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("images", images);
+                    bundle.putInt("position", position);
 
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
-                newFragment.setArguments(bundle);
-                newFragment.show(ft, "slideshow");
-            }
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    SlideshowDialogFragment newFragment = SlideshowDialogFragment.newInstance();
+                    newFragment.setArguments(bundle);
+                    newFragment.show(ft, "slideshow");
+                }
 
-            @Override
-            public void onLongClick(View view, int position) {
+                @Override
+                public void onLongClick(View view, int position) {
 
-            }
-        }));
+                }
+            }));
             fetchImages();
             //----------------------testing---------------------//
 
@@ -344,7 +344,7 @@ public class YourSpace extends AppCompatActivity
             return viewfirst;
         }
 
-//        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
+        //        //&&& 2. This method create & return "a new instance" of this fragment according to  "String text".
         public static FirstFragment newInstance(String text) {
 
             FirstFragment f = new FirstFragment(); //create a frament for containing a simple view
@@ -358,12 +358,12 @@ public class YourSpace extends AppCompatActivity
 
             return f;
         }
-            private void fetchImages() {
+        private void fetchImages() {
 
-                pDialog.setMessage("Downloading json...");
-                pDialog.show();
+            pDialog.setMessage("Downloading json...");
+            pDialog.show();
 
-                JsonArrayRequest req = new JsonArrayRequest(endpoint,
+            JsonArrayRequest req = new JsonArrayRequest(endpoint,
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
@@ -385,28 +385,28 @@ public class YourSpace extends AppCompatActivity
 
                                     images.add(image);
 
-                                    } catch (JSONException e) {
-                                        Log.e(TAG, "Json parsing error: " + e.getMessage());
-                                    }
+                                } catch (JSONException e) {
+                                    Log.e(TAG, "Json parsing error: " + e.getMessage());
                                 }
+                            }
 
-                                mAdapter.notifyDataSetChanged();
+                            mAdapter.notifyDataSetChanged();
                         }
                     }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.e(TAG, "Error: " + error.getMessage());
-                                pDialog.hide();
-                            }
-                        });
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e(TAG, "Error: " + error.getMessage());
+                    pDialog.hide();
+                }
+            });
 
-    // Adding request to request queue
-    AppController.getInstance().addToRequestQueue(req);
-}
+            // Adding request to request queue
+            AppController.getInstance().addToRequestQueue(req);
+        }
     }
 
     //----------------------SecondFragement--------------------------------------
-        //2. class"SecondFragment" creates a fragment containing a simple view.
+    //2. class"SecondFragment" creates a fragment containing a simple view.
     public static class SecondFragment extends Fragment {
 
         //This is the main method of this class->create a View (fragment_your_space_videos)
@@ -446,7 +446,7 @@ public class YourSpace extends AppCompatActivity
         }
     }
     //----------------------ThirdFragement--------------------------------------
-        //3. Class"ThirdFragment" creates a fragment containing a simple view.
+    //3. Class"ThirdFragment" creates a fragment containing a simple view.
     public static class ThirdFragment extends Fragment {
 
         //This is the main method of this class->create a View (fragment_your_space_diary)
@@ -487,7 +487,7 @@ public class YourSpace extends AppCompatActivity
     }
 //-----------------------------------------------------------------------------------------------------//
 
-//--------------------------Dialog for warning before logging out--------------------------
+    //--------------------------Dialog for warning before logging out--------------------------
     public class LogOutDialog extends DialogFragment {
 
         TextView yesbtn_logout,nobtn_logout;

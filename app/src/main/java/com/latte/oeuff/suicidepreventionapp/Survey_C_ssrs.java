@@ -142,23 +142,23 @@ public class Survey_C_ssrs extends AppCompatActivity implements View.OnClickList
 //        //*****To uncover colors of icon**********
 //        navigationView.setItemIconTintList(null);
 //
-//        //floating button (bottom)
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
-//        fab.setImageResource(R.drawable.emergencycall);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
-////                        .setAction("Action", null).show();
-//
-//                //This is for going to phone in mobile
-//                Intent callIntent = new Intent(Intent.ACTION_CALL);
-//                callIntent.setData(Uri.parse("tel:112"));
-//                //no need to request a permission
-//                startActivity(callIntent);
-//
-//            }
-//        });
+        //floating button (bottom)
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabBtn);
+        fab.setImageResource(R.drawable.emergencycall);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Snackbar.make(view, "Emergency call ?", Snackbar.LENGTH_LONG) //=bottom black bar
+//                        .setAction("Action", null).show();
+
+                //This is for going to phone in mobile
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:112"));
+                //no need to request a permission
+                startActivity(callIntent);
+
+            }
+        });
         //**************************************************************************************************
 
 

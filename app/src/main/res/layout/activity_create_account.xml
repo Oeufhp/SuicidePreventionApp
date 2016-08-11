@@ -302,7 +302,8 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Username (6-12 letters)"/>
+            android:hint="Username (6-12 letters)"
+            android:inputType="textPersonName"/>
 
         <ImageButton
             android:id="@+id/checkbtn"
