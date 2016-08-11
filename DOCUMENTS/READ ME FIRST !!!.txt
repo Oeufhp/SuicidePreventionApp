@@ -1,4 +1,5 @@
-*** 0. Please read all docs in folder "docs" before following below steps
+*** 0.1 Please read all docs in folder "docs" before following below steps
+*** 0.2 The final version with shortDocs is in "final branch" but if you want to move them back to "master branch", you can merge branchs or create a new repository.  
 1. In "api" folder, you can push all files in it to your own server and you don't need to set up Slim. (It's already finished !)
 2. In "database-sql" folder, you can import all sql files in your own database and you don't need to spend times for creating new tables.
 	import: Select a database you want to import the data in -> "File" -> "Load SQL file" -> Choose sql file -> Click run button above -> finish !!! 
@@ -7,4 +8,5 @@
 5. If you have any questions, Pleast contact us
 	nawatv@gmail.com
 	pitarnh@gmail.com
+
 
